@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Install dependencies
+        run: apt install ssh sshpass
       - name: Deploy
-        run: scp -r . ${{ secrets.FTP_USER }}:${{ secrets.FTP_PASSWORD }}@${{ secrets.FTP_HOST }}:/
+        run: sshpass -p ${{ secrets.FTP_PASSWORD }} scp -r ${{ secrets.FTP_USER }}@${{ secrets.FTP_HOST }}:/nicograef.de ./
         
