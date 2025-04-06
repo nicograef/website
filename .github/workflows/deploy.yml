@@ -1,0 +1,15 @@
+name: Deploy website
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Deploy
+        run: scp -r . ${{ secrets.FTP_USER }}:${{ secrets.FTP_PASSWORD }}@${{ secrets.FTP_HOST }}:/
+        
