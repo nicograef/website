@@ -1,14 +1,26 @@
-<?php
-include 'projects.php';
-?>
+<?php include 'projects.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nico Graef</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description"
+    content="Portfolio of Nico Graef, a Software Engineer specializing in web development and modern technologies.">
+  <meta name="author" content="Nico Graef">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Nico Graef – Software Engineer">
+  <meta property="og:description"
+    content="Portfolio of Nico Graef, showcasing projects and skills in software engineering.">
+  <meta property="og:image" content="/img/icon.png">
+  <meta property="og:url" content="https://nicograef.com">
+
+  <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="stylesheet" href="styles.css">
+
+  <title>Nico Graef &ndash; Softare Engineer</title>
 </head>
 
 <body>
