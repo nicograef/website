@@ -26,12 +26,12 @@
 <body>
   <header>
     <h1>Nico Gräf</h1>
-    <p>Software Engineer from Freiburg, Germany</p>
+    <p lang="en">Software Engineer from Freiburg, Germany</p>
     <br />
     <p>
-      <a href="https://github.com/nicograef" target="_blank" rel="noopener noreferrer">Github</a>
-      <a href="https://linkedin.com/in/nicograef" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="https://xing.com/profile/Nico_Graef2/" target="_blank" rel="noopener noreferrer">Xing</a>
+      <a href="https://github.com/nicograef" target="_blank" rel="noopener noreferrer" aria-label="Visit Nico Gräf's GitHub profile">Github</a>
+      <a href="https://linkedin.com/in/nicograef" target="_blank" rel="noopener noreferrer" aria-label="Visit Nico Gräf's LinkedIn profile">LinkedIn</a>
+      <a href="https://xing.com/profile/Nico_Graef2/" target="_blank" rel="noopener noreferrer" aria-label="Visit Nico Gräf's Xing profile">Xing</a>
     </p>
   </header>
   <main>
@@ -40,8 +40,8 @@
         <h3>
           <span class="title"><?= $p->title ?></span>
           <?php if (!empty($p->linkTitle) && !empty($p->linkUrl)): ?>
-            <a href="<?= $p->linkUrl ?>" title="<?= $p->linkTitle ?>" target="_blank"
-              rel="noopener noreferrer"><?= $p->linkTitle ?></a>
+            <a href="<?= htmlspecialchars($p->linkUrl, ENT_QUOTES, 'UTF-8') ?>" title="<?= $p->linkTitle ?>" target="_blank"
+              rel="noopener noreferrer" aria-label="<?= $p->linkTitle ?> for <?= $p->title ?>"><?= $p->linkTitle ?></a>
           <?php endif; ?>
         </h3>
         <div>
