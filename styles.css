@@ -6,6 +6,10 @@
   --background: #f9f7f7;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body,
 html {
   margin: 0;
@@ -60,6 +64,15 @@ header {
   margin: 80px 0;
   max-width: 750px;
   width: 100%;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out,
+    box-shadow 0.3s ease;
+
+  &.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
   @media (min-width: 1000px) {
     margin: 100px 0;
@@ -87,6 +100,11 @@ header {
     font-size: 0.85rem;
     line-height: 1.75;
     text-align: justify;
+  }
+
+  img {
+    will-change: transform;
+    transition: transform 0.1s ease-out;
   }
 }
 
