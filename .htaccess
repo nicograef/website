@@ -1,3 +1,6 @@
+# Custom error pages
+ErrorDocument 404 /404.php
+
 # Security: Prevent direct access to JSON files
 <FilesMatch "\.json$">
     Order allow,deny
