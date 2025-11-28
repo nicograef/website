@@ -20,7 +20,7 @@
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="stylesheet" href="styles.css">
 
-  <title>Nico Graef &ndash; Softare Engineer</title>
+  <title>Nico Graef &ndash; Software Engineer</title>
 </head>
 
 <body>
@@ -47,12 +47,6 @@
     <?php endforeach; ?>
   </main>
   <footer>
-    <p>
-      <a href="https://github.com/nicograef" target="_blank" rel="noopener noreferrer">Github</a>
-      <a href="https://linkedin.com/in/nicograef" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="https://xing.com/profile/Nico_Graef2/" target="_blank" rel="noopener noreferrer">Xing</a>
-    </p>
-    <br />
     <p>&copy; <?= date('Y') ?> nico graef</p>
   </footer>
 </body>
