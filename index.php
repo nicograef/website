@@ -8,22 +8,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description"
-    content="Portfolio of Nico Graef, a Software Engineer specializing in web development and modern technologies.">
-  <meta name="author" content="Nico Graef">
+    content="Portfolio of Nico Gräf, a Software Engineer specializing in web development and modern technologies.">
+  <meta name="author" content="Nico Gräf">
   <meta name="robots" content="index, follow">
-  <meta property="og:title" content="Nico Graef – Software Engineer">
+  <meta property="og:title" content="Nico Gräf – Software Engineer">
   <meta property="og:description"
-    content="Portfolio of Nico Graef, showcasing projects and skills in software engineering.">
+    content="Portfolio of Nico Gräf, showcasing projects and skills in software engineering.">
   <meta property="og:image" content="/img/icon.png">
   <meta property="og:url" content="https://nicograef.com">
 
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="stylesheet" href="styles.css">
 
-  <title>Nico Graef &ndash; Software Engineer</title>
+  <title>Nico Gräf &ndash; Software Engineer</title>
 </head>
 
 <body>
+  <header>
+    <h1>Nico Gräf</h1>
+    <p>Software Engineer from Freiburg, Germany</p>
+    <br />
+    <p>
+      <a href="https://github.com/nicograef" target="_blank" rel="noopener noreferrer">Github</a>
+      <a href="https://linkedin.com/in/nicograef" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://xing.com/profile/Nico_Graef2/" target="_blank" rel="noopener noreferrer">Xing</a>
+    </p>
+  </header>
   <main>
     <?php foreach ($projects as $p): ?>
       <section class="project">
@@ -47,7 +57,7 @@
     <?php endforeach; ?>
   </main>
   <footer>
-    <p>&copy; <?= date('Y') ?> nico graef</p>
+    <p>&copy; <?= date('Y') ?> Nico Gräf</p>
   </footer>
 </body>
 
