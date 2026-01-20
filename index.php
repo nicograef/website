@@ -25,8 +25,10 @@
 
 <body>
   <header>
-    <h1>Nico Gräf</h1>
+    <img src="/img/nico-social.jpg" alt="Nico Gräf" title="Nico Gräf" loading="lazy" class="profile-picture"/>
+    <h1 style="margin-bottom: 0">Nico Gräf</h1>
     <p lang="en">Software Engineer from Freiburg, Germany</p>
+    <br />
     <br />
     <p>
       <a href="https://github.com/nicograef" target="_blank" rel="noopener noreferrer" aria-label="Visit Nico Gräf's GitHub profile">Github</a>
