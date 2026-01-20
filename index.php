@@ -32,6 +32,7 @@
       <a href="https://github.com/nicograef" target="_blank" rel="noopener noreferrer" aria-label="Visit Nico Gräf's GitHub profile">Github</a>
       <a href="https://linkedin.com/in/nicograef" target="_blank" rel="noopener noreferrer" aria-label="Visit Nico Gräf's LinkedIn profile">LinkedIn</a>
       <a href="https://xing.com/profile/Nico_Graef2/" target="_blank" rel="noopener noreferrer" aria-label="Visit Nico Gräf's Xing profile">Xing</a>
+      <a href="https://medium.com/@nicograef" target="_blank" rel="noopener noreferrer" aria-label="Visit Nico Gräf's Medium articles">Medium</a>
     </p>
   </header>
   <main>
