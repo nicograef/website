@@ -23,4 +23,3 @@ jobs:
             --exclude 'README.md' \
             -e "ssh -o StrictHostKeyChecking=no" \
             ./ ${{ secrets.FTP_USER }}@${{ secrets.FTP_HOST }}:/home/www/nicograef.de/
-        

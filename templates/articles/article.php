@@ -24,8 +24,8 @@ ob_start();
     <?php endif; ?>
 </article>
 
-<!-- Syntax Highlighting (local) -->
-<script src="/assets/js/highlight.js"></script>
+<!-- Syntax Highlighting (highlight.js) -->
+<script src="/vendor/highlight.js"></script>
 <script>
     hljs.highlightAll();
 </script>
