@@ -5,8 +5,8 @@ Allow: /
 # Sitemap
 Sitemap: https://nicograef.com/sitemap.xml
 
-# Disallow access to internal PHP files
-Disallow: /articles/functions.php
-Disallow: /articles/Parsedown.php
-Disallow: /projects.php
-Disallow: /layout.php
+# Disallow access to internal folders
+Disallow: /content/
+Disallow: /includes/
+Disallow: /templates/
+Disallow: /vendor/
