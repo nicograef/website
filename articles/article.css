@@ -65,6 +65,7 @@ article h3 {
   margin-top: 32px;
   margin-bottom: 12px;
   text-align: left;
+  color: #444;
 }
 
 article .article-meta {
@@ -128,12 +129,12 @@ article pre code {
 
 /* Blockquotes - Scientific style */
 article blockquote {
-  border-left: 3px solid #757575;
+  border-left: 3px solid #333;
   margin: 32px -10%;
   width: 120%;
   padding: 4px 0 4px 24px;
   font-style: italic;
-  color: #555;
+  color: #333;
   font-size: 1.05rem;
   box-sizing: border-box;
 }
@@ -217,6 +218,46 @@ article ul ul {
   margin-bottom: 0.5em;
 }
 
+/* Numbered lists with bold headings (for technique explanations) */
+article ol {
+  list-style: none;
+  counter-reset: step-counter;
+  padding-left: 0;
+}
+
+article ol > li {
+  counter-increment: step-counter;
+  position: relative;
+  padding-left: 48px;
+  margin-bottom: 1.5em;
+}
+
+article ol > li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: Montserrat, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--secondary, #f4b400);
+  line-height: 1.2;
+}
+
+article ol > li strong:first-child {
+  font-family: Montserrat, sans-serif;
+  font-size: 1.05rem;
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+/* Abbreviations with dotted underline */
+article abbr[title] {
+  text-decoration: underline dotted;
+  text-decoration-color: rgba(0, 0, 0, 0.3);
+  cursor: help;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   article {
@@ -292,5 +333,18 @@ article ul ul {
   article .article-meta {
     margin-top: 40px;
     padding-top: 20px;
+  }
+
+  /* Numbered lists on mobile */
+  article ol > li {
+    padding-left: 36px;
+  }
+
+  article ol > li::before {
+    font-size: 1.25rem;
+  }
+
+  article ol > li strong:first-child {
+    font-size: 1rem;
   }
 }
