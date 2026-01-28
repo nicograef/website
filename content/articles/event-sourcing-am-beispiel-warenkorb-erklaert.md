@@ -65,7 +65,7 @@ Dieses System würde gut funktionieren und die oberflächlichen Anforderungen ei
 
 ### Feature Request: Personalisierte Rabattcodes
 
-Die Marketing-Abteilung möchte Benutzern personalisierte Rabattcodes schicken, die Produkte in ihren Warenkorb gelegt, aber nie gekauft haben. Mit CRUD können wir diese Information nicht liefern – wir wissen nur, was *jetzt* im Warenkorb liegt, nicht was *früher* drin war.
+Die Marketing-Abteilung möchte Benutzern personalisierte Rabattcodes schicken, die Produkte in ihren Warenkorb gelegt, aber nie gekauft haben. Mit CRUD können wir diese Information nicht liefern – wir wissen nur, was _jetzt_ im Warenkorb liegt, nicht was _früher_ drin war.
 
 ### UX-Frage: Plus/Minus-Buttons oder Eingabefeld?
 
@@ -99,7 +99,7 @@ Ein Event beschreibt ein Ereignis, das im System stattgefunden hat. Events sind 
 
 Ein Event besteht aus:
 
-- **Type**: Der Event-Typ (z.B. `cart.product-added`)
+- **Type**: Der Event-Typ (z.B. `warenkorb.produkt-hinzugefuegt`)
 - **Time**: Zeitstempel, wann das Event aufgetreten ist
 - **Subject**: Referenz zum betroffenen Objekt/Aggregat (z.B. `user:456`)
 - **Data**: Alle relevanten Informationen (z.B. Produkt-ID, Menge)
@@ -108,14 +108,14 @@ Die <abbr title="Cloud Native Computing Foundation">CNCF</abbr> hat mit [CloudEv
 
 ```json
 {
-    "id": "8875",
-    "type": "cart.product-added",
-    "time": "2026-01-15T10:30:00Z",
-    "subject": "user:456",
-    "data": {
-        "productId": 123,
-        "quantity": 2
-    }
+  "id": "8875",
+  "type": "warenkorb.produkt-hinzugefuegt",
+  "time": "2026-01-15T10:30:00Z",
+  "subject": "user:456",
+  "data": {
+    "produktId": 123,
+    "menge": 2
+  }
 }
 ```
 
@@ -125,7 +125,7 @@ Das `subject`-Feld ist besonders wichtig: Es ermöglicht uns, alle Events zu ein
 
 Ein Event Store ist eine Datenbank, die speziell für Events optimiert ist. Die wichtigste Eigenschaft: Er ist **append-only** – Events werden nur hinzugefügt, niemals geändert oder gelöscht.
 
-Für unser Beispiel verwenden wir eine einfache relationale Datenbank als Event Store. In der Praxis gibt es auch spezialisierte Event-Store-Datenbanken wie [EventStoreDB](https://eventstore.com/) oder [EventSourcingDB](https://thenativeweb.io/products/eventsourcingdb), die zusätzliche Features wie Event-Streams, Subscriptions und optimierte Abfragen bieten.
+Für unser Beispiel verwenden wir eine einfache relationale Datenbank als Event Store. In der Praxis gibt es auch spezialisierte Event-Store-Datenbanken wie [KurrentDB](https://www.kurrent.io/) (ehemals EventStoreDB) oder [EventSourcingDB](https://www.eventsourcingdb.io/), die zusätzliche Features wie Event-Streams, Subscriptions und optimierte Abfragen bieten.
 
 ## Warenkorb mit Event-Sourcing
 
@@ -173,15 +173,15 @@ Beachte den Unterschied zur REST-API: Statt `POST /warenkorb` mit einer generisc
 
 Die Events in der Tabelle könnten z.B. so aussehen:
 
-| id  | type                 | subject  | data                                            | time                |
-| --- | -------------------- | -------- | ----------------------------------------------- | ------------------- |
-| 1   | produkt-hinzugefuegt | user:1   | `{ "produktId": 123, "menge": 2 }`              | 2025-01-23 10:00:00 |
-| 2   | produkt-entfernt     | user:2   | `{ "produktId": 456 }`                          | 2025-01-23 10:02:00 |
-| 3   | menge-geaendert      | user:1   | `{ "produktId": 123, "neueMenge": 1 }`          | 2025-01-23 10:03:00 |
-| 4   | produkt-hinzugefuegt | user:1   | `{ "produktId": 456, "menge": 2 }`              | 2025-01-23 10:03:20 |
-| 5   | produkt-entfernt     | user:1   | `{ "produktId": 123 }`                          | 2025-01-23 10:04:00 |
-| 6   | produkt-hinzugefuegt | user:3   | `{ "produktId": 789, "menge": 3 }`              | 2025-01-23 10:05:00 |
-| 7   | menge-geaendert      | user:1   | `{ "produktId": 456, "neueMenge": 3 }`          | 2025-01-23 10:09:30 |
+| id  | type                 | subject | data                                   | time                |
+| --- | -------------------- | ------- | -------------------------------------- | ------------------- |
+| 1   | produkt-hinzugefuegt | user:1  | `{ "produktId": 123, "menge": 2 }`     | 2025-01-23 10:00:00 |
+| 2   | produkt-entfernt     | user:2  | `{ "produktId": 456 }`                 | 2025-01-23 10:02:00 |
+| 3   | menge-geaendert      | user:1  | `{ "produktId": 123, "neueMenge": 1 }` | 2025-01-23 10:03:00 |
+| 4   | produkt-hinzugefuegt | user:1  | `{ "produktId": 456, "menge": 2 }`     | 2025-01-23 10:03:20 |
+| 5   | produkt-entfernt     | user:1  | `{ "produktId": 123 }`                 | 2025-01-23 10:04:00 |
+| 6   | produkt-hinzugefuegt | user:3  | `{ "produktId": 789, "menge": 3 }`     | 2025-01-23 10:05:00 |
+| 7   | menge-geaendert      | user:1  | `{ "produktId": 456, "neueMenge": 3 }` | 2025-01-23 10:09:30 |
 
 Um den aktuellen Zustand des Warenkorbs zu ermitteln, müssen wir alle Events für den jeweiligen Benutzer lesen und diese der Reihe nach anwenden. Was passiert also, wenn wir `GET /warenkorb` für Benutzer 1 aufrufen?
 
@@ -297,9 +297,7 @@ Du möchtest sehen, wie Event-Sourcing in einem echten Projekt eingesetzt wird? 
 
 ## Weiterführende Links
 
-- [CQRS, Event-Sourcing und DDD erklärt](https://cqrs.com/)
 - [CQRS - Command Query Responsibility Segregation](https://martinfowler.com/bliki/CQRS.html)
 - [Event Sourcing - Martin Fowler](https://martinfowler.com/eaaDev/EventSourcing.html)
-- [Event-Sourcing - thenativeweb](https://eventsourcingdatabase.com/)
-- [EventSourcingDB](https://thenativeweb.io/products/eventsourcingdb)
-- [KurrentDB](https://eventstore.com/)
+- [EventSourcingDB - the native web](https://www.eventsourcingdb.io/)
+- [KurrentDB](https://www.kurrent.io/) (ehemals EventStoreDB)
