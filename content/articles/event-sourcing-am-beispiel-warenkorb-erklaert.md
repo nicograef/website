@@ -16,6 +16,8 @@ tags:
 
 Event-Sourcing ist eine Alternative zu CRUD. Dabei werden nicht die aktuellen Zustände von Objekten gespeichert, sondern alle Änderungen (Events), die zu diesem Zustand geführt haben. Dies ermöglicht eine vollständige Nachverfolgbarkeit und Wiederherstellung des Systemzustands zu jedem beliebigen Zeitpunkt.
 
+**Stell dir Event-Sourcing wie Git vor:** Git speichert nicht einfach den aktuellen Zustand deines Codes, sondern jeden einzelnen Commit – jede Änderung, die jemals gemacht wurde. Du kannst jederzeit zu einem früheren Stand zurückkehren, sehen wer wann was geändert hat, und verstehen warum bestimmte Entscheidungen getroffen wurden. Genau so funktioniert Event-Sourcing für Anwendungsdaten.
+
 In einem Event-Sourcing-System gibt es kein UPDATE und es gibt auch kein DELETE. Genaugenommen gibt es auch kein CREATE, stattdessen gibt es nur "Write/Add Event". Selbst das Lesen (READ) funktioniert anders als bei CRUD: Anstatt den aktuellen Zustand eines Objekts direkt aus einer Datenbanktabelle abzurufen, werden alle Events zu diesem Objekt gelesen und der aktuelle Zustand durch das Anwenden dieser Events rekonstruiert.
 
 In diesem Artikel vergleiche ich Event-Sourcing mit dem traditionellen CRUD-Ansatz anhand des Beispiels Warenkorb in einem Online-Shop.
@@ -59,7 +61,21 @@ Das Backend könnte dann folgende Endpunkte bereitstellen:
 | `DELETE` | `/warenkorb/produkt/{id}` | Produkt entfernen (DELETE)  |
 | `GET`    | `/warenkorb`              | Warenkorb abrufen (READ)    |
 
-Dieses System würde gut funktionieren und die oberflächlichen Anforderungen eines Warenkorbs erfüllen. Allerdings gibt es auch einige Fragen, die man mit diesem Ansatz nicht beantworten kann, wie z.B.:
+Dieses System würde gut funktionieren und die oberflächlichen Anforderungen eines Warenkorbs erfüllen. Allerdings gibt es auch einige Fragen, die man mit diesem Ansatz nicht beantworten kann.
+
+### Feature Request: Personalisierte Rabattcodes
+
+Die Marketing-Abteilung möchte Benutzern personalisierte Rabattcodes schicken, die Produkte in ihren Warenkorb gelegt, aber nie gekauft haben. Mit CRUD können wir diese Information nicht liefern – wir wissen nur, was *jetzt* im Warenkorb liegt, nicht was *früher* drin war.
+
+### UX-Frage: Plus/Minus-Buttons oder Eingabefeld?
+
+Das UX-Team fragt, ob Benutzer lieber +/- Buttons oder ein Eingabefeld zum Ändern der Produktmenge nutzen würden. Mit CRUD sehen wir nur die finale Menge, nicht wie oft und in welche Richtung Benutzer die Menge anpassen.
+
+### Issue Debugging: Warum wurde das Produkt entfernt?
+
+Ein Kunde beschwert sich, dass ein Produkt aus seinem Warenkorb verschwunden ist. War es der Benutzer selbst? Oder hat das System das Produkt entfernt, weil es nicht mehr verfügbar war? Mit CRUD können wir das nicht unterscheiden.
+
+### Weitere unbeantwortbare Fragen
 
 - Welche Produkte werden oft in den Warenkorb gelegt aber dann doch nicht bestellt (wieder entfernt)?
 - Wie oft wird die Menge eines Produktes reduziert oder erhöht?
@@ -75,16 +91,49 @@ Außerdem geht durch die Kombination von CRUD-System und REST-API fast immer der
 
 Genau hier setzt Event-Sourcing an.
 
+## Was ist ein Event?
+
+Bevor wir in die Implementierung einsteigen, klären wir kurz, was ein Event eigentlich ist.
+
+Ein Event beschreibt ein Ereignis, das im System stattgefunden hat. Events sind unveränderliche Fakten, die das beschreiben, was passiert ist. Bei deinem Bankkonto könnte es zum Beispiel diese Events geben: "Überweisung wurde durchgeführt" oder "Bargeld wurde abgehoben". Im Fall des Warenkorbs könnten Events z.B. "Produkt wurde dem Warenkorb hinzugefügt", "Produkt wurde aus dem Warenkorb entfernt" oder "Menge eines Produkts wurde geändert" sein.
+
+Ein Event besteht aus:
+
+- **Type**: Der Event-Typ (z.B. `cart.product-added`)
+- **Time**: Zeitstempel, wann das Event aufgetreten ist
+- **Subject**: Referenz zum betroffenen Objekt/Aggregat (z.B. `user:456`)
+- **Data**: Alle relevanten Informationen (z.B. Produkt-ID, Menge)
+
+Die <abbr title="Cloud Native Computing Foundation">CNCF</abbr> hat mit [CloudEvents](https://cloudevents.io/) einen Standard für Event-Formate definiert. Ein Event könnte so aussehen:
+
+```json
+{
+    "id": "8875",
+    "type": "cart.product-added",
+    "time": "2026-01-15T10:30:00Z",
+    "subject": "user:456",
+    "data": {
+        "productId": 123,
+        "quantity": 2
+    }
+}
+```
+
+Das `subject`-Feld ist besonders wichtig: Es ermöglicht uns, alle Events zu einem bestimmten Benutzer (oder Warenkorb) effizient abzufragen.
+
+## Event Store
+
+Ein Event Store ist eine Datenbank, die speziell für Events optimiert ist. Die wichtigste Eigenschaft: Er ist **append-only** – Events werden nur hinzugefügt, niemals geändert oder gelöscht.
+
+Für unser Beispiel verwenden wir eine einfache relationale Datenbank als Event Store. In der Praxis gibt es auch spezialisierte Event-Store-Datenbanken wie [EventStoreDB](https://eventstore.com/) oder [EventSourcingDB](https://thenativeweb.io/products/eventsourcingdb), die zusätzliche Features wie Event-Streams, Subscriptions und optimierte Abfragen bieten.
+
 ## Warenkorb mit Event-Sourcing
 
 In der Event-Sourcing-Implementierung speichern wir alle Änderungen am Warenkorb als Events. Jedes Event beschreibt eine einzelne Änderung am Warenkorb und enthält alle notwendigen Informationen, um diese Änderung zu verstehen.
 
-Wir verwenden wieder eine relationale Datenbank, die Backend-API soll diesmal jedoch im Command-Style gebaut werden (ähnlich zu RPC und CQRS).
+Wir verwenden wieder eine relationale Datenbank, die Backend-API soll diesmal jedoch im Command-Style gebaut werden (ähnlich zu <abbr title="Remote Procedure Call">RPC</abbr> und <abbr title="Command Query Responsibility Segregation">CQRS</abbr>).
 
-An den Tabellen `benutzer` und `produkt` ändern wir nichts. Diese bleiben gleich wie bei der CRUD-Implementierung. Das Event-Sourcing wird in diesem Beispiel nur auf den Warenkorb angewendet. Dafür lösen wir uns von der `warenkorb`-Tabelle und erstellen stattdessen eine Tabelle `event`. Dort speichern wir alle Events inklusive dem Benutzer, dem Zeitstempel, der Art des Events und den dazugehörigen Daten.
-
-> **Was ist ein Event?**
-> Ein Event beschreibt ein Ereignis, das im System stattgefunden hat. Events sind unveränderliche Fakten, die das beschreiben, was passiert ist. Bei deinem Bankkonto könnte es zum Beispiel diese Events geben: "Überweisung wurde durchgeführt" oder "Bargeld wurde abgehoben" sein. Im Fall des Warenkorbs könnten Events z.B. "Produkt wurde dem Warenkorb hinzugefügt", "Produkt wurde aus dem Warenkorb entfernt" oder "Menge eines Produkts wurde geändert" sein. Ein Event beinhaltet neben dem Event-Typ (z.B. "produkt-hinzugefuegt") auch immer einen Zeitstempel und alle relevanten Informationen, die dieses Ereignis beschreiben (z.B. Produkt-ID, Menge, Benutzer-ID etc.).
+An den Tabellen `benutzer` und `produkt` ändern wir nichts. Diese bleiben gleich wie bei der CRUD-Implementierung. Das Event-Sourcing wird in diesem Beispiel nur auf den Warenkorb angewendet. Dafür lösen wir uns von der `warenkorb`-Tabelle und erstellen stattdessen eine Tabelle `event`. Dort speichern wir alle Events inklusive dem Subject (Benutzer-Referenz), dem Zeitstempel, der Art des Events und den dazugehörigen Daten.
 
 Das Datenbankmodell könnte so aussehen:
 
@@ -103,8 +152,9 @@ CREATE TABLE produkt (
 CREATE TABLE event (
     id INT PRIMARY KEY,
     type VARCHAR(100),
+    subject VARCHAR(100),
     data JSON,
-    timestamp TIMESTAMP
+    time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
@@ -119,19 +169,25 @@ Das Backend könnte dann folgende Endpunkte bereitstellen:
 | `POST`  | `/warenkorb/menge-aendern`       | `menge-geaendert`         |
 | `GET`   | `/warenkorb`                     | _(rekonstruiert Zustand)_ |
 
+Beachte den Unterschied zur REST-API: Statt `POST /warenkorb` mit einer generischen Payload verwenden wir sprechende Endpunkte wie `/warenkorb/produkt-hinzufuegen`. Das macht die Absicht des Aufrufs explizit.
+
 Die Events in der Tabelle könnten z.B. so aussehen:
 
-| id  | type                 | data                                                  | timestamp           |
-| --- | -------------------- | ----------------------------------------------------- | ------------------- |
-| 1   | produkt-hinzugefuegt | { "benutzerId": 1, "produktId": 123, "menge": 2 }     | 2025-01-23 10:00:00 |
-| 2   | produkt-entfernt     | { "benutzerId": 2, "produktId": 456 }                 | 2025-01-23 10:02:00 |
-| 3   | menge-geaendert      | { "benutzerId": 1, "produktId": 123, "neueMenge": 1 } | 2025-01-23 10:03:00 |
-| 4   | produkt-hinzugefuegt | { "benutzerId": 1, "produktId": 456, "menge": 2 }     | 2025-01-23 10:03:20 |
-| 5   | produkt-entfernt     | { "benutzerId": 1, "produktId": 123 }                 | 2025-01-23 10:04:00 |
-| 6   | produkt-hinzugefuegt | { "benutzerId": 3, "produktId": 789, "menge": 3 }     | 2025-01-23 10:05:00 |
-| 7   | menge-geaendert      | { "benutzerId": 1, "produktId": 456, "neueMenge": 3 } | 2025-01-23 10:09:30 |
+| id  | type                 | subject  | data                                            | time                |
+| --- | -------------------- | -------- | ----------------------------------------------- | ------------------- |
+| 1   | produkt-hinzugefuegt | user:1   | `{ "produktId": 123, "menge": 2 }`              | 2025-01-23 10:00:00 |
+| 2   | produkt-entfernt     | user:2   | `{ "produktId": 456 }`                          | 2025-01-23 10:02:00 |
+| 3   | menge-geaendert      | user:1   | `{ "produktId": 123, "neueMenge": 1 }`          | 2025-01-23 10:03:00 |
+| 4   | produkt-hinzugefuegt | user:1   | `{ "produktId": 456, "menge": 2 }`              | 2025-01-23 10:03:20 |
+| 5   | produkt-entfernt     | user:1   | `{ "produktId": 123 }`                          | 2025-01-23 10:04:00 |
+| 6   | produkt-hinzugefuegt | user:3   | `{ "produktId": 789, "menge": 3 }`              | 2025-01-23 10:05:00 |
+| 7   | menge-geaendert      | user:1   | `{ "produktId": 456, "neueMenge": 3 }`          | 2025-01-23 10:09:30 |
 
 Um den aktuellen Zustand des Warenkorbs zu ermitteln, müssen wir alle Events für den jeweiligen Benutzer lesen und diese der Reihe nach anwenden. Was passiert also, wenn wir `GET /warenkorb` für Benutzer 1 aufrufen?
+
+```sql
+SELECT * FROM event WHERE subject = 'user:1' ORDER BY time;
+```
 
 ### Schritt 1: Events lesen
 
@@ -186,6 +242,48 @@ Vielleicht fragst du dich jetzt, ob das System nicht langsam wird, wenn bei jede
 4. **CQRS und Caching** In vielen Event-Sourcing-Systemen wird das CQRS-Muster (Command Query Responsibility Segregation) verwendet. Dabei werden die Schreib- und Leseoperationen auf unterschiedliche Modelle und Datenbanken aufgeteilt. Für das Schreiben werden die Events in den Event-Store geschrieben, während für das Lesen ein optimiertes Lese-Modell (z.B. eine denormalisierte Ansicht) verwendet wird, das regelmäßig aus den Events generiert und aktualisiert wird. Dadurch können Leseoperationen sehr schnell durchgeführt werden, ohne dass alle Events (nochmal) verarbeitet werden müssen. Zusätzlich kann Caching auf diesen Lese-Modelle anwenden, um die Performance für häufig abgefragte Daten weiter zu verbessern. In unserem Beispiel könnte das Lese-Modell eine denormalisierte Tabelle sein, die den aktuellen Zustand des Warenkorbs für jeden Benutzer speichert. Diese Warenkorb-Tabelle wird bei jedem Event aktualisiert. Sodass beim Aufruf von `GET /warenkorb` schon alle Events verarbeitet wurden und der Datenbankeintrag sehr schnell abgerufen und an den Client zurückgegeben werden kann.
 
 Durch diese Techniken kann Event-Sourcing auch in großen Systemen mit vielen Benutzern und einer großen Anzahl von Events performant umgesetzt werden.
+
+## Event-Sourcing mit AWS
+
+Für Cloud-native Anwendungen bietet AWS eine gute Infrastruktur für Event-Sourcing:
+
+- **DynamoDB als Event Store**: DynamoDB eignet sich hervorragend als Event Store. Das `subject` wird als Partition Key verwendet, der Zeitstempel oder eine Sequenznummer als Sort Key. So können alle Events zu einem Aggregat effizient abgefragt werden.
+
+- **Lambda für Commands**: Jeder Command-Endpunkt wird von einer Lambda-Funktion verarbeitet, die das Event validiert und in DynamoDB schreibt.
+
+- **DynamoDB Streams + SNS**: Nach dem Schreiben eines Events kann DynamoDB Streams das Event an eine Lambda-Funktion weiterleiten, die es auf ein SNS Topic publiziert.
+
+- **Event-Subscribers**: Andere Microservices können das SNS Topic abonnieren und auf Events reagieren – z.B. um Lese-Modelle zu aktualisieren oder E-Mails zu versenden.
+
+Diese Architektur ist serverless, skaliert automatisch und ermöglicht eine lose Kopplung zwischen den Services.
+
+## Vor- und Nachteile
+
+### Vorteile
+
+- **Näher an der Fachdomäne**: Events beschreiben was im Business passiert ist, nicht nur technische Zustandsänderungen. Das macht Event-Sourcing zu einer natürlichen Ergänzung für Domain-Driven Design (DDD) und Event Storming.
+
+- **Vollständiger Audit Trail**: Jede Änderung ist dokumentiert – wer hat wann was gemacht? Das ist besonders wichtig für Compliance-Anforderungen.
+
+- **Zeitreisen möglich**: Der Zustand kann für jeden beliebigen Zeitpunkt rekonstruiert werden. Das ist Gold wert für Debugging und Analyse.
+
+- **Keine Information geht verloren**: Der Kontext und die Absicht hinter jeder Änderung bleiben erhalten.
+
+- **Perfekt für Event-Driven Architectures**: Event-Sourcing passt natürlich zu CQRS, Microservices und asynchroner Kommunikation.
+
+- **KI-Integration**: Mit dem vollständigen Kontext aller Änderungen können KI-Systeme bessere Vorhersagen und Empfehlungen machen.
+
+### Nachteile
+
+- **Mehr Speicherplatz**: Events akkumulieren sich über die Zeit. Alte Events können nicht einfach gelöscht werden.
+
+- **Event Replay kann dauern**: Bei Millionen von Events kann die Rekonstruktion des Zustands Zeit brauchen (hier helfen Snapshots und CQRS).
+
+- **Zusätzliche Komplexität**: Event-Sourcing erfordert ein Umdenken in der Architektur und bringt neue Herausforderungen mit sich.
+
+- **Schema-Evolution**: Alte Event-Schemas bleiben für immer erhalten. Änderungen müssen rückwärtskompatibel sein oder durch Upcaster migriert werden.
+
+- **Lernkurve**: Entwickler müssen das Konzept verstehen und verinnerlichen. Das braucht Zeit und gutes Onboarding.
 
 ## Fazit
 
