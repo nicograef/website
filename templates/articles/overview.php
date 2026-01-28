@@ -6,7 +6,7 @@
 ob_start();
 ?>
 <div class="articles-container" id="main-content">
-    <a href="/">&larr; Zurück zur Startseite</a>
+    <a href="/" class="back-link">&larr; Zurück zur Startseite</a>
     <h1>Artikel</h1>
     <?php if (empty($articles)): ?>
         <p>Noch keine Artikel vorhanden.</p>
@@ -22,10 +22,10 @@ ob_start();
                     <?php endif; ?>
                     <div class="article-meta">
                         <?php if ($article['date']): ?>
-                            <span class="date"><?= date('d.m.Y', strtotime($article['date'])) ?></span>
+                            <span class="date"><?= date('d. F Y', strtotime($article['date'])) ?></span>
                         <?php endif; ?>
                         <?php if ($article['author']): ?>
-                            <span class="author">von <?= htmlspecialchars($article['author']) ?></span>
+                            <span class="author"><?= htmlspecialchars($article['author']) ?></span>
                         <?php endif; ?>
                     </div>
                     <?php if (!empty($article['tags'])): ?>
@@ -42,5 +42,5 @@ ob_start();
 </div>
 <?php
 $pageContent = ob_get_clean();
-include __DIR__ . '/../layout.php';
+include TEMPLATES_DIR . '/layout.php';
 ?>

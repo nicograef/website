@@ -1,5 +1,9 @@
 <?php
-require 'Parsedown.php';
+require __DIR__ . '/../vendor/Parsedown.php';
+
+// Base paths
+define('CONTENT_DIR', __DIR__ . '/../content/articles');
+define('TEMPLATES_DIR', __DIR__ . '/../templates');
 
 /**
  * Parse YAML frontmatter from markdown content
@@ -41,7 +45,7 @@ function parseArticle($markdown)
 function getArticles()
 {
     $articles = [];
-    $files = glob(__DIR__ . '/*.md');
+    $files = glob(CONTENT_DIR . '/*.md');
 
     foreach ($files as $file) {
         $slug = basename($file, '.md');
@@ -84,7 +88,7 @@ function getSlugFromRequest()
  */
 function renderArticle($slug)
 {
-    $filePath = __DIR__ . '/' . $slug . '.md';
+    $filePath = CONTENT_DIR . '/' . $slug . '.md';
 
     if (!file_exists($filePath)) {
         http_response_code(404);
@@ -109,9 +113,9 @@ function renderArticle($slug)
     $pageDescription = $description;
     $pageUrl = '/articles/' . $slug;
     $pageLang = 'de';
-    $extraStyles = ['/articles/article.css'];
+    $extraStyles = ['/assets/css/article.css'];
 
-    include __DIR__ . '/article.php';
+    include TEMPLATES_DIR . '/articles/article.php';
 }
 
 /**
@@ -126,7 +130,7 @@ function renderOverview()
     $pageDescription = 'Artikel über Software-Entwicklung, Architektur und moderne Technologien von Nico Gräf.';
     $pageUrl = '/articles';
     $pageLang = 'de';
-    $extraStyles = ['/articles/overview.css'];
+    $extraStyles = ['/assets/css/overview.css'];
 
-    include __DIR__ . '/overview.php';
+    include TEMPLATES_DIR . '/articles/overview.php';
 }

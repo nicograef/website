@@ -2,7 +2,7 @@
   {
     "title": "jotti / since 2025",
     "description": "jotti is a simple order management system for clubs and non-profit organizations. It allows managing products (beverages and food) as well as booking orders and payments to tables. As a web app, jotti can be used on any smartphone. It provides administrators with dedicated web access to manage products and tables, as well as handle accounting tasks.",
-    "image": "/img/jotti.jpg",
+    "image": "/assets/img/jotti.jpg",
     "tags": [
       "PostgreSQL",
       "Go",
@@ -22,7 +22,7 @@
   {
     "title": "Haufe Akademie / since 2024",
     "description": "The Haufe Akademie is the training and education division of Haufe Group. Since 2025 I am part of a Scrum team providing technical solutions for the company.",
-    "image": "/img/haufe-akademie.png",
+    "image": "/assets/img/haufe-akademie.png",
     "tags": [
       "AWS",
       "Serverless",
@@ -44,7 +44,7 @@
   {
     "title": "Idana / 2020-2024",
     "description": "Idana is a german startup that provides a digital assistant for the healthcare sector. I joined the team as a fullstack developer and graduated to a team lead position. I was responsible for the development of the web application and the backend services.",
-    "image": "/img/idana.png",
+    "image": "/assets/img/idana.png",
     "tags": [
       "Google Cloud",
       "E2EE",
@@ -65,7 +65,7 @@
   {
     "title": "Freiburg Challenge / 2020",
     "description": "A location-based social game for Freiburg once developed an MVP for. The idea was to create a game where users can explore the city and collect points by visiting different locations.",
-    "image": "/img/freiburg-challenge.jpg",
+    "image": "/assets/img/freiburg-challenge.jpg",
     "tags": [
       "UI/UX Design",
       "Adobe XD",
@@ -80,7 +80,7 @@
   {
     "title": "What The Flag / 2019",
     "description": "A Quizduell-like game with questions about countries, capitals and flags where users can challenge each other. Developed for my room mates as a Progressive Web App with the MERN Stack.",
-    "image": "/img/what-the-flag.jpg",
+    "image": "/assets/img/what-the-flag.jpg",
     "tags": [
       "Express JS",
       "MongoDB",
@@ -96,7 +96,7 @@
   {
     "title": "Sudoku Android App / 2016",
     "description": "A native android app to learn and play sudoku puzzles. I started this project in early 2016 because I wanted to know how native app developing works. After publishing the first version I made a total revamp including a new design and a Sudoku of the Week.",
-    "image": "/img/sudoku-app.jpg",
+    "image": "/assets/img/sudoku-app.jpg",
     "tags": ["Java", "Android", "Firebase", "Google Play Store"],
     "linkTitle": "github repo",
     "linkUrl": "https://github.com/nicograef/sudoku-trainer"
@@ -104,7 +104,7 @@
   {
     "title": "Lokalrunde / 2020",
     "description": "For the german-wide online hackathon #WirVsVirus my team designed and prototyped an app to support local bars and cafes during the covid-19 crisis.",
-    "image": "/img/lokalrunde.jpg",
+    "image": "/assets/img/lokalrunde.jpg",
     "tags": ["Hackathon", "Angular JS", "Firebase"],
     "linkTitle": "github repo",
     "linkUrl": "https://github.com/VirtualCoffee/lokalrunde"
@@ -112,7 +112,7 @@
   {
     "title": "Smart Coffee / 2015",
     "description": "As part of a student project a fellow stundent and I hacked a coffee machine to accept orders via wifi. We also built a robot arm to serve cups and improved some sensors.",
-    "image": "/img/smart-coffee.jpg",
+    "image": "/assets/img/smart-coffee.jpg",
     "tags": ["Arduino", "C++", "3D-Printing", "Embedded"],
     "linkTitle": "watch video",
     "linkUrl": "https://youtu.be/dsMQO0oeDec"
@@ -120,7 +120,7 @@
   {
     "title": "Tutorial Runner Game / 2015",
     "description": "Back in 2015 I dreamed of being a game developer. So I decided to try out the Unreal Engine. After completing a tutorial I created this runner game. I also composed the music, created the game sounds and some textures.",
-    "image": "/img/tutorial-runner.jpg",
+    "image": "/assets/img/tutorial-runner.jpg",
     "tags": ["Unreal Engine", "C++", "Game Dev"],
     "linkTitle": "watch video",
     "linkUrl": "https://youtu.be/k_JBZWA0-zM"
@@ -128,7 +128,7 @@
   {
     "title": "Board Games App / 2018",
     "description": "A functional mockup for a board games community app based on Framework7 and Cordova/Phonegap I designed for a friend's student project.",
-    "image": "/img/board-games-community-app.jpg",
+    "image": "/assets/img/board-games-community-app.jpg",
     "tags": ["Cordova", "Framework7", "Mockup", "Prototype"],
     "linkTitle": "Watch demo",
     "linkUrl": "https://youtu.be/43I4IdAd3HA"
@@ -136,7 +136,7 @@
   {
     "title": "Sudoku Solver / 2016",
     "description": "Java gui application to solve sudokus I created out of curiosity back in 2016. I was wondering if I could come up with a algorithm to solve sudokus - on my on.",
-    "image": "/img/sudoku-solver.jpg",
+    "image": "/assets/img/sudoku-solver.jpg",
     "tags": ["Java", "Desktop", "Algorithms"],
     "linkTitle": "github repo",
     "linkUrl": "https://github.com/nicograef/sudoku-solver"
@@ -144,7 +144,7 @@
   {
     "title": "ML Classification / 2016",
     "description": "After completing an online course about Machine Learning I played around with the MNIST-dataset, implemented my version of the Genetic Algorithm and coded a Feed Forward Neural Network.",
-    "image": "/img/classification.jpg",
+    "image": "/assets/img/classification.jpg",
     "tags": ["AI", "Python", "Machine Learning", "Java", "Classification"],
     "linkTitle": "github repo",
     "linkUrl": "https://github.com/nicograef/ai"
@@ -152,7 +152,7 @@
   {
     "title": "Wirkraft / 2018",
     "description": "In 2018 I developed a native android app, a hybrid app and several features for the web backend of a community platform.",
-    "image": "/img/wirkraft.jpg",
+    "image": "/assets/img/wirkraft.jpg",
     "tags": [
       "Vue JS",
       "Cordova",
@@ -168,7 +168,7 @@
   {
     "title": "MSH Sportpferde / 2017",
     "description": "As a webdesign freelancer I designed and (hand-)coded the website for an equestrian farm. Later they asked me to help build an online presence. That's kind of how I got into online marketing.",
-    "image": "/img/msh-sportpferde.jpg",
+    "image": "/assets/img/msh-sportpferde.jpg",
     "tags": [
       "HTML",
       "CSS",
@@ -183,7 +183,7 @@
   {
     "title": "Meisterwunder Pop-up Store / 2015",
     "description": "As my first startup-like project a friend and I opened a pop-up store before christmas 2015. We offered custom portrait art and showed some art hacking experiments at our opening.",
-    "image": "/img/makelangelo.jpg",
+    "image": "/assets/img/makelangelo.jpg",
     "tags": ["Startup", "Art"],
     "linkTitle": "watch video",
     "linkUrl": "https://youtu.be/p4j1_mpg-3o"
@@ -191,7 +191,7 @@
   {
     "title": "Wiwili / 2019",
     "description": "In Freiburg there's a bridge called Wiwili and it has a cyclists sensor built into the ground. I downloaded the data from FRITZ (the open data platform of Freiburg) and used it to play around with D3.JS.",
-    "image": "/img/wiwili.png",
+    "image": "/assets/img/wiwili.png",
     "tags": ["Data Visualisation", "D3.JS", "Open Data"],
     "linkTitle": "Play with it",
     "linkUrl": "https://nicograef.com/wiwili"
@@ -199,7 +199,7 @@
   {
     "title": "Project 0742 / 2016",
     "description": "A simple website maker I made to learn some node.js stuff. Sadly, I lost the final version of my code and this repo only represents the alpha version.",
-    "image": "/img/project0742.jpg",
+    "image": "/assets/img/project0742.jpg",
     "tags": ["HTML", "CSS", "Node JS", "Web Design"],
     "linkTitle": "watch video",
     "linkUrl": "https://youtu.be/Y6JF0A9bYoE"
@@ -207,13 +207,13 @@
   {
     "title": "Kuunery / 2019",
     "description": "As an experiment in online marketing I invented an art magazine startup, set up an online shop with shopify and used instagram for marketing.",
-    "image": "/img/kuunery.jpg",
+    "image": "/assets/img/kuunery.jpg",
     "tags": ["Online Marketing", "Instagram", "Shopify", "Art"]
   },
   {
     "title": "Country Quiz NPM Module / 2019",
     "description": "I created this module as part of the What The Flag project and published it to NPM just out of curiosity. It lets you create questions and quizzes about countries, flags and capitals. Later, I used this as a training project for testing and Travis CI.",
-    "image": "/img/country-quiz.jpg",
+    "image": "/assets/img/country-quiz.jpg",
     "tags": [
       "NPM",
       "Travis CI",

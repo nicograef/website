@@ -6,7 +6,7 @@
  */
 
 $pageLang = $pageLang ?? 'de';
-$pageImage = $pageImage ?? '/img/icon.png';
+$pageImage = $pageImage ?? '/assets/img/icon.png';
 $bodyClass = $bodyClass ?? '';
 $baseUrl = 'https://nicograef.com';
 $fullUrl = $baseUrl . ($pageUrl ?? $_SERVER['REQUEST_URI']);
@@ -41,10 +41,10 @@ $fullUrl = $baseUrl . ($pageUrl ?? $_SERVER['REQUEST_URI']);
     <meta name="twitter:image" content="<?= $baseUrl . htmlspecialchars($pageImage) ?>">
 
     <!-- Favicon & Styles -->
-    <link rel="icon" type="image/png" href="/img/icon.png">
-    <link rel="preload" href="/fonts/Montserrat-Regular.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="/fonts/Montserrat-Bold.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/png" href="/assets/img/icon.png">
+    <link rel="preload" href="/assets/fonts/Montserrat-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/assets/fonts/Montserrat-Bold.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="/assets/css/main.css">
     <?php if (!empty($extraStyles)): ?>
         <?php foreach ($extraStyles as $style): ?>
             <link rel="stylesheet" href="<?= htmlspecialchars($style) ?>">

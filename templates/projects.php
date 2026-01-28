@@ -19,6 +19,6 @@ class Project
     }
 }
 
-$jsonData = file_get_contents('projects.json');
+$jsonData = file_get_contents(__DIR__ . '/../content/projects.json');
 $projectData = json_decode($jsonData, true);
 $projects = array_map(fn($data) => new Project($data), $projectData);

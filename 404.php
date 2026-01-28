@@ -19,12 +19,12 @@ ob_start();
     }
 </style>
 <div class="error-container" id="main-content">
-    <img src="/img/404.webp" alt="404 - Page not found" style="max-width: 400px; width: 100%; height: auto; margin-bottom: 20px;">
+    <img src="/assets/img/404.webp" alt="404 - Page not found" style="max-width: 400px; width: 100%; height: auto; margin-bottom: 20px;">
     <p>
         <a href="/">back to my portfolio</a>
     </p>
 </div>
 <?php
 $pageContent = ob_get_clean();
-include __DIR__ . '/layout.php';
+include __DIR__ . '/templates/layout.php';
 ?>

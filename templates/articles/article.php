@@ -3,8 +3,8 @@
 // Variables provided by renderArticle(): $title, $description, $date, $author, $tags, $htmlContent
 // Layout variables: $pageTitle, $pageDescription, $pageUrl, $pageLang, $extraStyles
 
-// Add highlight.js styles (local)
-$extraStyles[] = '/articles/highlight.css';
+// Add highlight.js styles (vendor)
+$extraStyles[] = '/vendor/highlight.css';
 
 ob_start();
 ?>
@@ -25,11 +25,11 @@ ob_start();
 </article>
 
 <!-- Syntax Highlighting (local) -->
-<script src="/articles/highlight.js"></script>
+<script src="/assets/js/highlight.js"></script>
 <script>
     hljs.highlightAll();
 </script>
 <?php
 $pageContent = ob_get_clean();
-include __DIR__ . '/../layout.php';
+include TEMPLATES_DIR . '/layout.php';
 ?>

@@ -1,0 +1,168 @@
+/* Articles Overview - Matching main site style */
+.articles-container {
+  max-width: 680px;
+  margin: 60px auto;
+  padding: 0 24px;
+}
+
+.articles-container > a:first-child {
+  font-family: Montserrat, sans-serif;
+  font-size: 0.9rem;
+  color: #757575;
+  display: inline-block;
+  margin-bottom: 24px;
+}
+
+.articles-container > a:first-child:hover {
+  color: var(--primary, #112d4e);
+}
+
+.articles-container h1 {
+  font-family:
+    Montserrat,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--primary, #112d4e);
+  margin: 0 0 48px 0;
+  letter-spacing: -0.01em;
+}
+
+.article-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.article-card {
+  padding: 28px 32px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.article-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.article-link {
+  margin: 0;
+  border-bottom: none;
+  display: block;
+}
+
+.article-link:hover {
+  border-bottom: none;
+}
+
+.article-title {
+  font-family:
+    Montserrat,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  margin: 0 0 12px 0;
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--primary, #112d4e);
+  transition: color 0.2s ease;
+}
+
+.article-link:hover .article-title {
+  color: var(--secondary, #f4b400);
+}
+
+.article-description {
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  color: #444;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0 0 16px 0;
+}
+
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: #757575;
+  font-family: Montserrat, sans-serif;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+
+.article-meta .date::before {
+  content: "\1F4C5";
+  margin-right: 6px;
+}
+
+.article-meta .author::before {
+  content: "\270D";
+  margin-right: 6px;
+}
+
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.article-tags .chip {
+  background: #dbe2ef;
+  color: var(--primary, #112d4e);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: Montserrat, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: lowercase;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .articles-container {
+    margin: 30px auto;
+    padding: 0 16px;
+  }
+
+  .articles-container h1 {
+    font-size: 1.75rem;
+    margin-bottom: 32px;
+  }
+
+  .article-list {
+    gap: 24px;
+  }
+
+  .article-card {
+    padding: 20px 24px;
+  }
+
+  .article-title {
+    font-size: 1.2rem;
+  }
+
+  .article-description {
+    font-size: 0.95rem;
+  }
+
+  .article-meta {
+    gap: 12px;
+    font-size: 0.8rem;
+  }
+
+  .article-tags .chip {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+}

@@ -1,17 +1,17 @@
 <?php
-include 'projects.php';
+include 'templates/projects.php';
 
 // Layout data
 $pageTitle = 'Nico Gräf – Software Engineer';
 $pageDescription = 'Portfolio of Nico Gräf, a Software Engineer specializing in web development and modern technologies.';
 $pageUrl = '/';
 $pageLang = 'en';
-$pageImage = '/img/nico-social.jpg';
+$pageImage = '/assets/img/nico-social.jpg';
 
 ob_start();
 ?>
 <header>
-  <img src="/img/nico-social.jpg" alt="Nico Gräf" title="Nico Gräf" loading="eager" class="profile-picture" />
+  <img src="/assets/img/nico-social.jpg" alt="Nico Gräf" title="Nico Gräf" loading="eager" class="profile-picture" />
   <h1 style="margin-bottom: 0">Nico Gräf</h1>
   <p>Software Engineer from Freiburg, Germany</p>
   <br />
@@ -69,5 +69,5 @@ ob_start();
 </script>
 <?php
 $pageContent = ob_get_clean();
-include 'layout.php';
+include 'templates/layout.php';
 ?>

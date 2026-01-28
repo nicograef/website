@@ -4,7 +4,7 @@
  * Articles Controller
  * Routes requests to the appropriate view
  */
-require 'functions.php';
+require __DIR__ . '/../includes/articles.php';
 
 $slug = getSlugFromRequest();
 
