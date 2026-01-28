@@ -28,38 +28,38 @@ In diesem Artikel vergleiche ich Event-Sourcing mit dem traditionellen CRUD-Ansa
 
 Für die CRUD-Implementierung nehmen wir eine relationale Datenbank und ein REST-like Backend, um CRUD-Operationen durchzuführen.
 
-Stellen wir uns vor, es gibt eine Tabelle `warenkorb` mit den Spalten `benutzer_id`, `produkt_id` und `menge`. Wenn ein Benutzer ein Produkt zu seinem Warenkorb hinzufügt, wird ein neuer Eintrag in der Tabelle erstellt (CREATE). Wenn der Benutzer die Menge eines Produkts ändert, wird der entsprechende Eintrag aktualisiert (UPDATE). Wenn der Benutzer ein Produkt entfernt, wird der Eintrag gelöscht (DELETE). Wir speichern also immer den aktuellen Zustand des Warenkorbs. Um den aktuellen Zustand des Warenkorbs zu ermitteln, müssen wir einfach die Einträge in der Tabelle für den jeweiligen Benutzer abfragen (READ). Das Datenbankmodell könnte also so aussehen:
+Stellen wir uns vor, es gibt eine Tabelle `shopping_carts` mit den Spalten `user_id`, `product_id` und `quantity`. Wenn ein Benutzer ein Produkt zu seinem Warenkorb hinzufügt, wird ein neuer Eintrag in der Tabelle erstellt (CREATE). Wenn der Benutzer die Menge eines Produkts ändert, wird der entsprechende Eintrag aktualisiert (UPDATE). Wenn der Benutzer ein Produkt entfernt, wird der Eintrag gelöscht (DELETE). Wir speichern also immer den aktuellen Zustand des Warenkorbs. Um den aktuellen Zustand des Warenkorbs zu ermitteln, müssen wir einfach die Einträge in der Tabelle für den jeweiligen Benutzer abfragen (READ). Das Datenbankmodell könnte also so aussehen:
 
 ```sql
-CREATE TABLE benutzer (
+CREATE TABLE users (
     id INT PRIMARY KEY,
     name VARCHAR(100)
 );
 
-CREATE TABLE produkt (
+CREATE TABLE products (
     id INT PRIMARY KEY,
     name VARCHAR(100),
-    preis DECIMAL(10, 2)
+    price DECIMAL(10, 2)
 );
 
-CREATE TABLE warenkorb (
-    benutzer_id INT,
-    produkt_id INT,
-    menge INT,
-    PRIMARY KEY (benutzer_id, produkt_id),
-    FOREIGN KEY (produkt_id) REFERENCES produkt(id),
-    FOREIGN KEY (benutzer_id) REFERENCES benutzer(id)
+CREATE TABLE shopping_carts (
+    user_id INT,
+    product_id INT,
+    quantity INT,
+    PRIMARY KEY (user_id, product_id),
+    FOREIGN KEY (product_id) REFERENCES products(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 ```
 
 Das Backend könnte dann folgende Endpunkte bereitstellen:
 
-| Methode  | Endpunkt                  | Beschreibung                |
-| -------- | ------------------------- | --------------------------- |
-| `POST`   | `/warenkorb`              | Produkt hinzufügen (CREATE) |
-| `PATCH`  | `/warenkorb/produkt/{id}` | Menge ändern (UPDATE)       |
-| `DELETE` | `/warenkorb/produkt/{id}` | Produkt entfernen (DELETE)  |
-| `GET`    | `/warenkorb`              | Warenkorb abrufen (READ)    |
+| Methode  | Endpunkt             | Beschreibung                |
+| -------- | -------------------- | --------------------------- |
+| `POST`   | `/cart/products`     | Produkt hinzufügen (CREATE) |
+| `PATCH`  | `/cart/product/{id}` | Menge ändern (UPDATE)       |
+| `DELETE` | `/cart/product/{id}` | Produkt entfernen (DELETE)  |
+| `GET`    | `/cart`              | Warenkorb abrufen (READ)    |
 
 Dieses System würde gut funktionieren und die oberflächlichen Anforderungen eines Warenkorbs erfüllen. Allerdings gibt es auch einige Fragen, die man mit diesem Ansatz nicht beantworten kann.
 
@@ -87,7 +87,7 @@ Ein Kunde beschwert sich, dass ein Produkt aus seinem Warenkorb verschwunden ist
 
 Wenn solche Fragen gestellt werden und ein CRUD-System im Einsatz ist, wird oft (nachträglich) versucht, diese Informationen durch zusätzliche Statistik-Tabellen, Historie-Tabellen, Log-Tabellen oder Audit-Logs zu erfassen. Dies führt jedoch oft zu komplexen und schwer wartbaren Systemen.
 
-Außerdem geht durch die Kombination von CRUD-System und REST-API fast immer der Kontext der Änderung, die Fachlichkeit hinter dem CREATE/UPDATE/DELETE oder die Absicht des Benutzers verloren. Wenn das System komplexer wird, gibt es möglicherweise viele verschiedene Gründe, die zu einem `POST /warenkorb` Aufruf führen können (z.B. "Produkt hinzufügen um direkt zu kaufen", "Produkt wieder hinzufügen weil versehentlich entfernt", "Produkt für später vormerken", etc.). Diese verschiedenen Gründe können jedoch nicht mehr unterschieden werden, wenn nur der aktuelle Zustand des Warenkorbs gespeichert wird und selbst das Backend nur CREATE, UPDATE und DELETE kennt.
+Außerdem geht durch die Kombination von CRUD-System und REST-API fast immer der Kontext der Änderung, die Fachlichkeit hinter dem CREATE/UPDATE/DELETE oder die Absicht des Benutzers verloren. Wenn das System komplexer wird, gibt es möglicherweise viele verschiedene Gründe, die zu einem `POST /cart/products` Aufruf führen können (z.B. "Produkt hinzufügen um direkt zu kaufen", "Produkt wieder hinzufügen weil versehentlich entfernt", "Produkt für später vormerken", etc.). Diese verschiedenen Gründe können jedoch nicht mehr unterschieden werden, wenn nur der aktuelle Zustand des Warenkorbs gespeichert wird und selbst das Backend nur CREATE, UPDATE und DELETE kennt.
 
 Genau hier setzt Event-Sourcing an.
 
@@ -99,7 +99,7 @@ Ein Event beschreibt ein Ereignis, das im System stattgefunden hat. Events sind 
 
 Ein Event besteht aus:
 
-- **Type**: Der Event-Typ (z.B. `warenkorb.produkt-hinzugefuegt`)
+- **Type**: Der Event-Typ (z.B. `cart.product-added`)
 - **Time**: Zeitstempel, wann das Event aufgetreten ist
 - **Subject**: Referenz zum betroffenen Objekt/Aggregat (z.B. `user:456`)
 - **Data**: Alle relevanten Informationen (z.B. Produkt-ID, Menge)
@@ -109,12 +109,12 @@ Die <abbr title="Cloud Native Computing Foundation">CNCF</abbr> hat mit [CloudEv
 ```json
 {
   "id": "8875",
-  "type": "warenkorb.produkt-hinzugefuegt",
+  "type": "cart.product-added",
   "time": "2026-01-15T10:30:00Z",
   "subject": "user:456",
   "data": {
-    "produktId": 123,
-    "menge": 2
+    "productId": 123,
+    "quantity": 2
   }
 }
 ```
@@ -133,23 +133,23 @@ In der Event-Sourcing-Implementierung speichern wir alle Änderungen am Warenkor
 
 Wir verwenden wieder eine relationale Datenbank, die Backend-API soll diesmal jedoch im Command-Style gebaut werden (ähnlich zu <abbr title="Remote Procedure Call">RPC</abbr> und <abbr title="Command Query Responsibility Segregation">CQRS</abbr>).
 
-An den Tabellen `benutzer` und `produkt` ändern wir nichts. Diese bleiben gleich wie bei der CRUD-Implementierung. Das Event-Sourcing wird in diesem Beispiel nur auf den Warenkorb angewendet. Dafür lösen wir uns von der `warenkorb`-Tabelle und erstellen stattdessen eine Tabelle `event`. Dort speichern wir alle Events inklusive dem Subject (Benutzer-Referenz), dem Zeitstempel, der Art des Events und den dazugehörigen Daten.
+An den Tabellen `users` und `products` ändern wir nichts. Diese bleiben gleich wie bei der CRUD-Implementierung. Das Event-Sourcing wird in diesem Beispiel nur auf den Warenkorb angewendet. Dafür lösen wir uns von der `shopping_carts`-Tabelle und erstellen stattdessen eine Tabelle `events`. Dort speichern wir alle Events inklusive dem Subject (Benutzer-Referenz), dem Zeitstempel, der Art des Events und den dazugehörigen Daten.
 
 Das Datenbankmodell könnte so aussehen:
 
 ```sql
-CREATE TABLE benutzer (
+CREATE TABLE users (
     id INT PRIMARY KEY,
     name VARCHAR(100)
 );
 
-CREATE TABLE produkt (
+CREATE TABLE products (
     id INT PRIMARY KEY,
     name VARCHAR(100),
-    preis DECIMAL(10, 2)
+    price DECIMAL(10, 2)
 );
 
-CREATE TABLE event (
+CREATE TABLE events (
     id INT PRIMARY KEY,
     type VARCHAR(100),
     subject VARCHAR(100),
@@ -162,31 +162,31 @@ Jedes Mal, wenn ein Benutzer ein Produkt zu seinem Warenkorb hinzufügt, wird ei
 
 Das Backend könnte dann folgende Endpunkte bereitstellen:
 
-| Methode | Endpunkt                         | Event                     |
-| ------- | -------------------------------- | ------------------------- |
-| `POST`  | `/warenkorb/produkt-hinzufuegen` | `produkt-hinzugefuegt`    |
-| `POST`  | `/warenkorb/produkt-entfernen`   | `produkt-entfernt`        |
-| `POST`  | `/warenkorb/menge-aendern`       | `menge-geaendert`         |
-| `GET`   | `/warenkorb`                     | _(rekonstruiert Zustand)_ |
+| Methode | Endpunkt                | Event                     |
+| ------- | ----------------------- | ------------------------- |
+| `POST`  | `/cart/add-product`     | `product-added`           |
+| `POST`  | `/cart/remove-product`  | `product-removed`         |
+| `POST`  | `/cart/change-quantity` | `quantity-changed`        |
+| `GET`   | `/cart`                 | _(rekonstruiert Zustand)_ |
 
-Beachte den Unterschied zur REST-API: Statt `POST /warenkorb` mit einer generischen Payload verwenden wir sprechende Endpunkte wie `/warenkorb/produkt-hinzufuegen`. Das macht die Absicht des Aufrufs explizit.
+Beachte den Unterschied zur REST-API: Statt `POST /cart/products` mit einer generischen Payload verwenden wir sprechende Endpunkte wie `/cart/add-product`. Das macht die Absicht des Aufrufs explizit.
 
 Die Events in der Tabelle könnten z.B. so aussehen:
 
-| id  | type                 | subject | data                                   | time                |
-| --- | -------------------- | ------- | -------------------------------------- | ------------------- |
-| 1   | produkt-hinzugefuegt | user:1  | `{ "produktId": 123, "menge": 2 }`     | 2025-01-23 10:00:00 |
-| 2   | produkt-entfernt     | user:2  | `{ "produktId": 456 }`                 | 2025-01-23 10:02:00 |
-| 3   | menge-geaendert      | user:1  | `{ "produktId": 123, "neueMenge": 1 }` | 2025-01-23 10:03:00 |
-| 4   | produkt-hinzugefuegt | user:1  | `{ "produktId": 456, "menge": 2 }`     | 2025-01-23 10:03:20 |
-| 5   | produkt-entfernt     | user:1  | `{ "produktId": 123 }`                 | 2025-01-23 10:04:00 |
-| 6   | produkt-hinzugefuegt | user:3  | `{ "produktId": 789, "menge": 3 }`     | 2025-01-23 10:05:00 |
-| 7   | menge-geaendert      | user:1  | `{ "produktId": 456, "neueMenge": 3 }` | 2025-01-23 10:09:30 |
+| id  | type             | subject | data                                  | time                |
+| --- | ---------------- | ------- | ------------------------------------- | ------------------- |
+| 1   | product-added    | user:1  | `{ "productId": 123, "quantity": 2 }` | 2025-01-23 10:00:00 |
+| 2   | product-removed  | user:2  | `{ "productId": 456 }`                | 2025-01-23 10:02:00 |
+| 3   | quantity-changed | user:1  | `{ "productId": 123, "quantity": 1 }` | 2025-01-23 10:03:00 |
+| 4   | product-added    | user:1  | `{ "productId": 456, "quantity": 2 }` | 2025-01-23 10:03:20 |
+| 5   | product-removed  | user:1  | `{ "productId": 123 }`                | 2025-01-23 10:04:00 |
+| 6   | product-added    | user:3  | `{ "productId": 789, "quantity": 3 }` | 2025-01-23 10:05:00 |
+| 7   | quantity-changed | user:1  | `{ "productId": 456, "quantity": 3 }` | 2025-01-23 10:09:30 |
 
-Um den aktuellen Zustand des Warenkorbs zu ermitteln, müssen wir alle Events für den jeweiligen Benutzer lesen und diese der Reihe nach anwenden. Was passiert also, wenn wir `GET /warenkorb` für Benutzer 1 aufrufen?
+Um den aktuellen Zustand des Warenkorbs zu ermitteln, müssen wir alle Events für den jeweiligen Benutzer lesen und diese der Reihe nach anwenden. Was passiert also, wenn wir `GET /cart` für Benutzer 1 aufrufen?
 
 ```sql
-SELECT * FROM event WHERE subject = 'user:1' ORDER BY time;
+SELECT * FROM events WHERE subject = 'user:1' ORDER BY time;
 ```
 
 ### Schritt 1: Events lesen
@@ -214,18 +214,18 @@ Wir wenden die Events der Reihe nach an:
 ### Schritt 3: Ergebnis zurückgeben
 
 ```json
-{ "benutzerId": 1, "warenkorb": [{ "produktId": 456, "menge": 3 }] }
+{ "userId": 1, "cart": [{ "productId": 456, "quantity": 3 }] }
 ```
 
 Wir können mit Event-Sourcing also die gleiche Funktionalität liefern, wie mit dem CRUD-Ansatz. Aber zusätzlich können wir jetzt auch alle zuvor gestellten Fragen beantworten, da wir alle Events gespeichert haben.
 
 - Welche Produkte werden oft in den Warenkorb gelegt aber dann doch nicht bestellt?
-  - Wir können alle "produkt-hinzugefuegt" Events zählen und die entsprechenden "produkt-entfernt" Events dagegenstellen, um diese Information zu erhalten.
+  - Wir können alle `product-added` Events zählen und die entsprechenden `product-removed` Events dagegenstellen, um diese Information zu erhalten.
   - Bei Benutzer 1 sehen wir, dass Produkt 123 hinzugefügt und später entfernt wurde.
 - Wie oft wird die Menge eines Produktes reduziert oder erhöht?
-  - Wir können alle "menge-geaendert" Events analysieren, um zu sehen, wie oft die Menge geändert wurde und in welche Richtung.
+  - Wir können alle `quantity-changed` Events analysieren, um zu sehen, wie oft die Menge geändert wurde und in welche Richtung.
 - Welche Produkte verweilen am längsten im Warenkorb, bevor sie gekauft oder entfernt werden?
-  - Wenn wir ein Zeitstempel für die Bestellung oder sogar ein Bestell-Event haben, können die Zeitstempel der "produkt-hinzugefuegt" und "warenkorb-bestellt" Events vergleichen, um die Verweildauer zu berechnen.
+  - Wenn wir ein Zeitstempel für die Bestellung oder sogar ein Bestell-Event haben, können die Zeitstempel der `product-added` und `cart-ordered` Events vergleichen, um die Verweildauer zu berechnen.
 
 Da wir alle Events speichern, können wir Analysen durchführen, um das Verhalten der Benutzer besser zu verstehen. Ebenso eröffnen sich viele weitere Möglichkeiten: Sagen wir die Marketing-Abteilung kommt auf die Idee, Benutzern personalisierte Angebote zu machen, basierend auf den Produkten, die sie häufig in den Warenkorb legen, aber nicht kaufen. Mit Event-Sourcing können wir diese Funktion schnell bauen und sofort allen Benutzern personalisierte Angebote zusenden. Mit der CRUD-Implementierung wäre das nicht so einfach möglich. Man müsste das System erst erweitern und kann selbst dann nur mit den zukünftigen Daten arbeiten, nicht aber mit den historischen Daten.
 
@@ -239,7 +239,7 @@ Vielleicht fragst du dich jetzt, ob das System nicht langsam wird, wenn bei jede
 
 3. **Optimierte Datenbanken** In unserem Beispiel haben wir eine relationale Datenbank für die Speicherung verwendet. Ich selbst habe dafür in einem Projekt PostgreSQL verwendet. Ebenso kann man bei kleinen Anwendungen NoSQL-Datenbanken wie MongoDB oder AWS DynamoDB für Event-Sourcing verwenden. Es gibt jedoch auch spezialisierte Datenbanken (sog. Event-Stores), die für Event-Sourcing optimiert sind. Diese bieten oft bessere Performance und Skalierbarkeit für das Speichern und Abrufen von Events. In unserem Beispiel könnten dann die Produkte und Benutzer in einer relationalen Datenbank bleiben, während die Events in einem speziellen Event-Store gespeichert werden.
 
-4. **CQRS und Caching** In vielen Event-Sourcing-Systemen wird das CQRS-Muster (Command Query Responsibility Segregation) verwendet. Dabei werden die Schreib- und Leseoperationen auf unterschiedliche Modelle und Datenbanken aufgeteilt. Für das Schreiben werden die Events in den Event-Store geschrieben, während für das Lesen ein optimiertes Lese-Modell (z.B. eine denormalisierte Ansicht) verwendet wird, das regelmäßig aus den Events generiert und aktualisiert wird. Dadurch können Leseoperationen sehr schnell durchgeführt werden, ohne dass alle Events (nochmal) verarbeitet werden müssen. Zusätzlich kann Caching auf diesen Lese-Modelle anwenden, um die Performance für häufig abgefragte Daten weiter zu verbessern. In unserem Beispiel könnte das Lese-Modell eine denormalisierte Tabelle sein, die den aktuellen Zustand des Warenkorbs für jeden Benutzer speichert. Diese Warenkorb-Tabelle wird bei jedem Event aktualisiert. Sodass beim Aufruf von `GET /warenkorb` schon alle Events verarbeitet wurden und der Datenbankeintrag sehr schnell abgerufen und an den Client zurückgegeben werden kann.
+4. **CQRS und Caching** In vielen Event-Sourcing-Systemen wird das CQRS-Muster (Command Query Responsibility Segregation) verwendet. Dabei werden die Schreib- und Leseoperationen auf unterschiedliche Modelle und Datenbanken aufgeteilt. Für das Schreiben werden die Events in den Event-Store geschrieben, während für das Lesen ein optimiertes Lese-Modell (z.B. eine denormalisierte Ansicht) verwendet wird, das regelmäßig aus den Events generiert und aktualisiert wird. Dadurch können Leseoperationen sehr schnell durchgeführt werden, ohne dass alle Events (nochmal) verarbeitet werden müssen. Zusätzlich kann Caching auf diesen Lese-Modelle anwenden, um die Performance für häufig abgefragte Daten weiter zu verbessern. In unserem Beispiel könnte das Lese-Modell eine denormalisierte Tabelle sein, die den aktuellen Zustand des Warenkorbs für jeden Benutzer speichert. Diese Warenkorb-Tabelle wird bei jedem Event aktualisiert. Sodass beim Aufruf von `GET /cart` schon alle Events verarbeitet wurden und der Datenbankeintrag sehr schnell abgerufen und an den Client zurückgegeben werden kann.
 
 Durch diese Techniken kann Event-Sourcing auch in großen Systemen mit vielen Benutzern und einer großen Anzahl von Events performant umgesetzt werden.
 
