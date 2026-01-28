@@ -245,17 +245,7 @@ Diese Techniken können helfen, Event-Sourcing auch in größeren Systemen einzu
 
 ## Event-Sourcing mit AWS
 
-Für Cloud-native Anwendungen bietet AWS eine gute Infrastruktur für Event-Sourcing:
-
-- **DynamoDB als Event Store**: DynamoDB kann als Event Store verwendet werden. Das `subject` wird als Partition Key verwendet, der Zeitstempel oder eine Sequenznummer als Sort Key. So können alle Events zu einem Aggregat abgefragt werden. Allerdings hat DynamoDB Einschränkungen bei komplexen Queries über mehrere Partitions hinweg.
-
-- **Lambda für Commands**: Jeder Command-Endpunkt wird von einer Lambda-Funktion verarbeitet, die das Event validiert und in DynamoDB schreibt.
-
-- **DynamoDB Streams + SNS**: Nach dem Schreiben eines Events kann DynamoDB Streams das Event an eine Lambda-Funktion weiterleiten, die es auf ein SNS Topic publiziert.
-
-- **Event-Subscribers**: Andere Microservices können das SNS Topic abonnieren und auf Events reagieren – z.B. um Lese-Modelle zu aktualisieren oder E-Mails zu versenden.
-
-Diese Architektur ist serverless und skaliert automatisch. Allerdings bringt sie auch Vendor Lock-in, verteilte Systeme-Komplexität und potentiell höhere Kosten bei hohem Durchsatz mit sich.
+Wenn du Event-Sourcing mit AWS umsetzen möchtest, habe ich einen separaten Artikel geschrieben, der eine konkrete Implementierung mit DynamoDB, Lambda und SNS zeigt: [Event-Sourcing mit AWS DynamoDB](/articles/event-sourcing-mit-aws-dynamodb). Dort stelle ich auch meine Open-Source-Bibliothek [dynamo-eventdb](https://github.com/nicograef/dynamo-eventdb) vor, die DynamoDB als Event Store kapselt und ein CDK-Setup für das Deployment mitbringt.
 
 ## Vor- und Nachteile
 
