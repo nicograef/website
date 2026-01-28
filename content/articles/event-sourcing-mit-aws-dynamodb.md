@@ -4,6 +4,7 @@ description: Eine praktische Implementierung von Event-Sourcing mit AWS DynamoDB
 author: Nico Gräf
 author_url: https://nicograef.com
 date: 2025-01-28
+draft: true
 tags:
   - Software Architecture
   - Event-Sourcing

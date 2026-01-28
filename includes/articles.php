@@ -59,6 +59,7 @@ function getArticles()
             'date' => $parsed['meta']['date'] ?? '',
             'author' => $parsed['meta']['author'] ?? '',
             'tags' => $parsed['meta']['tags'] ?? [],
+            'draft' => ($parsed['meta']['draft'] ?? '') === 'true',
         ];
     }
 
@@ -106,7 +107,13 @@ function renderArticle($slug)
     $date = $parsed['meta']['date'] ?? '';
     $author = $parsed['meta']['author'] ?? '';
     $tags = $parsed['meta']['tags'] ?? [];
+    $draft = ($parsed['meta']['draft'] ?? '') === 'true';
     $htmlContent = $Parsedown->text($parsed['content']);
+
+    // Prepend [Entwurf] to title in HTML content if draft
+    if ($draft) {
+        $htmlContent = preg_replace('/^(<h1[^>]*>)/', '$1[Entwurf] ', $htmlContent);
+    }
 
     // Layout data
     $pageTitle = $title . ' | Nico Gräf';
