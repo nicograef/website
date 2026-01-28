@@ -12,8 +12,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: sudo apt-get install ssh sshpass
+        run: sudo apt-get install -y sshpass rsync
 
       - name: Deploy
-        run: sshpass -p '${{ secrets.FTP_PASSWORD }}' scp -v -o StrictHostKeyChecking=no -r ./* ${{ secrets.FTP_USER }}@${{ secrets.FTP_HOST }}:/home/www/nicograef.de/
+        run: |
+          sshpass -p '${{ secrets.FTP_PASSWORD }}' rsync -avz --delete \
+            --exclude '.git' \
+            --exclude '.github' \
+            --exclude '.devcontainer' \
+            --exclude 'README.md' \
+            -e "ssh -o StrictHostKeyChecking=no" \
+            ./ ${{ secrets.FTP_USER }}@${{ secrets.FTP_HOST }}:/home/www/nicograef.de/
         
