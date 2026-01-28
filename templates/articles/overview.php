@@ -6,7 +6,7 @@
 ob_start();
 ?>
 <div class="articles-container" id="main-content">
-    <a href="/" class="back-link">&larr; Zurück zur Startseite</a>
+    <a href="/" class="back-link">&larr; Zum Portfolio</a>
     <h1>Artikel</h1>
     <?php if (empty($articles)): ?>
         <p>Noch keine Artikel vorhanden.</p>

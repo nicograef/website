@@ -61,7 +61,7 @@ $fullUrl = $baseUrl . ($pageUrl ?? $_SERVER['REQUEST_URI']);
     <?= $pageContent ?>
 
     <footer>
-        <p>&copy; <?= date('Y') ?> Nico Gräf</p>
+        <p>&copy; <?= date('Y') ?> <a href="/">Nico Gräf</a></p>
     </footer>
     </body>
 

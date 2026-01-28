@@ -68,15 +68,6 @@ article h3 {
   color: #444;
 }
 
-article .article-meta {
-  margin-top: 56px;
-  padding-top: 24px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  color: #757575;
-  font-size: 0.9rem;
-  font-family: Montserrat, sans-serif;
-}
-
 article p {
   margin-bottom: 1.5em;
 }
@@ -328,11 +319,6 @@ article abbr[title] {
     width: 100%;
     max-width: 100%;
     border-radius: 0;
-  }
-
-  article .article-meta {
-    margin-top: 40px;
-    padding-top: 20px;
   }
 
   /* Numbered lists on mobile */
