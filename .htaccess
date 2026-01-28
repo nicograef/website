@@ -1,8 +1,32 @@
 # Custom error pages
 ErrorDocument 404 /404.php
 
+# URL Rewriting
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Articles routing
+    RewriteRule ^articles/?$ /articles/index.php [L,QSA]
+    RewriteRule ^articles/([a-z0-9-]+)/?$ /articles/index.php?slug=$1 [L,QSA]
+    
+    # Sitemap
+    RewriteRule ^sitemap\.xml$ /sitemap.php [L]
+</IfModule>
+
 # Security: Prevent direct access to JSON files
 <FilesMatch "\.json$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Security: Prevent direct access to Markdown files
+<FilesMatch "\.md$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Security: Prevent direct access to internal PHP files
+<FilesMatch "(functions|Parsedown|layout|projects)\.php$">
     Order allow,deny
     Deny from all
 </FilesMatch>
