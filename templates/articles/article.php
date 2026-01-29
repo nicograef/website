@@ -9,7 +9,7 @@ $extraStyles[] = '/vendor/highlight.css';
 ob_start();
 ?>
 
-<article id="main-content">
+<article>
     <a href="/articles" class="back-link">&larr; Alle Artikel</a>
     <?= $htmlContent ?>
 </article>
@@ -19,6 +19,7 @@ ob_start();
 <script>
     hljs.highlightAll();
 </script>
+
 <?php
 $pageContent = ob_get_clean();
 include TEMPLATES_DIR . '/layout.php';

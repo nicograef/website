@@ -5,7 +5,8 @@
 
 ob_start();
 ?>
-<div class="articles-container" id="main-content">
+
+<div class="articles-container">
     <a href="/" class="back-link">&larr; Zum Portfolio</a>
     <div class="article-list">
         <?php foreach ($articles as $article): ?>
@@ -35,6 +36,7 @@ ob_start();
         <?php endforeach; ?>
     </div>
 </div>
+
 <?php
 $pageContent = ob_get_clean();
 include TEMPLATES_DIR . '/layout.php';

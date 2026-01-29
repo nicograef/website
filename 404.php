@@ -7,6 +7,7 @@ $extraStyles = [];
 
 ob_start();
 ?>
+
 <style>
     .error-container {
         display: flex;
@@ -18,12 +19,14 @@ ob_start();
         padding: 20px;
     }
 </style>
-<div class="error-container" id="main-content">
+
+<div class="error-container">
     <img src="/assets/img/404.webp" alt="404 - Page not found" style="max-width: 400px; width: 100%; height: auto; margin-bottom: 20px;">
     <p>
         <a href="/">back to my portfolio</a>
     </p>
 </div>
+
 <?php
 $pageContent = ob_get_clean();
 include __DIR__ . '/templates/layout.php';

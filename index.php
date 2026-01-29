@@ -10,6 +10,7 @@ $pageImage = '/assets/img/nico-social.jpg';
 
 ob_start();
 ?>
+
 <header>
   <img src="/assets/img/nico-social.jpg" alt="Nico Gräf" title="Nico Gräf" loading="eager" class="profile-picture" />
   <h1 style="margin-bottom: 0">Nico Gräf</h1>
@@ -24,7 +25,7 @@ ob_start();
     <a href="/articles" aria-label="Read my articles">Articles</a>
   </p>
 </header>
-<main id="main-content">
+<main>
   <?php foreach ($projects as $p): ?>
     <section class="project">
       <h3>
@@ -67,6 +68,7 @@ ob_start();
     observer.observe(project);
   });
 </script>
+
 <?php
 $pageContent = ob_get_clean();
 include 'templates/layout.php';

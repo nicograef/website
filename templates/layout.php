@@ -2,15 +2,15 @@
 
 /**
  * Shared layout template
- * Variables: $pageTitle, $pageDescription, $pageUrl, $pageImage, $pageLang, $pageContent, $bodyClass
+ * Variables: $pageTitle, $pageDescription, $pageUrl, $pageImage, $pageLang, $pageContent
  */
 
 $pageLang = $pageLang ?? 'de';
 $pageImage = $pageImage ?? '/assets/img/icon.png';
-$bodyClass = $bodyClass ?? '';
 $baseUrl = 'https://nicograef.com';
 $fullUrl = $baseUrl . ($pageUrl ?? $_SERVER['REQUEST_URI']);
 ?>
+
 <!DOCTYPE html>
 <html lang="<?= $pageLang ?>">
 
@@ -54,15 +54,12 @@ $fullUrl = $baseUrl . ($pageUrl ?? $_SERVER['REQUEST_URI']);
     <title><?= htmlspecialchars($pageTitle) ?></title>
 </head>
 
-<body<?= $bodyClass ? ' class="' . htmlspecialchars($bodyClass) . '"' : '' ?>>
-    <!-- Skip Links for Accessibility -->
-    <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
-
+<body>
     <?= $pageContent ?>
 
     <footer>
         <p>&copy; <?= date('Y') ?> <a href="/">Nico Gräf</a></p>
     </footer>
-    </body>
+</body>
 
 </html>
