@@ -1,5 +1,5 @@
 .project {
-  margin: 80px 0;
+  margin: 60px auto;
   max-width: 750px;
   width: 100%;
   opacity: 0;
@@ -15,15 +15,15 @@
   }
 
   @media (min-width: 1000px) {
-    margin: 100px 0;
+    margin: 80px auto;
   }
 
   @media (min-width: 1200px) {
-    margin: 120px 0;
+    margin: 100px auto;
   }
 
   @media (min-width: 1600px) {
-    margin: 140px 0;
+    margin: 120px auto;
   }
 
   .title {
@@ -50,10 +50,28 @@
 
 .articles {
   max-width: 1200px;
-  margin: 120px auto;
+  margin: 60px auto;
   padding: 0 20px;
   display: flex;
-  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+
+  @media (min-width: 1000px) {
+    flex-direction: row;
+    gap: 20px;
+    margin: 80px auto;
+  }
+
+  @media (min-width: 1200px) {
+    margin: 100px auto;
+  }
+
+  @media (min-width: 1600px) {
+    margin: 120px auto;
+    gap: 20px;
+  }
 
   .article-link {
     float: right;
