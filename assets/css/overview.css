@@ -1,11 +1,10 @@
-/* Articles Overview - Matching main site style */
 .articles-container {
   max-width: 680px;
   margin: 60px auto;
   padding: 0 24px;
 }
 
-.articles-container > a:first-child {
+.back-link {
   font-family: Montserrat, sans-serif;
   font-size: 0.9rem;
   color: #757575;
@@ -13,11 +12,7 @@
   margin-bottom: 24px;
 }
 
-.articles-container > a:first-child:hover {
-  color: var(--primary, #112d4e);
-}
-
-.articles-container h1 {
+h1 {
   font-family:
     Montserrat,
     -apple-system,
@@ -38,29 +33,34 @@
   gap: 40px;
 }
 
+.article-link {
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  text-transform: none;
+  white-space: normal;
+  border: none;
+
+  &:hover {
+    padding: 0;
+    border: none;
+  }
+}
+
 .article-card {
-  padding: 28px 32px;
+  padding: 24px;
+  cursor: pointer;
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   transition:
     box-shadow 0.3s ease,
     transform 0.3s ease;
-}
 
-.article-card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
-}
-
-.article-link {
-  margin: 0;
-  border-bottom: none;
-  display: block;
-}
-
-.article-link:hover {
-  border-bottom: none;
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+  }
 }
 
 .article-title {
@@ -77,10 +77,6 @@
   line-height: 1.35;
   color: var(--primary, #112d4e);
   transition: color 0.2s ease;
-}
-
-.article-link:hover .article-title {
-  color: var(--secondary, #f4b400);
 }
 
 .article-description {
@@ -114,16 +110,16 @@
 .article-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 4px;
 }
 
 .article-tags .chip {
   background: #dbe2ef;
   color: var(--primary, #112d4e);
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: 4px;
   font-family: Montserrat, sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 500;
   text-transform: lowercase;
 }
@@ -145,7 +141,7 @@
   }
 
   .article-card {
-    padding: 20px 24px;
+    padding: 18px;
   }
 
   .article-title {
@@ -162,7 +158,7 @@
   }
 
   .article-tags .chip {
-    font-size: 0.7rem;
-    padding: 3px 8px;
+    font-size: 0.65rem;
+    padding: 2px 6px;
   }
 }
