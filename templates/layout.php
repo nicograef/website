@@ -44,7 +44,7 @@ $fullUrl = $baseUrl . ($pageUrl ?? $_SERVER['REQUEST_URI']);
     <link rel="icon" type="image/png" href="/assets/img/icon.png">
     <link rel="preload" href="/assets/fonts/Montserrat-Regular.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="/assets/fonts/Montserrat-Bold.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
     <?php if (!empty($extraStyles)): ?>
         <?php foreach ($extraStyles as $style): ?>
             <link rel="stylesheet" href="<?= htmlspecialchars($style) ?>">

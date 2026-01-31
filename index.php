@@ -7,6 +7,7 @@ $pageDescription = 'Portfolio of Nico Gräf, a Software Engineer specializing in
 $pageUrl = '/';
 $pageLang = 'en';
 $pageImage = '/assets/img/nico-social.jpg';
+$extraStyles = ['/assets/css/main.css'];
 
 ob_start();
 ?>
@@ -16,7 +17,6 @@ ob_start();
   <h1 style="margin-bottom: 0">Nico Gräf</h1>
   <p>Software Engineer from Freiburg, Germany</p>
   <br />
-  <br />
   <p>
     <a href="https://github.com/nicograef" target="_blank" rel="noopener noreferrer" aria-label="Visit Nico Gräf's GitHub profile">Github</a>
     <a href="https://linkedin.com/in/nicograef" target="_blank" rel="noopener noreferrer" aria-label="Visit Nico Gräf's LinkedIn profile">LinkedIn</a>
@@ -25,6 +25,9 @@ ob_start();
     <a href="/articles" aria-label="Read my articles">Articles</a>
   </p>
 </header>
+
+<?php include __DIR__ . '/includes/articles-latest.php'; ?>
+
 <main>
   <?php foreach ($projects as $p): ?>
     <section class="project">

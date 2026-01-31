@@ -1,0 +1,80 @@
+@import "fonts.css";
+
+:root {
+  --primary: #112d4e;
+  --secondary: #f4b400;
+  --background: #f9f7f7;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  color: var(--primary);
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  line-height: 1;
+
+  ::selection {
+    background: var(--secondary);
+  }
+}
+
+a {
+  margin: 0 10px;
+  padding-bottom: 4px;
+  text-decoration: none;
+  font-weight: inherit;
+  text-transform: lowercase;
+  color: inherit;
+  transition: all 0.1s ease;
+  white-space: nowrap;
+  border-bottom: 2px solid var(--secondary);
+
+  &:hover {
+    padding-bottom: 0;
+    border-bottom: 4px solid var(--secondary);
+  }
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+img.profile-picture {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin-top: 20px;
+  object-fit: cover;
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+footer,
+header {
+  text-align: center;
+  font-size: small;
+}
+
+.chip {
+  display: inline;
+  background: #dbe2ef;
+  padding: 3px 6px;
+  border-radius: 3px;
+  margin-right: 4px;
+  white-space: nowrap;
+  font-size: small;
+  line-height: 2;
+}
