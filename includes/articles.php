@@ -131,6 +131,7 @@ function renderArticle($slug)
 function renderOverview()
 {
     $articles = getArticles();
+    $articles = array_filter($articles, fn($article) => !$article['draft']);
 
     // Layout data
     $pageTitle = 'Artikel | Nico Gräf';

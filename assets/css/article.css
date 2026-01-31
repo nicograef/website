@@ -131,7 +131,7 @@ article blockquote {
 }
 
 article blockquote p {
-  margin-bottom: 0;
+  margin: 0;
 }
 
 /* Strong text in blockquotes for notes */
@@ -172,6 +172,17 @@ article img {
   height: auto;
   margin: 32px -10%;
   border-radius: 4px;
+}
+
+article img:has(+ em) {
+  margin-bottom: 0;
+}
+
+article img + em {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  text-align: center;
 }
 
 article a {
