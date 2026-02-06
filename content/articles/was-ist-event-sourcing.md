@@ -46,18 +46,6 @@ Die <abbr title="Cloud Native Computing Foundation">CNCF</abbr> hat mit [CloudEv
 
 Das `subject`-Feld ist besonders wichtig: Es ermöglicht uns, alle Events zu einem bestimmten Benutzer (oder Warenkorb) effizient abzufragen.
 
-## Was ist Event-Sourcing?
-
-**Stell dir Event-Sourcing wie Git vor:** Git speichert nicht einfach den aktuellen Zustand deines Codes, sondern jeden einzelnen Commit – jede Änderung, die jemals gemacht wurde. Du kannst jederzeit zu einem früheren Stand zurückkehren, sehen wer wann was geändert hat, und verstehen warum bestimmte Entscheidungen getroffen wurden. Event-Sourcing verfolgt einen ähnlichen Ansatz für Anwendungsdaten – allerdings mit deutlich mehr Komplexität in der Umsetzung.
-
-In einem Event-Sourcing-System gibt es kein UPDATE und es gibt auch kein DELETE. Genaugenommen gibt es auch kein CREATE, stattdessen gibt es nur "Write/Add Event". Selbst das Lesen (READ) funktioniert anders als bei CRUD: Anstatt den aktuellen Zustand eines Objekts direkt aus einer Datenbanktabelle abzurufen, werden alle Events zu diesem Objekt gelesen und der aktuelle Zustand durch das Anwenden dieser Events rekonstruiert.
-
 ## Event Store
 
-Ein Event Store ist eine Datenbank, die speziell für Events optimiert ist. Die wichtigste Eigenschaft: Er ist **append-only** – Events werden nur hinzugefügt, niemals geändert oder gelöscht.
-
-Für unser Beispiel verwenden wir eine einfache relationale Datenbank als Event Store. In der Praxis gibt es auch spezialisierte Event-Store-Datenbanken wie [KurrentDB](https://www.kurrent.io/) (ehemals EventStoreDB) oder [EventSourcingDB](https://www.eventsourcingdb.io/), die zusätzliche Features wie Event-Streams, Subscriptions und optimierte Abfragen bieten.
-
-## Event-Driven Architecture (EDA)
-
-Event-Driven Architecture (EDA) ist ein Architekturstil, bei dem die Kommunikation zwischen verschiedenen Komponenten oder Diensten hauptsächlich durch Events erfolgt. In einer EDA reagieren Komponenten auf Events, die von anderen Komponenten ausgelöst werden, anstatt direkt miteinander zu kommunizieren.
+_Event Store_ ist die Bezeichnung für eine Datenban, die Events speichert. Als Tabelle in einer relationalen Datenbank, als Collection in einer NoSQL Datenbank oder in einer speziell für Events optimierten Datenbank. Die wichtigste Eigenschaft: Der Event Store ist **append-only** – Events werden nur hinzugefügt, niemals geändert oder gelöscht.
