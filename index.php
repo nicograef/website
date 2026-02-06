@@ -29,8 +29,8 @@ ob_start();
 <?php include __DIR__ . '/includes/articles-latest.php'; ?>
 
 <main>
-  <?php foreach ($projects as $p): ?>
-    <section class="project">
+  <?php foreach ($projects as $index => $p): ?>
+    <section class="project<?= $index === 0 ? ' fade-in' : '' ?>">
       <h3>
         <span class="title"><?= $p->title ?></span>
         <?php if (!empty($p->linkTitle) && !empty($p->linkUrl)): ?>
@@ -45,7 +45,7 @@ ob_start();
           <?php endforeach; ?>
         </p>
         <p class="description"><?= $p->description ?></p>
-        <img src="<?= $p->image ?>" alt="<?= $p->title ?>" title="<?= $p->title ?>" loading="lazy" />
+        <img src="<?= $p->image ?>" alt="<?= $p->title ?>" title="<?= $p->title ?>" loading="<?= $index === 0 ? 'eager' : 'lazy' ?>" />
       </div>
     </section>
   <?php endforeach; ?>
@@ -67,8 +67,11 @@ ob_start();
     });
   }, observerOptions);
 
-  document.querySelectorAll('.project').forEach(project => {
-    observer.observe(project);
+  // Observe all projects except the first one (which is already visible)
+  document.querySelectorAll('.project').forEach((project, index) => {
+    if (index > 0) {
+      observer.observe(project);
+    }
   });
 </script>
 
