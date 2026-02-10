@@ -58,9 +58,7 @@ Das Ergebnis: Im Warenkorb liegt Produkt 456 mit Menge 2. Wir können aber auch 
 
 > Mehr Details und eine vollständige Implementierung findest du im Artikel [Event-Sourcing am Beispiel Warenkorb erklärt](/articles/event-sourcing-am-beispiel-warenkorb-erklaert).
 
-## Vor- und Nachteile
-
-### Vorteile
+## Vorteile
 
 - **Näher an der Fachdomäne**: Events beschreiben, was im Business passiert ist, nicht nur technische Zustandsänderungen. Das macht Event-Sourcing zu einer guten Ergänzung für Domain-Driven Design (DDD).
 - **Audit Trail**: Jede Änderung ist dokumentiert – wer hat wann was gemacht?
@@ -68,7 +66,7 @@ Das Ergebnis: Im Warenkorb liegt Produkt 456 mit Menge 2. Wir können aber auch 
 - **Keine Information geht verloren**: Der Kontext und die Absicht hinter jeder Änderung bleiben erhalten.
 - **Potenzial für Analytics**: Mit den historischen Daten lassen sich Analysen durchführen, die mit CRUD nicht möglich wären.
 
-### Nachteile
+## Nachteile
 
 - **Deutlich mehr Komplexität**: Event-Sourcing erfordert ein fundamentales Umdenken in der Architektur.
 - **Performance-Probleme**: Ohne zusätzliche Maßnahmen wie Snapshots oder CQRS kann das System bei vielen Events langsam werden.
