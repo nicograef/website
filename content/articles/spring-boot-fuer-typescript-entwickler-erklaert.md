@@ -39,7 +39,7 @@ public class BookServlet extends HttpServlet {
 
 Stell dir vor, du müsstest in Express.js jede Response manuell als String zusammenbauen und jede Route in einer XML-Datei registrieren. So fühlte sich Java-Webentwicklung im Jahr 2000 an.
 
-### Phase 2: Spring Framework (seit 2003)
+### Phase 2: Spring Framework (seit 2004)
 
 Brachte Dependency Injection und reduzierte den Boilerplate deutlich. Aber: Es gab immer noch viel XML-Konfiguration und man brauchte einen externen Tomcat-Server.
 
@@ -49,7 +49,7 @@ Convention over Configuration. Embedded Tomcat (kein externer Server mehr nötig
 
 ## Was ist Tomcat?
 
-Tomcat ist ein HTTP-Server, der Java-Code ausführen kann — vergleichbar mit Express.js, aber auf einer niedrigeren Ebene.
+Tomcat ist ein Servlet-Container — ein HTTP-Server, der Java-Code ausführen kann. Vergleichbar mit Node.js' eingebautem `http`-Modul (`http.createServer()`), aber auf einer höheren Abstraktionsebene.
 
 In Spring Boot ist Tomcat **eingebettet** (embedded): Er steckt in deiner `.jar`-Datei und startet automatisch. Du musst ihn nicht separat installieren. Die gesamte Konfiguration besteht aus einer Zeile:
 
@@ -78,7 +78,7 @@ Spring Boot ist ein Framework auf dem Spring Framework, das die Konfiguration au
 </dependency>
 ```
 
-## Dependency Injection: Javas größte Idee
+## Dependency Injection: Springs zentrale Idee
 
 In Express.js erstellst du deine Services manuell und gibst sie weiter:
 
@@ -135,7 +135,7 @@ Technisch könnte man überall `@Component` schreiben. Aber die spezifischen Ann
 
 ### Constructor Injection — die empfohlene Variante
 
-Es gibt drei Wege, eine Dependency zu injizieren. Aber nur einer ist empfohlen:
+Es gibt mehrere Wege, eine Dependency zu injizieren (Constructor, Setter, Field). Aber nur einer ist empfohlen:
 
 ```java
 // ✅ Constructor Injection (Best Practice)
@@ -236,7 +236,7 @@ public class GlobalExceptionHandler {
 }
 ```
 
-Der Ablauf: Eine Controller-Methode wirft eine Exception → Spring fängt sie ab → sucht die passende `@ExceptionHandler`-Methode → serialisiert den Return-Wert zu JSON. Ohne `@RestControllerAdvice` bekäme der Client eine unbrauchbare HTML-Error-Page.
+Der Ablauf: Eine Controller-Methode wirft eine Exception → Spring fängt sie ab → sucht die passende `@ExceptionHandler`-Methode → serialisiert den Return-Wert zu JSON. Ohne `@RestControllerAdvice` liefert Spring Boot eine generische Fehlerantwort (JSON für REST-Clients, HTML-Whitelabel-Page für Browser) — mit `@RestControllerAdvice` kontrollierst du das Format selbst.
 
 ### RestClient: Externe HTTP-Aufrufe
 
@@ -294,7 +294,7 @@ stmt.executeUpdate();
 conn.close();
 ```
 
-**JPA** (Jakarta Persistence API) ist eine Spezifikation — ein Standard, der beschreibt, _wie_ ein ORM in Java aussehen soll. **Hibernate** ist die populärste Implementierung dieses Standards. Das Verhältnis ist vergleichbar mit: Die Fetch-API ist der Standard, Axios ist eine Library, die darauf aufbaut.
+**JPA** (Jakarta Persistence API) ist eine Spezifikation — ein Standard, der beschreibt, _wie_ ein ORM in Java aussehen soll. **Hibernate** ist die populärste Implementierung dieses Standards. Das Verhältnis ist vergleichbar mit einem TypeScript-Interface und einer Klasse, die es implementiert: JPA definiert die API, Hibernate liefert den Code dahinter.
 
 ### JPA Entities
 
@@ -495,8 +495,8 @@ class BookControllerTest {
 Tests ausführen:
 
 ```bash
-mvn test          # alle Tests
-mvn verify -B     # CI-Modus
+mvn test          # alle Tests (Unit-Tests via Surefire)
+mvn verify        # Unit- + Integrationstests (via Failsafe)
 ```
 
 ---

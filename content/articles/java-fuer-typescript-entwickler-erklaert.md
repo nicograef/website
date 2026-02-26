@@ -27,6 +27,8 @@ In der Node.js-Welt installierst du Node.js und hast damit alles: Runtime, Paket
 | **JRE** (Java Runtime Environment) | JVM + Standardbibliothek         | Node.js Runtime (ohne npm)          |
 | **JVM** (Java Virtual Machine)     | Führt Bytecode aus               | V8-Engine in Node.js                |
 
+**Hinweis:** Seit Java 11 wird das JRE nicht mehr separat angeboten — du installierst immer das JDK. Die Trennung ist aber konzeptionell weiterhin nützlich.
+
 Die **JVM** ist der Kern. Sie nimmt kompilierten **Bytecode** (`.class`-Dateien) und führt ihn aus — plattformunabhängig. Ob Linux, Mac oder Windows: Derselbe Bytecode läuft überall, weil die JVM die Brücke zum Betriebssystem bildet.
 
 ## Der Build-Prozess
@@ -40,7 +42,7 @@ In der Praxis tippt man diese Befehle aber nicht einzeln ein. Dafür gibt es **M
 
 ## Maven — Javas Paketmanager und Build-Tool
 
-Maven ist für Java, was npm/pnpm für Node.js ist: Build-Tool und Dependency-Manager in einem. Die zentrale Konfigurationsdatei heißt `pom.xml` (Project Object Model) — das Äquivalent zur `package.json`.
+Maven ist Javas Dependency-Manager und Build-Tool in einem. In der Node.js-Welt verteilt sich das auf mehrere Tools: npm/pnpm verwalten Dependencies, während `tsc`, Webpack oder esbuild den Build übernehmen. Maven macht beides. Die zentrale Konfigurationsdatei heißt `pom.xml` (Project Object Model) — das Äquivalent zur `package.json`.
 
 ```xml
 <!-- pom.xml — Javas package.json -->
@@ -75,7 +77,7 @@ Statt `npm install` und `npm run build` hat Maven einen eigenen Lifecycle:
 | `mvn clean`           | `target/`-Ordner löschen         | `rm -rf dist/`  |
 | `mvn spring-boot:run` | App im Dev-Modus starten         | `npm run dev`   |
 
-Das Ergebnis eines Builds ist eine `.jar`-Datei im `target/`-Ordner — ein ZIP-Archiv mit dem kompilierten Bytecode und allen Dependencies. Du startest sie mit:
+Das Ergebnis eines Builds ist eine `.jar`-Datei im `target/`-Ordner — ein ZIP-Archiv mit dem kompilierten Bytecode. Bei Spring Boot erzeugt das Build-Plugin ein sogenanntes Fat-JAR, das alle Dependencies enthält. Du startest es mit:
 
 ```bash
 java -jar target/bookstore-0.0.1-SNAPSHOT.jar
@@ -193,7 +195,7 @@ field.set(entity, "Clean Code");  // setzt den Wert ohne Setter
 
 Als TypeScript-Entwickler wirst du diesen Code nie selbst schreiben. Aber es ist wichtig zu wissen, dass Reflection existiert, denn zwei zentrale Technologien im Java-Ökosystem nutzen es intensiv:
 
-1. **Hibernate** (das ORM) lädt Daten aus der Datenbank und setzt die Felder per Reflection. Deshalb braucht eine Entity-Klasse einen leeren Konstruktor und mutable Felder.
+1. **Hibernate** (das ORM) lädt Daten aus der Datenbank und setzt die Felder per Reflection. Deshalb braucht eine Entity-Klasse einen leeren Konstruktor, und die Felder dürfen nicht `final` sein.
 2. **Spring** (Dependency Injection) findet Klassen mit Annotations wie `@Service` oder `@Controller` per Classpath-Scanning und injiziert automatisch die richtigen Abhängigkeiten.
 
 In TypeScript gibt es kein echtes Reflection, aber TypeScript-Decorators und `Reflect.metadata` kommen dem am nächsten.
@@ -249,7 +251,7 @@ Lombok reduziert den Boilerplate-Code erheblich. Der Nachteil: Der generierte Co
 
 ### Records — Javas Antwort auf TypeScript `type`
 
-Seit Java 16 gibt es **Records**: immutable Datenklassen ohne jeglichen Boilerplate. Der Compiler generiert automatisch Konstruktor, Getter, `equals()`, `hashCode()` und `toString()`.
+Seit Java 16 gibt es **Records**: immutable Datenklassen ohne jeglichen Boilerplate. Der Compiler generiert automatisch Konstruktor, Accessor-Methoden (z.B. `title()` statt `getTitle()`), `equals()`, `hashCode()` und `toString()`.
 
 ```java
 // Ein Record in Java:
@@ -270,7 +272,7 @@ Zugriff auf Felder funktioniert ohne `get`-Prefix: `response.title()`, `response
 | **Typisches Einsatzgebiet** | DTOs: `BookRequest`, `BookResponse` | JPA Entity: `Book`                |
 | **Vererbung**               | Keine                               | Möglich                           |
 
-**Warum kann eine JPA Entity kein Record sein?** Weil Hibernate Reflection nutzt (siehe oben): Es braucht einen leeren Konstruktor und setzt dann die Felder einzeln. Records sind immutable — das passt nicht zusammen.
+**Warum kann eine JPA Entity kein Record sein?** Weil die JPA-Spezifikation einen leeren Konstruktor und nicht-`final`e Felder verlangt. Records sind immutable und haben keinen leeren Konstruktor — das passt nicht zusammen.
 
 ### DTOs — Daten transportieren, nicht mehr
 
@@ -290,7 +292,7 @@ record BookListEntry(Long id, String title, String author) {}         // Listena
 Jackson ist die Standard-JSON-Library in der Java-Welt. Sie konvertiert Java-Objekte zu JSON und umgekehrt — automatisch.
 
 ```
-Client sendet JSON:     { "title": "Clean Code", "author": "Robert C. Martin" }
+Client sendet JSON:     { "title": "Clean Code", "author": "Robert C. Martin", "price": 29.99 }
                               ↓ Jackson deserialisiert
 Java-Objekt:            BookRequest("Clean Code", "Robert C. Martin", 29.99)
 
