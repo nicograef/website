@@ -16,7 +16,7 @@ tags:
 
 > Dieser Artikel baut auf [Java für TypeScript-Entwickler erklärt](/articles/java-fuer-typescript-entwickler-erklaert) auf. Dort werden die Java-Plattform, die Sprache und die Datenmodellierung erklärt.
 
-Du kennst Express.js, hast vielleicht schon REST-APIs mit Node.js gebaut und willst jetzt verstehen, wie das in der Java-Welt funktioniert? Dann bist du hier richtig. Spring Boot ist Javas Antwort auf Express — nur mit mehr Struktur, mehr Konventionen und einem mächtigen Framework dahinter.
+Du kennst Express.js und hast vielleicht schon REST-APIs mit Node.js gebaut? Dann hast du die richtige Grundlage für Spring Boot — Javas meistgenutztes Backend-Framework. Wo Express minimal ist und dir die Wahl lässt, bringt Spring Boot Konventionen, Struktur und Automatisierung mit.
 
 ## Vor Spring Boot: Eine kurze Zeitreise
 
@@ -41,7 +41,7 @@ Stell dir vor, du müsstest in Express.js jede Response manuell als String zusam
 
 ### Phase 2: Spring Framework (seit 2004)
 
-Brachte Dependency Injection und reduzierte den Boilerplate deutlich. Aber: Es gab immer noch viel XML-Konfiguration und man brauchte einen externen Tomcat-Server.
+Brachte Dependency Injection und reduzierte den Boilerplate deutlich — allerdings mit viel XML-Konfiguration und einem externen Tomcat-Server.
 
 ### Phase 3: Spring Boot (seit 2014)
 
@@ -365,7 +365,7 @@ src/main/resources/db/migration/
     V2__add_index.sql         ← nächste Version
 ```
 
-Beim App-Start passiert folgendes:
+Beim App-Start passiert Folgendes:
 
 1. Flyway prüft die `flyway_schema_history`-Tabelle: Welche Migrationen wurden schon ausgeführt?
 2. Neue Migrationen werden ausgeführt (z.B. V2, wenn V1 schon durch ist)
@@ -377,7 +377,7 @@ Flyway nutzt Plain-SQL-Dateien — einfach und datenbankspezifisch. Die Alternat
 
 ## Konfiguration: `application.properties`
 
-`application.properties` ist Spring Boot's zentrale Konfigurationsdatei — vergleichbar mit `.env` in Node.js:
+`application.properties` ist die zentrale Konfigurationsdatei von Spring Boot — vergleichbar mit `.env` in Node.js:
 
 ```properties
 # Datenbank — ${VAR:default} liest Umgebungsvariablen mit Fallback
@@ -550,4 +550,4 @@ Zum Abschluss ein Blick auf alle Schichten — von oben (HTTP) nach unten (Daten
 └───────────────────────────────────────────────────────────────┘
 ```
 
-Spring Boot nimmt dir viel ab: Tomcat starten, JSON serialisieren, Abhängigkeiten verdrahten, SQL generieren. Dein Job ist es, Controller, Services und Entities zu schreiben — den Rest erledigt das Framework. Wenn du Express.js verstehst, verstehst du auch Spring Boot. Die Konzepte sind die gleichen, nur die Syntax und die Konventionen unterscheiden sich.
+Spring Boot nimmt dir viel ab: Tomcat starten, JSON serialisieren, Abhängigkeiten verdrahten, SQL generieren. Dein Job ist es, Controller, Services und Entities zu schreiben — den Rest erledigt das Framework. Die Konzepte aus Express.js findest du alle wieder: Routing, Middleware, Request/Response. Spring Boot bringt darüber hinaus Dependency Injection, ein typisiertes ORM und ein ausgereiftes Test-Ökosystem mit — Dinge, die du dir in Node.js aus verschiedenen Libraries zusammenbauen müsstest.

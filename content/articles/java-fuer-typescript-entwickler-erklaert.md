@@ -13,7 +13,7 @@ tags:
 
 # Java für TypeScript-Entwickler erklärt
 
-Du kommst aus der TypeScript- und Node.js-Welt und willst Java verstehen? Dann ist dieser Artikel für dich. Statt bei Null anzufangen, nutzen wir dein bestehendes Wissen als Brücke: Für jedes Java-Konzept zeige ich dir das Äquivalent in TypeScript oder Node.js, damit du eine Intuition aufbauen kannst.
+Du kommst aus der TypeScript- und Node.js-Welt und willst Java verstehen? Statt bei Null anzufangen, nutzen wir dein bestehendes Wissen als Brücke: Für jedes Java-Konzept zeige ich das Äquivalent in TypeScript oder Node.js — so baust du schnell eine Intuition auf.
 
 Dieser Artikel behandelt die Java-Plattform, die Sprache selbst und die Datenmodellierung. Im Folgeartikel [Spring Boot für TypeScript-Entwickler erklärt](/articles/spring-boot-fuer-typescript-entwickler-erklaert) geht es dann um das Spring-Boot-Framework — Javas Antwort auf Express.js.
 
@@ -38,7 +38,7 @@ In TypeScript kompilierst du `.ts`-Dateien zu `.js` und führst sie dann mit Nod
 1. **`javac`** kompiliert `.java`-Dateien zu `.class`-Dateien (Bytecode) — ähnlich wie `tsc` TypeScript zu JavaScript kompiliert.
 2. **`java`** startet die JVM und führt die `.class`-Dateien aus — ähnlich wie `node dist/index.js`.
 
-In der Praxis tippt man diese Befehle aber nicht einzeln ein. Dafür gibt es **Maven**.
+In der Praxis tippst du diese Befehle nicht einzeln ein — dafür gibt es **Maven**.
 
 ## Maven — Javas Paketmanager und Build-Tool
 
@@ -83,7 +83,7 @@ Das Ergebnis eines Builds ist eine `.jar`-Datei im `target/`-Ordner — ein ZIP-
 java -jar target/bookstore-0.0.1-SNAPSHOT.jar
 ```
 
-Vergleichbar mit Go: `go build` erzeugt ein Binary, `./binary` startet es. Der Unterschied: Go erzeugt nativen Maschinencode, Java erzeugt Bytecode, der von der JVM interpretiert und zur Laufzeit optimiert wird.
+Das ist vergleichbar mit einer gebündelten Node.js-App: Statt einzelner Dateien hast du ein einziges Artefakt, das du deployen kannst — nur, dass die JVM statt Node.js als Runner dient.
 
 ## JVM zur Laufzeit: Warum Java schnell ist
 
@@ -174,8 +174,8 @@ Java hat kein `const`-Keyword. Stattdessen gibt es `final` — und es kann an ve
 private final BookService bookService;
 // ≈ readonly bookService: BookService — kann nach dem Konstruktor nicht neu zugewiesen werden
 
-private static final Map<String, String> CATEGORIES = Map.of("FIC", "Fiction");
-// ≈ const CATEGORIES = Object.freeze({ FIC: "Fiction" })
+private static final int MAX_RESULTS = 100;
+// ≈ export const MAX_RESULTS = 100 auf Modul-Ebene
 ```
 
 **Wichtig**: `final` schützt nur die **Referenz**, nicht den **Inhalt**. Eine `final List<String>` kann nicht auf eine andere Liste zeigen, aber die Elemente _in_ der Liste können geändert werden. Für echte Immutabilität nutzt man `List.of()` oder `Map.of()` — unmodifizierbare Collections.
@@ -220,7 +220,7 @@ Warum? Drei Gründe:
 2. **Frameworks erwarten es** — Jackson (JSON-Serialisierung) und Hibernate nutzen Getter/Setter
 3. **Java-Convention** — die gesamte Toolchain baut auf diesem Pattern auf
 
-Das wirkt umständlich, aber dafür gibt es zwei Abkürzungen:
+Das wirkt umständlich. Deshalb gibt es in der Java-Welt zwei Lösungen: **Lombok** und **Records**.
 
 ### Lombok — der Boilerplate-Killer
 
@@ -260,8 +260,6 @@ record BookResponse(Long id, String title, String author, double price) {}
 // Das Äquivalent in TypeScript:
 // type BookResponse = { id: number; title: string; author: string; price: number }
 ```
-
-Zugriff auf Felder funktioniert ohne `get`-Prefix: `response.title()`, `response.author()`.
 
 **Wann Record, wann Klasse?**
 
@@ -309,7 +307,7 @@ In TypeScript machst du das mit `JSON.parse()` und `JSON.stringify()` — aber o
 
 ## Fazit
 
-Java und TypeScript/Node.js sind sich ähnlicher, als man auf den ersten Blick denkt. Die Grundkonzepte — Typsysteme, Module, Build-Prozesse, Garbage Collection — existieren in beiden Welten. Java ist expliziter (Sichtbarkeitsmodifier, Getter/Setter), bietet dafür aber ein ausgereifteres Ökosystem für große Backend-Systeme.
+Wenn du TypeScript und Node.js kennst, hast du bereits eine solide Grundlage für Java. Die Konzepte — Typsysteme, Module, Build-Prozesse, Garbage Collection — existieren in beiden Welten. Java ist expliziter (Sichtbarkeitsmodifier, Getter/Setter), bietet dafür aber stärkere Garantien und ein ausgereiftes Ökosystem für große Backend-Systeme.
 
 Die wichtigsten Parallelen auf einen Blick:
 
