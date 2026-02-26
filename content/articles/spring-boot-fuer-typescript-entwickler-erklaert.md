@@ -53,7 +53,7 @@ Tomcat ist ein Servlet-Container — ein HTTP-Server, der Java-Code ausführen k
 
 In Spring Boot ist Tomcat **eingebettet** (embedded): Er steckt in deiner `.jar`-Datei und startet automatisch. Du musst ihn nicht separat installieren. Die gesamte Konfiguration besteht aus einer Zeile:
 
-```properties
+```ini
 # application.properties
 server.port=8080
 ```
@@ -379,7 +379,7 @@ Flyway nutzt Plain-SQL-Dateien — einfach und datenbankspezifisch. Die Alternat
 
 `application.properties` ist die zentrale Konfigurationsdatei von Spring Boot — vergleichbar mit `.env` in Node.js:
 
-```properties
+```ini
 # Datenbank — ${VAR:default} liest Umgebungsvariablen mit Fallback
 spring.datasource.url=${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/bookstore}
 spring.datasource.username=${SPRING_DATASOURCE_USERNAME:admin}
