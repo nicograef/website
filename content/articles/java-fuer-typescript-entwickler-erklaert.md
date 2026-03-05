@@ -4,6 +4,7 @@ description: Du kommst aus der TypeScript/Node.js-Welt und willst Java verstehen
 author: Nico Gräf
 author_url: https://nicograef.com
 date: 2025-02-26
+draft: true
 tags:
   - Java
   - TypeScript

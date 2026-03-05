@@ -4,6 +4,7 @@ description: Du kennst Express.js und willst Spring Boot verstehen? Dieser Artik
 author: Nico Gräf
 author_url: https://nicograef.com
 date: 2025-02-26
+draft: true
 tags:
   - Java
   - Spring Boot
