@@ -8,17 +8,29 @@ class Project
     public $linkTitle;
     public $linkUrl;
 
-    public function __construct($data)
+    public function __construct($data, string $lang = 'en')
     {
-        $this->title = htmlspecialchars($data['title']);
-        $this->description = htmlspecialchars($data['description']);
+        $rawTitle = ($lang === 'de' && !empty($data['title_de']))
+            ? $data['title_de']
+            : $data['title'];
+        $this->title = htmlspecialchars($rawTitle);
+        $rawDescription = ($lang === 'de' && !empty($data['description_de']))
+            ? $data['description_de']
+            : $data['description'];
+        $this->description = htmlspecialchars($rawDescription);
         $this->image = $data['image'];
         $this->tags = $data['tags'];
-        $this->linkTitle = $data['linkTitle'] ?? null;
+        $rawLinkTitle = ($lang === 'de' && !empty($data['linkTitle_de']))
+            ? $data['linkTitle_de']
+            : ($data['linkTitle'] ?? null);
+        $this->linkTitle = $rawLinkTitle !== null ? htmlspecialchars($rawLinkTitle) : null;
         $this->linkUrl = $data['linkUrl'] ?? null;
     }
 }
 
-$jsonData = file_get_contents(__DIR__ . '/../content/projects.json');
-$projectData = json_decode($jsonData, true);
-$projects = array_map(fn($data) => new Project($data), $projectData);
+function loadProjects(string $lang = 'en'): array
+{
+    $jsonData = file_get_contents(__DIR__ . '/../content/projects.json');
+    $projectData = json_decode($jsonData, true);
+    return array_map(fn($data) => new Project($data, $lang), $projectData);
+}

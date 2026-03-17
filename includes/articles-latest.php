@@ -1,5 +1,7 @@
 <?php
 require_once 'articles.php';
+// $lang is available from the calling context (index.php)
+$lang = $lang ?? 'en';
 
 $allArticles = getArticles();
 $articles = array_filter($allArticles, fn($a) => empty($a['draft']));
@@ -15,7 +17,7 @@ $latestArticles = array_slice($articles, 0, 3);
                 <p class="article-description"><?= htmlspecialchars($article['description']) ?></p>
             <?php endif; ?>
             <a href="/articles/<?= htmlspecialchars($article['slug']) ?>" class="article-link">
-                lesen &rarr;
+                <?= $lang === 'de' ? 'lesen' : 'read' ?> &rarr;
             </a>
         </article>
     <?php endforeach; ?>

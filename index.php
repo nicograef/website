@@ -1,6 +1,10 @@
 <?php
+require_once 'includes/lang.php';
 include 'templates/projects.php';
 include 'includes/render.php';
+
+$lang = detectLang();
+$projects = loadProjects($lang);
 
 ob_start();
 ?>
@@ -8,14 +12,14 @@ ob_start();
 <header>
   <img src="/assets/img/nico-social.jpg" alt="Nico Gräf" title="Nico Gräf" loading="eager" class="profile-picture" />
   <h1 style="margin-bottom: 0">Nico Gräf</h1>
-  <p>Software Engineer from Freiburg, Germany</p>
+  <p><?= $lang === 'de' ? 'Software Engineer aus Freiburg, Deutschland' : 'Software Engineer from Freiburg, Germany' ?></p>
   <br />
   <p>
-    <a href="https://github.com/nicograef" target="_blank" rel="noopener noreferrer" aria-label="Visit Nico Gräf's GitHub profile">Github</a>
-    <a href="https://linkedin.com/in/nicograef" target="_blank" rel="noopener noreferrer" aria-label="Visit Nico Gräf's LinkedIn profile">LinkedIn</a>
-    <a href="https://xing.com/profile/Nico_Graef2/" target="_blank" rel="noopener noreferrer" aria-label="Visit Nico Gräf's Xing profile">Xing</a>
-    <a href="https://medium.com/@nicograef" target="_blank" rel="noopener noreferrer" aria-label="Visit Nico Gräf's Medium articles">Medium</a>
-    <a href="/articles" aria-label="Read my articles">Articles</a>
+    <a href="https://github.com/nicograef" target="_blank" rel="noopener noreferrer" aria-label="<?= $lang === 'de' ? 'Nico Gräfs GitHub-Profil besuchen' : "Visit Nico Gräf's GitHub profile" ?>">Github</a>
+    <a href="https://linkedin.com/in/nicograef" target="_blank" rel="noopener noreferrer" aria-label="<?= $lang === 'de' ? 'Nico Gräfs LinkedIn-Profil besuchen' : "Visit Nico Gräf's LinkedIn profile" ?>">LinkedIn</a>
+    <a href="https://xing.com/profile/Nico_Graef2/" target="_blank" rel="noopener noreferrer" aria-label="<?= $lang === 'de' ? 'Nico Gräfs Xing-Profil besuchen' : "Visit Nico Gräf's Xing profile" ?>">Xing</a>
+    <a href="https://medium.com/@nicograef" target="_blank" rel="noopener noreferrer" aria-label="<?= $lang === 'de' ? 'Nico Gräfs Medium-Artikel lesen' : "Visit Nico Gräf's Medium articles" ?>">Medium</a>
+    <a href="/articles" aria-label="<?= $lang === 'de' ? 'Meine Artikel lesen' : 'Read my articles' ?>"><?= $lang === 'de' ? 'Artikel' : 'Articles' ?></a>
   </p>
 </header>
 
@@ -28,7 +32,7 @@ ob_start();
         <span class="title"><?= $p->title ?></span>
         <?php if (!empty($p->linkTitle) && !empty($p->linkUrl)): ?>
           <a href="<?= htmlspecialchars($p->linkUrl, ENT_QUOTES, 'UTF-8') ?>" title="<?= $p->linkTitle ?>" target="_blank"
-            rel="noopener noreferrer" aria-label="<?= $p->linkTitle ?> for <?= $p->title ?>"><?= $p->linkTitle ?></a>
+            rel="noopener noreferrer" aria-label="<?= $p->linkTitle ?> <?= $lang === 'de' ? 'für' : 'for' ?> <?= $p->title ?>"><?= $p->linkTitle ?></a>
         <?php endif; ?>
       </h3>
       <div>
@@ -71,11 +75,15 @@ ob_start();
 <?php
 $pageContent = ob_get_clean();
 
+$isGerman = $lang === 'de';
+
 renderLayout([
     'pageTitle' => 'Nico Gräf – Software Engineer',
-    'pageDescription' => 'Portfolio of Nico Gräf, a Software Engineer specializing in web development and modern technologies.',
+    'pageDescription' => $isGerman
+        ? 'Portfolio von Nico Gräf, Software Engineer mit Fokus auf Webentwicklung und moderne Technologien.'
+        : 'Portfolio of Nico Gräf, a Software Engineer specializing in web development and modern technologies.',
     'pageUrl' => '/',
-    'pageLang' => 'en',
+    'pageLang' => $lang,
     'pageImage' => '/assets/img/nico-social.jpg',
     'extraStyles' => ['/assets/css/main.css'],
     'pageContent' => $pageContent,
