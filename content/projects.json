@@ -1,12 +1,13 @@
 [
   {
     "title": "jotti / since 2025",
-    "description": "jotti is a simple order management system for clubs and non-profit organizations. It allows managing products (beverages and food) as well as booking orders and payments to tables. As a web app, jotti can be used on any smartphone. It provides administrators with dedicated web access to manage products and tables, as well as handle accounting tasks.",
-    "image": "/assets/img/jotti.jpg",
+    "description": "jotti is a free, open-source mobile point-of-sale system (mPOS) for clubs and non-profit organizations — built for events like Vereinsfeste, Weihnachtsmärkte, and concerts. Service staff take orders on their own smartphones, confirm delivery, collect payments, and process cancellations — all per table, all in the browser. No cloud subscription, no special hardware, no payment gateway. Self-hosted via Docker, with an admin area for managing products (with variants), tables, and users, a kitchen display, receipt printing, and daily reporting per table and staff member. Table operations are persisted via event sourcing (append-only).",
+    "image": "/assets/img/jotti.png",
     "tags": [
       "PostgreSQL",
       "Go",
       "React",
+      "Vite",
       "Docker",
       "Typescript",
       "Linux",
@@ -14,10 +15,12 @@
       "shadcn/ui",
       "Tailwind CSS",
       "JWT",
-      "zod"
+      "zod",
+      "Event Sourcing",
+      "DDD"
     ],
-    "linkTitle": "github repo",
-    "linkUrl": "https://github.com/nicograef/jotti"
+    "linkTitle": "website",
+    "linkUrl": "https://jotti.rocks"
   },
   {
     "title": "Haufe Akademie / since 2024",
