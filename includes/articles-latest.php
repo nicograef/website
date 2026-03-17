@@ -18,6 +18,5 @@ $latestArticles = array_slice($articles, 0, 3);
                 lesen &rarr;
             </a>
         </article>
-        </a>
     <?php endforeach; ?>
 </div>

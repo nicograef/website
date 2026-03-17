@@ -1,9 +1,5 @@
 <?php
-// Layout data
-$pageTitle = '404 - Page Not Found | Nico Gräf';
-$pageDescription = 'The page you are looking for could not be found.';
-$pageLang = 'en';
-$extraStyles = [];
+include __DIR__ . '/includes/render.php';
 
 ob_start();
 ?>
@@ -29,5 +25,12 @@ ob_start();
 
 <?php
 $pageContent = ob_get_clean();
-include __DIR__ . '/templates/layout.php';
+
+renderLayout([
+    'pageTitle' => '404 - Page Not Found | Nico Gräf',
+    'pageDescription' => 'The page you are looking for could not be found.',
+    'pageLang' => 'en',
+    'extraStyles' => [],
+    'pageContent' => $pageContent,
+]);
 ?>

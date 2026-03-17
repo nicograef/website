@@ -8,7 +8,7 @@ article {
   max-width: 680px;
   margin: 60px auto;
   padding: 0 24px;
-  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  font-family: var(--font-body);
   font-size: 1.125rem;
   line-height: 1.8;
   color: #292929;
@@ -19,13 +19,7 @@ article {
 }
 
 article h1 {
-  font-family:
-    Montserrat,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
+  font-family: var(--font-heading);
   font-size: 2.25rem;
   font-weight: 700;
   line-height: 1.25;
@@ -35,13 +29,7 @@ article h1 {
 }
 
 article h2 {
-  font-family:
-    Montserrat,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.375rem;
   font-weight: 700;
   margin-top: 48px;
@@ -51,13 +39,7 @@ article h2 {
 }
 
 article h3 {
-  font-family:
-    Montserrat,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.125rem;
   font-weight: 700;
   margin-top: 32px;
@@ -96,8 +78,7 @@ article pre {
 }
 
 article code {
-  font-family:
-    "SF Mono", "Fira Code", "Fira Mono", Menlo, Monaco, Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 0.9em;
 }
 
@@ -144,8 +125,7 @@ article table {
   width: 120%;
   margin: 32px -10%;
   font-size: 0.8rem;
-  font-family:
-    "SF Mono", "Fira Code", "Fira Mono", Menlo, Monaco, Consolas, monospace;
+  font-family: var(--font-mono);
   text-align: left;
 }
 
@@ -198,7 +178,7 @@ article a:hover {
 }
 
 .back-link {
-  font-family: Montserrat, sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.9rem;
 }
 
@@ -237,7 +217,7 @@ article ol > li::before {
   position: absolute;
   left: 0;
   top: 0;
-  font-family: Montserrat, sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--secondary, #f4b400);
@@ -245,7 +225,7 @@ article ol > li::before {
 }
 
 article ol > li strong:first-child {
-  font-family: Montserrat, sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.05rem;
   display: block;
   margin-bottom: 0.5em;

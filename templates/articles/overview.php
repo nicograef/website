@@ -1,11 +1,3 @@
-<?php
-// Articles overview template
-// Variables provided by renderOverview(): $articles
-// Layout variables: $pageTitle, $pageDescription, $pageUrl, $pageLang, $extraStyles
-
-ob_start();
-?>
-
 <div class="articles-container">
     <a href="/" class="back-link">&larr; Zum Portfolio</a>
     <h1>Meine Artikel</h1>
@@ -37,8 +29,3 @@ ob_start();
         <?php endforeach; ?>
     </div>
 </div>
-
-<?php
-$pageContent = ob_get_clean();
-include TEMPLATES_DIR . '/layout.php';
-?>

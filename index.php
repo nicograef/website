@@ -1,13 +1,6 @@
 <?php
 include 'templates/projects.php';
-
-// Layout data
-$pageTitle = 'Nico Gräf – Software Engineer';
-$pageDescription = 'Portfolio of Nico Gräf, a Software Engineer specializing in web development and modern technologies.';
-$pageUrl = '/';
-$pageLang = 'en';
-$pageImage = '/assets/img/nico-social.jpg';
-$extraStyles = ['/assets/css/main.css'];
+include 'includes/render.php';
 
 ob_start();
 ?>
@@ -77,5 +70,14 @@ ob_start();
 
 <?php
 $pageContent = ob_get_clean();
-include 'templates/layout.php';
+
+renderLayout([
+    'pageTitle' => 'Nico Gräf – Software Engineer',
+    'pageDescription' => 'Portfolio of Nico Gräf, a Software Engineer specializing in web development and modern technologies.',
+    'pageUrl' => '/',
+    'pageLang' => 'en',
+    'pageImage' => '/assets/img/nico-social.jpg',
+    'extraStyles' => ['/assets/css/main.css'],
+    'pageContent' => $pageContent,
+]);
 ?>

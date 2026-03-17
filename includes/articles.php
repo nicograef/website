@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/../vendor/Parsedown.php';
+require_once __DIR__ . '/render.php';
 
 // Base paths
 define('CONTENT_DIR', __DIR__ . '/../content/articles');
@@ -115,14 +116,14 @@ function renderArticle($slug)
         $htmlContent = preg_replace('/^(<h1[^>]*>)/', '$1[Entwurf] ', $htmlContent);
     }
 
-    // Layout data
-    $pageTitle = $title . ' | Nico Gräf';
-    $pageDescription = $description;
-    $pageUrl = '/articles/' . $slug;
-    $pageLang = 'de';
-    $extraStyles = ['/assets/css/article.css'];
-
-    include TEMPLATES_DIR . '/articles/article.php';
+    render(TEMPLATES_DIR . '/articles/article.php', [
+        'pageTitle' => $title . ' | Nico Gräf',
+        'pageDescription' => $description,
+        'pageUrl' => '/articles/' . $slug,
+        'pageLang' => 'de',
+        'extraStyles' => ['/assets/css/article.css', '/vendor/highlight.css'],
+        'htmlContent' => $htmlContent,
+    ]);
 }
 
 /**
@@ -133,12 +134,12 @@ function renderOverview()
     $articles = getArticles();
     $articles = array_filter($articles, fn($article) => !$article['draft']);
 
-    // Layout data
-    $pageTitle = 'Artikel | Nico Gräf';
-    $pageDescription = 'Artikel über Software-Entwicklung, Architektur und moderne Technologien von Nico Gräf.';
-    $pageUrl = '/articles';
-    $pageLang = 'de';
-    $extraStyles = ['/assets/css/overview.css'];
-
-    include TEMPLATES_DIR . '/articles/overview.php';
+    render(TEMPLATES_DIR . '/articles/overview.php', [
+        'pageTitle' => 'Artikel | Nico Gräf',
+        'pageDescription' => 'Artikel über Software-Entwicklung, Architektur und moderne Technologien von Nico Gräf.',
+        'pageUrl' => '/articles',
+        'pageLang' => 'de',
+        'extraStyles' => ['/assets/css/overview.css'],
+        'articles' => $articles,
+    ]);
 }
