@@ -16,5 +16,5 @@ function render(string $template, array $vars = []): void
     ob_start();
     include $template;
     $pageContent = ob_get_clean();
-    include __DIR__ . '/../templates/layout.php';
+    include __DIR__ . '/layout.php';
 }

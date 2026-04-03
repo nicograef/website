@@ -4,7 +4,7 @@
  * Articles Controller
  * Routes requests to the appropriate view
  */
-require __DIR__ . '/../includes/articles.php';
+require __DIR__ . '/../src/articles.php';
 
 $slug = $_GET['slug'] ?? null;
 if (!$slug) {

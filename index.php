@@ -1,14 +1,14 @@
 <?php
-require_once 'includes/lang.php';
-require_once 'includes/articles.php';
-include 'templates/projects.php';
-require_once 'includes/render.php';
+require_once 'src/lang.php';
+require_once 'src/articles.php';
+include 'src/projects.php';
+require_once 'src/render.php';
 
 $lang = detectLang();
 $projects = loadProjects($lang);
 $isGerman = $lang === 'de';
 
-render(__DIR__ . '/templates/home.php', [
+render(__DIR__ . '/src/home.php', [
     'pageTitle' => 'Nico Gräf – Software Engineer',
     'pageDescription' => $isGerman
         ? 'Portfolio von Nico Gräf, Software Engineer mit Fokus auf Webentwicklung und moderne Technologien.'
@@ -16,7 +16,6 @@ render(__DIR__ . '/templates/home.php', [
     'pageUrl' => '/',
     'pageLang' => $lang,
     'pageImage' => '/assets/img/nico-social.jpg',
-    'extraStyles' => ['/assets/css/main.css'],
     'lang' => $lang,
     'projects' => $projects,
 ]);
