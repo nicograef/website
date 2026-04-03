@@ -12,4 +12,4 @@
 
 ## Commands
 
-Dev server: `php -S 0.0.0.0:8080`
+Dev server: `php -S 0.0.0.0:8080 router.php`

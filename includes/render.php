@@ -18,16 +18,3 @@ function render(string $template, array $vars = []): void
     $pageContent = ob_get_clean();
     include __DIR__ . '/../templates/layout.php';
 }
-
-/**
- * Render the shared layout with pre-buffered content.
- *
- * Use this when page content is already captured (e.g. inline HTML in index.php).
- *
- * @param array $vars Layout variables including 'pageContent'
- */
-function renderLayout(array $vars): void
-{
-    extract($vars);
-    include __DIR__ . '/../templates/layout.php';
-}

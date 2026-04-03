@@ -18,8 +18,8 @@ class Project
             ? $data['description_de']
             : $data['description'];
         $this->description = htmlspecialchars($rawDescription);
-        $this->image = $data['image'];
-        $this->tags = $data['tags'];
+        $this->image = htmlspecialchars($data['image']);
+        $this->tags = array_map('htmlspecialchars', $data['tags']);
         $rawLinkTitle = ($lang === 'de' && !empty($data['linkTitle_de']))
             ? $data['linkTitle_de']
             : ($data['linkTitle'] ?? null);

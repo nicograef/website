@@ -1,6 +1,6 @@
 # Agents.md
 
-Personal portfolio and blog for **Nico Gräf** (nicograef.com). Zero-dependency, no-build-step, file-based vanilla PHP website. Homepage is English (portfolio), blog articles are German (software architecture). Dev server: `php -S 0.0.0.0:8080`
+Personal portfolio and blog for **Nico Gräf** (nicograef.com). Zero-dependency, no-build-step, file-based vanilla PHP website. Homepage is English (portfolio), blog articles are German (software architecture). Dev server: `php -S 0.0.0.0:8080 router.php`
 
 ## Tech Stack
 
@@ -17,7 +17,7 @@ Personal portfolio and blog for **Nico Gräf** (nicograef.com). Zero-dependency,
 
 | Command | Description |
 |---------|-------------|
-| `php -S 0.0.0.0:8080` | Start dev server |
+| `php -S 0.0.0.0:8080 router.php` | Start dev server |
 
 ## Template Pattern
 

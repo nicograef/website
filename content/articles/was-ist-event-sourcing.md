@@ -1,16 +1,3 @@
----
-title: Was ist Event-Sourcing?
-description: Eine kurze Erklärung zu Event-Sourcing.
-author: Nico Gräf
-author_url: https://nicograef.com
-date: 2025-02-06
-tags:
-  - Event
-  - Event-Sourcing
-  - CQRS
-  - Software Architecture
----
-
 # Was ist Event-Sourcing?
 
 Event-Sourcing ist eine Alternative zu CRUD. Dabei werden nicht die aktuellen Zustände von Objekten gespeichert, sondern alle Änderungen (Events), die zu diesem Zustand geführt haben. Dies kann eine vollständige Nachverfolgbarkeit und Wiederherstellung des Systemzustands zu jedem beliebigen Zeitpunkt ermöglichen.

@@ -1,18 +1,3 @@
----
-title: Spring Boot für TypeScript-Entwickler erklärt
-description: Du kennst Express.js und willst Spring Boot verstehen? Dieser Artikel erklärt Dependency Injection, Controller, Services, JPA, Testing und mehr — mit Vergleichen zu Node.js.
-author: Nico Gräf
-author_url: https://nicograef.com
-date: 2025-02-26
-draft: true
-tags:
-  - Java
-  - Spring Boot
-  - TypeScript
-  - Software Architecture
-  - Backend
----
-
 # Spring Boot für TypeScript-Entwickler erklärt
 
 > Dieser Artikel baut auf [Java für TypeScript-Entwickler erklärt](/articles/java-fuer-typescript-entwickler-erklaert) auf. Dort werden die Java-Plattform, die Sprache und die Datenmodellierung erklärt.

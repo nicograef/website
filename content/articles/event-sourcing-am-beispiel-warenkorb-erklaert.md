@@ -1,17 +1,3 @@
----
-title: Event-Sourcing am Beispiel Warenkorb erklärt
-description: Event-Sourcing ist eine Alternative zu CRUD. Lerne anhand eines Warenkorb-Beispiels, wie Events statt Zuständen gespeichert werden und welche Vorteile das bringt.
-author: Nico Gräf
-author_url: https://nicograef.com
-date: 2025-01-23
-tags:
-  - Software Architecture
-  - Event-Sourcing
-  - CQRS
-  - Event-Driven Architecture
-  - Domain-Driven Design
----
-
 # Event-Sourcing am Beispiel Warenkorb erklärt
 
 Event-Sourcing ist eine Alternative zu CRUD. Dabei werden nicht die aktuellen Zustände von Objekten gespeichert, sondern alle Änderungen (Events), die zu diesem Zustand geführt haben. Dies kann – zumindest theoretisch – eine vollständige Nachverfolgbarkeit und Wiederherstellung des Systemzustands zu jedem beliebigen Zeitpunkt ermöglichen.

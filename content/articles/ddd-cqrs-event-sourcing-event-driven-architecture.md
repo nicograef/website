@@ -1,19 +1,3 @@
----
-title: Was sind DDD, CQRS, Event-Sourcing und Event-Driven Architecture?
-description: asd
-author: Nico Gräf
-author_url: https://nicograef.com
-date: 2025-01-31
-draft: true
-tags:
-  - Domain-Driven Design
-  - Events
-  - Event-Sourcing
-  - CQRS
-  - Event-Driven Architecture
-  - Software Architecture
----
-
 # Was sind DDD, CQRS, Event-Sourcing und Event-Driven Architecture?
 
 In diesem Artikel erkläre ich den unterschied zwischen Domain-Driven Design (DDD), Command Query Responsibility Segregation (CQRS), Event-Sourcing und Event-Driven Architecture.

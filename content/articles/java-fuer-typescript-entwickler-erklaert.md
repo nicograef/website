@@ -1,17 +1,3 @@
----
-title: Java für TypeScript-Entwickler erklärt
-description: Du kommst aus der TypeScript/Node.js-Welt und willst Java verstehen? Dieser Artikel erklärt die Java-Plattform, die Sprache und die Datenmodellierung — mit Vergleichen zu TypeScript.
-author: Nico Gräf
-author_url: https://nicograef.com
-date: 2025-02-26
-draft: true
-tags:
-  - Java
-  - TypeScript
-  - Software Architecture
-  - Backend
----
-
 # Java für TypeScript-Entwickler erklärt
 
 Du kommst aus der TypeScript- und Node.js-Welt und willst Java verstehen? Statt bei Null anzufangen, nutzen wir dein bestehendes Wissen als Brücke: Für jedes Java-Konzept zeige ich das Äquivalent in TypeScript oder Node.js — so baust du schnell eine Intuition auf.

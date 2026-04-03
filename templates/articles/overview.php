@@ -5,7 +5,7 @@
         <?php foreach ($articles as $article): ?>
             <a href="/articles/<?= htmlspecialchars($article['slug']) ?>" class="article-link">
                 <article class="article-card">
-                    <h2 class="article-title"><?php if (!empty($article['draft'])): ?>[Entwurf] <?php endif; ?><?= htmlspecialchars($article['title']) ?></h2>
+                    <h2 class="article-title"><?= htmlspecialchars($article['title']) ?></h2>
                     <?php if (!empty($article['description'])): ?>
                         <p class="article-description"><?= htmlspecialchars($article['description']) ?></p>
                     <?php endif; ?>

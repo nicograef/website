@@ -1,19 +1,3 @@
----
-title: Event-Sourcing mit AWS DynamoDB
-description: Eine praktische Implementierung von Event-Sourcing mit AWS DynamoDB, Lambda und SNS. Mit CDK-Setup und TypeScript Service-Klasse.
-author: Nico Gräf
-author_url: https://nicograef.com
-date: 2025-01-28
-draft: true
-tags:
-  - Software Architecture
-  - Event-Sourcing
-  - AWS
-  - DynamoDB
-  - CDK
-  - TypeScript
----
-
 # Event-Sourcing mit AWS DynamoDB
 
 > Dieser Artikel baut auf meinem vorherigen Artikel [Event-Sourcing am Beispiel Warenkorb erklärt](/articles/event-sourcing-am-beispiel-warenkorb-erklaert) auf. Dort habe ich die Grundlagen von Event-Sourcing erklärt und gezeigt, wie Events statt Zuständen gespeichert werden. In diesem Artikel zeige ich eine konkrete Implementierung mit AWS DynamoDB.

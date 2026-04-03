@@ -3,10 +3,7 @@ require_once 'articles.php';
 // $lang is available from the calling context (index.php)
 $lang = $lang ?? 'en';
 
-$allArticles = getArticles();
-$articles = array_filter($allArticles, fn($a) => empty($a['draft']));
-usort($articles, fn($a, $b) => strcmp($b['date'], $a['date']));
-$latestArticles = array_slice($articles, 0, 3);
+$latestArticles = getLatestArticles(3);
 ?>
 
 <div class="articles">

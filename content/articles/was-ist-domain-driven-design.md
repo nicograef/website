@@ -1,14 +1,3 @@
----
-title: Was ist Domain Driven Design?
-description: Eine Einführung in Domain Driven Design (DDD) und wie es hilft, Software besser an die Fachlichkeit anzupassen.
-author: Nico Gräf
-author_url: https://nicograef.com
-date: 2025-01-31
-tags:
-  - Domain Driven Design
-  - Software Architecture
----
-
 # Was ist Domain Driven Design?
 
 > Diese Erklärung zu DDD wendet sich an Entwickler und konzentriert sich auf das sogenannte "tactical design". Für Architekten ist wahrscheinlich das "strategic design" relevanter.

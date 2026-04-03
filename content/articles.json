@@ -1,0 +1,26 @@
+[
+    {
+        "slug": "was-ist-event-sourcing",
+        "title": "Was ist Event-Sourcing?",
+        "description": "Eine kurze Erklärung zu Event-Sourcing.",
+        "date": "2025-02-06",
+        "author": "Nico Gräf",
+        "tags": ["Event", "Event-Sourcing", "CQRS", "Software Architecture"]
+    },
+    {
+        "slug": "was-ist-domain-driven-design",
+        "title": "Was ist Domain Driven Design?",
+        "description": "Eine Einführung in Domain Driven Design (DDD) und wie es hilft, Software besser an die Fachlichkeit anzupassen.",
+        "date": "2025-01-31",
+        "author": "Nico Gräf",
+        "tags": ["Domain Driven Design", "Software Architecture"]
+    },
+    {
+        "slug": "event-sourcing-am-beispiel-warenkorb-erklaert",
+        "title": "Event-Sourcing am Beispiel Warenkorb erklärt",
+        "description": "Event-Sourcing ist eine Alternative zu CRUD. Lerne anhand eines Warenkorb-Beispiels, wie Events statt Zuständen gespeichert werden und welche Vorteile das bringt.",
+        "date": "2025-01-23",
+        "author": "Nico Gräf",
+        "tags": ["Software Architecture", "Event-Sourcing", "CQRS", "Event-Driven Architecture", "Domain-Driven Design"]
+    }
+]
