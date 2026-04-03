@@ -97,25 +97,88 @@ see the cross-reference landscape before confirming the outline.
 
 ### 5. Create diagrams
 
-For each concept that benefits from a visual explanation, create a **simple
-Mermaid diagram**. The user will convert these to images using Excalidraw.
+For each concept that benefits from a visual explanation, create a diagram.
+The user will convert these to images using Excalidraw.
 
-**Rules for Mermaid diagrams:**
+**Step 1 — Decide: Mermaid or Excalidraw-Skizze?**
 
-- Keep them simple — prefer clarity over completeness.
-- Use `graph TD` (top-down) or `graph LR` (left-right) for most diagrams.
-  Use `sequenceDiagram` only when showing message flow between actors.
-- Short, readable node labels (2–4 words). German labels when they match the
-  article terminology.
+Not every diagram is a good fit for Mermaid. Before writing any Mermaid code,
+ask: *does this diagram need nested containers with content inside them?*
+
+| Diagram need | Right tool |
+|---|---|
+| Flow / pipeline / request path | Mermaid `graph TD` or `graph LR` |
+| Message exchange between actors | Mermaid `sequenceDiagram` |
+| States and transitions | Mermaid `stateDiagram-v2` |
+| A single entity with attributes or methods | Mermaid `classDiagram` |
+| **Entities grouped inside named context boxes** | **Excalidraw-Skizze** (see below) |
+| **Side-by-side model comparison with attribute lists** | **Excalidraw-Skizze** (see below) |
+
+The last two rows are a hard limit of Mermaid:
+
+- `classDiagram` renders each class as an **isolated** UML box — it has no
+  concept of a wrapping container. If the diagram's point is to show that
+  *the same term means different things in different contexts*, `classDiagram`
+  fails: it produces two disconnected boxes with no visual grouping.
+- `graph LR` with `subgraph` can draw context boxes, but **cannot** show
+  attribute lists inside a node (labels are 2–4 words maximum).
+- When you need **both** (context grouping + attribute lists), Mermaid cannot
+  do it cleanly → provide an **Excalidraw-Skizze** instead.
+
+**Excalidraw-Skizze format** (for diagrams Mermaid cannot handle):
+
+Instead of a Mermaid block, describe the diagram as a precise structured
+blueprint the user can draw in Excalidraw in a few minutes:
+
+```
+**Excalidraw-Skizze** (für Excalidraw manuell zeichnen):
+
+[Jedes Element auf einer eigenen Zeile, eingerückt nach Verschachtelung]
+Äußere Box (abgerundete Ecken, grüner Rahmen) — Beschriftung oben: "Kontext: X"
+  Innere Box — Titel (groß, fett): "Entität"
+  Attributliste darunter: feld1, feld2, feld3
+
+[Weitere Elemente + räumliche Beziehungen:]
+Beide Boxen nebeneinander, gleiche Höhe, kein Pfeil zwischen ihnen.
+```
+
+Rules for an Excalidraw-Skizze:
+- Describe every element: shape, border colour, label text, font size/weight.
+- Describe spatial relationships explicitly ("nebeneinander", "darunter",
+  "zentriert", "gleiche Breite", "Pfeil von A nach B mit Label X").
+- One element per line, indented to show nesting.
+- No ambiguity — the user should be able to draw it without any visual
+  decisions left open.
+
+**Step 2 — If using Mermaid: follow these rules:**
+
+- Keep diagrams simple — prefer clarity over completeness.
+- German labels when they match the article terminology.
 - No styling directives (`style`, `classDef`, `linkStyle`) — Excalidraw
   handles the visual design.
-- Maximum ~10 nodes per diagram. If more are needed, split into multiple
-  diagrams.
-- Present each diagram in a fenced `mermaid` code block with a brief caption
-  explaining what the diagram shows.
+- Maximum ~10 nodes per diagram. Split into multiple if needed.
+- Present each diagram in a fenced `mermaid` code block with a brief caption.
+- **`\n` does not work inside node labels** — it renders as literal `\n`.
+  Never use it. For `graph` nodes: keep labels to 2–4 words.
+- **Before writing a diagram, mentally render it:** read each line, picture
+  the shape, verify it communicates the concept clearly.
+- **`subgraph` is for visual grouping only.** Use it when grouping *is the
+  point* (e.g. "these services form one deployment unit"). Do **not** use it
+  to annotate roles like Upstream/Downstream — arrow direction and edge labels
+  communicate that more cleanly. Wrapping a single node in a `subgraph` just
+  to label it adds noise without meaning.
 
-**Example:**
+**Before finalising each diagram, run this checklist:**
+1. Does it need nested context containers with attribute lists? → Excalidraw-Skizze.
+2. Is the Mermaid type correct for the content (see table above)?
+3. Does any label contain `\n`? → Fix it.
+4. Is any `subgraph` wrapping a single node just to add a role label? → Remove it, use edge labels instead.
+5. Would someone unfamiliar with the topic understand it without the article?
+6. Are there ≤ 10 nodes/participants?
 
+**Examples:**
+
+Flow — `graph TD`:
 ````markdown
 ```mermaid
 graph TD
@@ -126,6 +189,33 @@ graph TD
 ```
 _Vereinfachter Request-Flow durch die Schichten_
 ````
+
+Linear flow with labelled edges (e.g. Context Map with ACL) — plain `graph LR`, no `subgraph`:
+````markdown
+```mermaid
+graph LR
+    A["Kontext A"] -->|Modell A| B["Anti-Corruption Layer"]
+    B -->|Modell B| C["Kontext B"]
+```
+_Datenfluss durch einen Anti-Corruption Layer_
+````
+
+Model comparison with attribute lists — Excalidraw-Skizze (Mermaid cannot do this):
+
+```
+**Excalidraw-Skizze** (für Excalidraw manuell zeichnen):
+
+Äußere Box (abgerundete Ecken, grüner Rahmen) — Beschriftung oben links: "Kontext: Rechnungswesen"
+  Innere Box (abgerundete Ecken, schwarzer Rahmen) — Titel (groß, fett): "Kunde"
+  Attributliste darunter (Monospace, linksbündig): name, adresse, steuernummer, iban, zahlungsstatus, offeneRechnungen
+
+Äußere Box (abgerundete Ecken, blauer Rahmen) — Beschriftung oben links: "Kontext: Marketing"
+  Innere Box (abgerundete Ecken, schwarzer Rahmen) — Titel (groß, fett): "Kunde"
+  Attributliste darunter (Monospace, linksbündig): name, kampagnenSegment, kanalPraeferenz, klickRate, oeffnungsRate
+
+Beide äußeren Boxen nebeneinander (gleiche Höhe), kein Pfeil zwischen ihnen.
+```
+_Derselbe Begriff — zwei saubere Modelle in zwei Bounded Contexts_
 
 Do **not** embed Mermaid blocks in the article Markdown itself (the website
 does not render Mermaid). Instead, present them separately after the article
