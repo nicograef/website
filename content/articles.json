@@ -1,5 +1,13 @@
 [
     {
+        "slug": "anti-corruption-layer-erklaert",
+        "title": "Anti-Corruption Layer — Saubere Grenzen zwischen deinem Code und Legacy-Systemen",
+        "description": "Ein Anti-Corruption Layer trennt dein sauberes Modell vom Chaos eines Legacy-Systems — mit einem Adapter als Übersetzungsschicht.",
+        "date": "2026-04-03",
+        "author": "Nico Gräf",
+        "tags": ["Software Architecture", "Anti-Corruption Layer", "Legacy", "Integration", "Domain-Driven Design"]
+    },
+    {
         "slug": "was-ist-event-sourcing",
         "title": "Was ist Event-Sourcing?",
         "description": "Eine kurze Erklärung zu Event-Sourcing.",
@@ -22,5 +30,13 @@
         "date": "2025-01-23",
         "author": "Nico Gräf",
         "tags": ["Software Architecture", "Event-Sourcing", "CQRS", "Event-Driven Architecture", "Domain-Driven Design"]
+    },
+    {
+        "slug": "bounded-context-erklaert",
+        "title": "Bounded Context — Klare Grenzen für komplexe Domänen",
+        "description": "Warum ein einziges Datenmodell komplexe Systeme zum Scheitern bringt — und wie Bounded Contexts klare Grenzen setzen, damit Teams und Modelle unabhängig bleiben.",
+        "date": "2026-04-03",
+        "author": "Nico Gräf",
+        "tags": ["Domain Driven Design", "Software Architecture", "Bounded Context", "Microservices"]
     }
 ]
