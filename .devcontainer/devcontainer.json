@@ -1,0 +1,34 @@
+{
+  "name": "nicograef-website-dev",
+
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+
+  "features": {
+    "ghcr.io/devcontainers/features/php:1": {
+      "version": "8.3"
+    }
+  },
+
+  "postCreateCommand": "echo 'Dev container ready. Run: php -S 0.0.0.0:8080'",
+
+  "forwardPorts": [8080],
+
+  "portsAttributes": {
+    "8080": {
+      "label": "PHP dev server",
+      "onAutoForward": "notify"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "editorconfig.editorconfig",
+        "bmewburn.vscode-intelephense-client"
+      ]
+    }
+  }
+}
