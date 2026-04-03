@@ -402,8 +402,8 @@ consistently.
   werden — als Nächstes schauen wir uns an, wie man den aktuellen Zustand
   daraus rekonstruiert."
 - **Glossar** — Bei ≥ 5 neuen Fachbegriffen erscheint am Ende des Artikels ein
-  `## Glossar`-Abschnitt im Format `**Begriff**: Kurzdefinition`. Kein Glossar
-  bei weniger als 5 neuen Begriffen.
+  `## Glossar`-Abschnitt als UL-Liste im Format `- **Begriff**: Kurzdefinition`.
+  Kein Glossar bei weniger als 5 neuen Begriffen.
 - **Pattern-Artikel** _(dritter Artikel-Typ)_ — Neben "Was ist X?" und Deep
   Dive gibt es Pattern-Artikel, die ein konkretes Entwurfsmuster beschreiben.
   Pflicht-Struktur:

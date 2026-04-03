@@ -47,7 +47,7 @@ Das Ergebnis: Im Warenkorb liegt Produkt 456 mit Menge 2. Wir können aber auch 
 
 ## Vorteile
 
-- **Näher an der Fachdomäne**: Events beschreiben, was im Business passiert ist, nicht nur technische Zustandsänderungen. Das macht Event-Sourcing zu einer guten Ergänzung für Domain-Driven Design (DDD).
+- **Näher an der Fachdomäne**: Events beschreiben, was im Business passiert ist, nicht nur technische Zustandsänderungen. Das macht Event-Sourcing zu einer guten Ergänzung für [Domain Driven Design (DDD)](/articles/was-ist-domain-driven-design).
 - **Audit Trail**: Jede Änderung ist dokumentiert – wer hat wann was gemacht?
 - **Zeitreisen möglich**: Der Zustand kann für jeden beliebigen Zeitpunkt rekonstruiert werden.
 - **Keine Information geht verloren**: Der Kontext und die Absicht hinter jeder Änderung bleiben erhalten.

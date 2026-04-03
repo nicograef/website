@@ -90,16 +90,10 @@ Die Grundlagen von Domain Driven Design — inklusive Ubiquitous Language und ta
 
 ## Glossar
 
-**Bounded Context**: Eine explizite Grenze, innerhalb derer ein bestimmtes Domänenmodell und eine einheitliche Sprache gelten.
-
-**Ubiquitous Language**: Die gemeinsame, domänenspezifische Sprache von Entwicklern und Fachexperten innerhalb eines Bounded Context — gültig exakt dort, nicht darüber hinaus.
-
-**Context Map**: Diagramm, das die Beziehungen und Integrationsmuster zwischen Bounded Contexts visualisiert.
-
-**Anti-Corruption Layer (ACL)**: Übersetzungsschicht eines Downstream-Kontexts, die das eigene Modell vor Änderungen im Upstream-Modell schützt.
-
-**Conformist**: Integration-Pattern, bei dem der Downstream das Upstream-Modell ohne Transformation übernimmt.
-
-**Upstream / Downstream**: Richtungsbeziehung: Upstream ist unabhängig und liefert; Downstream konsumiert und passt sich an.
-
-**Open Host Service (OHS)**: Pattern, bei dem ein Kontext eine stabile, dokumentierte API für viele Konsumenten bereitstellt.
+- **Bounded Context**: Eine explizite Grenze, innerhalb derer ein bestimmtes Domänenmodell und eine einheitliche Sprache gelten.
+- **Ubiquitous Language**: Die gemeinsame, domänenspezifische Sprache von Entwicklern und Fachexperten innerhalb eines Bounded Context — gültig exakt dort, nicht darüber hinaus.
+- **Context Map**: Diagramm, das die Beziehungen und Integrationsmuster zwischen Bounded Contexts visualisiert.
+- **Anti-Corruption Layer (ACL)**: Übersetzungsschicht eines Downstream-Kontexts, die das eigene Modell vor Änderungen im Upstream-Modell schützt.
+- **Conformist**: Integration-Pattern, bei dem der Downstream das Upstream-Modell ohne Transformation übernimmt.
+- **Upstream / Downstream**: Richtungsbeziehung: Upstream ist unabhängig und liefert; Downstream konsumiert und passt sich an.
+- **Open Host Service (OHS)**: Pattern, bei dem ein Kontext eine stabile, dokumentierte API für viele Konsumenten bereitstellt.
