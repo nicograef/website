@@ -8,7 +8,7 @@ In einem Event-Sourcing-System gibt es kein UPDATE und es gibt auch kein DELETE.
 
 In diesem Artikel vergleiche ich Event-Sourcing mit dem traditionellen CRUD-Ansatz anhand des Beispiels Warenkorb in einem Online-Shop.
 
-> **Disclaimer:** Event-Sourcing hat — wie alles — seine Vor- und Nachteile und sollte nur angewendet werden, wenn es wirklich gute Gründe dafür gibt. Die zusätzliche Komplexität ist nicht zu unterschätzen. Auch wenn dieser Artikel den Warenkorb als Beispiel für Event-Sourcing verwendet, ist ein einfacher Warenkorb in der Praxis kein guter Kandidat für Event-Sourcing – CRUD reicht hier meist völlig aus.
+> **Disclaimer:** Event-Sourcing hat (wie alles) seine Vor- und Nachteile und sollte nur angewendet werden, wenn es wirklich gute Gründe dafür gibt. Die zusätzliche Komplexität ist nicht zu unterschätzen. Auch wenn dieser Artikel den Warenkorb als Beispiel für Event-Sourcing verwendet, ist ein einfacher Warenkorb in der Praxis kein guter Kandidat für Event-Sourcing – CRUD reicht hier meist völlig aus.
 
 ## Warenkorb mit CRUD
 
