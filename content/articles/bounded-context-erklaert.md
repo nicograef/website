@@ -1,99 +1,43 @@
 # Bounded Context: Klare Grenzen für komplexe Domänen
 
-Stell dir vor, du sitzt in einem Meeting mit Vertrieb und Kundendienst. Beide reden über "den Kunden", aber meinen sie dasselbe? Für den Vertrieb ist ein Kunde ein potenzieller Umsatz: Kontaktdaten, Kaufhistorie, Kundensegment. Für den Kundendienst ist ein Kunde ein offenes Ticket: Problembeschreibung, Gesprächsprotokoll, Eskalationsstufe.
+Stell dir vor, du sitzt in einem Meeting mit Vertrieb und Kundendienst. Beide reden über "den Kunden". Der Vertrieb meint damit Kontaktdaten, Kaufhistorie, Kundensegment. Der Kundendienst meint ein offenes Ticket mit Problembeschreibung und Eskalationsstufe. Selbes Wort, andere Bedeutung.
 
-In vielen Softwaresystemen wird dieses Problem ignoriert. Alles landet in einem einzigen, riesigen Datenmodell. Dann fangen die Probleme an.
-
-## Das Problem: Ein Begriff, viele Bedeutungen
-
-Sobald ein System wächst, treffen verschiedene Fachbereiche mit verschiedenen Sprachen aufeinander. Jeder Bereich hat seine eigene Vorstellung davon, was ein "Kunde", ein "Auftrag" oder eine "Transaktion" bedeutet.
-
-Das klingt abstrakt, wird aber im Code sehr konkret. Ein gemeinsames `Customer`-Objekt muss plötzlich Felder für die Buchhaltung tragen (`taxId`), für das Marketing (`campaignSegment`) und für den Kundendienst (`supportTier`). Das Objekt wächst ins Unendliche. Keine Abteilung versteht das gesamte Modell noch vollständig. Jede Änderung kann unbeabsichtigte Nebeneffekte in einem anderen Bereich auslösen.
-
-Die Lösung ist keine schnellere Datenbank und kein besseres ORM. Die Lösung ist **Bounded Context**.
+Viele Systeme ignorieren diesen Unterschied. Alles fließt in ein einziges `Customer`-Objekt: `taxId` für die Buchhaltung, `campaignSegment` fürs Marketing, `supportTier` für den Kundendienst. Das Objekt wächst mit jeder Abteilung. Keine Abteilung versteht das gesamte Modell. Jede Änderung kann in einem fremden Bereich etwas kaputtmachen.
 
 ## Was ist ein Bounded Context?
 
-Ein **Bounded Context** (zu Deutsch: begrenzter Kontext) ist eine explizite Grenze, innerhalb derer ein bestimmtes Domänenmodell gilt. Innerhalb dieser Grenze hat jeder Begriff eine präzise, einheitliche Bedeutung. Außerhalb darf (und soll) derselbe Begriff etwas anderes bedeuten.
+Ein **Bounded Context** ist eine explizite Grenze, innerhalb derer ein bestimmtes Domänenmodell gilt. Innerhalb dieser Grenze hat jeder Begriff eine präzise Bedeutung. Außerhalb darf derselbe Begriff etwas anderes bedeuten — und genau das ist gewollt.
 
-Eric Evans, der Begründer von [Domain Driven Design](/articles/was-ist-domain-driven-design), definierte den Bounded Context so: *"A description of a boundary (typically a subsystem, or the work of a particular team) within which a particular model is defined and applicable."*
+Eric Evans, der Begründer von Domain Driven Design, definierte es so: *"A description of a boundary (typically a subsystem, or the work of a particular team) within which a particular model is defined and applicable."*
 
-Die zweite Säule eines Bounded Context ist die **Ubiquitous Language**, die gemeinsame, domänenspezifische Sprache, die Entwickler und Fachexperten innerhalb des Kontexts teilen. Diese Sprache gilt exakt in diesem Kontext und nicht darüber hinaus. Der Begriff "Kunde" im Rechnungswesen beschreibt etwas anderes als "Kunde" im Marketing. Genau deshalb verdienen sie zwei verschiedene Modelle.
+Entwickler und Fachexperten teilen innerhalb eines Bounded Context eine gemeinsame Sprache — die Ubiquitous Language. "Kunde" im Rechnungswesen beschreibt etwas anderes als "Kunde" im Marketing. Deshalb verdienen sie zwei verschiedene Modelle in zwei verschiedenen Kontexten.
 
-> **Abgrenzung: Subdomain vs. Bounded Context:** Eine **Subdomain** beschreibt einen Teilbereich des Fachgebiets (z.B. "Zahlungsabwicklung") und existiert unabhängig davon, wie wir Software bauen. Der Bounded Context ist unsere Designentscheidung: Wie modellieren wir diesen Bereich im Code? Manchmal entspricht eine Subdomain einem Bounded Context, manchmal nicht.
+> **Subdomain vs. Bounded Context:** Eine Subdomain ist ein Teilbereich des Fachgebiets (z.B. "Zahlungsabwicklung") und existiert unabhängig von der Software. Der Bounded Context ist die Designentscheidung: Wie grenzen wir diesen Bereich im Code ab? Manchmal deckt sich beides, manchmal nicht.
 
-## Ein Begriff, zwei Welten
+Soweit die Theorie. Wie sieht das in der Praxis aus?
 
-Nehmen wir das Beispiel "Kunde" in einem E-Commerce-Unternehmen. Es gibt zwei Bounded Contexts: Rechnungswesen und Marketing.
+## Ein Begriff, zwei Modelle
 
-![Zwei Bounded Contexts für "Kunde"](/assets/img/articles/bounded-context-erklaert-modelle.png)
-_Derselbe Mensch, zwei saubere Modelle in zwei Bounded Contexts_
+Nehmen wir ein E-Commerce-Unternehmen mit zwei Bounded Contexts: Rechnungswesen und Marketing.
 
-Im **Rechnungswesen-Kontext** interessiert uns:
+Im Rechnungswesen-Kontext ist ein Kunde eine zahlungspflichtige Entität. Relevant sind Name, Adresse, Steuernummer, IBAN, Zahlungskonditionen und offene Rechnungen. Kommunikationspräferenzen oder Kampagnenzugehörigkeit interessieren hier niemanden.
 
-- Name, Adresse, Steuernummer
-- IBAN und Zahlungskonditionen
-- Offene Rechnungen und Zahlungsstatus
+Im Marketing-Kontext ist ein Kunde ein Empfänger von Kampagnen. Relevant sind Kommunikationskanal, Segment, Klick- und Öffnungsraten. Steuernummern und Zahlungskonditionen spielen keine Rolle.
 
-Im **Marketing-Kontext** interessiert uns:
+Ein gemeinsames `Customer`-Objekt müsste beides tragen. Das Ergebnis: ein aufgeblähtes Modell, das keine Seite vollständig versteht und das bei jeder Änderung Seiteneffekte riskiert. Zwei getrennte Modelle — jeweils nur mit den Feldern, die der Kontext braucht — sind kleiner, verständlicher und unabhängig voneinander änderbar.
 
-- Kommunikationskanal-Präferenz
-- Kampagnenzugehörigkeit und Segment
-- Klick- und Öffnungsrate
+Aber Kontexte existieren nicht in Isolation. Was passiert, wenn sie Daten austauschen müssen?
 
-Ein gemeinsames Modell, das beides abbildet, wäre aufgebläht und fragil. Zwei saubere Modelle in zwei Bounded Contexts sind wartbar, testbar und verständlich, jedes für sich.
+## Wenn Kontexte miteinander reden
 
-## Context Mapping: Wenn Kontexte miteinander reden müssen
+Irgendwann braucht ein Kontext Daten aus einem anderen. Der Rechnungswesen-Kontext braucht eine Kundenadresse, die im Vertriebs-Kontext gepflegt wird. Der Marketing-Kontext will wissen, ob ein Kunde aktive Rechnungen hat.
 
-Bounded Contexts können nicht vollständig isoliert existieren. Ein Online-Shop braucht irgendwann Informationen aus beiden Welten, zum Beispiel wenn eine Rechnung an einen Kunden verschickt werden soll, der im Marketing-Kontext abgemeldet ist.
+Eine **Context Map** dokumentiert diese Beziehungen. Sie zeigt, welche Kontexte kommunizieren und in welcher Richtung die Abhängigkeit verläuft. Der Kontext, der Daten liefert, heißt Upstream. Der Kontext, der sie konsumiert, heißt Downstream.
 
-Die entscheidende Frage lautet nicht "Welche API bauen wir?", sondern: "Welche Beziehung soll zwischen den Kontexten bestehen?" Erst nach dieser strategischen Entscheidung wählt man die Technologie. Diesen Prozess nennt man **Context Mapping**; dokumentiert wird er in einer **Context Map**.
+Wie der Downstream mit dem Upstream-Modell umgeht, hängt vom Integrations-Pattern ab. Ein Conformist übernimmt das Upstream-Modell direkt — pragmatisch, aber eng gekoppelt. Wer das eigene Modell schützen will, baut einen Anti-Corruption Layer als Übersetzungsschicht dazwischen. Bedient ein Kontext viele Konsumenten, bietet sich ein Open Host Service an: eine stabile, dokumentierte API.
 
-![Context Map mit Anti-Corruption Layer](/assets/img/articles/bounded-context-erklaert-context-map.png)
-_Context Map: Zwei Bounded Contexts, verbunden über einen Anti-Corruption Layer_
-
-In jeder Kontext-Beziehung gibt es zwei Rollen:
-
-- **Upstream:** der Kontext, der Daten oder Dienste bereitstellt. Er ist unabhängig und definiert den Vertrag.
-- **Downstream:** der Kontext, der diese Daten konsumiert. Er muss sich anpassen.
-
-Wie sich der Downstream anpasst, entscheidet das gewählte Pattern:
-
-| Pattern | Verhalten |
-|---|---|
-| **Conformist** | Downstream übernimmt das Upstream-Modell ohne Transformation (pragmatisch, koppelt aber die Modelle) |
-| **<abbr title="Anti-Corruption Layer">ACL</abbr>** | Downstream baut eine Übersetzungsschicht (mehr Aufwand, aber das eigene Modell bleibt sauber) |
-| **<abbr title="Open Host Service">OHS</abbr>** | Upstream stellt eine stabile, dokumentierte API für viele Konsumenten bereit |
-
-Der **Anti-Corruption Layer** ist meistens die bessere Wahl. Die Übersetzungsschicht isoliert den eigenen Kontext von Änderungen im Upstream. Wenn der Kundendaten-Kontext seine API umbaut, ändert sich nur der ACL; der Rest des Rechnungswesen-Kontexts bleibt unberührt.
-
-## Bounded Contexts und Microservices
-
-Bounded Contexts und Microservices ergänzen sich natürlich. Ein Bounded Context ist eine fachliche Grenze; ein Microservice ist eine technische Deployment-Grenze. Sie müssen nicht immer identisch sein, aber ein Bounded Context ist ein guter Ausgangspunkt für den Zuschnitt eines Microservice.
-
-Wer Microservices ohne Bounded Contexts definiert, endet häufig in einem **Distributed Monolith**: Dienste sind physisch getrennt, aber logisch so eng gekoppelt, dass jede Änderung mehrere Services gleichzeitig betrifft. Die Vorteile von Microservices (unabhängiges Deployment, Teamautonomie) verschwinden.
-
-Bounded Contexts sind kein Microservices-Konzept. Sie gelten genauso im modularen Monolithen: Jedes Modul kann ein Bounded Context sein: mit eigenem Modell, eigener Sprache, eigenen Grenzen.
+Die strategische Entscheidung kommt vor der technischen Umsetzung. Erst die Beziehung zwischen den Kontexten klären, dann die API bauen.
 
 ## Fazit
 
-Ein Bounded Context ist keine technische Entscheidung, sondern eine fachliche. Die Grenze folgt dem Sprachgebrauch des Business: Wo immer ein Begriff anfängt, etwas anderes zu bedeuten, ist eine Kontextgrenze sinnvoll.
-
-Die konkreten Vorteile:
-
-- **Klarere Modelle:** jeder Kontext enthält nur, was er wirklich braucht
-- **Unabhängige Teams:** Teams können ihren Kontext weiterentwickeln, ohne andere zu blockieren
-- **Explizite Abhängigkeiten:** die Context Map macht sichtbar, was sonst implizit und unkontrolliert wächst
-- **Natürliche Microservice-Grenzen:** Bounded Contexts geben dem Zuschnitt eine fachliche Grundlage
-
-Die Grundlagen von Domain Driven Design, inklusive Ubiquitous Language und taktischen Bausteinen wie Aggregates und Entities, findest du im Artikel [Was ist Domain Driven Design?](/articles/was-ist-domain-driven-design).
-
-## Glossar
-
-- **Bounded Context**: Eine explizite Grenze, innerhalb derer ein bestimmtes Domänenmodell und eine einheitliche Sprache gelten.
-- **Ubiquitous Language**: Die gemeinsame, domänenspezifische Sprache von Entwicklern und Fachexperten innerhalb eines Bounded Context, gültig exakt dort, nicht darüber hinaus.
-- **Context Map**: Diagramm, das die Beziehungen und Integrationsmuster zwischen Bounded Contexts visualisiert.
-- **Anti-Corruption Layer (ACL)**: Übersetzungsschicht eines Downstream-Kontexts, die das eigene Modell vor Änderungen im Upstream-Modell schützt.
-- **Conformist**: Integration-Pattern, bei dem der Downstream das Upstream-Modell ohne Transformation übernimmt.
-- **Upstream / Downstream**: Richtungsbeziehung: Upstream ist unabhängig und liefert; Downstream konsumiert und passt sich an.
-- **Open Host Service (OHS)**: Pattern, bei dem ein Kontext eine stabile, dokumentierte API für viele Konsumenten bereitstellt.
+Ein Bounded Context ist keine technische Entscheidung. Die Grenze folgt dem Sprachgebrauch: Wo ein Begriff anfängt, etwas anderes zu bedeuten, gehört eine Kontextgrenze hin. Jeder Kontext bekommt ein Modell, das nur enthält, was er braucht. Teams können ihren Bereich unabhängig weiterentwickeln. Die Context Map macht sichtbar, was sonst implizit wächst.
