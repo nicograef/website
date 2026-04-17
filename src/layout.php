@@ -24,6 +24,11 @@ $fullUrl = $baseUrl . ($pageUrl ?? $_SERVER['REQUEST_URI']);
     <meta name="author" content="Nico Gräf">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="<?= htmlspecialchars($fullUrl) ?>">
+    <?php if (($pageUrl ?? '') === '/'): ?>
+        <link rel="alternate" hreflang="en" href="<?= $baseUrl ?>/">
+        <link rel="alternate" hreflang="de" href="<?= $baseUrl ?>/">
+        <link rel="alternate" hreflang="x-default" href="<?= $baseUrl ?>/">
+    <?php endif; ?>
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
