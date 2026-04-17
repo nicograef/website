@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../vendor/Parsedown.php';
+require_once __DIR__ . '/../vendor/Parsedown.php';
 require_once __DIR__ . '/render.php';
 
 // Base path

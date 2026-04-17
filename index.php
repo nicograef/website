@@ -1,7 +1,7 @@
 <?php
 require_once 'src/lang.php';
 require_once 'src/articles.php';
-include 'src/projects.php';
+require_once 'src/projects.php';
 require_once 'src/render.php';
 
 $lang = detectLang();

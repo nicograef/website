@@ -5,7 +5,7 @@
  */
 header('Content-Type: application/xml; charset=utf-8');
 
-require __DIR__ . '/src/articles.php';
+require_once __DIR__ . '/src/articles.php';
 
 $baseUrl = 'https://nicograef.com';
 $articles = getArticles();
