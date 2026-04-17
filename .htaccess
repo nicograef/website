@@ -9,6 +9,9 @@ ErrorDocument 404 /404.php
     RewriteRule ^articles/?$ /articles/index.php [L,QSA]
     RewriteRule ^articles/([a-z0-9-]+)/?$ /articles/index.php?slug=$1 [L,QSA]
     
+    # CV
+    RewriteRule ^cv/?$ /cv.php [L]
+
     # Sitemap
     RewriteRule ^sitemap\.xml$ /sitemap.php [L]
 </IfModule>

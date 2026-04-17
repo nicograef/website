@@ -25,6 +25,12 @@ if ($uri === '/articles' || preg_match('#^/articles/.+#', $uri)) {
     return;
 }
 
+// Route: CV
+if ($uri === '/cv') {
+    require __DIR__ . '/cv.php';
+    return;
+}
+
 // Route: sitemap
 if ($uri === '/sitemap.xml') {
     require __DIR__ . '/sitemap.php';

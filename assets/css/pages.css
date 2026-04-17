@@ -621,3 +621,147 @@ h1 {
     height: auto;
     margin-bottom: 20px;
 }
+
+
+/* =============================================
+   CV
+   ============================================= */
+
+.cv {
+  max-width: 680px;
+  margin: 60px auto;
+  padding: 0 24px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #292929;
+}
+
+.cv-header {
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.cv h1 {
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  letter-spacing: -0.01em;
+}
+
+.cv-headline {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  color: #555;
+  margin: 0;
+}
+
+.cv-location {
+  font-size: 0.9rem;
+  color: #757575;
+  margin: 4px 0 0 0;
+}
+
+.cv-summary {
+  margin-bottom: 40px;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.cv h2 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--primary, #112d4e);
+  margin: 40px 0 16px 0;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--secondary, #f4b400);
+}
+
+.cv h3 {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  color: var(--primary, #112d4e);
+
+  a {
+    margin: 0;
+    font-size: inherit;
+    text-transform: none;
+  }
+}
+
+.cv-entry {
+  margin-bottom: 24px;
+}
+
+.cv-position {
+  margin-bottom: 12px;
+}
+
+.cv-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cv-title {
+  font-weight: 600;
+}
+
+.cv-date {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  color: #757575;
+  white-space: nowrap;
+}
+
+.cv-position p,
+.cv-entry > p {
+  margin: 4px 0 0 0;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.cv ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cv ul li {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .cv {
+    margin: 30px auto;
+    padding: 0 16px;
+    font-size: 0.95rem;
+  }
+
+  .cv h1 {
+    font-size: 1.75rem;
+  }
+
+  .cv h2 {
+    font-size: 1.1rem;
+    margin-top: 32px;
+  }
+
+  .cv-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .cv-date {
+    font-size: 0.75rem;
+  }
+}

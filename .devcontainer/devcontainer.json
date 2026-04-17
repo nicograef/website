@@ -9,7 +9,7 @@
     }
   },
 
-  "postCreateCommand": "echo 'Dev container ready. Run: php -S 0.0.0.0:8080'",
+  "postCreateCommand": "echo 'Dev container ready. Run: php -S 0.0.0.0:8080 router.php' to start the PHP development server.",
 
   "forwardPorts": [8080],
 

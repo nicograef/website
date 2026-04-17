@@ -1,0 +1,204 @@
+{
+  "basics": {
+    "name": "Nico Gräf",
+    "headline": "Software Engineer",
+    "headline_de": "Softwareentwickler",
+    "location": "Freiburg im Breisgau, Germany",
+    "location_de": "Freiburg im Breisgau, Deutschland",
+    "email": "graef.nico@gmail.com",
+    "website": "https://nicograef.com",
+    "linkedin": "https://www.linkedin.com/in/nicograef",
+    "github": "https://github.com/nicograef",
+    "summary": "Hey, I'm Nico – a senior software engineer from Freiburg, Germany. For over ten years, I've been developing software in a variety of roles: as a freelance web developer, a fullstack engineer in a large company, and as a team lead at a software startup. I truly enjoy building modern web applications, solving complex problems, and exploring new technologies. On the side, I like to write about software development topics and tinker with my own software ideas in my free time.",
+    "summary_de": "Hi, ich bin Nico – Senior Softwareentwickler aus Freiburg im Breisgau. Seit über zehn Jahren entwickle ich Software in verschiedensten Rollen: selbstständig als Web-Freelancer, als Fullstack-Entwickler in einem Konzern oder als Teamleiter eines Software-Startups. Ich habe großen Spaß daran, moderne Webanwendungen zu bauen, komplexe Probleme zu lösen und neue Technologien auszuprobieren. Nebenbei schreibe ich gerne Artikel über Themen aus der Softwareentwicklung und bastle in meiner Freizeit an eigenen Ideen."
+  },
+  "experience": [
+    {
+      "company": "Haufe Akademie",
+      "location": "Freiburg im Breisgau, Germany",
+      "location_de": "Freiburg im Breisgau, Deutschland",
+      "website": "https://www.haufe-akademie.de",
+      "positions": [
+        {
+          "title": "Software Engineer",
+          "start": "2024-05",
+          "end": null,
+          "description": "Part of a Scrum team building technical solutions for the training and education division of Haufe Group.",
+          "description_de": "Teil eines Scrum-Teams, das technische Lösungen für den Weiterbildungsbereich der Haufe Group entwickelt.",
+          "tags": ["AWS", "Docker", "TypeScript", "DynamoDB", "React"]
+        }
+      ]
+    },
+    {
+      "company": "Idana AG",
+      "location": "Freiburg im Breisgau, Germany",
+      "location_de": "Freiburg im Breisgau, Deutschland",
+      "website": "https://idana.com",
+      "positions": [
+        {
+          "title": "Lead Software Engineer",
+          "start": "2022-09",
+          "end": "2024-05",
+          "description": "Led a team of five software engineers building the web application and backend services for Idana, a German healthcare startup providing a digital patient-intake assistant.",
+          "description_de": "Leitung eines Teams von fünf Softwareentwicklern. Verantwortlich für die Entwicklung der Webanwendung und Backend-Services von Idana, einem deutschen Healthcare-Startup mit einem digitalen Anamnese-Assistenten.",
+          "tags": ["Leadership", "Google Cloud", "Go", "TypeScript", "E2EE", "Scrum"]
+        },
+        {
+          "title": "Software Engineer",
+          "title_de": "Software-Entwickler",
+          "start": "2020-06",
+          "end": "2022-09",
+          "description": "Full-stack development across web and backend: Google Cloud Platform, MySQL and NoSQL databases, Node.js, TypeScript, Vue.js, CI/CD and DevOps, end-to-end encryption, Scrum, and design prototyping.",
+          "description_de": "Full-Stack-Entwicklung für Web und Backend: Google Cloud Platform, MySQL- und NoSQL-Datenbanken, Node.js, TypeScript, Vue.js, CI/CD und DevOps, Ende-zu-Ende-Verschlüsselung, Scrum und Design-Prototyping.",
+          "tags": ["Google Cloud", "MySQL", "NoSQL", "Node.js", "TypeScript", "Vue.js", "CI/CD", "E2EE", "Scrum"]
+        }
+      ]
+    },
+    {
+      "company": "Urknall Startups GmbH & Co. KG",
+      "location": "Freiburg im Breisgau, Germany",
+      "location_de": "Freiburg im Breisgau, Deutschland",
+      "positions": [
+        {
+          "title": "Front-End Developer",
+          "title_de": "Front-End-Entwickler",
+          "start": "2017-09",
+          "end": "2020-04",
+          "description": "Conception, design and development of a native Android app, a hybrid app and several features in the web backend of the company's community-development platform.",
+          "description_de": "Konzeption, Design und Entwicklung einer Android-App, einer Hybrid-App und einigen Features im Web-Backend der Community-Plattform des Unternehmens.",
+          "tags": ["Vue.js", "Cordova", "CouchDB", "Android", "HTML", "CSS", "JavaScript"]
+        }
+      ]
+    },
+    {
+      "company": "Nico Gräf IT-Dienstleistungen",
+      "location": "Freiburg und Umgebung, Germany",
+      "location_de": "Freiburg und Umgebung, Deutschland",
+      "positions": [
+        {
+          "title": "Freelancer — Web Design & Software Development",
+          "title_de": "Freelancer — Webdesign & Softwareentwicklung",
+          "start": "2016-06",
+          "end": "2020-03",
+          "description": "Independent web design and online marketing, software development, and mobile and web app development for clients in the Freiburg region.",
+          "description_de": "Selbstständig: Webdesign und Online-Marketing, Softwareentwicklung sowie App- und Web-App-Entwicklung für Kunden aus der Region Freiburg.",
+          "tags": ["Web Design", "Online Marketing", "HTML", "CSS", "JavaScript", "Freelancing"]
+        }
+      ]
+    },
+    {
+      "company": "IMTEK — University of Freiburg",
+      "location": "Freiburg im Breisgau, Germany",
+      "location_de": "Freiburg im Breisgau, Deutschland",
+      "positions": [
+        {
+          "title": "Student Research Assistant",
+          "title_de": "Wissenschaftliche Hilfskraft",
+          "start": "2016-07",
+          "end": "2017-04",
+          "description": "Designed and implemented a PCB as part of the development of a new sensor. Supervised the electronics lab course for undergraduate students.",
+          "description_de": "Design und Implementierung eines PCBs als Erweiterung für die Entwicklung eines neuen Sensors. Betreuung des Elektronik-Praktikums.",
+          "tags": ["PCB Design", "Electronics", "Embedded", "Teaching"]
+        }
+      ]
+    },
+    {
+      "company": "WEPA Apothekenbedarf GmbH & Co. KG",
+      "location": "Germany",
+      "location_de": "Deutschland",
+      "positions": [
+        {
+          "title": "IT Intern",
+          "title_de": "Praktikant im IT-Bereich",
+          "start": "2010-03",
+          "end": "2010-03",
+          "description": "One-month IT internship.",
+          "description_de": "Einmonatiges Praktikum im IT-Bereich.",
+          "tags": ["Internship"]
+        }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "Albert-Ludwigs-Universität Freiburg",
+      "degree": "Bachelor of Science",
+      "field": "Embedded Systems Engineering",
+      "field_de": "Embedded Systems Engineering",
+      "start": "2013",
+      "end": "2020",
+      "grade": "1.8",
+      "description": "Focus areas: Java, C, C++, SQL, algorithms and data structures, embedded systems, microcontrollers, electronics, technical computer science.",
+      "description_de": "Schwerpunkte: Java, C, C++, SQL, Algorithmen und Datenstrukturen, Eingebettete Systeme, Mikrocontroller, Elektronik, Technische Informatik."
+    }
+  ],
+  "certifications": [
+    {
+      "name": "React",
+      "issuer": "Udemy",
+      "date": "2019-08",
+      "credentialId": "UC-OOCWHNKG"
+    },
+    {
+      "name": "Grundlagen des Onlinemarketings",
+      "issuer": "The Open University",
+      "date": "2018-06",
+      "credentialId": "CKT N3K KLA"
+    },
+    {
+      "name": "Entrepreneurship",
+      "issuer": "Albert-Ludwigs-Universität Freiburg",
+      "date": "2018-04"
+    },
+    {
+      "name": "Gründerworkshop Exist Bootcamp",
+      "issuer": "Albert-Ludwigs-Universität Freiburg",
+      "date": "2015-06"
+    }
+  ],
+  "languages": [
+    {
+      "name": "German",
+      "name_de": "Deutsch",
+      "level": "Native",
+      "level_de": "Muttersprache"
+    },
+    {
+      "name": "English",
+      "name_de": "Englisch",
+      "level": "Fluent (professional working)",
+      "level_de": "Fließend (verhandlungssicher)"
+    },
+    {
+      "name": "French",
+      "name_de": "Französisch",
+      "level": "Basic",
+      "level_de": "Grundkenntnisse"
+    },
+    {
+      "name": "Italian",
+      "name_de": "Italienisch",
+      "level": "Basic",
+      "level_de": "Grundkenntnisse"
+    }
+  ],
+  "skills": {
+    "top": ["CI/CD", "Go", "AWS"]
+  },
+  "volunteering": [
+    {
+      "role": "Board Member",
+      "role_de": "Vorstandsmitglied",
+      "organization": "SV Jechtingen e.V.",
+      "start": "2014",
+      "end": "2019"
+    },
+    {
+      "role": "Planning and Development",
+      "role_de": "Planung und Entwicklung",
+      "organization": "#WirvsVirus Hackathon & Implementation Program",
+      "start": "2020-03",
+      "end": "2020-03"
+    }
+  ]
+}
