@@ -44,6 +44,11 @@ function renderArticle(string $slug): void
     }
 
     $filePath = CONTENT_DIR . '/' . $slug . '.md';
+    if (!is_file($filePath)) {
+        http_response_code(404);
+        include __DIR__ . '/../404.php';
+        return;
+    }
     $markdown = file_get_contents($filePath);
     $Parsedown = new Parsedown();
     $htmlContent = $Parsedown->text($markdown);
