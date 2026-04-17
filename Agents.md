@@ -19,17 +19,21 @@ Personal portfolio and blog for **Nico Gräf** (nicograef.com). Zero-dependency,
 |---------|-------------|
 | `php -S 0.0.0.0:8080 router.php` | Start dev server |
 
+## Layout
+
+All PHP source lives flat in `src/`. Entry points (`index.php`, `articles/index.php`, `404.php`, `sitemap.php`) require files from `src/` and call `render()`.
+
 ## Template Pattern
 
-Pages use PHP output buffering — this is non-obvious, so follow the existing pattern:
+Pages use PHP output buffering via `render()` in `src/render.php`:
 
-1. Set layout vars (`$pageTitle`, `$pageDescription`, `$pageUrl`, `$pageLang`, `$pageImage`, `$extraStyles`)
-2. `ob_start()` → write HTML → `$pageContent = ob_get_clean()`
-3. `include 'templates/layout.php'` injects `$pageContent` into `<body>`
+1. Caller invokes `render('/abs/path/to/template.php', [...vars])` with layout vars (`$pageTitle`, `$pageDescription`, `$pageUrl`, `$pageLang`, `$pageImage`) and any template-specific vars.
+2. `render()` extracts the vars, buffers the template output into `$pageContent`, and includes `src/layout.php`.
+3. `src/layout.php` injects `$pageContent` into `<body>`.
 
-## Frontmatter
+## Article Metadata
 
-The YAML frontmatter parser in `includes/articles.php` is a custom ~30-line regex — **not** a full YAML library. It only supports flat `key: value` and `- listitem`. Do not use nested YAML.
+Article metadata lives in `content/articles.json` (slug, title, description, date, author, tags); the `.md` file in `content/articles/` holds body only — no frontmatter parser. Adding an article means updating both files. `articles.json` is the canonical publish list — a slug missing from it 404s even if the `.md` exists.
 
 ## Rules
 
@@ -46,7 +50,7 @@ The YAML frontmatter parser in `includes/articles.php` is a custom ~30-line rege
 - ✅ **Always:** Ask instead of assuming — when uncertain about requirements, design intent, or user expectations, ask structured questions to clarify. Only proceed with documented assumptions if the user explicitly declines to answer.
 - ✅ **Always:** Web search for external knowledge — when working with external tools, libraries, or specs, consult authoritative sources (official docs, RFCs) instead of relying on training data.
 - ⚠️ **Ask first:** Adding new vendor libraries — no package managers; any new dependency must be manually vendored and the user must approve.
-- ⚠️ **Ask first:** Any change to `templates/layout.php` — it affects every page.
+- ⚠️ **Ask first:** Any change to `src/layout.php` — it affects every page.
 - 🚫 **Never:** Introduce a build step, package manager, or framework.
 - 🚫 **Never:** Output dynamic content without `htmlspecialchars()`.
 
