@@ -17,13 +17,10 @@ ErrorDocument 404 /404.php
 <IfModule mod_rewrite.c>
     # Block direct access to content folder
     RewriteRule ^content/ - [F,L]
-    
-    # Block direct access to includes folder
-    RewriteRule ^includes/ - [F,L]
-    
-    # Block direct access to templates folder
-    RewriteRule ^templates/ - [F,L]
-    
+
+    # Block direct access to PHP source folder
+    RewriteRule ^src/ - [F,L]
+
     # Block direct access to vendor folder (except CSS)
     RewriteRule ^vendor/.*\.php$ - [F,L]
 </IfModule>
