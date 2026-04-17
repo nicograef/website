@@ -52,6 +52,7 @@ function renderArticle(string $slug): void
     $markdown = file_get_contents($filePath);
     $Parsedown = new Parsedown();
     $htmlContent = $Parsedown->text($markdown);
+    $hasCode = str_contains($htmlContent, '<pre><code');
 
     render(__DIR__ . '/article.php', [
         'pageTitle' => $article['title'] . ' | Nico Gräf',
@@ -59,6 +60,7 @@ function renderArticle(string $slug): void
         'pageUrl' => '/articles/' . $slug,
         'pageLang' => 'de',
         'htmlContent' => $htmlContent,
+        'hasCode' => $hasCode,
     ]);
 }
 
