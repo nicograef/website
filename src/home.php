@@ -31,20 +31,20 @@
   <?php foreach ($projects as $index => $p): ?>
     <section class="project<?= $index === 0 ? ' fade-in' : '' ?>">
       <h3>
-        <span class="title"><?= $p->title ?></span>
+        <span class="title"><?= htmlspecialchars($p->title) ?></span>
         <?php if (!empty($p->linkTitle) && !empty($p->linkUrl)): ?>
-          <a href="<?= htmlspecialchars($p->linkUrl, ENT_QUOTES, 'UTF-8') ?>" title="<?= $p->linkTitle ?>" target="_blank"
-            rel="noopener noreferrer" aria-label="<?= $p->linkTitle ?> <?= $lang === 'de' ? 'für' : 'for' ?> <?= $p->title ?>"><?= $p->linkTitle ?></a>
+          <a href="<?= htmlspecialchars($p->linkUrl) ?>" title="<?= htmlspecialchars($p->linkTitle) ?>" target="_blank"
+            rel="noopener noreferrer" aria-label="<?= htmlspecialchars($p->linkTitle) ?> <?= $lang === 'de' ? 'für' : 'for' ?> <?= htmlspecialchars($p->title) ?>"><?= htmlspecialchars($p->linkTitle) ?></a>
         <?php endif; ?>
       </h3>
       <div>
         <p>
           <?php foreach ($p->tags as $tag): ?>
-            <span class="chip"><?= $tag ?></span>
+            <span class="chip"><?= htmlspecialchars($tag) ?></span>
           <?php endforeach; ?>
         </p>
-        <p class="description"><?= $p->description ?></p>
-        <img src="<?= $p->image ?>" alt="<?= $p->title ?>" title="<?= $p->title ?>" loading="<?= $index === 0 ? 'eager' : 'lazy' ?>" />
+        <p class="description"><?= htmlspecialchars($p->description) ?></p>
+        <img src="<?= htmlspecialchars($p->image) ?>" alt="<?= htmlspecialchars($p->title) ?>" title="<?= htmlspecialchars($p->title) ?>" loading="<?= $index === 0 ? 'eager' : 'lazy' ?>" />
       </div>
     </section>
   <?php endforeach; ?>

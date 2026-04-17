@@ -1,29 +1,30 @@
 <?php
+
+/**
+ * Project data. Values are stored raw and escaped at the template layer.
+ */
 class Project
 {
-    public $title;
-    public $description;
-    public $image;
-    public $tags;
-    public $linkTitle;
-    public $linkUrl;
+    public string $title;
+    public string $description;
+    public string $image;
+    public array $tags;
+    public ?string $linkTitle;
+    public ?string $linkUrl;
 
-    public function __construct($data, string $lang = 'en')
+    public function __construct(array $data, string $lang = 'en')
     {
-        $rawTitle = ($lang === 'de' && !empty($data['title_de']))
+        $this->title = ($lang === 'de' && !empty($data['title_de']))
             ? $data['title_de']
             : $data['title'];
-        $this->title = htmlspecialchars($rawTitle);
-        $rawDescription = ($lang === 'de' && !empty($data['description_de']))
+        $this->description = ($lang === 'de' && !empty($data['description_de']))
             ? $data['description_de']
             : $data['description'];
-        $this->description = htmlspecialchars($rawDescription);
-        $this->image = htmlspecialchars($data['image']);
-        $this->tags = array_map('htmlspecialchars', $data['tags']);
-        $rawLinkTitle = ($lang === 'de' && !empty($data['linkTitle_de']))
+        $this->image = $data['image'];
+        $this->tags = $data['tags'];
+        $this->linkTitle = ($lang === 'de' && !empty($data['linkTitle_de']))
             ? $data['linkTitle_de']
             : ($data['linkTitle'] ?? null);
-        $this->linkTitle = $rawLinkTitle !== null ? htmlspecialchars($rawLinkTitle) : null;
         $this->linkUrl = $data['linkUrl'] ?? null;
     }
 }
