@@ -1,6 +1,6 @@
 <div class="error-container">
-    <img src="/assets/img/404.webp" alt="404 - Page not found" style="max-width: 400px; width: 100%; height: auto; margin-bottom: 20px;">
+    <img src="/assets/img/404.webp" alt="<?= $pageLang === 'de' ? '404 - Seite nicht gefunden' : '404 - Page not found' ?>" class="error-image">
     <p>
-        <a href="/">back to my portfolio</a>
+        <a href="/"><?= $pageLang === 'de' ? 'zurück zum Portfolio' : 'back to my portfolio' ?></a>
     </p>
 </div>

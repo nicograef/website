@@ -614,3 +614,10 @@ h1 {
     text-align: center;
     padding: 20px;
 }
+
+.error-image {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
