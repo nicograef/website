@@ -70,13 +70,5 @@ function cvLabels(string $lang): array
         'certifications' => $de ? 'Zertifizierungen' : 'Certifications',
         'languages'      => $de ? 'Sprachen' : 'Languages',
         'volunteering'   => $de ? 'Ehrenamt' : 'Volunteering',
-        'portfolio'      => 'Portfolio',
-        'articles'       => $de ? 'Artikel' : 'Articles',
-        'portfolio_aria' => $de ? 'Zum Portfolio' : 'Portfolio',
-        'github_aria'    => $de ? 'Nico Gräfs GitHub-Profil besuchen' : "Visit Nico Gräf's GitHub profile",
-        'linkedin_aria'  => $de ? 'Nico Gräfs LinkedIn-Profil besuchen' : "Visit Nico Gräf's LinkedIn profile",
-        'xing_aria'      => $de ? 'Nico Gräfs Xing-Profil besuchen' : "Visit Nico Gräf's Xing profile",
-        'medium_aria'    => $de ? 'Nico Gräfs Medium-Artikel lesen' : "Visit Nico Gräf's Medium articles",
-        'articles_aria'  => $de ? 'Meine Artikel lesen' : 'Read my articles',
     ];
 }

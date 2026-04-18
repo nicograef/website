@@ -1,18 +1,9 @@
 <?php $basics = $cv['basics']; ?>
-<header>
-  <img src="/assets/img/nico-social.jpg" alt="Nico Gräf" title="Nico Gräf" loading="eager" class="profile-picture" />
-  <h1 style="margin-bottom: 0"><?= htmlspecialchars($basics['name']) ?></h1>
-  <p><?= htmlspecialchars($basics['headline']) ?> <?= $l['from'] ?> <?= htmlspecialchars($basics['location']) ?></p>
-  <br />
-  <p>
-    <a href="/" aria-label="<?= htmlspecialchars($l['portfolio_aria']) ?>"><?= htmlspecialchars($l['portfolio']) ?></a>
-    <a href="https://github.com/nicograef" target="_blank" rel="noopener noreferrer" aria-label="<?= htmlspecialchars($l['github_aria']) ?>">Github</a>
-    <a href="https://linkedin.com/in/nicograef" target="_blank" rel="noopener noreferrer" aria-label="<?= htmlspecialchars($l['linkedin_aria']) ?>">LinkedIn</a>
-    <a href="https://xing.com/profile/Nico_Graef2/" target="_blank" rel="noopener noreferrer" aria-label="<?= htmlspecialchars($l['xing_aria']) ?>">Xing</a>
-    <a href="https://medium.com/@nicograef" target="_blank" rel="noopener noreferrer" aria-label="<?= htmlspecialchars($l['medium_aria']) ?>">Medium</a>
-    <a href="/articles" aria-label="<?= htmlspecialchars($l['articles_aria']) ?>"><?= htmlspecialchars($l['articles']) ?></a>
-  </p>
-</header>
+<?php
+$tagline = $basics['headline'] . ' ' . $l['from'] . ' ' . $basics['location'];
+$showPortfolioLink = true;
+include __DIR__ . '/header.php';
+?>
 
 <div class="cv">
     <?php if (!empty($basics['summary'])): ?>
