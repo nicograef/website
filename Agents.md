@@ -21,7 +21,7 @@ Personal portfolio and blog for **Nico Gräf** (nicograef.com). Zero-dependency,
 
 ## Layout
 
-All PHP source lives flat in `src/`. Entry points (`index.php`, `articles/index.php`, `404.php`, `sitemap.php`) require files from `src/` and call `render()`.
+All PHP source lives flat in `src/`. Entry points (`index.php`, `articles/index.php`, `cv.php`, `404.php`, `sitemap.php`) require data modules from `src/`, then call `render()`. Data modules (`articles.php`, `projects.php`, `cv.php`) only load and return data — they never call `render()`. Templates (`home.php`, `cv-page.php`, `article.php`, `overview.php`, `404-page.php`) live in `src/` alongside a shared `header.php` partial.
 
 ## Template Pattern
 
@@ -35,12 +35,16 @@ Pages use PHP output buffering via `render()` in `src/render.php`:
 
 Article metadata lives in `content/articles.json` (slug, title, description, date, author, tags); the `.md` file in `content/articles/` holds body only — no frontmatter parser. Adding an article means updating both files. `articles.json` is the canonical publish list — a slug missing from it 404s even if the `.md` exists.
 
+## CSS Architecture
+
+`base.css` is the only global stylesheet (reset, typography, shared classes like `.chip`, `.back-link`, `.profile-picture`). Each page loads its own CSS via the `pageStyles` render variable: `home.css`, `overview.css`, `article.css`, `cv.css`, `error.css`. `layout.php` iterates `$pageStyles` to emit per-page `<link>` tags.
+
 ## Rules
 
 1. **No package managers or build tools.** No Composer, no npm. Vendor new libraries manually if absolutely necessary.
 2. **No framework refactoring.** The vanilla PHP approach is deliberate.
 3. **Bilingual:** Homepage English, blog section German (UI strings and articles).
-4. **CSS:** Use native CSS nesting (no preprocessor). Respect existing custom properties in `base.css` and breakpoint system.
+4. **CSS:** Use native CSS nesting (no preprocessor). Respect existing custom properties in `base.css` and breakpoint system. Each page has its own CSS file — add styles to the relevant per-page file, not `base.css` (unless truly shared).
 5. **Security:** Always `htmlspecialchars()` on user-facing dynamic output.
 6. **New articles** → `content/articles/*.md`, **new projects** → `content/projects.json`. Read existing files for the expected format.
 

@@ -8,7 +8,7 @@
 1. No package managers or build tools (no Composer, no npm).
 2. No framework refactoring — the vanilla PHP approach is deliberate.
 3. Always `htmlspecialchars()` on user-facing dynamic output.
-4. No nested YAML — the frontmatter parser only supports flat `key: value` and `- listitem`.
+4. Each page has its own CSS file — add styles to the relevant per-page file, not `base.css` (unless truly shared).
 
 ## Commands
 

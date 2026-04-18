@@ -16,7 +16,8 @@ Personal portfolio and blog for **Nico Gräf** (nicograef.com / nicograef.de). V
 Every page is a tiny entry-point PHP file in the repo root that requires helpers from `src/` and calls `render()`:
 
 - `index.php` → homepage (EN or DE based on `detectLang()`)
-- `articles/index.php` → dispatches on `?slug=` (set by Apache rewrite or parsed from the path by `router.php`) to `renderArticle()` or `renderOverview()` in `src/articles.php`
+- `articles/index.php` → full controller: extracts slug from `?slug=` or URL path, calls `getArticle()` / `getArticles()` from `src/articles.php`, then calls `render()` with the article or overview template
+- `cv.php` → CV page (EN or DE)
 - `sitemap.php` → dynamic XML from `articles.json`
 - `404.php` → language-aware not-found page
 
@@ -25,12 +26,12 @@ Every page is a tiny entry-point PHP file in the repo root that requires helpers
 ### Content model
 
 - `content/articles.json` is the **canonical publish list** (slug, title, description, date, author, tags, sorted newest-first). A slug missing here 404s even if the `.md` exists. No frontmatter parser — the `.md` files in `content/articles/` hold body only.
-- `content/projects.json` drives the homepage project cards; `loadProjects($lang)` in `src/projects.php` picks the language variant.
+- `content/projects.json` drives the homepage project cards; `loadProjects($lang)` in `src/projects.php` resolves bilingual fields and returns plain associative arrays.
 - Adding an article = new `.md` in `content/articles/` **plus** a new entry at the top of `articles.json`. Both sides must match.
 
 ### Markdown & highlighting
 
-`renderArticle()` runs Parsedown over the `.md`, then does `str_contains($html, '<pre><code')` to set `$hasCode`. `src/article.php` only emits the `<script>` tag for `vendor/highlight.js` when `$hasCode` is true — keep this gate intact so code-free articles stay JS-free.
+`articles/index.php` calls `parseArticleMarkdown()` (which runs Parsedown over the `.md`), then does `str_contains($html, '<pre><code')` to set `$hasCode`. `src/article.php` only emits the `<script>` tag for `vendor/highlight.js` when `$hasCode` is true — keep this gate intact so code-free articles stay JS-free.
 
 ### Security model
 
