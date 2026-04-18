@@ -1,10 +1,6 @@
 <?php
-
-/**
- * Articles Controller
- * Routes requests to the appropriate view
- */
 require_once __DIR__ . '/../src/articles.php';
+require_once __DIR__ . '/../src/render.php';
 
 $slug = $_GET['slug'] ?? null;
 if (!$slug) {
@@ -15,7 +11,38 @@ if (!$slug) {
 }
 
 if ($slug) {
-    renderArticle($slug);
+    $article = getArticle($slug);
+    if (!$article) {
+        http_response_code(404);
+        include __DIR__ . '/../404.php';
+        return;
+    }
+
+    $htmlContent = parseArticleMarkdown($slug);
+    $hasCode = str_contains($htmlContent, '<pre><code');
+
+    $pageStyles = ['/assets/css/article.css'];
+    if ($hasCode) {
+        $pageStyles[] = '/vendor/highlight.css';
+    }
+
+    render(__DIR__ . '/../src/article.php', [
+        'pageTitle' => $article['title'] . ' | Nico Gräf',
+        'pageDescription' => $article['description'],
+        'pageUrl' => '/articles/' . $slug,
+        'pageLang' => 'de',
+        'pageStyles' => $pageStyles,
+        'htmlContent' => $htmlContent,
+        'hasCode' => $hasCode,
+    ]);
 } else {
-    renderOverview();
+    $articles = getArticles();
+
+    render(__DIR__ . '/../src/overview.php', [
+        'pageTitle' => 'Artikel | Nico Gräf',
+        'pageDescription' => 'Artikel über Software-Entwicklung, Architektur und moderne Technologien von Nico Gräf.',
+        'pageUrl' => '/articles',
+        'pageLang' => 'de',
+        'articles' => $articles,
+    ]);
 }
