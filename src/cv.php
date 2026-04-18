@@ -18,7 +18,7 @@ function resolveLocale(array $data, string $lang): array
 {
     $resolved = [];
     foreach ($data as $key => $value) {
-        if (str_ends_with($key, '_de')) {
+        if (substr($key, -3) === '_de') {
             continue; // handled when processing the base key
         }
         if ($lang === 'de' && array_key_exists($key . '_de', $data)) {
@@ -26,7 +26,7 @@ function resolveLocale(array $data, string $lang): array
         }
         if (is_array($value)) {
             // Indexed array (list) vs associative array
-            if (array_is_list($value)) {
+            if (array_values($value) === $value) {
                 $value = array_map(
                     fn($item) => is_array($item) ? resolveLocale($item, $lang) : $item,
                     $value

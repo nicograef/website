@@ -19,7 +19,7 @@ if ($slug) {
     }
 
     $htmlContent = parseArticleMarkdown($slug);
-    $hasCode = str_contains($htmlContent, '<pre><code');
+    $hasCode = strpos($htmlContent, '<pre><code') !== false;
 
     $pageStyles = ['/assets/css/article.css'];
     if ($hasCode) {
