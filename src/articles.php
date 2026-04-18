@@ -59,6 +59,7 @@ function renderArticle(string $slug): void
         'pageDescription' => $article['description'],
         'pageUrl' => '/articles/' . $slug,
         'pageLang' => 'de',
+        'pageStyles' => ['/assets/css/article.css'],
         'htmlContent' => $htmlContent,
         'hasCode' => $hasCode,
     ]);

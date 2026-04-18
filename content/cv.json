@@ -4,7 +4,7 @@
     "headline": "Software Engineer",
     "headline_de": "Softwareentwickler",
     "location": "Freiburg im Breisgau, Germany",
-    "location_de": "Freiburg im Breisgau, Deutschland",
+    "location_de": "Freiburg im Breisgau",
     "email": "graef.nico@gmail.com",
     "website": "https://nicograef.com",
     "linkedin": "https://www.linkedin.com/in/nicograef",
@@ -16,8 +16,7 @@
     {
       "company": "Haufe Akademie",
       "location": "Freiburg im Breisgau, Germany",
-      "location_de": "Freiburg im Breisgau, Deutschland",
-      "website": "https://www.haufe-akademie.de",
+      "location_de": "Freiburg im Breisgau",
       "positions": [
         {
           "title": "Software Engineer",
@@ -25,15 +24,39 @@
           "end": null,
           "description": "Part of a Scrum team building technical solutions for the training and education division of Haufe Group.",
           "description_de": "Teil eines Scrum-Teams, das technische Lösungen für den Weiterbildungsbereich der Haufe Group entwickelt.",
-          "tags": ["AWS", "Docker", "TypeScript", "DynamoDB", "React"]
+          "tags": [
+            "AWS",
+            "Serverless",
+            "CDK",
+            "TypeScript",
+            "React",
+            "Material UI",
+            "DynamoDB",
+            "Event-Driven",
+            "DDD",
+            "Docker",
+            "Linux",
+            "GitLab",
+            "SAP",
+            "ABAP",
+            "PHP",
+            "Go",
+            "PostgreSQL",
+            "Vite",
+            "nginx",
+            "shadcn/ui",
+            "Tailwind CSS",
+            "JWT",
+            "zod",
+            "Event Sourcing"
+          ]
         }
       ]
     },
     {
       "company": "Idana AG",
       "location": "Freiburg im Breisgau, Germany",
-      "location_de": "Freiburg im Breisgau, Deutschland",
-      "website": "https://idana.com",
+      "location_de": "Freiburg im Breisgau",
       "positions": [
         {
           "title": "Lead Software Engineer",
@@ -41,7 +64,22 @@
           "end": "2024-05",
           "description": "Led a team of five software engineers building the web application and backend services for Idana, a German healthcare startup providing a digital patient-intake assistant.",
           "description_de": "Leitung eines Teams von fünf Softwareentwicklern. Verantwortlich für die Entwicklung der Webanwendung und Backend-Services von Idana, einem deutschen Healthcare-Startup mit einem digitalen Anamnese-Assistenten.",
-          "tags": ["Leadership", "Google Cloud", "Go", "TypeScript", "E2EE", "Scrum"]
+          "tags": [
+            "Leadership",
+            "Scrum",
+            "Google Cloud",
+            "Go",
+            "TypeScript",
+            "Vue.js",
+            "Angular",
+            "Electron",
+            "SQL",
+            "MongoDB",
+            "Firebase",
+            "Material UI",
+            "E2EE",
+            "GitHub"
+          ]
         },
         {
           "title": "Software Engineer",
@@ -50,7 +88,30 @@
           "end": "2022-09",
           "description": "Full-stack development across web and backend: Google Cloud Platform, MySQL and NoSQL databases, Node.js, TypeScript, Vue.js, CI/CD and DevOps, end-to-end encryption, Scrum, and design prototyping.",
           "description_de": "Full-Stack-Entwicklung für Web und Backend: Google Cloud Platform, MySQL- und NoSQL-Datenbanken, Node.js, TypeScript, Vue.js, CI/CD und DevOps, Ende-zu-Ende-Verschlüsselung, Scrum und Design-Prototyping.",
-          "tags": ["Google Cloud", "MySQL", "NoSQL", "Node.js", "TypeScript", "Vue.js", "CI/CD", "E2EE", "Scrum"]
+          "tags": [
+            "Google Cloud",
+            "Node.js",
+            "Go",
+            "TypeScript",
+            "Vue.js",
+            "Angular",
+            "Electron",
+            "React",
+            "MySQL",
+            "SQL",
+            "NoSQL",
+            "MongoDB",
+            "Firebase",
+            "Material UI",
+            "Docker",
+            "CI/CD",
+            "E2EE",
+            "Scrum",
+            "PWA",
+            "UI/UX Design",
+            "Adobe XD",
+            "GitHub"
+          ]
         }
       ]
     },
@@ -82,7 +143,38 @@
           "end": "2020-03",
           "description": "Independent web design and online marketing, software development, and mobile and web app development for clients in the Freiburg region.",
           "description_de": "Selbstständig: Webdesign und Online-Marketing, Softwareentwicklung sowie App- und Web-App-Entwicklung für Kunden aus der Region Freiburg.",
-          "tags": ["Web Design", "Online Marketing", "HTML", "CSS", "JavaScript", "Freelancing"]
+          "tags": [
+            "Freelancing",
+            "Web Design",
+            "UI/UX Design",
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Node.js",
+            "Express.js",
+            "React",
+            "AngularJS",
+            "PWA",
+            "Cordova",
+            "Framework7",
+            "Docker",
+            "Linux",
+            "MongoDB",
+            "Firebase",
+            "D3.js",
+            "Data Visualisation",
+            "Open Data",
+            "NPM",
+            "Travis CI",
+            "Test Coverage",
+            "Documentation",
+            "Online Marketing",
+            "Instagram",
+            "Google",
+            "Shopify",
+            "Hackathon",
+            "Art"
+          ]
         }
       ]
     },
@@ -129,7 +221,30 @@
       "end": "2020",
       "grade": "1.8",
       "description": "Focus areas: Java, C, C++, SQL, algorithms and data structures, embedded systems, microcontrollers, electronics, technical computer science.",
-      "description_de": "Schwerpunkte: Java, C, C++, SQL, Algorithmen und Datenstrukturen, Eingebettete Systeme, Mikrocontroller, Elektronik, Technische Informatik."
+      "description_de": "Schwerpunkte: Java, C, C++, SQL, Algorithmen und Datenstrukturen, Eingebettete Systeme, Mikrocontroller, Elektronik, Technische Informatik.",
+      "tags": [
+        "Java",
+        "C",
+        "C++",
+        "Python",
+        "SQL",
+        "HTML",
+        "CSS",
+        "Node.js",
+        "Algorithms",
+        "Embedded",
+        "Arduino",
+        "3D-Printing",
+        "Android",
+        "Firebase",
+        "Google Play Store",
+        "Unreal Engine",
+        "Game Dev",
+        "AI",
+        "Machine Learning",
+        "Classification",
+        "Web Design"
+      ]
     }
   ],
   "certifications": [
@@ -182,9 +297,6 @@
       "level_de": "Grundkenntnisse"
     }
   ],
-  "skills": {
-    "top": ["CI/CD", "Go", "AWS"]
-  },
   "volunteering": [
     {
       "role": "Board Member",

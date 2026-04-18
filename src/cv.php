@@ -55,3 +55,28 @@ function formatCVDate(string $date, string $lang): string
     $months = $lang === 'de' ? $months_de : $months_en;
     return $months[$monthIndex] . ' ' . $parts[0];
 }
+
+/**
+ * Return all UI labels for the CV page in the given language.
+ */
+function cvLabels(string $lang): array
+{
+    $de = $lang === 'de';
+    return [
+        'present'        => $de ? 'heute' : 'present',
+        'from'           => $de ? 'aus' : 'from',
+        'experience'     => $de ? 'Berufserfahrung' : 'Experience',
+        'education'      => $de ? 'Ausbildung' : 'Education',
+        'certifications' => $de ? 'Zertifizierungen' : 'Certifications',
+        'languages'      => $de ? 'Sprachen' : 'Languages',
+        'volunteering'   => $de ? 'Ehrenamt' : 'Volunteering',
+        'portfolio'      => 'Portfolio',
+        'articles'       => $de ? 'Artikel' : 'Articles',
+        'portfolio_aria' => $de ? 'Zum Portfolio' : 'Portfolio',
+        'github_aria'    => $de ? 'Nico Gräfs GitHub-Profil besuchen' : "Visit Nico Gräf's GitHub profile",
+        'linkedin_aria'  => $de ? 'Nico Gräfs LinkedIn-Profil besuchen' : "Visit Nico Gräf's LinkedIn profile",
+        'xing_aria'      => $de ? 'Nico Gräfs Xing-Profil besuchen' : "Visit Nico Gräf's Xing profile",
+        'medium_aria'    => $de ? 'Nico Gräfs Medium-Artikel lesen' : "Visit Nico Gräf's Medium articles",
+        'articles_aria'  => $de ? 'Meine Artikel lesen' : 'Read my articles',
+    ];
+}

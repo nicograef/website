@@ -5,6 +5,7 @@ require_once 'src/render.php';
 
 $lang = detectLang();
 $cv = loadCV($lang);
+$l = cvLabels($lang);
 $isGerman = $lang === 'de';
 
 render(__DIR__ . '/src/cv-page.php', [
@@ -16,5 +17,6 @@ render(__DIR__ . '/src/cv-page.php', [
     'pageLang' => $lang,
     'pageImage' => '/assets/img/nico-social.jpg',
     'lang' => $lang,
+    'l' => $l,
     'cv' => $cv,
 ]);
