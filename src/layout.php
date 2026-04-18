@@ -54,7 +54,6 @@ $fullUrl = $baseUrl . ($pageUrl ?? $_SERVER['REQUEST_URI']);
     <?php foreach (($pageStyles ?? []) as $style): ?>
         <link rel="stylesheet" href="<?= htmlspecialchars($style) ?>">
     <?php endforeach; ?>
-    <link rel="stylesheet" href="/vendor/highlight.css">
 
     <title><?= htmlspecialchars($pageTitle) ?></title>
 </head>

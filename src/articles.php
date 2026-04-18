@@ -54,12 +54,17 @@ function renderArticle(string $slug): void
     $htmlContent = $Parsedown->text($markdown);
     $hasCode = str_contains($htmlContent, '<pre><code');
 
+    $pageStyles = ['/assets/css/article.css'];
+    if ($hasCode) {
+        $pageStyles[] = '/vendor/highlight.css';
+    }
+
     render(__DIR__ . '/article.php', [
         'pageTitle' => $article['title'] . ' | Nico Gräf',
         'pageDescription' => $article['description'],
         'pageUrl' => '/articles/' . $slug,
         'pageLang' => 'de',
-        'pageStyles' => ['/assets/css/article.css'],
+        'pageStyles' => $pageStyles,
         'htmlContent' => $htmlContent,
         'hasCode' => $hasCode,
     ]);
