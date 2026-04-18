@@ -16,6 +16,7 @@ render(__DIR__ . '/src/home.php', [
     'pageUrl' => '/',
     'pageLang' => $lang,
     'pageImage' => '/assets/img/nico-social.jpg',
+    'pageStyles' => ['/assets/css/home.css'],
     'lang' => $lang,
     'projects' => $projects,
 ]);

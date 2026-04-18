@@ -1,0 +1,128 @@
+.articles-container {
+  max-width: 680px;
+  margin: 60px auto;
+  padding: 0 24px;
+
+  h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0 0 48px 0;
+    letter-spacing: -0.01em;
+  }
+
+  .article-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .article-link {
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    text-transform: none;
+    white-space: normal;
+    border: none;
+
+    &:hover {
+      padding: 0;
+      border: none;
+    }
+  }
+
+  .article-card {
+    padding: 24px;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 8px;
+    transition: box-shadow 0.1s ease;
+
+    &:hover {
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .article-title {
+    margin: 0 0 12px 0;
+    font-size: 1.375rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--primary);
+    transition: color 0.2s ease;
+  }
+
+  .article-description {
+    font-family: var(--font-body);
+    color: #444;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0 0 16px 0;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    color: #757575;
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+
+    .date::before {
+      content: "\1F4C5";
+      margin-right: 6px;
+    }
+
+    .author::before {
+      content: "\270D";
+      margin-right: 6px;
+    }
+  }
+
+  .article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+
+    .chip {
+      font-size: 0.7rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    margin: 30px auto;
+    padding: 0 16px;
+
+    h1 {
+      font-size: 1.75rem;
+      margin-bottom: 32px;
+    }
+
+    .article-list {
+      gap: 24px;
+    }
+
+    .article-card {
+      padding: 18px;
+    }
+
+    .article-title {
+      font-size: 1.2rem;
+    }
+
+    .article-description {
+      font-size: 0.95rem;
+    }
+
+    .article-meta {
+      gap: 12px;
+      font-size: 0.8rem;
+    }
+
+    .article-tags .chip {
+      font-size: 0.65rem;
+      padding: 2px 6px;
+    }
+  }
+}

@@ -114,3 +114,10 @@ header {
   font-size: small;
   line-height: 2;
 }
+
+.back-link {
+  font-size: 0.9rem;
+  color: #757575;
+  display: inline-block;
+  margin-bottom: 24px;
+}

@@ -13,4 +13,5 @@ render(__DIR__ . '/src/404-page.php', [
         ? 'Die gesuchte Seite konnte nicht gefunden werden.'
         : 'The page you are looking for could not be found.',
     'pageLang' => $lang,
+    'pageStyles' => ['/assets/css/error.css'],
 ]);

@@ -16,6 +16,7 @@ render(__DIR__ . '/src/cv-page.php', [
     'pageUrl' => '/cv',
     'pageLang' => $lang,
     'pageImage' => '/assets/img/nico-social.jpg',
+    'pageStyles' => ['/assets/css/cv.css'],
     'lang' => $lang,
     'l' => $l,
     'cv' => $cv,

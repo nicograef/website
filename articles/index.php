@@ -43,6 +43,7 @@ if ($slug) {
         'pageDescription' => 'Artikel über Software-Entwicklung, Architektur und moderne Technologien von Nico Gräf.',
         'pageUrl' => '/articles',
         'pageLang' => 'de',
+        'pageStyles' => ['/assets/css/overview.css'],
         'articles' => $articles,
     ]);
 }
