@@ -27,7 +27,8 @@
 }
 
 :root {
-  --primary: #112d4e;
+  --primary: #153d94;
+  --primary-text: #142941;
   --secondary: #f4b400;
   --background: #f9f7f7;
   --font-heading:
@@ -48,10 +49,10 @@ html {
   margin: 0;
   padding: 0;
   background: var(--background);
-  color: var(--primary);
+  color: var(--primary-text);
   font-family: var(--font-heading);
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 body {
@@ -100,7 +101,8 @@ footer {
 
 .tag {
   display: inline;
-  background: #edf0f7;
+  background: white;
+  color: var(--primary);
   padding: 3px 6px;
   border-radius: 3px;
   margin-right: 4px;
@@ -140,7 +142,7 @@ header {
 
   .profile-picture {
     border-radius: 50%;
-    max-width: 300px;
+    max-width: 250px;
     object-fit: cover;
     aspect-ratio: 1 / 1;
   }
@@ -152,7 +154,9 @@ header {
   gap: 16px;
   margin: 80px auto;
 
-  > h2 {
+  >h2 {
+    font-size: 1.25rem;
+    color: var(--primary);
     flex-shrink: 0;
     width: 200px;
     margin: 0;
@@ -163,7 +167,7 @@ header {
     gap: 8px;
     margin: 60px auto;
 
-    > h2 {
+    >h2 {
       width: auto;
     }
   }

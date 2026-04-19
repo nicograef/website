@@ -5,9 +5,7 @@
 <main id="cv" class="cv">
     <section class="content-section">
         <h2><?= $lang === 'de' ? 'Über mich' : 'About Me' ?></h2>
-        <div>
-            <p class="cv-summary"><?= htmlspecialchars($basics['summary']) ?></p>
-        </div>
+        <p class="cv-summary"><?= htmlspecialchars($basics['summary']) ?></p>
     </section>
 
     <section class="content-section">
@@ -15,19 +13,14 @@
         <div>
             <?php foreach ($cv['experience'] as $exp): ?>
                 <div class="cv-entry">
-                    <h3><?= htmlspecialchars($exp['company']) ?></h3>
-                    <div class="cv-position">
-                        <div class="cv-row">
-                            <span class="cv-title"><?= htmlspecialchars($exp['title']) ?></span>
-                            <span class="cv-date"><?= formatCVDate($exp['start'], $lang) ?> – <?= $exp['end'] ? formatCVDate($exp['end'], $lang) : $l['present'] ?></span>
-                        </div>
-                        <p><?= htmlspecialchars($exp['description']) ?></p>
-                        <p class="cv-tags">
-                            <?php foreach ($exp['tags'] as $tag): ?>
-                                <span class="tag"><?= htmlspecialchars($tag) ?></span>
-                            <?php endforeach; ?>
-                        </p>
-                    </div>
+                    <h3><?= htmlspecialchars($exp['title']) ?> @ <?= htmlspecialchars($exp['company']) ?></h3>
+                    <p><?= formatCVDate($exp['start'], $lang) ?> – <?= $exp['end'] ? formatCVDate($exp['end'], $lang) : $l['present'] ?></p>
+                    <p><?= htmlspecialchars($exp['description']) ?></p>
+                    <p class="cv-tags">
+                        <?php foreach ($exp['tags'] as $tag): ?>
+                            <span class="tag"><?= htmlspecialchars($tag) ?></span>
+                        <?php endforeach; ?>
+                    </p>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -38,11 +31,8 @@
         <div>
             <?php foreach ($cv['education'] as $edu): ?>
                 <div class="cv-entry">
-                    <h3><?= htmlspecialchars($edu['school']) ?></h3>
-                    <div class="cv-row">
-                        <span class="cv-title"><?= htmlspecialchars($edu['degree']) ?> — <?= htmlspecialchars($edu['field']) ?></span>
-                        <span class="cv-date"><?= htmlspecialchars($edu['start']) ?> – <?= htmlspecialchars($edu['end']) ?></span>
-                    </div>
+                    <h3><?= htmlspecialchars($edu['degree']) ?> <?= htmlspecialchars($edu['field']) ?> @ <?= htmlspecialchars($edu['school']) ?></h3>
+                    <p><?= formatCVDate($edu['start'], $lang) ?> – <?= $edu['end'] ? formatCVDate($edu['end'], $lang) : $l['present'] ?></p>
                     <p><?= htmlspecialchars($edu['description']) ?></p>
                     <p class="cv-tags">
                         <?php foreach ($edu['tags'] as $tag): ?>
@@ -59,23 +49,20 @@
         <div>
             <ul>
                 <?php foreach ($cv['languages'] as $language): ?>
-                    <li><?= htmlspecialchars($language['name']) ?> — <?= htmlspecialchars($language['level']) ?></li>
+                    <li><strong><?= htmlspecialchars($language['name']) ?></strong> — <?= htmlspecialchars($language['level']) ?></li>
                 <?php endforeach; ?>
             </ul>
         </div>
     </section>
-
+    
     <section class="content-section">
         <h2><?= $l['volunteering'] ?></h2>
         <div>
-            <?php foreach ($cv['volunteering'] as $vol): ?>
-                <div class="cv-entry">
-                    <div class="cv-row">
-                        <span><strong><?= htmlspecialchars($vol['role']) ?></strong> — <?= htmlspecialchars($vol['organization']) ?></span>
-                        <span class="cv-date"><?= formatCVDate($vol['start'], $lang) ?> – <?= formatCVDate($vol['end'], $lang) ?></span>
-                    </div>
-                </div>
-            <?php endforeach; ?>
+            <ul>
+                <?php foreach ($cv['volunteering'] as $vol): ?>
+                    <li><strong><?= htmlspecialchars($vol['role']) ?></strong> — <?= htmlspecialchars($vol['organization']) ?>, <?= formatCVDate($vol['start'], $lang) ?> – <?= $vol['end'] ? formatCVDate($vol['end'], $lang) : $l['present'] ?></li>
+                <?php endforeach; ?>
+            </ul>
         </div>
     </section>
 
@@ -84,10 +71,7 @@
         <div>
             <ul>
                 <?php foreach ($cv['certifications'] as $cert): ?>
-                    <li>
-                        <strong><?= htmlspecialchars($cert['name']) ?></strong> — <?= htmlspecialchars($cert['issuer']) ?>
-                        <span class="cv-date">(<?= formatCVDate($cert['date'], $lang) ?>)</span>
-                    </li>
+                    <li><strong><?= htmlspecialchars($cert['name']) ?></strong> — <?= htmlspecialchars($cert['issuer']) ?>, <?= formatCVDate($cert['date'], $lang) ?></li>
                 <?php endforeach; ?>
             </ul>
         </div>

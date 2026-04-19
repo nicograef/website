@@ -127,11 +127,11 @@
       ]
     },
     {
-      "company": "Nico Gräf IT-Dienstleistungen",
+      "company": "Freelance (self-employed)",
       "location": "Freiburg und Umgebung, Germany",
       "location_de": "Freiburg und Umgebung, Deutschland",
-      "title": "Freelancer — Web Design & Software Development",
-      "title_de": "Freelancer — Webdesign & Softwareentwicklung",
+      "title": "Web Design & Software Development",
+      "title_de": "Webdesign & Softwareentwicklung",
       "start": "2016-06",
       "end": "2020-03",
       "description": "Independent web design and online marketing, software development, and mobile and web app development for clients in the Freiburg region.",
@@ -206,7 +206,7 @@
   "education": [
     {
       "school": "Albert-Ludwigs-Universität Freiburg",
-      "degree": "Bachelor of Science",
+      "degree": "B.Sc.",
       "field": "Embedded Systems Engineering",
       "field_de": "Embedded Systems Engineering",
       "start": "2013",
@@ -298,18 +298,11 @@
       "end": "2019"
     },
     {
-      "role": "Board Member",
+      "role": "Student Council President",
       "role_de": "Schülersprecher",
       "organization": "Martin-Schongauer-Gymnasium Breisach",
       "start": "2009",
       "end": "2012"
-    },
-    {
-      "role": "Developer",
-      "role_de": "Entwickler",
-      "organization": "#WirvsVirus Hackathon",
-      "start": "2020-03",
-      "end": "2020-03"
     }
   ]
 }
