@@ -10,4 +10,4 @@ Hey, I'm Nico – a senior software engineer from Freiburg, Germany. For over te
 
 # Development
 
-Local server: `php -S 0.0.0.0:8080 router.php`
+Local server: `php -S 0.0.0.0:8080 -t public router.php`

@@ -21,10 +21,13 @@ ErrorDocument 404 /404.php
     # Block direct access to content folder
     RewriteRule ^content/ - [F,L]
 
-    # Block direct access to PHP source folder
-    RewriteRule ^src/ - [F,L]
+    # Block direct access to PHP helpers
+    RewriteRule ^lib/ - [F,L]
 
-    # Block direct access to vendor folder (except CSS)
+    # Block direct access to templates
+    RewriteRule ^templates/ - [F,L]
+
+    # Block direct access to vendor PHP (static assets in vendor still allowed)
     RewriteRule ^vendor/.*\.php$ - [F,L]
 </IfModule>
 

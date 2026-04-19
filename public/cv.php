@@ -1,14 +1,14 @@
 <?php
-require_once 'src/lang.php';
-require_once 'src/cv.php';
-require_once 'src/render.php';
+require_once __DIR__ . '/lib/lang.php';
+require_once __DIR__ . '/lib/cv.php';
+require_once __DIR__ . '/lib/render.php';
 
 $lang = detectLang();
 $cv = loadCV($lang);
 $l = cvLabels($lang);
 $isGerman = $lang === 'de';
 
-render(__DIR__ . '/src/cv-page.php', [
+render(__DIR__ . '/templates/cv-page.php', [
     'pageTitle' => $cv['basics']['name'] . ' – CV',
     'pageDescription' => $isGerman
         ? 'Lebenslauf von ' . $cv['basics']['name'] . ', ' . $cv['basics']['headline']

@@ -1,11 +1,11 @@
 <?php
-require_once __DIR__ . '/src/lang.php';
-require_once __DIR__ . '/src/render.php';
+require_once __DIR__ . '/lib/lang.php';
+require_once __DIR__ . '/lib/render.php';
 
 $lang = detectLang();
 $isGerman = $lang === 'de';
 
-render(__DIR__ . '/src/404-page.php', [
+render(__DIR__ . '/templates/404-page.php', [
     'pageTitle' => $isGerman
         ? '404 - Seite nicht gefunden | Nico Gräf'
         : '404 - Page Not Found | Nico Gräf',

@@ -4,13 +4,13 @@ description: >-
   Write a German-language software architecture blog article following the
   established style and conventions of nicograef.com. Use when the user wants
   to write a new article, create blog content, or draft an explanation of a
-  software architecture topic. Outputs a Markdown file in content/articles/.
+  software architecture topic. Outputs a Markdown file in public/content/articles/.
 ---
 
 # Write Article
 
 Write a German-language software architecture article for nicograef.com.
-The output is a single Markdown file saved to `content/articles/<slug>.md`.
+The output is a single Markdown file saved to `public/content/articles/<slug>.md`.
 
 You may skip steps if you don't consider them necessary.
 
@@ -60,7 +60,7 @@ additional source and note any differences or gaps compared to the fetched
 URLs.
 
 **Bestehende Artikel prüfen:** Vor dem Weitergehen die vorhandenen Artikel
-in `content/articles/` scannen. Wenn ein Teilthema bereits einen eigenen
+in `public/content/articles/` scannen. Wenn ein Teilthema bereits einen eigenen
 Artikel hat, im neuen Artikel nicht erneut erklären — nur erwähnen.
 
 After presenting the Recherche-Protokoll, ask:
@@ -87,7 +87,7 @@ Artikel nur erwähnen ohne Erklärung.
 ### 4. Write the article
 
 Write the full article following the Style Guide below. Save it to
-`content/articles/<slug>.md`.
+`public/content/articles/<slug>.md`.
 
 **Slug convention:** German, kebab-case, descriptive
 (e.g. `was-ist-event-sourcing`, `event-sourcing-am-beispiel-warenkorb-erklaert`).
@@ -139,10 +139,10 @@ fits within 155 characters and the user approves it.
 
 After completing the above, remind the user:
 
-- [ ] Add an entry to `content/articles.json` with the correct metadata
+- [ ] Add an entry to `public/content/articles.json` with the correct metadata
       (see format below, use the approved SEO description)
 - [ ] Verify the article renders correctly with the dev server
-      (`php -S 0.0.0.0:8080 router.php`)
+      (`php -S 0.0.0.0:8080 -t public router.php`)
 
 **articles.json entry format:**
 

@@ -5,11 +5,11 @@
 | Term | Definition | Aliases to avoid |
 | --- | --- | --- |
 | **Article** | A Markdown blog post authored in German, covering a software architecture topic | Blog post, post, entry |
-| **Project** | A portfolio item displayed on the homepage, defined in `content/projects.json` | Work, case study |
+| **Project** | A portfolio item displayed on the homepage, defined in `public/content/projects.json` | Work, case study |
 | **Frontmatter** | The YAML metadata block at the top of an **Article** file (title, description, date, tags, image) | Metadata, header, YAML block |
 | **Tag** | A label attached to an **Article** via **Frontmatter** for categorization | Category, label |
-| **Layout** | The shared PHP page template in `templates/layout.php` that wraps every page's HTML shell | Page template, wrapper, shell |
-| **Vendor** | A third-party library manually copied into the `vendor/` directory — no package manager involved | Dependency, package, library |
+| **Layout** | The shared PHP page template in `public/templates/layout.php` that wraps every page's HTML shell | Page template, wrapper, shell |
+| **Vendor** | A third-party library manually copied into the `public/vendor/` directory — no package manager involved | Dependency, package, library |
 
 ## Handbook sync workflow
 
@@ -48,5 +48,5 @@
 ## Flagged ambiguities
 
 - **"FTP" vs SSH** — The GitHub Actions secrets (`FTP_USER`, `FTP_HOST`) are named as if the transport is FTP, but the actual **Deploy** mechanism is `rsync` over SSH. `FTP_PASSWORD` was replaced with `SSH_PRIVATE_KEY` in this session. `FTP_USER` and `FTP_HOST` remain misleadingly named — consider renaming to `SSH_USER` and `SSH_HOST`.
-- **"template"** — used in two unrelated senses: (1) `templates/layout.php`, the PHP page **Layout**; (2) `handbook/templates/`, the **Handbook**'s reference files. These are entirely different concepts. Use **Layout** for (1) and **Handbook template** or **handbook area** for (2).
-- **"vendor"** — in standard PHP/Composer projects, `vendor/` means Composer-managed packages. Here it means manually copied libraries with no package manager involved. The distinction is material: nothing in `vendor/` should ever be auto-updated or gitignored.
+- **"template"** — used in two unrelated senses: (1) `public/templates/layout.php`, the PHP page **Layout**; (2) `handbook/templates/`, the **Handbook**'s reference files. These are entirely different concepts. Use **Layout** for (1) and **Handbook template** or **handbook area** for (2).
+- **"vendor"** — in standard PHP/Composer projects, `vendor/` means Composer-managed packages. Here it means manually copied libraries with no package manager involved. The distinction is material: nothing in `public/vendor/` should ever be auto-updated or gitignored.
