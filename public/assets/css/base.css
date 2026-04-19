@@ -131,6 +131,11 @@ header {
     justify-content: space-evenly;
     gap: 24px;
     row-gap: 24px;
+
+    a[aria-current="page"] {
+      padding-bottom: 0;
+      border-bottom: 6px solid var(--secondary);
+    }
   }
 
   .profile-picture {

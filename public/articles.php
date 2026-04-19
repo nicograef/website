@@ -44,6 +44,8 @@ if ($slug) {
         'pageUrl' => '/articles',
         'pageLang' => 'de',
         'pageStyles' => ['/assets/css/overview.css'],
+        'lang' => 'de',
+        'currentPage' => 'articles',
         'articles' => $articles,
     ]);
 }

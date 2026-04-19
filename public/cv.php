@@ -18,6 +18,7 @@ render(__DIR__ . '/templates/cv-page.php', [
     'pageImage' => '/assets/img/nico-social.jpg',
     'pageStyles' => ['/assets/css/cv.css'],
     'lang' => $lang,
+    'currentPage' => 'cv',
     'l' => $l,
     'cv' => $cv,
 ]);
