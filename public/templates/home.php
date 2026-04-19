@@ -1,25 +1,36 @@
-<?php
-$tagline = $lang === 'de' ? 'Software Engineer aus Freiburg, Deutschland' : 'Software Engineer from Freiburg, Germany';
-$showPortfolioLink = false;
-include __DIR__ . '/header.php';
-?>
+<header>
+  <img src="/assets/img/nico-social.jpg" alt="Nico Gräf" title="Nico Gräf" loading="eager" class="profile-picture" />
+  <h1>Nico Gräf</h1>
+  <p><?= $lang === 'de' ? 'Software Engineer aus Freiburg im Breisgau' : 'Software Engineer from Freiburg, Germany' ?></p>
+  <nav aria-label="<?= $lang === 'de' ? 'Hauptnavigation' : 'Main navigation' ?>">
+    <a href="#portfolio" aria-label="<?= $lang === 'de' ? 'Mein Portfolio ansehen' : 'View my portfolio' ?>">Portfolio</a>
+    <a href="/cv" aria-label="<?= $lang === 'de' ? 'Meinen Lebenslauf ansehen' : 'View my CV' ?>">CV</a>
+    <a href="/articles" aria-label="<?= $lang === 'de' ? 'Meine Artikel lesen' : 'Read my articles' ?>">Blog</a>
+    <a href="https://github.com/nicograef" target="_blank" rel="noopener noreferrer" aria-label="<?= $lang === 'de' ? 'Nico Gräfs GitHub-Profil besuchen' : "Visit Nico Gräf's GitHub profile" ?>">Github</a>
+    <a href="https://linkedin.com/in/nicograef" target="_blank" rel="noopener noreferrer" aria-label="<?= $lang === 'de' ? 'Nico Gräfs LinkedIn-Profil besuchen' : "Visit Nico Gräf's LinkedIn profile" ?>">LinkedIn</a>
+    <a href="https://xing.com/profile/Nico_Graef2/" target="_blank" rel="noopener noreferrer" aria-label="<?= $lang === 'de' ? 'Nico Gräfs Xing-Profil besuchen' : "Visit Nico Gräf's Xing profile" ?>">Xing</a>
+    <a href="https://medium.com/@nicograef" target="_blank" rel="noopener noreferrer" aria-label="<?= $lang === 'de' ? 'Nico Gräfs Medium-Artikel lesen' : "Visit Nico Gräf's Medium articles" ?>">Medium</a>
+  </nav>
+</header>
 
-<?php $latestArticles = getLatestArticles(3); ?>
+
 <div class="articles">
+  <?php $latestArticles = getLatestArticles(3); ?>
+  <h2><?= $lang === 'de' ? 'Neueste Artikel' : 'Latest Articles' ?></h2>
+  <div class="article-list">
     <?php foreach ($latestArticles as $article): ?>
+      <a href="/articles/<?= htmlspecialchars($article['slug']) ?>" class="article-link">
         <article class="article-card">
-            <h2 class="article-title"><?= htmlspecialchars($article['title']) ?></h2>
-            <?php if (!empty($article['description'])): ?>
-                <p class="article-description"><?= htmlspecialchars($article['description']) ?></p>
-            <?php endif; ?>
-            <a href="/articles/<?= htmlspecialchars($article['slug']) ?>" class="article-link">
-                <?= $lang === 'de' ? 'lesen' : 'read' ?> &rarr;
-            </a>
+          <h3 class="article-title"><?= htmlspecialchars($article['title']) ?></h3>
+          <p class="article-description"><?= htmlspecialchars($article['description']) ?></p>
         </article>
+      </a>
     <?php endforeach; ?>
+  </div>
 </div>
 
 <main>
+  <h2 id="portfolio"><?= $lang === 'de' ? 'Portfolio' : 'Projects' ?></h2>
   <?php foreach ($projects as $index => $p): ?>
     <section class="project<?= $index === 0 ? ' fade-in' : '' ?>">
       <h3>

@@ -1,13 +1,17 @@
-.articles-container {
-  max-width: 900px;
-  margin: 60px auto;
-  padding: 0 24px;
+body {
+    max-width: 900px;
+}
 
+.articles-container {
   header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 24px;
+
+    h1 {
+      margin: 0;
+    }
   }
 
   .article-list {
@@ -61,9 +65,6 @@
   }
 
   @media (max-width: 768px) {
-    margin: 20px auto;
-    padding: 0 12px;
-
     header {
       margin-bottom: 12px;
     }

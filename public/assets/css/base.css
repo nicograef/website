@@ -57,6 +57,17 @@ html {
   line-height: 1.5;
 }
 
+body {
+  margin: 60px auto;
+  padding: 0 24px;
+  max-width: 1200px;
+
+  @media (max-width: 768px) {
+    margin: 20px auto;
+    padding: 0 12px;
+  }
+}
+
 ::selection {
   background: var(--secondary);
 }
@@ -84,25 +95,10 @@ img {
   object-fit: cover;
 }
 
-img.profile-picture {
-  border-radius: 50%;
-  width: 200px;
-  height: 200px;
-  margin-top: 20px;
-  object-fit: cover;
-}
-
-main {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-footer,
-header {
+footer {
   text-align: center;
   font-size: small;
-  margin-bottom: 30px;
+  margin-top: 30px;
 }
 
 .chip {
