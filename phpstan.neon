@@ -1,0 +1,15 @@
+parameters:
+    phpVersion: 70400
+    level: 5
+    paths:
+        - public
+        - router.php
+    excludePaths:
+        - public/vendor
+    scanFiles:
+        - public/vendor/Parsedown.php
+    ignoreErrors:
+        -
+            identifier: variable.undefined
+            paths:
+                - public/templates/*

@@ -26,15 +26,21 @@ jobs:
             | xargs -0 -n1 -P4 php -l
           echo "All PHP files pass syntax check on PHP 7.4"
 
-      - name: Block PHP 8+ only functions
+      - name: Cache PHPStan
+        uses: actions/cache@v4
+        with:
+          path: phpstan.phar
+          key: phpstan-2.1.17
+
+      - name: Download PHPStan
         run: |
-          set -e
-          BANNED='str_contains|str_starts_with|str_ends_with|array_is_list|enum_exists'
-          if grep -rnE --include='*.php' --exclude-dir=vendor "\b($BANNED)\s*\(" public router.php; then
-            echo "::error::Found PHP 8+ only function call above. Production runs PHP 7.4."
-            exit 1
+          if [[ ! -f phpstan.phar ]]; then
+            wget -q https://github.com/phpstan/phpstan/releases/download/2.1.17/phpstan.phar
+            chmod +x phpstan.phar
           fi
-          echo "No PHP 8+ only function calls detected."
+
+      - name: Run PHPStan
+        run: php phpstan.phar analyse --no-progress
 
   deploy:
     needs: lint
