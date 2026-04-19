@@ -6,14 +6,19 @@ ErrorDocument 404 /404.php
     RewriteEngine On
     
     # Articles routing
-    RewriteRule ^articles/?$ /articles/index.php [L,QSA]
-    RewriteRule ^articles/([a-z0-9-]+)/?$ /articles/index.php?slug=$1 [L,QSA]
-    
+    RewriteRule ^articles/?$ /articles.php [L,QSA]
+    RewriteRule ^articles/([a-z0-9-]+)/?$ /articles.php?slug=$1 [L,QSA]
+
     # CV
     RewriteRule ^cv/?$ /cv.php [L]
 
     # Sitemap
     RewriteRule ^sitemap\.xml$ /sitemap.php [L]
+
+    # Block direct access to .php files — only pretty routes are public
+    RewriteCond %{IS_SUBREQ} false
+    RewriteCond %{THE_REQUEST} \s/+[^\s]+\.php[\s?]
+    RewriteRule \.php$ - [R=404,L]
 </IfModule>
 
 # Security: Protect internal folders

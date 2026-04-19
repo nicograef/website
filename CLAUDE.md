@@ -20,7 +20,7 @@ public/                    webroot — everything the web sees
 ├── .htaccess
 ├── robots.txt
 ├── index.php cv.php sitemap.php 404.php     entry points
-├── articles/index.php                        article controller
+├── articles.php                              article controller
 ├── assets/{css,fonts,img}/                   static assets
 ├── content/                                  JSON + Markdown data (blocked by .htaccess)
 ├── lib/                                      pure-function PHP helpers
@@ -33,7 +33,7 @@ public/                    webroot — everything the web sees
 Every page is a tiny entry-point PHP file in `public/` that requires helpers from `public/lib/` and calls `render()` with a template from `public/templates/`:
 
 - `public/index.php` → homepage (EN or DE based on `detectLang()`)
-- `public/articles/index.php` → full controller: extracts slug from `?slug=` or URL path, calls `getArticle()` / `getArticles()` from `public/lib/articles.php`, then calls `render()` with the article or overview template
+- `public/articles.php` → full controller: extracts slug from `?slug=` or URL path, calls `getArticle()` / `getArticles()` from `public/lib/articles.php`, then calls `render()` with the article or overview template
 - `public/cv.php` → CV page (EN or DE)
 - `public/sitemap.php` → dynamic XML from `articles.json`
 - `public/404.php` → language-aware not-found page
@@ -48,7 +48,7 @@ Every page is a tiny entry-point PHP file in `public/` that requires helpers fro
 
 ### Markdown & highlighting
 
-`public/articles/index.php` calls `parseArticleMarkdown()` (which runs Parsedown over the `.md`), then does `str_contains($html, '<pre><code')` to set `$hasCode`. `public/templates/article.php` only emits the `<script>` tag for `vendor/highlight.js` when `$hasCode` is true — keep this gate intact so code-free articles stay JS-free.
+`public/articles.php` calls `parseArticleMarkdown()` (which runs Parsedown over the `.md`), then does `str_contains($html, '<pre><code')` to set `$hasCode`. `public/templates/article.php` only emits the `<script>` tag for `vendor/highlight.js` when `$hasCode` is true — keep this gate intact so code-free articles stay JS-free.
 
 ### Security model
 

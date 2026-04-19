@@ -23,7 +23,7 @@ Personal portfolio and blog for **Nico Gräf** (nicograef.com). Zero-dependency,
 
 Everything the web sees lives under `public/`. The repo root holds config, docs, and the dev-only `router.php`.
 
-PHP inside `public/` is split by purpose: **entry points** (`index.php`, `articles/index.php`, `cv.php`, `404.php`, `sitemap.php`) at the webroot; **helpers** in `public/lib/` (`lang.php`, `render.php`, `articles.php`, `projects.php`, `cv.php`) — pure functions that load and return data; **templates** in `public/templates/` (`layout.php`, `header.php`, `home.php`, `cv-page.php`, `article.php`, `overview.php`, `404-page.php`) — HTML output only. Entry points require helpers, then call `render()` with a template. Helpers never call `render()`.
+PHP inside `public/` is split by purpose: **entry points** (`index.php`, `articles.php`, `cv.php`, `404.php`, `sitemap.php`) at the webroot; **helpers** in `public/lib/` (`lang.php`, `render.php`, `articles.php`, `projects.php`, `cv.php`) — pure functions that load and return data; **templates** in `public/templates/` (`layout.php`, `header.php`, `home.php`, `cv-page.php`, `article.php`, `overview.php`, `404-page.php`) — HTML output only. Entry points require helpers, then call `render()` with a template. Helpers never call `render()`.
 
 ## Template Pattern
 

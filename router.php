@@ -11,6 +11,13 @@
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
+// Block direct .php access — only pretty routes are public
+if (str_ends_with($uri, '.php')) {
+    http_response_code(404);
+    require __DIR__ . '/public/404.php';
+    return;
+}
+
 // Static files — let the built-in server handle them directly
 if ($uri !== '/' && is_file(__DIR__ . '/public' . $uri)) {
     return false;
@@ -24,7 +31,7 @@ if ($uri === '/') {
 
 // Route: articles
 if ($uri === '/articles' || preg_match('#^/articles/.+#', $uri)) {
-    require __DIR__ . '/public/articles/index.php';
+    require __DIR__ . '/public/articles.php';
     return;
 }
 
