@@ -13,11 +13,21 @@ article {
   font-family: var(--font-body);
   font-size: 1.125rem;
   line-height: 1.8;
-  color: #292929;
   text-align: justify;
   hyphens: auto;
   -webkit-hyphens: auto;
   -ms-hyphens: auto;
+
+  a {
+    margin: 0;
+    text-transform: none;
+    white-space: normal;
+  }
+
+  >a:first-child {
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+  }
 
   h1 {
     font-family: var(--font-heading);
@@ -90,7 +100,7 @@ article {
     font-size: 0.9em;
   }
 
-  :not(pre) > code {
+  :not(pre)>code {
     background: rgba(0, 0, 0, 0.06);
     padding: 3px 6px;
     border-radius: 4px;
@@ -156,7 +166,7 @@ article {
     }
   }
 
-  img + em {
+  img+em {
     display: block;
     font-size: 0.85rem;
     color: #666;
@@ -190,7 +200,7 @@ article {
     counter-reset: step-counter;
     padding-left: 0;
 
-    > li {
+    >li {
       counter-increment: step-counter;
       position: relative;
       padding-left: 48px;
@@ -282,7 +292,7 @@ article {
       border-radius: 0;
     }
 
-    ol > li {
+    ol>li {
       padding-left: 36px;
 
       &::before {

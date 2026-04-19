@@ -1,38 +1,41 @@
-.cv-summary {
-  margin: 0;
-  text-align: justify;
-  hyphens: auto;
-  -webkit-hyphens: auto;
-  -ms-hyphens: auto;
-}
+.cv {
 
-
-.cv-entry {
-  margin-bottom: 32px;
-
-  h3 {
+  .cv-summary {
     margin: 0;
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
   }
 
-  >p {
-    margin: 4px 0 0 0;
-    font-size: 0.9rem;
+
+  .cv-entry {
+    margin-bottom: 32px;
+
+    h3 {
+      margin: 0;
+    }
+
+    >p {
+      margin: 4px 0 0 0;
+      font-size: 0.9rem;
+    }
+
+    .cv-tags {
+      margin: 10px 0 0 0;
+      line-height: 2.2;
+    }
   }
 
-  .cv-tags {
-    margin: 10px 0 0 0;
-    line-height: 2.2;
-  }
-}
 
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-
-  li {
-    margin-bottom: 8px;
-    font-size: 0.95rem;
+    li {
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
   }
 }
