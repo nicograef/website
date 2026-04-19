@@ -3,9 +3,42 @@ name: Deploy website
 on:
   push:
     branches: ["main"]
+  pull_request:
+    branches: ["main"]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup PHP 7.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+          coverage: none
+          tools: none
+
+      - name: Lint PHP files
+        run: |
+          find public router.php -name '*.php' -not -path 'public/vendor/*' -print0 \
+            | xargs -0 -n1 -P4 php -l
+          echo "All PHP files pass syntax check on PHP 7.4"
+
+      - name: Block PHP 8+ only functions
+        run: |
+          set -e
+          BANNED='str_contains|str_starts_with|str_ends_with|array_is_list|enum_exists'
+          if grep -rnE --include='*.php' --exclude-dir=vendor "\b($BANNED)\s*\(" public router.php; then
+            echo "::error::Found PHP 8+ only function call above. Production runs PHP 7.4."
+            exit 1
+          fi
+          echo "No PHP 8+ only function calls detected."
+
   deploy:
+    needs: lint
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

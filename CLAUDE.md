@@ -2,12 +2,13 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-Personal portfolio and blog for **Nico Gräf** (nicograef.com / nicograef.de). Vanilla PHP 8.3, no framework, no build step, no package manager. Homepage is bilingual (EN/DE via `Accept-Language`); blog articles are German only. `Agents.md` holds the full conventions — read it before non-trivial work.
+Personal portfolio and blog for **Nico Gräf** (nicograef.com / nicograef.de). Vanilla PHP 7.4 (production and CI), no framework, no build step, no package manager. Homepage is bilingual (EN/DE via `Accept-Language`); blog articles are German only. `Agents.md` holds the full conventions — read it before non-trivial work.
 
 ## Commands
 
 - `php -S 0.0.0.0:8080 -t public router.php` — local dev server. The `-t public` flag makes `public/` the document root for static files; `router.php` (at the repo root, dev-only) handles pretty-URL rewrites (`/articles`, `/articles/<slug>`, `/sitemap.xml`) the way Apache's `.htaccess` does in prod.
-- Deployment is automatic on push to `main` via `.github/workflows/deploy.yml` — rsync ships the contents of `public/` (and only `public/`) to the server. There is no test / lint / build step.
+- `find public router.php -name '*.php' -not -path 'public/vendor/*' | xargs -n1 php -l` — syntax-lint all user PHP files (matches CI, assuming local PHP is 7.4).
+- Deployment is automatic on push to `main` via `.github/workflows/deploy.yml` — CI runs a PHP 7.4 lint step first; only on green does rsync ship the contents of `public/` (and only `public/`) to the server.
 
 ## Architecture
 
@@ -48,7 +49,7 @@ Every page is a tiny entry-point PHP file in `public/` that requires helpers fro
 
 ### Markdown & highlighting
 
-`public/articles.php` calls `parseArticleMarkdown()` (which runs Parsedown over the `.md`), then does `str_contains($html, '<pre><code')` to set `$hasCode`. `public/templates/article.php` only emits the `<script>` tag for `vendor/highlight.js` when `$hasCode` is true — keep this gate intact so code-free articles stay JS-free.
+`public/articles.php` calls `parseArticleMarkdown()` (which runs Parsedown over the `.md`), then does `strpos($html, '<pre><code') !== false` to set `$hasCode`. `public/templates/article.php` only emits the `<script>` tag for `vendor/highlight.js` when `$hasCode` is true — keep this gate intact so code-free articles stay JS-free. Note: use `strpos`, not `str_contains` — the latter is PHP 8.0+ and the production server runs 7.4.
 
 ### Security model
 

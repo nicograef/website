@@ -6,7 +6,7 @@ Personal portfolio and blog for **Nico Gräf** (nicograef.com). Zero-dependency,
 
 | Component | Technology |
 |-----------|-----------|
-| Language  | PHP 8.3 (vanilla, no framework) |
+| Language  | PHP 7.4 (vanilla, no framework; production and CI both run 7.4) |
 | Templating | PHP output buffering (`ob_start` / `ob_get_clean`) |
 | Markdown | `public/vendor/Parsedown.php` (vendored) |
 | Syntax highlighting | `public/vendor/highlight.js` (vendored) |
