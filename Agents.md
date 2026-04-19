@@ -39,7 +39,7 @@ Article metadata lives in `public/content/articles.json` (slug, title, descripti
 
 ## CSS Architecture
 
-`base.css` is the only global stylesheet (reset, typography, shared classes like `.chip`, `.profile-picture`). Each page loads its own CSS via the `pageStyles` render variable: `home.css`, `overview.css`, `article.css`, `cv.css`, `error.css`. `layout.php` iterates `$pageStyles` to emit per-page `<link>` tags.
+`base.css` is the only global stylesheet (reset, typography, shared classes like `.tag`, `.profile-picture`). Each page loads its own CSS via the `pageStyles` render variable: `home.css`, `overview.css`, `article.css`, `cv.css`, `error.css`. `layout.php` iterates `$pageStyles` to emit per-page `<link>` tags.
 
 ## Rules
 

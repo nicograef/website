@@ -42,12 +42,9 @@
     "SF Mono", "Fira Code", "Fira Mono", Menlo, Monaco, Consolas, monospace;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body,
 html {
+  scroll-behavior: smooth;
   margin: 0;
   padding: 0;
   background: var(--background);
@@ -60,7 +57,7 @@ html {
 body {
   margin: 60px auto;
   padding: 0 24px;
-  max-width: 1200px;
+  max-width: 1000px;
 
   @media (max-width: 768px) {
     margin: 20px auto;
@@ -101,7 +98,7 @@ footer {
   margin-top: 30px;
 }
 
-.chip {
+.tag {
   display: inline;
   background: #edf0f7;
   padding: 3px 6px;
@@ -110,4 +107,59 @@ footer {
   white-space: nowrap;
   font-size: small;
   line-height: 2;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  h1 {
+    margin-bottom: 0;
+  }
+
+  p {
+    margin-top: 4px;
+  }
+
+  nav {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 24px;
+    row-gap: 24px;
+  }
+
+  .profile-picture {
+    border-radius: 50%;
+    max-width: 300px;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+  }
+}
+
+.content-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin: 80px auto;
+
+  > h2 {
+    flex-shrink: 0;
+    width: 200px;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 8px;
+    margin: 60px auto;
+
+    > h2 {
+      width: auto;
+    }
+  }
 }
