@@ -3,67 +3,31 @@
         "slug": "was-ist-domain-driven-design",
         "title": "Domain Driven Design: Die Brücke zwischen Fachwissen und Code",
         "description": "Wie Domain Driven Design die Lücke zwischen Fachabteilung und Code schließt, mit Ubiquitous Language, Bounded Contexts und taktischen Bausteinen.",
-        "date": "2026-04-03",
-        "author": "Nico Gräf",
-        "tags": [
-            "Domain Driven Design",
-            "Software Architecture",
-            "Bounded Context",
-            "Ubiquitous Language"
-        ]
+        "date": "2026-04-03"
     },
     {
         "slug": "bounded-context-erklaert",
         "title": "Bounded Context: Klare Grenzen für komplexe Domänen",
         "description": "Warum ein einziges Datenmodell komplexe Systeme zum Scheitern bringt und wie Bounded Contexts klare Grenzen setzen, damit Teams und Modelle unabhängig bleiben.",
         "date": "2026-04-03",
-        "author": "Nico Gräf",
-        "tags": [
-            "Domain Driven Design",
-            "Software Architecture",
-            "Bounded Context",
-            "Microservices"
-        ]
+        "author": "Nico Gräf"
     },
     {
         "slug": "anti-corruption-layer-erklaert",
         "title": "Anti-Corruption Layer: Saubere Grenzen zwischen deinem Code und Legacy-Systemen",
         "description": "Ein Anti-Corruption Layer trennt dein sauberes Modell vom Chaos eines Legacy-Systems, mit einem Adapter als Übersetzungsschicht.",
-        "date": "2026-04-03",
-        "author": "Nico Gräf",
-        "tags": [
-            "Software Architecture",
-            "Anti-Corruption Layer",
-            "Legacy",
-            "Integration",
-            "Domain-Driven Design"
-        ]
+        "date": "2026-04-03"
     },
     {
         "slug": "was-ist-event-sourcing",
         "title": "Was ist Event-Sourcing?",
         "description": "Eine kurze Erklärung zu Event-Sourcing.",
-        "date": "2025-02-06",
-        "author": "Nico Gräf",
-        "tags": [
-            "Event",
-            "Event-Sourcing",
-            "CQRS",
-            "Software Architecture"
-        ]
+        "date": "2025-02-06"
     },
     {
         "slug": "event-sourcing-am-beispiel-warenkorb-erklaert",
         "title": "Event-Sourcing am Beispiel Warenkorb erklärt",
         "description": "Event-Sourcing ist eine Alternative zu CRUD. Lerne anhand eines Warenkorb-Beispiels, wie Events statt Zuständen gespeichert werden und welche Vorteile das bringt.",
-        "date": "2025-01-23",
-        "author": "Nico Gräf",
-        "tags": [
-            "Software Architecture",
-            "Event-Sourcing",
-            "CQRS",
-            "Event-Driven Architecture",
-            "Domain-Driven Design"
-        ]
+        "date": "2025-01-23"
     }
 ]

@@ -13,17 +13,7 @@
                         <?php if ($article['date']): ?>
                             <span class="date"><?= date('d. F Y', strtotime($article['date'])) ?></span>
                         <?php endif; ?>
-                        <?php if ($article['author']): ?>
-                            <span class="author"><?= htmlspecialchars($article['author']) ?></span>
-                        <?php endif; ?>
                     </div>
-                    <?php if (!empty($article['tags'])): ?>
-                        <div class="article-tags">
-                            <?php foreach ($article['tags'] as $tag): ?>
-                                <span class="chip"><?= htmlspecialchars($tag) ?></span>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endif; ?>
                 </article>
             </a>
         <?php endforeach; ?>
