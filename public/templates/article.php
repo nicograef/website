@@ -1,5 +1,5 @@
 <article>
-    <a href="/articles" class="back-link">&larr; Alle Artikel</a>
+    <a href="/articles">&larr; Alle Artikel</a>
     <?= $htmlContent ?>
 </article>
 

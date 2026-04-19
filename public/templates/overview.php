@@ -1,19 +1,15 @@
 <div class="articles-container">
-    <a href="/" class="back-link">&larr; Zum Portfolio</a>
-    <h1>Meine Artikel</h1>
+    <header>
+        <h1>Meine Artikel</h1>
+        <a href="/">Zum Portfolio</a>
+    </header>
     <div class="article-list">
         <?php foreach ($articles as $article): ?>
             <a href="/articles/<?= htmlspecialchars($article['slug']) ?>" class="article-link">
                 <article class="article-card">
-                    <h2 class="article-title"><?= htmlspecialchars($article['title']) ?></h2>
-                    <?php if (!empty($article['description'])): ?>
-                        <p class="article-description"><?= htmlspecialchars($article['description']) ?></p>
-                    <?php endif; ?>
-                    <div class="article-meta">
-                        <?php if ($article['date']): ?>
-                            <span class="date"><?= date('d. F Y', strtotime($article['date'])) ?></span>
-                        <?php endif; ?>
-                    </div>
+                    <span class="article-meta"><?= date('d. F Y', strtotime($article['date'])) ?></span>
+                    <h3 class="article-title"><?= htmlspecialchars($article['title']) ?></h3>
+                    <p class="article-description"><?= htmlspecialchars($article['description']) ?></p>
                 </article>
             </a>
         <?php endforeach; ?>
