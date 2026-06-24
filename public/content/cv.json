@@ -14,6 +14,35 @@
   },
   "experience": [
     {
+      "company": "jotti",
+      "location": "Freiburg im Breisgau, Germany",
+      "location_de": "Freiburg im Breisgau",
+      "title": "Founder & Lead Engineer",
+      "title_de": "Gründer & Lead-Entwickler",
+      "start": "2025-10",
+      "end": null,
+      "description": "Founder, architect, and sole developer of jotti — a free, open-source mobile point-of-sale system for clubs and non-profits, built for full German fiscal compliance (KassenSichV, TSE, GoBD). Designed and built the entire product end-to-end: a Go backend with an event-sourced cash journal, a React frontend, cloud TSE integration, ESC/POS receipt printing, and a self-hosted Docker deployment.",
+      "description_de": "Gründer, Architekt und alleiniger Entwickler von jotti – einem kostenlosen, quelloffenen mobilen Kassensystem für Vereine und gemeinnützige Organisationen, ausgelegt auf volle Fiskalkonformität (KassenSichV, TSE, GoBD). Das gesamte Produkt eigenständig konzipiert und umgesetzt: Go-Backend mit event-basiertem Kassenjournal, React-Frontend, Cloud-TSE-Anbindung, ESC/POS-Bondruck und self-hosted Docker-Deployment.",
+      "tags": [
+        "Go",
+        "TypeScript",
+        "React",
+        "PostgreSQL",
+        "Event Sourcing",
+        "DDD",
+        "Docker",
+        "Caddy",
+        "Linux",
+        "Vite",
+        "shadcn/ui",
+        "Tailwind CSS",
+        "JWT",
+        "Argon2id",
+        "zod",
+        "KassenSichV/TSE"
+      ]
+    },
+    {
       "company": "Haufe Akademie",
       "location": "Freiburg im Breisgau, Germany",
       "location_de": "Freiburg im Breisgau",
