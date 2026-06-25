@@ -21,8 +21,8 @@
       "title_de": "Gründer & Lead-Entwickler",
       "start": "2025-10",
       "end": null,
-      "description": "Founder, architect, and sole developer of jotti — a free, open-source mobile point-of-sale system for clubs and non-profits, built for full German fiscal compliance (KassenSichV, TSE, GoBD). Designed and built the entire product end-to-end: a Go backend with an event-sourced cash journal, a React frontend, cloud TSE integration, ESC/POS receipt printing, and a self-hosted Docker deployment.",
-      "description_de": "Gründer, Architekt und alleiniger Entwickler von jotti – einem kostenlosen, quelloffenen mobilen Kassensystem für Vereine und gemeinnützige Organisationen, ausgelegt auf volle Fiskalkonformität (KassenSichV, TSE, GoBD). Das gesamte Produkt eigenständig konzipiert und umgesetzt: Go-Backend mit event-basiertem Kassenjournal, React-Frontend, Cloud-TSE-Anbindung, ESC/POS-Bondruck und self-hosted Docker-Deployment.",
+      "description": "Founder, architect, and sole developer of jotti — a free, open-source mobile point-of-sale system for clubs and non-profits, built for Germany's cash-register regulation (KassenSichV). Designed and built the entire product end-to-end: a Go backend with an event-sourced, append-only cash journal (GoBD), a React frontend, cloud TSE integration (fiskaly), DSFinV-K export, ESC/POS receipt printing, and a self-hosted Docker deployment.",
+      "description_de": "Gründer, Architekt und alleiniger Entwickler von jotti – einem kostenlosen, quelloffenen mobilen Kassensystem für Vereine und gemeinnützige Organisationen, ausgelegt auf die KassenSichV. Das gesamte Produkt eigenständig konzipiert und umgesetzt: Go-Backend mit event-basiertem, append-only Kassenjournal (GoBD), React-Frontend, Cloud-TSE-Anbindung (fiskaly), DSFinV-K-Export, ESC/POS-Bondruck und self-hosted Docker-Deployment.",
       "tags": [
         "Go",
         "TypeScript",
