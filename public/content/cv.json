@@ -1,8 +1,8 @@
 {
   "basics": {
     "name": "Nico Gräf",
-    "headline": "Software Engineer",
-    "headline_de": "Softwareentwickler",
+    "headline": "Senior Software Engineer",
+    "headline_de": "Senior Softwareentwickler",
     "location": "Freiburg im Breisgau, Germany",
     "location_de": "Freiburg im Breisgau",
     "email": "graef.nico@gmail.com",
@@ -269,12 +269,6 @@
     }
   ],
   "certifications": [
-    {
-      "name": "React",
-      "issuer": "Udemy",
-      "date": "2019-08",
-      "credentialId": "UC-OOCWHNKG"
-    },
     {
       "name": "Grundlagen des Onlinemarketings",
       "issuer": "The Open University",

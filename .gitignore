@@ -21,3 +21,4 @@ phpstan.phar
 
 # ── Private (local only, never committed) ────────────────────────────────────
 bewerbung/
+docs/plans/
