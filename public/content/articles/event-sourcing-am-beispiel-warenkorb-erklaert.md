@@ -229,10 +229,6 @@ Vielleicht fragst du dich jetzt, ob das System nicht langsam wird, wenn bei jede
 
 Diese Techniken können helfen, Event-Sourcing auch in größeren Systemen einzusetzen. Aber sie bringen zusätzliche Komplexität mit sich und müssen sorgfältig implementiert werden. Für viele Anwendungsfälle ist CRUD einfach die bessere Wahl.
 
-## Event-Sourcing mit AWS
-
-Wenn du Event-Sourcing mit AWS umsetzen möchtest, habe ich einen separaten Artikel geschrieben, der eine konkrete Implementierung mit DynamoDB, Lambda und SNS zeigt: [Event-Sourcing mit AWS DynamoDB](/articles/event-sourcing-mit-aws-dynamodb). Dort stelle ich auch meine Open-Source-Bibliothek [dynamo-eventdb](https://github.com/nicograef/dynamo-eventdb) vor, die DynamoDB als Event Store kapselt und ein CDK-Setup für das Deployment mitbringt.
-
 ## Vor- und Nachteile
 
 ### Vorteile
@@ -273,7 +269,7 @@ Aber: Event-Sourcing ist kein Wundermittel. Die zusätzliche Komplexität ist er
 
 Wenn du mehr über Event-Sourcing erfahren möchtest, empfehle ich dir, dich mit den Konzepten von Domain-Driven Design (DDD) und Command Query Responsibility Segregation (CQRS) auseinanderzusetzen, da diese oft in Kombination mit Event-Sourcing verwendet werden. Aber geh skeptisch an die Sache heran – viele Projekte haben sich mit Event-Sourcing übernommen.
 
-Du möchtest sehen, wie Event-Sourcing in einem echten Projekt eingesetzt wird? [jotti](https://github.com/nicograef/jotti) ist ein einfaches Bestellsystem für kleine gastronomische Betriebe. Bestellungen, Stornierungen und Bezahlungen wurden in diesem Projekt mittels Event-Sourcing implementiert. Sieh dir den Sourcecode auf Github an: [github.com/nicograef/jotti](https://github.com/nicograef/jotti)
+Du möchtest sehen, wie Event-Sourcing in einem echten Projekt eingesetzt wird? Mit [jotti](https://jotti.rocks) baue ich gerade ein Kassensystem für Vereine und gemeinnützige Organisationen, das auf die KassenSichV ausgelegt ist – mit TSE-Signatur je Vorgang und einem append-only Kassenjournal. Event-Sourcing ist dabei der Kern der Kassen-Operationen: Bestellungen, Stornierungen und Bezahlungen werden als unveränderliche Events gespeichert. Sieh dir den Sourcecode auf Github an: [github.com/nicograef/jotti](https://github.com/nicograef/jotti)
 
 ## Weiterführende Links
 
