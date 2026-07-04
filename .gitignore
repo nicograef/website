@@ -18,3 +18,6 @@ Thumbs.db
 
 # ── Tools (downloaded in CI, not vendored) ───────────────────────────────────
 phpstan.phar
+
+# ── Private (local only, never committed) ────────────────────────────────────
+bewerbung/
