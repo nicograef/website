@@ -19,7 +19,11 @@
   <section id="portfolio" class="portfolio content-section">
     <h2><?= $lang === 'de' ? 'Portfolio' : 'Projects' ?></h2>
     <div class="project-list">
+      <?php $shownEarlyHeading = false; ?>
       <?php foreach ($projects as $index => $p): ?>
+        <?php if (!empty($p['early']) && !$shownEarlyHeading): $shownEarlyHeading = true; ?>
+          <h3 class="early-projects-heading"><?= $lang === 'de' ? 'Frühe Projekte & Experimente' : 'Early Projects & Experiments' ?></h3>
+        <?php endif; ?>
         <section class="project<?= $index === 0 ? ' fade-in' : '' ?>">
           <h3>
             <span class="title"><?= htmlspecialchars($p['title']) ?></span>
