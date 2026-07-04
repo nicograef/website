@@ -1,7 +1,5 @@
 # Taktisches Domain Driven Design: Fachlogik im Code abbilden
 
-> **Entwurf** — Dieser Artikel ist ein Draft und noch nicht veröffentlicht.
-
 Du hast die Ubiquitous Language definiert und weißt, welche Bounded Contexts dein System hat. Jetzt stellt sich die Frage: Wie sieht der Code innerhalb eines Kontexts aus? Taktisches DDD liefert dafür fünf Bausteine.
 
 ## Entity: Identität über die Zeit
@@ -18,20 +16,20 @@ Ein Aggregate ist ein Cluster aus Entities und Value Objects, der als Einheit be
 
 Beispiel: Eine `Bestellung` (Aggregate Root) enthält `Bestellpositionen` (Entities) und einen `Gesamtbetrag` (Value Object). Die Geschäftsregel "bestätigte Bestellungen dürfen nicht mehr geändert werden" wird direkt im Aggregate Root durchgesetzt, nicht in einem Service oder Controller.
 
-```java
-public class Bestellung {
-    private final BestellungId id;
-    private List<Bestellposition> positionen;
-    private BestellStatus status;
+```typescript
+class Bestellung {
+  private readonly id: BestellungId;
+  private positionen: Bestellposition[];
+  private status: BestellStatus;
 
-    public void hinzufuegen(Bestellposition position) {
-        if (status.istBestaetigt()) {
-            throw new DomainException(
-                "Bestätigte Bestellungen können nicht geändert werden."
-            );
-        }
-        positionen.add(position);
+  hinzufuegen(position: Bestellposition): void {
+    if (this.status.istBestaetigt()) {
+      throw new DomainError(
+        "Bestätigte Bestellungen können nicht geändert werden."
+      );
     }
+    this.positionen.push(position);
+  }
 }
 ```
 

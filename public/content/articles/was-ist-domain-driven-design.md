@@ -32,7 +32,7 @@ Das Prinzip dahinter: Fachlogik im Kern, Technik außen. Ein Datenbankwechsel be
 
 ## Strategisches und taktisches Design
 
-DDD unterscheidet zwei Werkzeugkästen. Das strategische Design teilt große Domänen in überschaubare Bereiche auf, mit Konzepten wie Subdomains, Bounded Contexts und Context Maps. Das taktische Design liefert Bausteine für die Umsetzung im Code: Entities, Value Objects, Aggregates, Repositories und Domain Events.
+DDD unterscheidet zwei Werkzeugkästen. [Das strategische Design](/articles/strategisches-domain-driven-design) teilt große Domänen in überschaubare Bereiche auf, mit Konzepten wie Subdomains, Bounded Contexts und Context Maps. [Das taktische Design](/articles/taktisches-domain-driven-design) liefert Bausteine für die Umsetzung im Code: Entities, Value Objects, Aggregates, Repositories und Domain Events.
 
 Beide Werkzeugkästen sind eigenständige Themen. Der Einstieg funktioniert ohne sie. Die Ubiquitous Language und die Trennung von Fachlogik und Technik bringen bereits Klarheit, bevor du dich mit Aggregates oder Context Maps beschäftigst.
 

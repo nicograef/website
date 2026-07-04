@@ -1,5 +1,17 @@
 [
     {
+        "slug": "strategisches-domain-driven-design",
+        "title": "Strategisches Domain Driven Design: Große Domänen aufteilen",
+        "description": "Wie Subdomains, Bounded Contexts und Context Maps große Domänen in unabhängig entwickelbare Bereiche aufteilen.",
+        "date": "2026-07-04"
+    },
+    {
+        "slug": "taktisches-domain-driven-design",
+        "title": "Taktisches Domain Driven Design: Fachlogik im Code abbilden",
+        "description": "Entity, Value Object, Aggregate, Repository und Domain Event: die fünf Bausteine, mit denen taktisches DDD Fachlogik im Code abbildet.",
+        "date": "2026-07-04"
+    },
+    {
         "slug": "was-ist-domain-driven-design",
         "title": "Domain Driven Design: Die Brücke zwischen Fachwissen und Code",
         "description": "Wie Domain Driven Design die Lücke zwischen Fachabteilung und Code schließt, mit Ubiquitous Language, Bounded Contexts und taktischen Bausteinen.",

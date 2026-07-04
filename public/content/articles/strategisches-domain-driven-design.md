@@ -1,7 +1,5 @@
 # Strategisches Domain Driven Design: Große Domänen aufteilen
 
-> **Entwurf** — Dieser Artikel ist ein Draft und noch nicht veröffentlicht.
-
 Dein E-Commerce-System hat 200 Tabellen in einer Datenbank. Das Vertriebsteam sagt "Kunde" und meint Umsatzpotenzial. Das Support-Team sagt "Kunde" und meint ein offenes Ticket. Beide greifen auf dasselbe `Customer`-Objekt zu. Jede Änderung an diesem Objekt kann den jeweils anderen Bereich kaputtmachen.
 
 Strategisches DDD liefert Werkzeuge, um große Domänen in Bereiche aufzuteilen, die sich unabhängig voneinander entwickeln lassen.
@@ -18,13 +16,13 @@ Die Unterscheidung bestimmt, wo du deine knappe Entwicklungszeit investierst.
 
 Ein Bounded Context ist eine explizite Grenze, innerhalb derer ein bestimmtes Modell und eine einheitliche Sprache gelten. "Kunde" im Rechnungswesen hat andere Attribute als "Kunde" im Marketing. Zwei saubere Modelle in zwei Kontexten sind wartbarer als ein aufgeblähtes Universalmodell.
 
-Der bestehende Artikel zu Bounded Contexts behandelt dieses Thema ausführlich.
+Der [Artikel zu Bounded Contexts](/articles/bounded-context-erklaert) behandelt dieses Thema ausführlich.
 
 ## Context Mapping: Beziehungen zwischen Kontexten
 
 Bounded Contexts existieren nicht isoliert. Wenn der Rechnungswesen-Kontext Kundendaten aus dem Vertriebs-Kontext braucht, entsteht eine Beziehung. Die Context Map dokumentiert diese Beziehungen: Wer liefert Daten (Upstream), wer konsumiert sie (Downstream)? Welches Integrations-Pattern wird verwendet?
 
-Die drei häufigsten Patterns: Conformist (Downstream übernimmt das Upstream-Modell direkt), Anti-Corruption Layer (Downstream baut eine Übersetzungsschicht) und Open Host Service (Upstream stellt eine stabile API für viele Konsumenten bereit).
+Die drei häufigsten Patterns: Conformist (Downstream übernimmt das Upstream-Modell direkt), [Anti-Corruption Layer](/articles/anti-corruption-layer-erklaert) (Downstream baut eine Übersetzungsschicht) und Open Host Service (Upstream stellt eine stabile API für viele Konsumenten bereit).
 
 Die strategische Entscheidung (welche Beziehung?) kommt vor der technischen (welche API?).
 
