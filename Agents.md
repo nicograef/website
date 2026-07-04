@@ -49,6 +49,9 @@ Article metadata lives in `public/content/articles.json` (slug, title, descripti
 4. **CSS:** Use native CSS nesting (no preprocessor). Respect existing custom properties in `base.css` and breakpoint system. Each page has its own CSS file — add styles to the relevant per-page file, not `base.css` (unless truly shared).
 5. **Security:** Always `htmlspecialchars()` on user-facing dynamic output.
 6. **New articles** → `public/content/articles/*.md`, **new projects** → `public/content/projects.json`. Read existing files for the expected format.
+7. **Content facts:** Facts about Nico (roles, dates, skills, projects) come exclusively from `public/content/cv.json` and `public/content/projects.json`. When writing or editing homepage, CV, or article copy, never invent or embellish — no added skills, no upgraded titles.
+8. **jotti wording:** jotti is **source-available** (non-commercial license) — never "open source". Fiscal wording: "designed for KassenSichV" (DE: „ausgelegt auf die KassenSichV"), never "compliant" / „konform". Canonical claims live in the jotti repo (README / AGENTS.md).
+9. **Canonical domain:** Self-referencing links and mentions use **nicograef.com**, not nicograef.de.
 
 ## Boundaries
 

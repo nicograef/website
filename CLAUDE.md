@@ -60,4 +60,5 @@ Every page is a tiny entry-point PHP file in `public/` that requires helpers fro
 - No Composer, no npm, no framework. New dependencies must be manually vendored into `public/vendor/` and require approval.
 - CSS uses native nesting and custom properties from `public/assets/css/base.css`; no preprocessor.
 - Bilingual split is fixed: homepage EN+DE, blog DE only.
+- Facts about Nico come only from `public/content/cv.json` / `public/content/projects.json` — never invent or embellish. jotti is "source-available", never "open source"; „ausgelegt auf die KassenSichV", never „konform". Self-links use nicograef.com.
 - Commits follow Conventional Commits (`feat:`, `fix:`, `refactor:`, `docs:`, `chore:`). Never auto-commit — propose the message and let the user run it.
