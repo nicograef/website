@@ -43,6 +43,8 @@ Ein Repository versteckt die Datenschicht hinter domänensprachlichen Methoden. 
 
 Ein Domain Event beschreibt, dass etwas fachlich Relevantes geschehen ist. `BestellungAufgegeben`, `ZahlungEingegangen`, `LieferungVersandt`. Events entkoppeln Systemteile: Wenn eine Bestellung aufgegeben wird, muss die Bestelllogik nicht wissen, dass danach eine E-Mail verschickt und der Lagerbestand aktualisiert wird.
 
+Bei [jotti](https://jotti.rocks), meinem Kassensystem für Vereine, sind genau solche Events der Kern der Kasse: Bestellungen, Stornierungen und Zahlungen landen als unveränderliche Domain Events im Kassenjournal ([Code auf GitHub](https://github.com/nicograef/jotti)).
+
 ## Wann lohnen sich taktische Bausteine?
 
 Taktisches DDD lohnt sich, wenn die Fachlogik komplex genug ist, dass einfache CRUD-Operationen sie nicht mehr abbilden. Wenn Geschäftsregeln über mehrere Objekte hinweg gelten und konsistent durchgesetzt werden müssen. Für eine einfache Datenanwendung sind Entities und Aggregates zu viel Architektur.

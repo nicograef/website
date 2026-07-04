@@ -40,7 +40,7 @@ interface Customer {
 }
 ```
 
-Damit hast du das CRM-Modell in deinen Bestellservice kopiert. Dein Code verwendet jetzt Feldnamen, die niemand ohne CRM-Dokumentation versteht. Alles ist ein `string`, obwohl `isActive` ein Boolean sein sollte. Ob ein Kunde aktiv ist, bestimmt `AKTIV_FLG === "J"` — eine interne CRM-Konvention, die nichts in deinem Bestellservice zu suchen hat.
+Damit hast du das CRM-Modell in deinen Bestellservice kopiert. Dein Code verwendet jetzt Feldnamen, die niemand ohne CRM-Dokumentation versteht. Alles ist ein `string`, obwohl `isActive` ein Boolean sein sollte. Ob ein Kunde aktiv ist, bestimmt `AKTIV_FLG === "J"`, eine interne CRM-Konvention, die nichts in deinem Bestellservice zu suchen hat.
 
 Benennt das CRM-Team `AKTIV_FLG` irgendwann um, bricht dein Service. Du bist direkt von Entscheidungen abhängig, die in einem anderen System getroffen werden.
 
@@ -49,7 +49,7 @@ _Ohne ACL: Das CRM-Modell fließt direkt in den Bestellservice_
 
 ## Das Pattern: Der Anti-Corruption Layer
 
-Der **Anti-Corruption Layer** (ACL) ist eine Übersetzungsschicht zwischen zwei Systemen. Er nimmt das Modell des externen Systems entgegen und übersetzt es in dein eigenes Domänenmodell. Dein Code kennt das externe Format nicht — er arbeitet nur mit der Schnittstelle, die der ACL bereitstellt.
+Der **Anti-Corruption Layer** (ACL) ist eine Übersetzungsschicht zwischen zwei Systemen. Er nimmt das Modell des externen Systems entgegen und übersetzt es in dein eigenes Domänenmodell. Dein Code kennt das externe Format nicht. Er arbeitet nur mit der Schnittstelle, die der ACL bereitstellt.
 
 > "As a downstream client, create an isolating layer to provide your system with functionality of the upstream system in terms of your own domain model. This layer talks to the other system through its existing interface, requiring little or no modification to the other system." (Eric Evans)
 
@@ -58,7 +58,7 @@ Du passt dein Modell nicht dem externen System an. Du definierst zuerst, wie dei
 ![Bestellservice mit ACL: Der CrmAdapter übersetzt das CRM-Modell](/assets/img/articles/acl-mit-acl.png)
 _Mit ACL: Der Adapter übersetzt das CRM-Format, bevor es deinen Code erreicht_
 
-Das Gegenstück zum ACL ist der **Conformist**: Du übernimmst das externe Modell unverändert und sparst dir die Übersetzungslogik. Weniger Aufwand, aber direkte Abhängigkeit. Die Wahl ist binär — du übersetzt oder du übernimmst.
+Das Gegenstück zum ACL ist der **Conformist**: Du übernimmst das externe Modell unverändert und sparst dir die Übersetzungslogik. Weniger Aufwand, aber direkte Abhängigkeit.
 
 ## Praxisbeispiel: CrmAdapter als Übersetzungsschicht
 
@@ -102,13 +102,13 @@ class CrmAdapter {
 }
 ```
 
-Der `CrmAdapter` ist der ACL. Er ist die **einzige Stelle im gesamten Bestellservice, die das CRM-Format kennt**. Jeder andere Teil des Systems arbeitet mit `Customer` — mit sprechenden Feldnamen, typisierten Werten und einer Struktur, die zum Bestellservice passt.
+Der `CrmAdapter` ist der ACL. Er ist die **einzige Stelle im gesamten Bestellservice, die das CRM-Format kennt**. Jeder andere Teil des Systems arbeitet mit `Customer`: mit sprechenden Feldnamen, typisierten Werten und einer Struktur, die zum Bestellservice passt.
 
 Benennt das CRM-Team ein Feld um, änderst du eine Zeile im Adapter. Der Rest deines Codes bemerkt nichts.
 
 ## Wann lohnt sich ein ACL?
 
-Du schreibst und pflegst die Übersetzungslogik — das kostet etwas. Der Aufwand lohnt sich in drei Situationen:
+Du schreibst und pflegst die Übersetzungslogik. Das kostet etwas. Der Aufwand lohnt sich in drei Situationen:
 
 - **Kein Einfluss auf das externe System.** Es gehört einem anderen Team oder einem Drittanbieter. Änderungen kommen ohne Vorwarnung.
 - **Das externe Modell passt nicht zu deiner Fachlichkeit.** Kryptische Feldnamen, Codes statt sinnvoller Typen, eine Struktur, die mit deiner Domäne nichts zu tun hat.
@@ -118,6 +118,4 @@ Du schreibst und pflegst die Übersetzungslogik — das kostet etwas. Der Aufwan
 
 ## Fazit
 
-Der ACL löst ein konkretes Problem: Er hält fremde Modelle aus deinem Code heraus. Änderungen im externen System enden am Adapter. Dein Code bleibt unabhängig.
-
-Den größten Wert hat der ACL am Tag, an dem du das Altsystem endgültig ablöst. Dann entfernst du den Adapter — und der Rest deines Codes funktioniert weiter, ohne dass du eine einzige Zeile anfassen musst.
+Der ACL löst ein konkretes Problem: Er hält fremde Modelle aus deinem Code heraus. Änderungen im externen System enden am Adapter. Und am Tag, an dem du das Altsystem endgültig ablöst, entfernst du einfach den Adapter. Der Rest deines Codes funktioniert weiter, ohne dass du eine Zeile anfassen musst.

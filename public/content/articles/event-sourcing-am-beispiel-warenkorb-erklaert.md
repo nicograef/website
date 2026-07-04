@@ -1,14 +1,14 @@
 # Event-Sourcing am Beispiel Warenkorb erklärt
 
-Event-Sourcing ist eine Alternative zu CRUD. Dabei werden nicht die aktuellen Zustände von Objekten gespeichert, sondern alle Änderungen (Events), die zu diesem Zustand geführt haben. Dies kann – zumindest theoretisch – eine vollständige Nachverfolgbarkeit und Wiederherstellung des Systemzustands zu jedem beliebigen Zeitpunkt ermöglichen.
+Event-Sourcing ist eine Alternative zu CRUD. Dabei werden nicht die aktuellen Zustände von Objekten gespeichert, sondern alle Änderungen (Events), die zu diesem Zustand geführt haben. Dies kann, zumindest theoretisch, eine vollständige Nachverfolgbarkeit und Wiederherstellung des Systemzustands zu jedem beliebigen Zeitpunkt ermöglichen.
 
-**Stell dir Event-Sourcing wie Git vor:** Git speichert nicht einfach den aktuellen Zustand deines Codes, sondern jeden einzelnen Commit – jede Änderung, die jemals gemacht wurde. Du kannst jederzeit zu einem früheren Stand zurückkehren, sehen wer wann was geändert hat, und verstehen warum bestimmte Entscheidungen getroffen wurden. Event-Sourcing verfolgt einen ähnlichen Ansatz für Anwendungsdaten – allerdings mit deutlich mehr Komplexität in der Umsetzung.
+**Stell dir Event-Sourcing wie Git vor:** Git speichert nicht einfach den aktuellen Zustand deines Codes, sondern jeden einzelnen Commit: jede Änderung, die jemals gemacht wurde. Du kannst jederzeit zu einem früheren Stand zurückkehren, sehen wer wann was geändert hat, und verstehen warum bestimmte Entscheidungen getroffen wurden. Event-Sourcing verfolgt einen ähnlichen Ansatz für Anwendungsdaten, allerdings mit deutlich mehr Komplexität in der Umsetzung.
 
 In einem Event-Sourcing-System gibt es kein UPDATE und es gibt auch kein DELETE. Genaugenommen gibt es auch kein CREATE, stattdessen gibt es nur "Write/Add Event". Selbst das Lesen (READ) funktioniert anders als bei CRUD: Anstatt den aktuellen Zustand eines Objekts direkt aus einer Datenbanktabelle abzurufen, werden alle Events zu diesem Objekt gelesen und der aktuelle Zustand durch das Anwenden dieser Events rekonstruiert.
 
 In diesem Artikel vergleiche ich Event-Sourcing mit dem traditionellen CRUD-Ansatz anhand des Beispiels Warenkorb in einem Online-Shop.
 
-> **Disclaimer:** Event-Sourcing hat (wie alles) seine Vor- und Nachteile und sollte nur angewendet werden, wenn es wirklich gute Gründe dafür gibt. Die zusätzliche Komplexität ist nicht zu unterschätzen. Auch wenn dieser Artikel den Warenkorb als Beispiel für Event-Sourcing verwendet, ist ein einfacher Warenkorb in der Praxis kein guter Kandidat für Event-Sourcing – CRUD reicht hier meist völlig aus.
+> **Disclaimer:** Event-Sourcing hat (wie alles) seine Vor- und Nachteile und sollte nur angewendet werden, wenn es wirklich gute Gründe dafür gibt. Die zusätzliche Komplexität ist nicht zu unterschätzen. Auch wenn dieser Artikel den Warenkorb als Beispiel für Event-Sourcing verwendet, ist ein einfacher Warenkorb in der Praxis kein guter Kandidat für Event-Sourcing. CRUD reicht hier meist völlig aus.
 
 ## Warenkorb mit CRUD
 
@@ -51,7 +51,7 @@ Dieses System würde gut funktionieren und die oberflächlichen Anforderungen ei
 
 ### Feature Request: Personalisierte Rabattcodes
 
-Die Marketing-Abteilung möchte Benutzern personalisierte Rabattcodes schicken, die Produkte in ihren Warenkorb gelegt, aber nie gekauft haben. Mit CRUD können wir diese Information nicht liefern – wir wissen nur, was _jetzt_ im Warenkorb liegt, nicht was _früher_ drin war.
+Die Marketing-Abteilung möchte Benutzern personalisierte Rabattcodes schicken, die Produkte in ihren Warenkorb gelegt, aber nie gekauft haben. Mit CRUD können wir diese Information nicht liefern: Wir wissen nur, was _jetzt_ im Warenkorb liegt, nicht was _früher_ drin war.
 
 ### UX-Frage: Plus/Minus-Buttons oder Eingabefeld?
 
@@ -96,7 +96,7 @@ Die <abbr title="Cloud Native Computing Foundation">CNCF</abbr> hat mit [CloudEv
 {
   "id": "8875",
   "type": "cart.product-added",
-  "time": "2026-01-15T10:30:00Z",
+  "time": "2025-01-15T10:30:00Z",
   "subject": "user:456",
   "data": {
     "productId": 123,
@@ -109,7 +109,7 @@ Das `subject`-Feld ist besonders wichtig: Es ermöglicht uns, alle Events zu ein
 
 ## Event Store
 
-Ein Event Store ist eine Datenbank, die speziell für Events optimiert ist. Die wichtigste Eigenschaft: Er ist **append-only** – Events werden nur hinzugefügt, niemals geändert oder gelöscht.
+Ein Event Store ist eine Datenbank, die speziell für Events optimiert ist. Die wichtigste Eigenschaft: Er ist **append-only**. Events werden nur hinzugefügt, niemals geändert oder gelöscht.
 
 Für unser Beispiel verwenden wir eine einfache relationale Datenbank als Event Store. In der Praxis gibt es auch spezialisierte Event-Store-Datenbanken wie [KurrentDB](https://www.kurrent.io/) (ehemals EventStoreDB) oder [EventSourcingDB](https://www.eventsourcingdb.io/), die zusätzliche Features wie Event-Streams, Subscriptions und optimierte Abfragen bieten.
 
@@ -211,21 +211,21 @@ Wir können mit Event-Sourcing also die gleiche Funktionalität liefern, wie mit
 - Wie oft wird die Menge eines Produktes reduziert oder erhöht?
   - Wir können alle `quantity-changed` Events analysieren, um zu sehen, wie oft die Menge geändert wurde und in welche Richtung.
 - Welche Produkte verweilen am längsten im Warenkorb, bevor sie gekauft oder entfernt werden?
-  - Wenn wir ein Zeitstempel für die Bestellung oder sogar ein Bestell-Event haben, können die Zeitstempel der `product-added` und `cart-ordered` Events vergleichen, um die Verweildauer zu berechnen.
+  - Wenn wir einen Zeitstempel für die Bestellung oder sogar ein Bestell-Event haben, können wir die Zeitstempel der `product-added`- und `cart-ordered`-Events vergleichen, um die Verweildauer zu berechnen.
 
-Da wir alle Events speichern, können wir theoretisch Analysen durchführen, um das Verhalten der Benutzer besser zu verstehen. Allerdings erfordert das zusätzliche Infrastruktur und Entwicklungsaufwand. Sagen wir die Marketing-Abteilung kommt auf die Idee, Benutzern personalisierte Angebote zu machen, basierend auf den Produkten, die sie häufig in den Warenkorb legen, aber nicht kaufen. Mit Event-Sourcing haben wir die Daten dafür – aber wir müssen trotzdem die Analyse-Logik implementieren und die Daten aufbereiten. Mit der CRUD-Implementierung wäre das schwieriger, da wir die historischen Daten nicht haben. Man müsste das System erst erweitern und kann selbst dann nur mit den zukünftigen Daten arbeiten.
+Da wir alle Events speichern, können wir theoretisch Analysen durchführen, um das Verhalten der Benutzer besser zu verstehen. Allerdings erfordert das zusätzliche Infrastruktur und Entwicklungsaufwand. Sagen wir, die Marketing-Abteilung kommt auf die Idee, Benutzern personalisierte Angebote zu machen, basierend auf den Produkten, die sie häufig in den Warenkorb legen, aber nicht kaufen. Mit Event-Sourcing haben wir die Daten dafür, aber wir müssen trotzdem die Analyse-Logik implementieren und die Daten aufbereiten. Mit der CRUD-Implementierung wäre das schwieriger, da wir die historischen Daten nicht haben. Man müsste das System erst erweitern und kann selbst dann nur mit den zukünftigen Daten arbeiten.
 
 ## Wird das System nicht langsam?
 
-Vielleicht fragst du dich jetzt, ob das System nicht langsam wird, wenn bei jeder Abfrage erst alle Events aus der Datenbank geladen und der Zustand rekonstruiert werden muss. Zumindest war das meine erste Reaktion, als ich das Konzept von Event-Sourcing zum ersten Mal gehört habe. Und ja – das ist ein echtes Problem. Bei einer naiven Implementierung kann das System schnell an seine Grenzen stoßen. Es gibt verschiedene Techniken, um dieses Problem zu mildern, aber keine davon ist kostenlos:
+Vielleicht fragst du dich jetzt, ob das System nicht langsam wird, wenn bei jeder Abfrage erst alle Events aus der Datenbank geladen und der Zustand rekonstruiert werden muss. Zumindest war das meine erste Reaktion, als ich das Konzept von Event-Sourcing zum ersten Mal gehört habe. Und ja, das ist ein echtes Problem. Bei einer naiven Implementierung kann das System schnell an seine Grenzen stoßen. Es gibt verschiedene Techniken, um dieses Problem zu mildern, aber keine davon ist kostenlos:
 
-1. **Event-Modellierung** Durch die richtige Modellierung der Events kann die Anzahl der zu verarbeitenden Events reduziert werden. Zum Beispiel könnte man in unserem Beispielsystem jedesmal einen neuen Warenkorb "aufmachen", sobald der Benutzer den Warenkorb abschickt (z.B. durch eine Bestellung). Dadurch werden die Events für jeden abgeschlossenen Warenkorb getrennt gespeichert und es müssen nicht jedesmal alle Events eines Benutzers verarbeitet werden, sondern nur die Events des aktuellen Warenkorbs. In diesem Modell würde jeder Warenkorb eine eigene ID bekommen und die Events würden diese ID referenzieren. Ich würde mal behaupten, dass dadurch maximal 30-50 Events pro Warenkorb anfallen. Diese Anzahl von Events sollten problemlos vom Backend in Echtzeit verarbeitet werden können.
+1. **Event-Modellierung** Durch die richtige Modellierung der Events kann die Anzahl der zu verarbeitenden Events reduziert werden. Zum Beispiel könnte man in unserem Beispielsystem jedes Mal einen neuen Warenkorb "aufmachen", sobald der Benutzer den Warenkorb abschickt (z.B. durch eine Bestellung). Dadurch werden die Events für jeden abgeschlossenen Warenkorb getrennt gespeichert und es müssen nicht jedes Mal alle Events eines Benutzers verarbeitet werden, sondern nur die Events des aktuellen Warenkorbs. In diesem Modell würde jeder Warenkorb eine eigene ID bekommen und die Events würden diese ID referenzieren. Ich würde mal behaupten, dass dadurch maximal 30-50 Events pro Warenkorb anfallen. Diese Anzahl von Events sollten problemlos vom Backend in Echtzeit verarbeitet werden können.
 
 2. **Snapshots** Eine weitere Technik ist die Verwendung von Snapshots. Dabei wird in regelmäßigen Abständen der aktuelle Zustand des Objekts gespeichert (z.B. alle 100 Events oder nach bestimmten Ereignissen). Wenn der Zustand abgerufen werden muss, wird zuerst der letzte Snapshot geladen und dann nur die Events seit diesem Snapshot angewendet. Dadurch reduziert sich die Anzahl der zu verarbeitenden Events erheblich. Die historischen Events bleiben jedoch weiterhin erhalten und können für Analysen verwendet werden. In unserem Beispiel könnte ein Cronjob jede Nacht einen Snapshot erzeugen, in dem eine Liste aller Produkte aufgeführt ist, die von Benutzern in ihren Warenkorb hinzugefügt und danach wieder entfernt wurden (inklusive der Häufigkeit). Mit diesem Snapshot könnte dann die Analyse deutlich schneller durchgeführt werden.
 
 3. **Optimierte Datenbanken** In unserem Beispiel haben wir eine relationale Datenbank für die Speicherung verwendet. Ich selbst habe dafür in einem Projekt PostgreSQL verwendet. Ebenso kann man bei kleinen Anwendungen NoSQL-Datenbanken wie MongoDB oder AWS DynamoDB für Event-Sourcing verwenden. Es gibt jedoch auch spezialisierte Datenbanken (sog. Event-Stores), die für Event-Sourcing optimiert sind. Diese bieten oft bessere Performance und Skalierbarkeit für das Speichern und Abrufen von Events. In unserem Beispiel könnten dann die Produkte und Benutzer in einer relationalen Datenbank bleiben, während die Events in einem speziellen Event-Store gespeichert werden.
 
-4. **CQRS und Caching** In vielen Event-Sourcing-Systemen wird das CQRS-Muster (Command Query Responsibility Segregation) verwendet. Dabei werden die Schreib- und Leseoperationen auf unterschiedliche Modelle und Datenbanken aufgeteilt. Für das Schreiben werden die Events in den Event-Store geschrieben, während für das Lesen ein optimiertes Lese-Modell (z.B. eine denormalisierte Ansicht) verwendet wird, das regelmäßig aus den Events generiert und aktualisiert wird. Dadurch können Leseoperationen sehr schnell durchgeführt werden, ohne dass alle Events (nochmal) verarbeitet werden müssen. Zusätzlich kann Caching auf diesen Lese-Modelle anwenden, um die Performance für häufig abgefragte Daten weiter zu verbessern. In unserem Beispiel könnte das Lese-Modell eine denormalisierte Tabelle sein, die den aktuellen Zustand des Warenkorbs für jeden Benutzer speichert. Diese Warenkorb-Tabelle wird bei jedem Event aktualisiert. Sodass beim Aufruf von `GET /cart` schon alle Events verarbeitet wurden und der Datenbankeintrag sehr schnell abgerufen und an den Client zurückgegeben werden kann.
+4. **CQRS und Caching** In vielen Event-Sourcing-Systemen wird das CQRS-Muster (Command Query Responsibility Segregation) verwendet. Dabei werden die Schreib- und Leseoperationen auf unterschiedliche Modelle und Datenbanken aufgeteilt. Für das Schreiben werden die Events in den Event-Store geschrieben, während für das Lesen ein optimiertes Lese-Modell (z.B. eine denormalisierte Ansicht) verwendet wird, das regelmäßig aus den Events generiert und aktualisiert wird. Dadurch können Leseoperationen sehr schnell durchgeführt werden, ohne dass alle Events (nochmal) verarbeitet werden müssen. Zusätzlich kann man Caching auf diese Lese-Modelle anwenden, um die Performance für häufig abgefragte Daten weiter zu verbessern. In unserem Beispiel könnte das Lese-Modell eine denormalisierte Tabelle sein, die den aktuellen Zustand des Warenkorbs für jeden Benutzer speichert. Diese Warenkorb-Tabelle wird bei jedem Event aktualisiert, sodass beim Aufruf von `GET /cart` schon alle Events verarbeitet wurden und der Datenbankeintrag sehr schnell abgerufen und an den Client zurückgegeben werden kann.
 
 Diese Techniken können helfen, Event-Sourcing auch in größeren Systemen einzusetzen. Aber sie bringen zusätzliche Komplexität mit sich und müssen sorgfältig implementiert werden. Für viele Anwendungsfälle ist CRUD einfach die bessere Wahl.
 
@@ -233,17 +233,17 @@ Diese Techniken können helfen, Event-Sourcing auch in größeren Systemen einzu
 
 ### Vorteile
 
-- **Näher an der Fachdomäne**: Events können beschreiben was im Business passiert ist, nicht nur technische Zustandsänderungen. Das kann Event-Sourcing zu einer Ergänzung für Domain-Driven Design (DDD) und Event Storming machen – wenn das Team diese Konzepte bereits versteht.
+- **Näher an der Fachdomäne**: Events können beschreiben was im Business passiert ist, nicht nur technische Zustandsänderungen. Das kann Event-Sourcing zu einer Ergänzung für Domain-Driven Design (DDD) und Event Storming machen, wenn das Team diese Konzepte bereits versteht.
 
-- **Audit Trail**: Jede Änderung ist dokumentiert – wer hat wann was gemacht? Das kann für Compliance-Anforderungen nützlich sein, allerdings gibt es auch einfachere Wege, Audit-Logs zu implementieren.
+- **Audit Trail**: Wer hat wann was gemacht? Jede Änderung ist dokumentiert. Das kann für Compliance-Anforderungen nützlich sein, allerdings gibt es auch einfachere Wege, Audit-Logs zu implementieren.
 
-- **Zeitreisen möglich**: Der Zustand kann für jeden beliebigen Zeitpunkt rekonstruiert werden. Das kann beim Debugging helfen – wenn man die entsprechende Tooling-Infrastruktur aufgebaut hat.
+- **Zeitreisen möglich**: Der Zustand kann für jeden beliebigen Zeitpunkt rekonstruiert werden. Das kann beim Debugging helfen, wenn man die entsprechende Tooling-Infrastruktur aufgebaut hat.
 
-- **Keine Information geht verloren**: Der Kontext und die Absicht hinter jeder Änderung bleiben erhalten – vorausgesetzt, die Events wurden von Anfang an richtig modelliert.
+- **Keine Information geht verloren**: Der Kontext und die Absicht hinter jeder Änderung bleiben erhalten, vorausgesetzt, die Events wurden von Anfang an richtig modelliert.
 
 - **Passt zu Event-Driven Architectures**: Event-Sourcing kann gut mit CQRS, Microservices und asynchroner Kommunikation kombiniert werden. Das bedeutet aber auch: mehr bewegliche Teile, mehr Komplexität.
 
-- **Potenzial für Analytics**: Mit den historischen Daten lassen sich Analysen durchführen – aber das erfordert zusätzliche Entwicklung und Infrastruktur.
+- **Potenzial für Analytics**: Mit den historischen Daten lassen sich Analysen durchführen, aber das erfordert zusätzliche Entwicklung und Infrastruktur.
 
 ### Nachteile
 
@@ -251,7 +251,7 @@ Diese Techniken können helfen, Event-Sourcing auch in größeren Systemen einzu
 
 - **Performance-Probleme**: Ohne zusätzliche Maßnahmen wie Snapshots oder CQRS kann das System bei vielen Events sehr langsam werden. Diese Maßnahmen wiederum bringen eigene Komplexität mit.
 
-- **Speicherplatz-Explosion**: Events akkumulieren sich über die Zeit. Je nach Anwendungsfall können das Terabytes an Daten werden. Alte Events können nicht einfach gelöscht werden – das würde das Konzept ad absurdum führen.
+- **Speicherplatz-Explosion**: Events akkumulieren sich über die Zeit. Je nach Anwendungsfall können das Terabytes an Daten werden. Alte Events können nicht einfach gelöscht werden. Das würde das Konzept ad absurdum führen.
 
 - **Schema-Evolution ist schmerzhaft**: Alte Event-Schemas bleiben für immer erhalten. Änderungen müssen rückwärtskompatibel sein oder durch Upcaster migriert werden. Das kann bei lange laufenden Systemen zum echten Problem werden.
 
@@ -259,17 +259,17 @@ Diese Techniken können helfen, Event-Sourcing auch in größeren Systemen einzu
 
 - **Tooling-Lücken**: Im Vergleich zu relationalen Datenbanken ist das Tooling für Event-Sourcing weniger ausgereift. Debugging, Monitoring und Operations sind aufwändiger.
 
-- **Overkill für die meisten Anwendungen**: Seien wir ehrlich – die meisten CRUD-Anwendungen brauchen kein Event-Sourcing. Der Overhead lohnt sich nur, wenn die Vorteile wirklich benötigt werden.
+- **Overkill für die meisten Anwendungen**: Seien wir ehrlich: Die meisten CRUD-Anwendungen brauchen kein Event-Sourcing. Der Overhead lohnt sich nur, wenn die Vorteile wirklich benötigt werden.
 
 ## Fazit
 
-Event-Sourcing ist ein interessantes Architekturmuster, das in bestimmten Szenarien Vorteile bieten kann – insbesondere wenn vollständige Nachverfolgbarkeit, komplexe Analysen oder die Integration mit Event-Driven Architectures wichtig sind.
+Event-Sourcing ist ein interessantes Architekturmuster, das in bestimmten Szenarien Vorteile bieten kann, insbesondere wenn vollständige Nachverfolgbarkeit, komplexe Analysen oder die Integration mit Event-Driven Architectures wichtig sind.
 
-Aber: Event-Sourcing ist kein Wundermittel. Die zusätzliche Komplexität ist erheblich, die Lernkurve steil, und für die meisten Anwendungen ist CRUD schlicht die bessere Wahl. Bevor du Event-Sourcing einführst, solltest du ehrlich prüfen, ob du die Vorteile wirklich brauchst – oder ob ein einfaches Audit-Log nicht denselben Zweck erfüllt.
+Aber: Event-Sourcing ist kein Wundermittel. Die zusätzliche Komplexität ist erheblich, die Lernkurve steil, und für die meisten Anwendungen ist CRUD schlicht die bessere Wahl. Bevor du Event-Sourcing einführst, solltest du ehrlich prüfen, ob du die Vorteile wirklich brauchst oder ob ein einfaches Audit-Log nicht denselben Zweck erfüllt.
 
-Wenn du mehr über Event-Sourcing erfahren möchtest, empfehle ich dir, dich mit den Konzepten von Domain-Driven Design (DDD) und Command Query Responsibility Segregation (CQRS) auseinanderzusetzen, da diese oft in Kombination mit Event-Sourcing verwendet werden. Aber geh skeptisch an die Sache heran – viele Projekte haben sich mit Event-Sourcing übernommen.
+Wenn du mehr über Event-Sourcing erfahren möchtest, empfehle ich dir, dich mit den Konzepten von Domain-Driven Design (DDD) und Command Query Responsibility Segregation (CQRS) auseinanderzusetzen, da diese oft in Kombination mit Event-Sourcing verwendet werden. Aber geh skeptisch an die Sache heran: Viele Projekte haben sich mit Event-Sourcing übernommen.
 
-Du möchtest sehen, wie Event-Sourcing in einem echten Projekt eingesetzt wird? Mit [jotti](https://jotti.rocks) baue ich gerade ein Kassensystem für Vereine und gemeinnützige Organisationen, das auf die KassenSichV ausgelegt ist – mit TSE-Signatur je Vorgang und einem append-only Kassenjournal. Event-Sourcing ist dabei der Kern der Kassen-Operationen: Bestellungen, Stornierungen und Bezahlungen werden als unveränderliche Events gespeichert. Sieh dir den Sourcecode auf Github an: [github.com/nicograef/jotti](https://github.com/nicograef/jotti)
+Du möchtest sehen, wie Event-Sourcing in einem echten Projekt eingesetzt wird? Mit [jotti](https://jotti.rocks) baue ich gerade ein Kassensystem für Vereine und gemeinnützige Organisationen, das auf die KassenSichV ausgelegt ist, mit TSE-Signatur je Vorgang und einem append-only Kassenjournal. Event-Sourcing ist dabei der Kern der Kassen-Operationen: Bestellungen, Stornierungen und Bezahlungen werden als unveränderliche Events gespeichert. Sieh dir den Sourcecode auf GitHub an: [github.com/nicograef/jotti](https://github.com/nicograef/jotti)
 
 ## Weiterführende Links
 

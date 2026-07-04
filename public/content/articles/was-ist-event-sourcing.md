@@ -1,14 +1,14 @@
 # Was ist Event-Sourcing?
 
-Event-Sourcing ist eine Alternative zu CRUD. Dabei werden nicht die aktuellen Zustände von Objekten gespeichert, sondern alle Änderungen (Events), die zu diesem Zustand geführt haben. Dies kann eine vollständige Nachverfolgbarkeit und Wiederherstellung des Systemzustands zu jedem beliebigen Zeitpunkt ermöglichen.
+Event-Sourcing ist eine Alternative zu CRUD: Statt den aktuellen Zustand eines Objekts zu speichern, speichert man alle Änderungen (Events), die zu diesem Zustand geführt haben. Damit lässt sich der Systemzustand für jeden beliebigen Zeitpunkt rekonstruieren, zumindest in der Theorie.
 
-**Stell dir Event-Sourcing wie Git vor:** Git speichert nicht einfach den aktuellen Zustand deines Codes, sondern jeden einzelnen Commit – jede Änderung, die jemals gemacht wurde. Du kannst jederzeit zu einem früheren Stand zurückkehren, sehen wer wann was geändert hat, und verstehen warum bestimmte Entscheidungen getroffen wurden. Event-Sourcing verfolgt einen ähnlichen Ansatz für Anwendungsdaten.
+**Stell dir Event-Sourcing wie Git vor:** Git speichert nicht den aktuellen Stand deines Codes, sondern jeden einzelnen Commit. Du kannst jederzeit zu einem früheren Stand zurückkehren und nachvollziehen, wer wann was geändert hat. Event-Sourcing macht dasselbe mit Anwendungsdaten.
 
-In einem Event-Sourcing-System gibt es kein UPDATE und es gibt auch kein DELETE. Genaugenommen gibt es auch kein CREATE, stattdessen gibt es nur "Write/Add Event". Selbst das Lesen (READ) funktioniert anders als bei CRUD: Anstatt den aktuellen Zustand eines Objekts direkt aus einer Datenbanktabelle abzurufen, werden alle Events zu diesem Objekt gelesen und der aktuelle Zustand durch das Anwenden dieser Events rekonstruiert.
+In einem Event-Sourcing-System gibt es kein UPDATE und kein DELETE, nur das Anhängen neuer Events. Selbst das Lesen funktioniert anders als bei CRUD: Der aktuelle Zustand wird nicht direkt aus einer Datenbanktabelle abgerufen, sondern aus allen Events zu diesem Objekt rekonstruiert.
 
 ## Was ist ein Event?
 
-Ein Event beschreibt ein Ereignis, das im System stattgefunden hat. Events sind unveränderliche Fakten, die das beschreiben, was passiert ist. Bei deinem Bankkonto könnte es zum Beispiel diese Events geben: "Überweisung wurde durchgeführt" oder "Bargeld wurde abgehoben".
+Ein Event beschreibt ein Ereignis, das im System stattgefunden hat: ein unveränderlicher Fakt. Bei deinem Bankkonto könnte es zum Beispiel diese Events geben: "Überweisung wurde durchgeführt" oder "Bargeld wurde abgehoben".
 
 Ein Event besteht aus:
 
@@ -19,7 +19,7 @@ Ein Event besteht aus:
 
 ## Event Store
 
-_Event Store_ ist die Bezeichnung für eine Datenbank, die Events speichert. Als Tabelle in einer relationalen Datenbank, als Collection in einer NoSQL-Datenbank oder in einer speziell für Events optimierten Datenbank. Die wichtigste Eigenschaft: Der Event Store ist **append-only** – Events werden nur hinzugefügt, niemals geändert oder gelöscht.
+_Event Store_ ist die Bezeichnung für eine Datenbank, die Events speichert. Als Tabelle in einer relationalen Datenbank, als Collection in einer NoSQL-Datenbank oder in einer speziell für Events optimierten Datenbank. Die wichtigste Eigenschaft: Der Event Store ist **append-only**. Events werden nur hinzugefügt, niemals geändert oder gelöscht.
 
 ## Kurzes Beispiel: Warenkorb
 
@@ -41,14 +41,14 @@ Um den aktuellen Zustand des Warenkorbs zu ermitteln, werden alle Events der Rei
 | product-added    | Produkt 123 (Menge: 1), Produkt 456 (Menge: 2)  |
 | product-removed  | Produkt 456 (Menge: 2)                          |
 
-Das Ergebnis: Im Warenkorb liegt Produkt 456 mit Menge 2. Wir können aber auch nachvollziehen, dass Produkt 123 einmal hinzugefügt, in der Menge geändert und dann wieder entfernt wurde – diese Information wäre bei CRUD verloren.
+Das Ergebnis: Im Warenkorb liegt Produkt 456 mit Menge 2. Wir können aber auch nachvollziehen, dass Produkt 123 einmal hinzugefügt, in der Menge geändert und dann wieder entfernt wurde. Diese Information wäre bei CRUD verloren.
 
 > Mehr Details und eine vollständige Implementierung findest du im Artikel [Event-Sourcing am Beispiel Warenkorb erklärt](/articles/event-sourcing-am-beispiel-warenkorb-erklaert).
 
 ## Vorteile
 
 - **Näher an der Fachdomäne**: Events beschreiben, was im Business passiert ist, nicht nur technische Zustandsänderungen. Das macht Event-Sourcing zu einer guten Ergänzung für [Domain Driven Design (DDD)](/articles/was-ist-domain-driven-design).
-- **Audit Trail**: Jede Änderung ist dokumentiert – wer hat wann was gemacht?
+- **Audit Trail**: Wer hat wann was gemacht? Jede Änderung ist dokumentiert.
 - **Zeitreisen möglich**: Der Zustand kann für jeden beliebigen Zeitpunkt rekonstruiert werden.
 - **Keine Information geht verloren**: Der Kontext und die Absicht hinter jeder Änderung bleiben erhalten.
 - **Potenzial für Analytics**: Mit den historischen Daten lassen sich Analysen durchführen, die mit CRUD nicht möglich wären.
@@ -60,3 +60,5 @@ Das Ergebnis: Im Warenkorb liegt Produkt 456 mit Menge 2. Wir können aber auch 
 - **Schema-Evolution ist schmerzhaft**: Alte Event-Schemas bleiben für immer erhalten. Änderungen müssen rückwärtskompatibel sein.
 - **Eventual Consistency**: Bei CQRS-basierten Systemen ist das Lese-Modell nicht sofort aktuell.
 - **Overkill für die meisten Anwendungen**: Die meisten CRUD-Anwendungen brauchen kein Event-Sourcing. Der Overhead lohnt sich nur, wenn die Vorteile wirklich benötigt werden.
+
+Wenn du Event-Sourcing in einem echten Projekt sehen willst: Bei [jotti](https://jotti.rocks), meinem Kassensystem für Vereine, ist das Kassenjournal ein append-only Event Store. Jede Bestellung, Stornierung und Zahlung ist ein unveränderliches Event ([Code auf GitHub](https://github.com/nicograef/jotti)).

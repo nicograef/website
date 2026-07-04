@@ -21,8 +21,9 @@
     <div class="project-list">
       <?php $shownEarlyHeading = false; ?>
       <?php foreach ($projects as $index => $p): ?>
-        <?php if (!empty($p['early']) && !$shownEarlyHeading): $shownEarlyHeading = true; ?>
-          <h3 class="early-projects-heading"><?= $lang === 'de' ? 'Frühe Projekte & Experimente' : 'Early Projects & Experiments' ?></h3>
+        <?php if (!empty($p['early']) && !$shownEarlyHeading): ?>
+          <?php $shownEarlyHeading = true; ?>
+          <h3><?= $lang === 'de' ? 'Frühe Projekte & Experimente' : 'Early Projects & Experiments' ?></h3>
         <?php endif; ?>
         <section class="project<?= $index === 0 ? ' fade-in' : '' ?>">
           <h3>

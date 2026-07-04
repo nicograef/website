@@ -13,7 +13,7 @@
     },
     {
         "slug": "was-ist-domain-driven-design",
-        "title": "Domain Driven Design: Die Brücke zwischen Fachwissen und Code",
+        "title": "Domain Driven Design: Wenn der Code die Fachsprache lernt",
         "description": "Wie Domain Driven Design die Lücke zwischen Fachabteilung und Code schließt, mit Ubiquitous Language, Bounded Contexts und taktischen Bausteinen.",
         "date": "2026-04-03"
     },
@@ -21,8 +21,7 @@
         "slug": "bounded-context-erklaert",
         "title": "Bounded Context: Klare Grenzen für komplexe Domänen",
         "description": "Warum ein einziges Datenmodell komplexe Systeme zum Scheitern bringt und wie Bounded Contexts klare Grenzen setzen, damit Teams und Modelle unabhängig bleiben.",
-        "date": "2026-04-03",
-        "author": "Nico Gräf"
+        "date": "2026-04-03"
     },
     {
         "slug": "anti-corruption-layer-erklaert",
@@ -33,7 +32,7 @@
     {
         "slug": "was-ist-event-sourcing",
         "title": "Was ist Event-Sourcing?",
-        "description": "Eine kurze Erklärung zu Event-Sourcing.",
+        "description": "Die Kurzfassung: Wie Event-Sourcing Änderungen statt Zuständen speichert, was ein Event ausmacht und wann sich der Ansatz lohnt.",
         "date": "2025-02-06"
     },
     {
