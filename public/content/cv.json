@@ -46,7 +46,7 @@
       "company": "Haufe Akademie",
       "location": "Freiburg im Breisgau, Germany",
       "location_de": "Freiburg im Breisgau",
-      "title": "Software Engineer",
+      "title": "Senior Software Engineer",
       "start": "2024-05",
       "end": null,
       "description": "Development for the training and education division of Haufe Group in a cross-functional Scrum team: event-driven serverless systems on AWS and React frontends. Played a leading role in building an internal React component library as a shadcn registry (registry setup and CLI, Radix UI components, Tailwind CSS, design tokens for the internal design system). Built a microservice for asynchronous communication between SAP and the rest of the system landscape, and trained the team in event-driven architecture to reduce coupling. Independently learned ABAP when SAP changes were needed, writing unit tests and splitting reports into testable, isolated classes. Gave an internal talk on event sourcing.",
