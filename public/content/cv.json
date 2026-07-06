@@ -49,8 +49,8 @@
       "title": "Software Engineer",
       "start": "2024-05",
       "end": null,
-      "description": "Part of a Scrum team building technical solutions for the training and education division of Haufe Group.",
-      "description_de": "Teil eines Scrum-Teams, das technische Lösungen für den Weiterbildungsbereich der Haufe Group entwickelt.",
+      "description": "Development for the training and education division of Haufe Group in a cross-functional Scrum team: event-driven serverless systems on AWS and React frontends. Played a leading role in building an internal React component library as a shadcn registry (registry setup and CLI, Radix UI components, Tailwind CSS, design tokens for the internal design system). Built a microservice for asynchronous communication between SAP and the rest of the system landscape, and trained the team in event-driven architecture to reduce coupling. Independently learned ABAP when SAP changes were needed, writing unit tests and splitting reports into testable, isolated classes. Gave an internal talk on event sourcing.",
+      "description_de": "Entwicklung für den Weiterbildungsbereich der Haufe Group in einem crossfunktionalen Scrum-Team: event-getriebene Serverless-Systeme auf AWS und React-Frontends. Maßgeblich am Aufbau einer internen React-Komponentenbibliothek als shadcn-Registry beteiligt (Registry-Setup und CLI, Radix-UI-Komponenten, Tailwind CSS, Design-Tokens zum internen Design-System). Einen Microservice für die asynchrone Kommunikation zwischen SAP und der übrigen Systemlandschaft gebaut und das Team in event-getriebener Architektur geschult, um Kopplung zu reduzieren. Selbstständig in ABAP eingearbeitet, als SAP-Anpassungen anstanden: Unit-Tests geschrieben und Reports in testbare, isolierte Klassen aufgeteilt. Interner Vortrag zu Event Sourcing.",
       "tags": [
         "AWS",
         "Serverless",
@@ -69,7 +69,9 @@
         "GitLab",
         "PostgreSQL",
         "Vite",
-        "shadcn/ui",
+        "shadcn",
+        "Radix UI",
+        "Microservices",
         "Tailwind CSS",
         "zod"
       ]
@@ -81,8 +83,8 @@
       "title": "Lead Software Engineer",
       "start": "2022-09",
       "end": "2024-05",
-      "description": "Led a team of five software engineers building the web application and backend services for Idana, a German healthcare startup providing a digital patient-intake assistant.",
-      "description_de": "Leitung eines Teams von fünf Softwareentwicklern. Verantwortlich für die Entwicklung der Webanwendung und Backend-Services von Idana, einem deutschen Healthcare-Startup mit einem digitalen Anamnese-Assistenten.",
+      "description": "Led a team of five software engineers (technically and disciplinarily) at Idana, a German healthcare startup providing a digital patient-intake assistant; also acted as Scrum Master and owned system architecture and tech-debt management. Led the migration of the JavaScript backend to a Go architecture, solved critical performance limits with database indexes based on normalized hashes, and cut build times sharply by introducing Vite and esbuild. Designed the Idana customer portal from customer-journey analysis to interactive clickdummy, and owned hiring and onboarding of new engineers.",
+      "description_de": "Fachliche und disziplinarische Führung eines fünfköpfigen Entwicklungsteams bei Idana, einem deutschen Healthcare-Startup mit digitalem Anamnese-Assistenten; zusätzlich Scrum Master sowie verantwortlich für Systemarchitektur und Tech-Debt-Management. Migration des JavaScript-Backends auf eine Go-Architektur geleitet, kritische Performance-Limits über Datenbank-Indizes auf Basis normalisierter Hashes gelöst und Build-Zeiten durch die Einführung von Vite und esbuild deutlich reduziert. Das Idana Customer Portal von der Customer-Journey-Analyse bis zum interaktiven Clickdummy konzipiert sowie Hiring und Onboarding neuer Entwickler verantwortet.",
       "tags": [
         "Leadership",
         "Scrum",
@@ -214,22 +216,6 @@
         "Embedded",
         "Teaching"
       ]
-    },
-    {
-      "company": "WEPA Apothekenbedarf GmbH & Co. KG",
-      "location": "Germany",
-      "location_de": "Deutschland",
-      "title": "IT Intern",
-      "title_de": "Praktikant im IT-Bereich",
-      "start": "2010-03",
-      "end": "2010-03",
-      "description": "One-month IT internship.",
-      "description_de": "Einmonatiges Praktikum im IT-Bereich.",
-      "tags": [
-        "Internship",
-        "Microsoft Office",
-        "IT Support"
-      ]
     }
   ],
   "education": [
@@ -315,7 +301,7 @@
   "volunteering": [
     {
       "role": "Board Member",
-      "role_de": "Vorstandsmitglied",
+      "role_de": "Mitglied der Vorstandschaft",
       "organization": "SV Jechtingen e.V.",
       "start": "2014",
       "end": "2019"
