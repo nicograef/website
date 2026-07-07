@@ -43,7 +43,7 @@ Every page is a tiny entry-point PHP file in `public/` that requires helpers fro
 
 ### Content model
 
-- `public/content/articles.json` is the **canonical publish list** (slug, title, description, date, author, tags, sorted newest-first). A slug missing here 404s even if the `.md` exists. No frontmatter parser — the `.md` files in `public/content/articles/` hold body only.
+- `public/content/articles.json` is the **canonical publish list** (slug, title, description, date, sorted newest-first). A slug missing here 404s even if the `.md` exists. No frontmatter parser — the `.md` files in `public/content/articles/` hold body only.
 - `public/content/projects.json` drives the homepage project cards; `loadProjects($lang)` in `public/lib/projects.php` resolves bilingual fields and returns plain associative arrays.
 - Adding an article = new `.md` in `public/content/articles/` **plus** a new entry at the top of `articles.json`. Both sides must match.
 

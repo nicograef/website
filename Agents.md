@@ -35,7 +35,7 @@ Pages use PHP output buffering via `render()` in `public/lib/render.php`:
 
 ## Article Metadata
 
-Article metadata lives in `public/content/articles.json` (slug, title, description, date, author, tags); the `.md` file in `public/content/articles/` holds body only — no frontmatter parser. Adding an article means updating both files. `articles.json` is the canonical publish list — a slug missing from it 404s even if the `.md` exists.
+Article metadata lives in `public/content/articles.json` (slug, title, description, date); the `.md` file in `public/content/articles/` holds body only — no frontmatter parser. Adding an article means updating both files. `articles.json` is the canonical publish list — a slug missing from it 404s even if the `.md` exists.
 
 ## CSS Architecture
 
