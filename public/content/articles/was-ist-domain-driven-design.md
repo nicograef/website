@@ -1,8 +1,8 @@
 # Domain Driven Design: Wenn der Code die Fachsprache lernt
 
-Du bist Entwickler in einem E-Commerce-Unternehmen. Die Fachabteilung meldet einen Bug: "Die Buchungsanfrage lässt sich nicht stornieren." Du schaust ins Log, findest einen `DELETE /booking-request/42` mit Status `204 No Content`. Alles hat funktioniert. Trotzdem ist der Bug da. Was ist passiert?
+Du bist Entwickler in einem E-Commerce-Unternehmen. Die Fachabteilung meldet einen Bug: „Die Buchungsanfrage lässt sich nicht stornieren.“ Du schaust ins Log, findest einen `DELETE /booking-request/42` mit Status `204 No Content`. Alles hat funktioniert. Trotzdem ist der Bug da. Was ist passiert?
 
-Die Fachabteilung meint mit "stornieren" etwas anderes als dein Code mit `DELETE`. Stornieren heißt: den Datensatz behalten, den Status ändern, offene Posten rückgängig machen, den Kunden benachrichtigen. Dein `DELETE` hat den Datensatz gelöscht. Die Fachabteilung und dein Code sprechen schlicht nicht dieselbe Sprache.
+Die Fachabteilung meint mit „stornieren“ etwas anderes als dein Code mit `DELETE`. Stornieren heißt: den Datensatz behalten, den Status ändern, offene Posten rückgängig machen, den Kunden benachrichtigen. Dein `DELETE` hat den Datensatz gelöscht. Die Fachabteilung und dein Code sprechen schlicht nicht dieselbe Sprache.
 
 Genau hier setzt **Domain Driven Design** (kurz **<abbr title="Domain Driven Design">DDD</abbr>**) an. DDD ist kein Framework und keine Bibliothek. Es ist eine Sammlung von Prinzipien, die Software so gestaltet, dass sie die Fachlichkeit widerspiegelt statt sie nur zu verwalten.
 
@@ -16,9 +16,9 @@ DDD dreht die übliche Reihenfolge um. Statt zuerst über Datenbanktabellen, RES
 
 DDDs Antwort auf das Kommunikationsproblem heißt **Ubiquitous Language**: die gemeinsame, verbindliche Sprache von Fachexperten und Entwicklern. Sie entsteht aus Gesprächen zwischen beiden Seiten und wird zur einzigen Sprache im Projekt.
 
-Die Regeln sind einfach. Begriffe der Ubiquitous Language tauchen im Code auf: in Klassen, Methoden, Modulen. Wenn sich die Sprache ändert, ändert sich der Code. Synonyme sind verboten. Entweder heißt es "Buchungsanfrage" oder "Reservierungsanfrage", nicht beides.
+Die Regeln sind einfach. Begriffe der Ubiquitous Language tauchen im Code auf: in Klassen, Methoden, Modulen. Wenn sich die Sprache ändert, ändert sich der Code. Synonyme sind verboten. Entweder heißt es „Buchungsanfrage“ oder „Reservierungsanfrage“, nicht beides.
 
-Zurück zum Beispiel: Die Fachabteilung sagt "stornieren", nicht "löschen". Also wird aus `DELETE /booking-request` ein `POST /buchungsanfrage-stornieren`. Der Code spricht dieselbe Sprache wie die Fachabteilung. Die Übersetzungsleistung auf Entwicklerseite (von Deutsch zu Englisch, von Fachsprache zu technischer Abstraktion) entfällt. Missverständnisse wie der vermeintliche Bug verschwinden.
+Zurück zum Beispiel: Die Fachabteilung sagt „stornieren“, nicht „löschen“. Also wird aus `DELETE /booking-request` ein `POST /buchungsanfrage-stornieren`. Der Code spricht dieselbe Sprache wie die Fachabteilung. Die Übersetzungsleistung auf Entwicklerseite (von Deutsch zu Englisch, von Fachsprache zu technischer Abstraktion) entfällt. Missverständnisse wie der vermeintliche Bug verschwinden.
 
 Das kann auch bedeuten, dass ein deutscher Fachbegriff zwischen dem sonst englischsprachigen Code auftaucht. Das ist kein Versehen, sondern Absicht: Der Code soll sich so lesen, wie die Fachabteilung das Geschäft beschreibt.
 
@@ -32,7 +32,7 @@ Ein Datenbankwechsel berührt die Fachlogik nicht. Eine Änderung der Geschäfts
 
 ## Strategisches und taktisches Design
 
-DDD unterscheidet zwei Werkzeugkästen. [Das strategische Design](/articles/strategisches-domain-driven-design) teilt große Domänen in überschaubare Bereiche auf, mit Konzepten wie Subdomains, Bounded Contexts und Context Maps. [Das taktische Design](/articles/taktisches-domain-driven-design) liefert Bausteine für die Umsetzung im Code: Entities, Value Objects, Aggregates, Repositories und Domain Events.
+DDD unterscheidet zwei Werkzeugkästen. Das strategische Design teilt große Domänen in überschaubare Bereiche auf, mit Konzepten wie Subdomains, Bounded Contexts und Context Maps. Das taktische Design liefert Bausteine für die Umsetzung im Code: Entities, Value Objects, Aggregates, Repositories und Domain Events.
 
 Beide Werkzeugkästen sind eigenständige Themen. Der Einstieg funktioniert ohne sie. Die Ubiquitous Language und die Trennung von Fachlogik und Technik bringen bereits Klarheit, bevor du dich mit Aggregates oder Context Maps beschäftigst.
 
@@ -42,4 +42,6 @@ DDD lohnt sich, wenn die Domain komplex ist: viele Geschäftsregeln, die Entwick
 
 Für einfache Datenanwendungen (Formular, Datenbank, Liste) ist DDD zu viel Aufwand. Auch wenn das Team klein ist und alle die Domain gut kennen, zahlt sich die Modellierung nicht aus.
 
-Der pragmatische Einstieg: Fang mit der Ubiquitous Language an. Die Fachsprache in den Code zu bringen kostet wenig und bringt sofort Klarheit. So halte ich es auch bei [jotti](https://jotti.rocks), meinem Kassensystem für Vereine: Der Code spricht von Bestellungen, Stornierungen und Tagesabschlüssen, in derselben Sprache wie die Menschen an der Kasse.
+Der pragmatische Einstieg: Fang mit der Ubiquitous Language an. Die Fachsprache in den Code zu bringen kostet wenig und bringt sofort Klarheit. So halte ich es auch bei [jotti](https://jotti.rocks), meinem Kassensystem für Vereine: Der Code spricht von Kassensitzung, Kassensturz und Tagesabschluss, in derselben Sprache wie die Menschen an der Kasse.
+
+Die Ubiquitous Language pflege ich dort als eigenes, verbindliches Dokument im Repository. jotti ist source-available; ausgelegt ist es auf die <abbr title="Kassensicherungsverordnung">KassenSichV</abbr>. Der Code auf [GitHub](https://github.com/nicograef/jotti) zeigt dir, wie deutsche Fachbegriffe in Go-Paketen aussehen.

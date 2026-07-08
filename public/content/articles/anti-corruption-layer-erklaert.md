@@ -44,21 +44,58 @@ Damit hast du das CRM-Modell in deinen Bestellservice kopiert. Dein Code verwend
 
 Benennt das CRM-Team `AKTIV_FLG` irgendwann um, bricht dein Service. Du bist direkt von Entscheidungen abhängig, die in einem anderen System getroffen werden.
 
-![Bestellservice ohne ACL: Das CRM-Modell fließt direkt in den Bestellservice](/assets/img/articles/acl-ohne-acl.png)
-_Ohne ACL: Das CRM-Modell fließt direkt in den Bestellservice_
+Der Datenfluss sieht dann so aus:
+
+```text
+┌───────────────────────────┐
+│        Legacy-CRM         │
+│ KNDNR · NNAME · AKTIV_FLG │
+└─────────────┬─────────────┘
+              │  liefert CRM-Format
+              ▼
+┌───────────────────────────┐
+│      Bestellservice       │
+│ KNDNR · NNAME · AKTIV_FLG │
+│ überall im Code verteilt  │
+└───────────────────────────┘
+```
+
+Die untere Box ist das Problem: Das CRM-Vokabular liegt nicht an einer Stelle, sondern verteilt sich über jede Datei, die Kundendaten anfasst. Genau das macht die Umbenennung von `AKTIV_FLG` so teuer.
 
 ## Das Pattern: Der Anti-Corruption Layer
 
 Der **Anti-Corruption Layer** (ACL) ist eine Übersetzungsschicht zwischen zwei Systemen. Er nimmt das Modell des externen Systems entgegen und übersetzt es in dein eigenes Domänenmodell. Dein Code kennt das externe Format nicht. Er arbeitet nur mit der Schnittstelle, die der ACL bereitstellt.
 
-> "As a downstream client, create an isolating layer to provide your system with functionality of the upstream system in terms of your own domain model. This layer talks to the other system through its existing interface, requiring little or no modification to the other system." (Eric Evans)
+> „As a downstream client, create an isolating layer to provide your system with functionality of the upstream system in terms of your own domain model. This layer talks to the other system through its existing interface, requiring little or no modification to the other system.“ (Eric Evans)
 
 Du passt dein Modell nicht dem externen System an. Du definierst zuerst, wie dein Modell aussehen soll, und schreibst dann den ACL, der die Übersetzung übernimmt.
 
-![Bestellservice mit ACL: Der CrmAdapter übersetzt das CRM-Modell](/assets/img/articles/acl-mit-acl.png)
-_Mit ACL: Der Adapter übersetzt das CRM-Format, bevor es deinen Code erreicht_
+Mit ACL sieht derselbe Datenfluss so aus:
 
-Das Gegenstück zum ACL ist der **Conformist**: Du übernimmst das externe Modell unverändert und sparst dir die Übersetzungslogik. Weniger Aufwand, aber direkte Abhängigkeit.
+```text
+┌───────────────────────────┐
+│        Legacy-CRM         │
+│ KNDNR · NNAME · AKTIV_FLG │
+└─────────────┬─────────────┘
+              │  liefert CRM-Format
+              ▼
+┌───────────────────────────┐
+│     CrmAdapter (ACL)      │
+│ übersetzt ins eigene      │
+│ Domänenmodell             │
+└─────────────┬─────────────┘
+              │  liefert Customer
+              ▼
+┌───────────────────────────┐
+│      Bestellservice       │
+│ kennt nur Customer        │
+│ und Address               │
+└───────────────────────────┘
+```
+
+Der entscheidende Unterschied steckt im mittleren Kasten: Oben kommt das CRM-Format an, unten kommt nur noch `Customer` heraus. Der Bestellservice bekommt vom CRM-Vokabular nichts mehr mit.
+
+Das Gegenstück zum ACL ist der **Conformist**: Du übernimmst das externe Modell unverändert und sparst dir die Übersetzungslogik. Das ist weniger Aufwand, dafür hängst du direkt am fremden Modell.
 
 ## Praxisbeispiel: CrmAdapter als Übersetzungsschicht
 
@@ -114,8 +151,12 @@ Du schreibst und pflegst die Übersetzungslogik. Das kostet etwas. Der Aufwand l
 - **Das externe Modell passt nicht zu deiner Fachlichkeit.** Kryptische Feldnamen, Codes statt sinnvoller Typen, eine Struktur, die mit deiner Domäne nichts zu tun hat.
 - **Du löst ein Altsystem schrittweise ab.** Beim *Strangler Fig Pattern* umschließen neue Services das Altsystem von außen, Stück für Stück. Jeder neue Service nutzt einen ACL. Sobald das Altsystem abgelöst ist, fällt der ACL weg.
 
+Bei jotti, meinem Kassensystem für Vereine, habe ich die Anbindung an die <abbr title="Technische Sicherheitseinrichtung">TSE</abbr>, die jeden Kassenvorgang signiert, nach diesem Prinzip gebaut. Die Domäne definiert ein eigenes `TSEClient`-Interface in `backend/domain/tse/client.go`; die Implementierung für den TSE-Anbieter fiskaly liegt separat in `backend/repository/tse_repo/`. Der Rest des Codes kennt nur das eigene Interface. Das fiskaly-API-Format endet im Adapter. Streng genommen ist das ein Adapter um einen Drittanbieter, kein Legacy-System. Der Mechanismus ist aber derselbe: Das fremde Modell endet an der Übersetzungsschicht.
+
 **Wann kein ACL nötig ist:** Wenn das externe Modell sauber ist, sich selten ändert und nah an deinem eigenen Modell liegt, reicht der Conformist-Ansatz. Nicht jede Integration braucht eine Übersetzungsschicht.
 
 ## Fazit
 
 Der ACL löst ein konkretes Problem: Er hält fremde Modelle aus deinem Code heraus. Änderungen im externen System enden am Adapter. Und am Tag, an dem du das Altsystem endgültig ablöst, entfernst du einfach den Adapter. Der Rest deines Codes funktioniert weiter, ohne dass du eine Zeile anfassen musst.
+
+Wenn du den `TSEClient` und seinen fiskaly-Adapter im Original sehen willst: jotti ist source-available, der komplette Code liegt auf [github.com/nicograef/jotti](https://github.com/nicograef/jotti). Was hinter dem Kassensystem steckt und warum es auf die <abbr title="Kassensicherungsverordnung">KassenSichV</abbr> ausgelegt ist, findest du auf [jotti.rocks](https://jotti.rocks).

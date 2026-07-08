@@ -90,8 +90,8 @@ Rules:
 - **Verifizieren statt vermuten.** Jede Aussage über jotti muss durch eine
   reale Datei oder ein reales Verzeichnis belegt sein. Verzeichnisbäume vor
   dem Zeichnen mit `ls`/`tree` gegen das Repo prüfen.
-- **Wording:** jotti ist **source-available** (nie „Open Source"), „ausgelegt
-  auf die <abbr>KassenSichV</abbr>" (nie „konform").
+- **Wording:** jotti ist **source-available** (nie „Open Source“), „ausgelegt
+  auf die <abbr>KassenSichV</abbr>“ (nie „konform“).
 - **Kein Bezug erzwingen.** Wenn das Thema keinen echten jotti-Bezug hat,
   diesen Schritt mit einem Begründungssatz im Protokoll überspringen.
 
@@ -152,10 +152,10 @@ and check each of the following points. Fix any issues found inline.
 7. **Terminologie** — Alle Begriffe müssen konsistent mit der Begriffsliste
    aus Schritt 2 (Recherche-Protokoll, Terminologie-Liste) verwendet
    werden.
-8. **Gedankenstrich-Check** — Kein „—" und kein „–" im Fließtext. Jeden
+8. **Gedankenstrich-Check** — Kein „—“ und kein „–“ im Fließtext. Jeden
    Fund auflösen: Komma, Doppelpunkt, Klammern oder eigener Satz.
 9. **Stimmen-Check** — Mindestens ein echter Ich-Anker (eigene Erfahrung,
-   jotti). Keine LLM-Brücken („Soweit die Theorie…"), keine Fazits, die nur
+   jotti). Keine LLM-Brücken („Soweit die Theorie…“), keine Fazits, die nur
    wiederholen, keine Staccato-Punchlines.
 10. **Visual-Check** — Jeder Codeblock hat einen Sprach-Tag; ASCII-Art und
     Terminal-Sessions sind als ` ```text ` getaggt. Jedes Visual besteht den
@@ -243,17 +243,17 @@ Lehrbuchton. Referenztexte: der Warenkorb-Event-Sourcing-Artikel und der
 Workflow-Artikel (`workflow-ki-coding-agents.md`).
 
 - **Ich-Perspektive und eigene Erfahrung als Anker** — „Mir ist das oft genug
-  passiert…", „Für jotti, mein Kassensystem für Vereine, …". Fakten über Nico
+  passiert…“, „Für jotti, mein Kassensystem für Vereine, …“. Fakten über Nico
   kommen ausschließlich aus `public/content/cv.json` und
   `public/content/projects.json`. Anekdoten nie erfinden — im Zweifel
   Platzhalter setzen und den User fragen.
 - **Ehrliche Hedges und Skepsis gegen Overengineering** — „zumindest in der
-  Theorie", „Seien wir ehrlich", „CRUD reicht oft"-Disclaimer. Ein Artikel,
+  Theorie“, „Seien wir ehrlich“, „CRUD reicht oft“-Disclaimer. Ein Artikel,
   der nur Vorteile aufzählt, ist keiner.
 - **Keine LLM-Brücken** — keine rhetorischen Überleitungen wie „Soweit die
-  Theorie…", keine Fazits, die den Artikel nur wiederholen, keine
+  Theorie…“, keine Fazits, die den Artikel nur wiederholen, keine
   Staccato-Punchlines.
-- **Keine Gedankenstriche im Fließtext** — weder „—" noch „–". Einschübe
+- **Keine Gedankenstriche im Fließtext** — weder „—“ noch „–“. Einschübe
   auflösen in Komma, Doppelpunkt, Klammern oder einen eigenen Satz.
   (Diese SKILL.md nutzt Gedankenstriche in Anweisungen; im Artikeltext
   sind sie tabu.)
@@ -284,7 +284,7 @@ Workflow-Artikel (`workflow-ki-coding-agents.md`).
 - **jotti-Querverweis am Artikelende** ist erwünscht: kurzer Absatz mit Link
   auf [jotti.rocks](https://jotti.rocks) und/oder
   [github.com/nicograef/jotti](https://github.com/nicograef/jotti), inklusive
-  „source-available" und „ausgelegt auf die KassenSichV". Wording von Artikel
+  „source-available“ und „ausgelegt auf die KassenSichV“. Wording von Artikel
   zu Artikel variieren — nicht dreimal derselbe Satz.
 - Self-links use **nicograef.com** (never nicograef.de).
 
@@ -293,7 +293,7 @@ Workflow-Artikel (`workflow-ki-coding-agents.md`).
 Gemäßigt eingesetzte Text-Visuals machen Artikel greifbarer. Es gibt keine
 feste Obergrenze — aber jedes Visual muss den **Mehrwert-Test** bestehen:
 Es zeigt Struktur, Ablauf oder Look-and-feel, die Prosa nicht transportieren
-kann. Im Zweifel weglassen; „Fließtext bevorzugt" gilt weiter.
+kann. Im Zweifel weglassen; „Fließtext bevorzugt“ gilt weiter.
 
 Ein gutes Visual besteht aus drei Teilen: ein Satz davor, der sagt, was
 gleich zu sehen ist; der Block selbst; danach ein Bezug auf ein Detail aus
@@ -350,8 +350,8 @@ Werkzeug-Ausgaben eingerückt, Gekürztes mit `…`.
 | Blockquotes | For disclaimers, scope notes, tips (`> **Disclaimer:** …`) |
 | Pros/Cons lists | Bulleted list with **bold keyword**: explanation |
 | Inline code | Backtick-wrapped for identifiers, file names, commands |
-| Gedankenstriche | Keine „—"/„–" im Fließtext: auflösen in Komma, Doppelpunkt, Klammern oder eigenen Satz |
-| Anführungszeichen | Deutsche Anführungszeichen („…") im Fließtext |
+| Gedankenstriche | Keine „—“/„–“ im Fließtext: auflösen in Komma, Doppelpunkt, Klammern oder eigenen Satz |
+| Anführungszeichen | Deutsche Anführungszeichen („…“) im Fließtext |
 
 ### Content Patterns
 

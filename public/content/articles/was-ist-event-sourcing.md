@@ -8,7 +8,7 @@ In einem Event-Sourcing-System gibt es kein UPDATE und kein DELETE, nur das Anh�
 
 ## Was ist ein Event?
 
-Ein Event beschreibt ein Ereignis, das im System stattgefunden hat: ein unveränderlicher Fakt. Bei deinem Bankkonto könnte es zum Beispiel diese Events geben: "Überweisung wurde durchgeführt" oder "Bargeld wurde abgehoben".
+Ein Event beschreibt ein Ereignis, das im System stattgefunden hat: ein unveränderlicher Fakt. Bei deinem Bankkonto könnte es zum Beispiel diese Events geben: „Überweisung wurde durchgeführt“ oder „Bargeld wurde abgehoben“.
 
 Ein Event besteht aus:
 
@@ -19,7 +19,7 @@ Ein Event besteht aus:
 
 ## Event Store
 
-_Event Store_ ist die Bezeichnung für eine Datenbank, die Events speichert. Als Tabelle in einer relationalen Datenbank, als Collection in einer NoSQL-Datenbank oder in einer speziell für Events optimierten Datenbank. Die wichtigste Eigenschaft: Der Event Store ist **append-only**. Events werden nur hinzugefügt, niemals geändert oder gelöscht.
+**Event Store** ist die Bezeichnung für eine Datenbank, die Events speichert. Als Tabelle in einer relationalen Datenbank, als Collection in einer NoSQL-Datenbank oder in einer speziell für Events optimierten Datenbank. Die wichtigste Eigenschaft: Der Event Store ist **append-only**. Events werden nur hinzugefügt, niemals geändert oder gelöscht.
 
 ## Kurzes Beispiel: Warenkorb
 
@@ -43,11 +43,9 @@ Um den aktuellen Zustand des Warenkorbs zu ermitteln, werden alle Events der Rei
 
 Das Ergebnis: Im Warenkorb liegt Produkt 456 mit Menge 2. Wir können aber auch nachvollziehen, dass Produkt 123 einmal hinzugefügt, in der Menge geändert und dann wieder entfernt wurde. Diese Information wäre bei CRUD verloren.
 
-> Mehr Details und eine vollständige Implementierung findest du im Artikel [Event-Sourcing am Beispiel Warenkorb erklärt](/articles/event-sourcing-am-beispiel-warenkorb-erklaert).
-
 ## Vorteile
 
-- **Näher an der Fachdomäne**: Events beschreiben, was im Business passiert ist, nicht nur technische Zustandsänderungen. Das macht Event-Sourcing zu einer guten Ergänzung für [Domain Driven Design (DDD)](/articles/was-ist-domain-driven-design).
+- **Näher an der Fachdomäne**: Events beschreiben, was im Business passiert ist, nicht nur technische Zustandsänderungen. Das macht Event-Sourcing zu einer guten Ergänzung für Domain Driven Design (DDD).
 - **Audit Trail**: Wer hat wann was gemacht? Jede Änderung ist dokumentiert.
 - **Zeitreisen möglich**: Der Zustand kann für jeden beliebigen Zeitpunkt rekonstruiert werden.
 - **Keine Information geht verloren**: Der Kontext und die Absicht hinter jeder Änderung bleiben erhalten.
@@ -61,4 +59,4 @@ Das Ergebnis: Im Warenkorb liegt Produkt 456 mit Menge 2. Wir können aber auch 
 - **Eventual Consistency**: Bei CQRS-basierten Systemen ist das Lese-Modell nicht sofort aktuell.
 - **Overkill für die meisten Anwendungen**: Die meisten CRUD-Anwendungen brauchen kein Event-Sourcing. Der Overhead lohnt sich nur, wenn die Vorteile wirklich benötigt werden.
 
-Wenn du Event-Sourcing in einem echten Projekt sehen willst: Bei [jotti](https://jotti.rocks), meinem Kassensystem für Vereine, ist das Kassenjournal ein append-only Event Store. Jede Bestellung, Stornierung und Zahlung ist ein unveränderliches Event ([Code auf GitHub](https://github.com/nicograef/jotti)).
+Diese Abwägung habe ich für mein eigenes Projekt getroffen: Bei [jotti](https://jotti.rocks), meinem Kassensystem für Vereine, ist das Kassenjournal ein append-only Event Store. Ob eine Servicekraft eine Bestellung auf einen anderen Tisch umbucht oder der Kassensturz am Abend eine Soll-Ist-Differenz verbucht: Alles landet als unveränderliches Event im Journal. Für ein Kassensystem, ausgelegt auf die <abbr title="Kassensicherungsverordnung">KassenSichV</abbr>, ist das eine solide Basis. Der Code ist source-available und liegt auf [GitHub](https://github.com/nicograef/jotti).
