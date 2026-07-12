@@ -66,7 +66,11 @@ Die untere Box ist das Problem: Das CRM-Vokabular liegt nicht an einer Stelle, s
 
 Der **Anti-Corruption Layer** (ACL) ist eine Übersetzungsschicht zwischen zwei Systemen. Er nimmt das Modell des externen Systems entgegen und übersetzt es in dein eigenes Domänenmodell. Dein Code kennt das externe Format nicht. Er arbeitet nur mit der Schnittstelle, die der ACL bereitstellt.
 
+Geprägt hat den Begriff Eric Evans im [Domain-Driven Design](/articles/was-ist-domain-driven-design):
+
 > „As a downstream client, create an isolating layer to provide your system with functionality of the upstream system in terms of your own domain model. This layer talks to the other system through its existing interface, requiring little or no modification to the other system.“ (Eric Evans)
+
+An DDD gebunden ist das Muster aber nicht. Es greift überall, wo du ein externes Modell von deinem eigenen trennen willst, ganz gleich, ob dein System sonst nach DDD gebaut ist oder nicht.
 
 Du passt dein Modell nicht dem externen System an. Du definierst zuerst, wie dein Modell aussehen soll, und schreibst dann den ACL, der die Übersetzung übernimmt.
 
@@ -158,5 +162,3 @@ Bei jotti, meinem Kassensystem für Vereine, habe ich die Anbindung an die <abbr
 ## Fazit
 
 Der ACL löst ein konkretes Problem: Er hält fremde Modelle aus deinem Code heraus. Änderungen im externen System enden am Adapter. Und am Tag, an dem du das Altsystem endgültig ablöst, entfernst du einfach den Adapter. Der Rest deines Codes funktioniert weiter, ohne dass du eine Zeile anfassen musst.
-
-Wenn du den `TSEClient` und seinen fiskaly-Adapter im Original sehen willst: jotti ist source-available, der komplette Code liegt auf [github.com/nicograef/jotti](https://github.com/nicograef/jotti). Was hinter dem Kassensystem steckt und warum es auf die <abbr title="Kassensicherungsverordnung">KassenSichV</abbr> ausgelegt ist, findest du auf [jotti.rocks](https://jotti.rocks).
