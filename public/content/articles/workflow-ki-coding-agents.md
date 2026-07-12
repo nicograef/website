@@ -2,7 +2,19 @@
 
 Ein Coding-Agent hat mir in jotti, meinem Kassensystem für Vereine, einmal das Einmalpasswort für den Erst-Login umgebaut. Ursprünglich waren das sechs Ziffern. Der Agent stellte den Generator auf acht alphanumerische Zeichen um und zog das Frontend sauber nach: Das Eingabefeld verlangte jetzt acht Zeichen. Nur eine Kleinigkeit blieb liegen: In der Initial-Migration stand weiterhin der hartkodierte Argon2id-Hash des alten Codes `123456`, also sechs Ziffern. Bei jeder Neuinstallation verlangte das Eingabefeld acht Zeichen, der einzige gültige Code hatte aber sechs. Kein Login möglich, Deadlock ab dem ersten Start. Das Backend hätte das auffangen können, prüfte das Format des Codes aber gar nicht, nur ob überhaupt etwas eingegeben wurde.
 
-Das Modell hat hier nichts falsch gerechnet. Es hat an einer Stelle geraten, die niemand vorgegeben hatte: dass Generator, Eingabefeld und der geseedete Code zusammenpassen müssen. Das ist mein Punkt. Das Problem ist selten das Modell. Das Problem sind die Lücken in der Aufgabe, denn bei jeder davon muss das Modell raten. Mir ist das oft genug passiert, um daraus einen festen Workflow aus vier Phasen zu machen: klären, planen, umsetzen, prüfen. Jede Phase hat eine eigene Anleitung, einen sogenannten **Skill**: eine Markdown-Datei, die dem Agent vorgibt, wie er in dieser Phase arbeiten soll. Ich nutze dafür Claude Code; das Konzept funktioniert aber mit jedem Agent, der solche Anleitungen lesen kann. Wie sich der Workflow anfühlt, zeige ich an einem echten, größeren Feature aus jotti.
+Das Modell hat hier nichts falsch gerechnet. Es hat an einer Stelle geraten, die niemand vorgegeben hatte: dass Generator, Eingabefeld und der geseedete Code zusammenpassen müssen. Das ist mein Punkt. Das Problem ist selten das Modell. Das Problem sind die Lücken in der Aufgabe, denn bei jeder davon muss das Modell raten. Mir ist das oft genug passiert, um daraus einen festen Workflow aus vier Phasen zu machen: klären, planen, umsetzen, prüfen. Jede Phase hat ihren eigenen **Skill**.
+
+> Ein Skill ist eine Markdown-Anleitung, die dem Agent für eine
+> bestimmte Aufgabe eine Arbeitsweise vorgibt: welche Schritte er
+> in welcher Reihenfolge geht und woran er sich dabei hält.
+
+Ich nutze dafür Claude Code, das **Harness** meiner Wahl; das Konzept funktioniert aber mit jedem Agent, der solche Anleitungen lesen kann.
+
+> Das Harness ist die Software rund um das Sprachmodell: die
+> Werkzeuge, der Dateizugriff und die Regeln, mit denen das Modell
+> arbeitet. Claude Code ist ein solches Harness.
+
+Wie sich der Workflow anfühlt, zeige ich an einem echten, größeren Feature aus jotti.
 
 ## Das Feature: die TSE-Signatur aus dem Kassier-Pfad lösen
 
@@ -58,7 +70,17 @@ d70ba5e feat(tse): Kassenabschluss-Gate über Signaturstatus-Funktion (Phase 5)
 312f2a0 feat(tse): decouple TSE signing from checkout via transactional outbox
 ```
 
-Die frische Session pro Phase ist mehr als Ordnungsliebe. Das Kontextfenster eines Modells füllt sich schnell, und je voller es wird, desto eher gehen frühere Anweisungen unter. Zwischen meinen Phasen reist deshalb nur das jeweilige Artefakt (das PRD in die Planung, der Plan in die Umsetzung), nicht der komplette Chatverlauf. Recherche-Aufgaben lagere ich zusätzlich an Subagents aus, die in ihrem eigenen Kontext lesen und nur ihr Ergebnis zurückmelden.
+Die frische Session pro Phase ist mehr als Ordnungsliebe. Sie hält das **Kontextfenster** frei.
+
+> Das Kontextfenster ist das begrenzte Arbeitsgedächtnis des
+> Modells. Es füllt sich im Lauf einer Session, und je voller es
+> wird, desto eher gehen frühere Anweisungen darin unter.
+
+Zwischen meinen Phasen reist deshalb nur das jeweilige Artefakt (das PRD in die Planung, der Plan in die Umsetzung), nicht der komplette Chatverlauf. Recherche-Aufgaben lagere ich zusätzlich an **Subagents** aus.
+
+> Ein Subagent ist ein eigenständiger Agent mit eigenem, frischem
+> Kontextfenster. Er bearbeitet eine Teilaufgabe getrennt und
+> liefert nur sein Ergebnis zurück, nicht seinen ganzen Verlauf.
 
 Ein Nebeneffekt der Phasentrennung: Jede Phase kann ein anderes Modell bekommen. Fürs offene Klären nehme ich das gründlichste Modell, das ich bekommen kann (aktuell Fable 5), fürs Planen ein starkes Reasoning-Modell (Opus 4.8), fürs Umsetzen ein schnelles, zuverlässiges (Sonnet 5). Diese Namen sind vermutlich schneller veraltet als der Rest dieses Artikels. Das Muster dahinter bleibt: die meiste Denkleistung in die offenen Fragen stecken, nicht in die klar umrissene Umsetzung.
 
