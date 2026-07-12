@@ -273,8 +273,6 @@ Aber: Event-Sourcing ist kein Wundermittel. Die zusätzliche Komplexität ist er
 
 Wenn du mehr über Event-Sourcing erfahren möchtest, empfehle ich dir, dich mit den Konzepten von Domain-Driven Design (DDD) und Command Query Responsibility Segregation (CQRS) auseinanderzusetzen, da diese oft in Kombination mit Event-Sourcing verwendet werden. Aber geh skeptisch an die Sache heran: Viele Projekte haben sich mit Event-Sourcing übernommen.
 
-Du möchtest sehen, wie Event-Sourcing in einem echten Projekt eingesetzt wird? Mit [jotti](https://jotti.rocks) baue ich gerade ein source-available Kassensystem für Vereine und gemeinnützige Organisationen, das auf die KassenSichV ausgelegt ist, mit TSE-Signatur je Vorgang und einem append-only Kassenjournal. Event-Sourcing ist dabei der Kern der Kasse: Vom Aufnehmen einer Bestellung über die Teilzahlung mit Rückgeld bis zur Stornierung wird jeder Vorgang als unveränderliches Event gespeichert. Sieh dir den Sourcecode auf GitHub an: [github.com/nicograef/jotti](https://github.com/nicograef/jotti)
-
 ## Weiterführende Links
 
 - [CQRS - Command Query Responsibility Segregation](https://martinfowler.com/bliki/CQRS.html)
