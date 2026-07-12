@@ -1,5 +1,11 @@
 [
     {
+        "slug": "workflow-ki-coding-agents",
+        "title": "Erst klären, dann coden: Mein Workflow mit KI-Coding-Agents",
+        "description": "Klären, planen, umsetzen, prüfen: Wie ich mit Claude Code an jotti arbeite und warum der KI-Agent dabei nie raten muss.",
+        "date": "2026-07-07"
+    },
+    {
         "slug": "strategisches-domain-driven-design",
         "title": "Strategisches Domain Driven Design: Große Domänen aufteilen",
         "description": "Wie Subdomains, Bounded Contexts und Context Maps große Domänen in unabhängig entwickelbare Bereiche aufteilen.",
