@@ -1,4 +1,4 @@
-Repo for https://nicograef.de
+Repo for https://nicograef.com
 
 # Über mich
 

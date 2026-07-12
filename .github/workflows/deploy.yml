@@ -6,12 +6,21 @@ on:
   pull_request:
     branches: ["main"]
 
+# Least-privilege token; no job here writes to the repo (deploy ships out via SSH).
+permissions:
+  contents: read
+
+# Serialize deploys to the same ref — never abort a half-finished rsync.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Setup PHP 7.4
         uses: shivammathur/setup-php@v2
@@ -48,7 +57,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Install dependencies
         run: sudo apt-get install -y sshpass rsync

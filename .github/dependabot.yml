@@ -1,0 +1,15 @@
+# Monthly + grouped: one batched PR per ecosystem instead of per-dependency noise.
+# This repo has no package manager (vanilla PHP, no Composer/npm) — GitHub Actions
+# is the only versioned dependency surface. The github-actions updater keeps the
+# pinned action refs in .github/workflows/ from rotting.
+version: 2
+updates:
+  # ── GitHub Actions ──
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    groups:
+      github-actions:
+        patterns:
+          - "*"

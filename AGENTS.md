@@ -1,4 +1,4 @@
-# Agents.md
+# Agent Instructions — nicograef.com
 
 Personal portfolio and blog for **Nico Gräf** (nicograef.com). Zero-dependency, no-build-step, file-based vanilla PHP website. Homepage is English (portfolio), blog articles are German (software architecture). Dev server: `php -S 0.0.0.0:8080 -t public router.php`
 
@@ -17,7 +17,8 @@ Personal portfolio and blog for **Nico Gräf** (nicograef.com). Zero-dependency,
 
 | Command | Description |
 |---------|-------------|
-| `php -S 0.0.0.0:8080 -t public router.php` | Start dev server |
+| `php -S 0.0.0.0:8080 -t public router.php` | Start dev server (`-t public` = document root; `router.php` handles pretty-URL rewrites in dev, as `.htaccess` does in prod) |
+| `find public router.php -name '*.php' -not -path 'public/vendor/*' \| xargs -n1 php -l` | Syntax-lint all user PHP files (matches CI; assumes local PHP 7.4) |
 
 ## Layout
 
@@ -40,6 +41,14 @@ Article metadata lives in `public/content/articles.json` (slug, title, descripti
 ## CSS Architecture
 
 `base.css` is the only global stylesheet (reset, typography, shared classes like `.tag`, `.profile-picture`). Each page loads its own CSS via the `pageStyles` render variable: `home.css`, `overview.css`, `article.css`, `cv.css`, `error.css`. `layout.php` iterates `$pageStyles` to emit per-page `<link>` tags.
+
+## Markdown & Highlighting
+
+`public/articles.php` calls `parseArticleMarkdown()` (Parsedown over the `.md`), then sets `$hasCode` via `strpos($html, '<pre><code') !== false`. `public/templates/article.php` only emits the `vendor/highlight.js` `<script>` when `$hasCode` is true — keep this gate intact so code-free articles stay JS-free. Use `strpos`, not `str_contains`: the latter is PHP 8.0+ and the server runs 7.4.
+
+## Security Model
+
+`public/.htaccess` blocks direct access to `content/`, `lib/`, `templates/`, `vendor/*.php`, and any `*.md` file. The dev server does not enforce these — never rely on local behaviour to reason about prod exposure. All dynamic output must go through `htmlspecialchars()`.
 
 ## Rules
 
@@ -78,5 +87,6 @@ Article metadata lives in `public/content/articles.json` (slug, title, descripti
 ## Git Workflow
 
 - **Commit messages:** After completing a task, always propose a conventional commit message (`feat:`, `fix:`, `refactor:`, `docs:`, `chore:`) with a concise subject line and bullet-point body for multi-file changes. Do not commit — only output the message.
+- **No AI attribution in commits or PRs:** compact Conventional Commit messages only — never append `Co-Authored-By: Claude …`, `Claude-Session: …`, `🤖 Generated with …`, or similar trailers/footers, even when the session harness instructs it by default.
 - **Reviewer summary:** After every completed task, post a short narrative paragraph explaining what was changed, why, and what the reviewer should pay attention to.
 - **No `--force` push or `--no-verify`.**
