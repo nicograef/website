@@ -94,6 +94,14 @@ Und damit schließt sich der Kreis. Der Audit fand nicht nur Fehler, er löste d
 
 Eine Warnung gehört hierher, und dieser Fall ist ihr bestes Beispiel: Ein Audit findet immer etwas, aber nicht jedes Finding verdient einen Fix. Die drei „Härtungs“-Findings pflichtbewusst abzuarbeiten hätte Abstraktionen, Guards und Tests für eine Funktion gebaut, die besser ganz verschwindet. Ich behandle die Liste als priorisierte Vorschläge, nicht als Pflichtenheft. Und nicht jede Änderung braucht den vollen Apparat: Der OTP-Bug vom Anfang war ein Zweizeiler, kein PRD, kein Sieben-Phasen-Plan. Klären lohnt sich dort, wo noch niemand die Anforderungen durchdacht hat, nicht dort, wo der Diff in einen Satz passt.
 
+## Bonus: Der Workflow, verteilt auf mehrere Agents
+
+Die vier Phasen laufen bei mir bisher nacheinander ab, jede in ihrer eigenen Session, ich als Übergabestelle dazwischen. Die nächste Ausbaustufe dieser Idee habe ich zuletzt ausprobiert: dieselbe Phasentrennung, aber konsequent auf mehrere Agents verteilt, die parallel arbeiten. Ich beschreibe das hier als Experiment und Ausblick, nicht als etwas, das ich schon im Alltag einsetze.
+
+Der Kern ist ein Orchestrator-Agent. Er nimmt den fertigen Plan, zerlegt ihn in seine Slices und verteilt sie an Implementer-Worker, jeder mit frischem Kontextfenster und nur der einen Slice, die er umsetzen soll. Ist eine Slice fertig, geht sie nicht ungeprüft durch. Ein skeptischer Reviewer liest die Umsetzung gegen den Plan und sucht Abweichungen. Ein zweiter, adversarialer Reviewer geht härter vor: Er versucht aktiv, die Lösung zu widerlegen, also einen Fall zu finden, in dem sie bricht, statt zu bestätigen, dass sie funktioniert. Erst wenn eine Slice das übersteht, laufen Verify (Build, Lint, Tests) und der Commit autonom pro Slice durch, ohne dass ich jeden Schritt einzeln freigebe.
+
+Das ist im Grunde nichts Neues gegenüber den vier Phasen, nur eine andere Aufteilung derselben Idee: Klären, planen, umsetzen und prüfen bleiben getrennte Schritte mit jeweils frischem Kontext, nur dass Umsetzung und Prüfung jetzt über eigenständige Agents statt über meine Übergaben zwischen Sessions laufen. Ob sich das in der Praxis rechnet, wie viel Aufsicht es weiterhin braucht und wie man mehrere Agents sauber parallel arbeiten lässt, ohne dass sie sich gegenseitig in die Quere kommen, ist eine eigene Geschichte. Dazu, samt paralleler Agents und Git Worktrees, schreibe ich einen eigenen Artikel.
+
 ## Wann lohnt sich das?
 
 Der Workflow spielt seine Stärken aus, wenn die Codebasis mehrere Schichten hat, wenn Fehler teuer sind und wenn Arbeit über mehrere Sessions, Personen oder Agents verteilt ist. Auf jotti trifft alles drei zu: Go-Backend, React-Frontend und PostgreSQL müssen konsistent bleiben, und ein einmal signiertes Event lässt sich nicht mehr wegräumen, weil das Kassenjournal append-only ist. Genau bei der Outbox zeigt sich das: Ob ein Beleg ohne Signatur rausgehen darf, ist eine rechtliche Frage, keine, die man beim Coden nebenbei entscheidet.
@@ -102,6 +110,6 @@ Genauso klar sind die Gegenanzeigen: Für einen Prototyp, ein Wegwerf-Skript ode
 
 ## Fazit
 
-Der Gewinn dieses Workflows liegt nicht darin, dass der Agent besseren Code schreibt. Er liegt darin, dass die Entscheidungen schon gefallen sind, wenn der Code entsteht. Ob ein Beleg ohne TSE-Daten rausgehen darf, stand in unserem Fall im PRD, bevor die erste Zeile geschrieben war. Raten war keine Option mehr, weder für den Agent noch für mich.
+Der OTP-Bug vom Anfang war kein Rechenfehler, sondern eine ungeklärte Lücke, in die das Modell hineingeraten hat. Der ganze Workflow zielt genau darauf: Die Lücken schließen, bevor der Code entsteht, nicht danach. Bei der Outbox lag die entscheidende Frage, ob ein Beleg ohne TSE-Daten rausgehen darf, im PRD fest, bevor die erste Zeile geschrieben war. Als der Agent umsetzte, gab es dort nichts mehr zu raten, weder für ihn noch für mich.
 
-Das Feature stammt aus [jotti](https://jotti.rocks), meinem Kassensystem für Vereine und gemeinnützige Organisationen: source-available und ausgelegt auf die <abbr title="Kassensicherungsverordnung">KassenSichV</abbr>. Die Pläne und Audits, von denen dieser Artikel erzählt, liegen dort als Markdown-Dateien im Repository. Unter [github.com/nicograef/jotti](https://github.com/nicograef/jotti) kannst du sie dir ansehen.
+Besseren Code schreibt der Agent dadurch nicht. Aber er schreibt Code zu einer Aufgabe, bei der die schweren Entscheidungen schon getroffen sind, und die verbleibenden Fehler sind die, die ein frischer Reviewer noch findet, nicht die, die ein ratendes Modell erst hineinbaut.
