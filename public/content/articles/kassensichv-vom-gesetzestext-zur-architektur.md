@@ -6,7 +6,7 @@ Ein Kassenbuch für ein Vereinsfest sieht harmlos aus: ein paar Excel-Zeilen, Ba
 
 Denn sobald ein Smartphone oder ein PC das Kassenbuch führt, ist es rechtlich ein „elektronisches Aufzeichnungssystem“ und damit an strenge Vorgaben gebunden. Für [jotti](https://jotti.rocks), das Kassensystem, das ich für Vereine und gemeinnützige Organisationen baue, war die zentrale Frage nicht „wie baue ich eine App zum Bestellungen-Erfassen“, sondern: Wie übersetze ich Gesetzestext in Architekturentscheidungen? Dieser Artikel geht die wichtigsten davon durch.
 
-Falls dir Event-Sourcing noch nicht vertraut ist: Die Grundidee, Zustände nicht zu speichern, sondern aus Events zu rekonstruieren, ist die Basis für alles Weitere in diesem Artikel.
+Falls dir Event-Sourcing noch nicht vertraut ist, lohnt sich vorher ein Blick in [Event-Sourcing am Beispiel Warenkorb erklärt](/articles/event-sourcing-am-beispiel-warenkorb-erklaert). Die Grundidee, Zustände nicht zu speichern, sondern aus Events zu rekonstruieren, ist hier die Basis für alles Weitere.
 
 ## Die Rechtslage: was ein Kassensystem heute leisten muss
 
@@ -109,5 +109,3 @@ Diese Einordnung ist keine bloße Behauptung, sondern eine Eigenschaft der Archi
 ## Fazit
 
 Die Architekturentscheidungen in jotti (append-only Kassenjournal, TSE-Signatur pro Vorgang über eine Outbox, synchrone Projektion, CRUD für Stammdaten, Smartphones als reine Eingabegeräte) sind fast alle direkt aus AO, KassenSichV und GoBD ableitbar. Der Gesetzestext hat hier weniger Architektur verhindert als vielmehr eine vorgegeben, die sich auch ohne rechtlichen Zwang gut begründen ließe: Nachvollziehbarkeit und Unveränderbarkeit sind Eigenschaften, die man sich für ein Kassensystem sowieso wünscht.
-
-jotti ist aktuell in der Beta und source-available. Wenn du prüfen willst, ob der Code hält, was dieser Artikel verspricht: Das append-only Kassenjournal, die Datenbank-Trigger und die TSE-Anbindung liegen offen auf [github.com/nicograef/jotti](https://github.com/nicograef/jotti).
