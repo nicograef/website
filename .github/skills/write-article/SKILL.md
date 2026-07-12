@@ -54,7 +54,7 @@ synthesize the content into a **Recherche-Protokoll**.
    ("Was ist X?", Deep Dive, Pattern-Artikel) with 1–2 sentences of reasoning.
 4. **Titelvorschläge** — propose 2–3 German `# Title` options following the
    pattern `[Konzept] — [Nutzen für Leser]`. Mark one as recommended.
-5. **Praxisbeispiel aus jotti** — filled in Step 3 (see below).
+5. **Praxisbeispiel** — filled in Step 3 (see below).
 
 **Session-Notizen / Entwurf:** If the user also provided prior session notes
 or a draft, integrate them into the Recherche-Protokoll — treat them as an
@@ -68,14 +68,28 @@ Artikel hat, im neuen Artikel nicht erneut erklären — nur erwähnen.
 Do not present the Recherche-Protokoll yet — Step 3 adds the Praxisbeispiel
 section first.
 
-### 3. Praxisbeispiel aus jotti suchen
+### 3. Praxisbeispiel wählen
 
-Nicos eigenes Produkt **jotti** (`~/r/jotti`) ist die bevorzugte Quelle für
-Praxisbeispiele. Die Artikel sollen zeigen, dass Nico die Konzepte selbst
-anwendet — nicht nur Theorie referiert.
+Ein konkretes Beispiel macht das Konzept greifbar. Wähle das Beispiel, das
+das Konzept am klarsten illustriert. Generische Beispiele (CRM, Warenkorb,
+Bankkonto) sind dafür gleichwertig zu jotti — kein Beispiel ist bevorzugt,
+allein der Erklärwert entscheidet.
 
-Search the jotti repo for a real example that matches the topic. Good entry
-points:
+**jotti als Option:** Nicos eigenes Produkt **jotti** (`~/r/jotti`) darf als
+Beispiel dienen, aber nur, wenn es ein Konzept konkret illustriert (nicht als
+Selbstzweck). Regeln, falls du jotti verwendest:
+
+- **Maximal eine jotti-Passage pro Artikel.** Nicht das ganze Repo
+  durchdeklinieren — ein Beispiel, das trägt.
+- **Löschtest.** Die jotti-Passage muss entfernbar sein, ohne dass eine
+  Verständnislücke entsteht. Besteht sie den Test nicht, illustriert sie
+  nicht, sondern trägt die Erklärung — dann fehlt die Erklärung selbst.
+- **Keine externen jotti-Links in Konzept-Artikeln** (jotti.rocks, GitHub).
+  Die Nennung „jotti, mein Kassensystem für Vereine“ bleibt unverlinkt. Nur
+  in Erfahrungs-Artikeln, deren Gegenstand jotti selbst ist, darf die
+  Erstnennung verlinken.
+
+Gute Einstiegspunkte im jotti-Repo:
 
 | Thema | Wo suchen |
 |-------|-----------|
@@ -85,20 +99,23 @@ points:
 | AI-Workflows, Planung, PRDs, Skills | `docs/plans/`, `docs/prds/`, `.github/` |
 | Produkt- und Compliance-Kontext | `AGENTS.md`, `docs/compliance.md`, `docs/anforderungen.md` |
 
-Rules:
+Regeln für jede jotti-Aussage:
 
 - **Verifizieren statt vermuten.** Jede Aussage über jotti muss durch eine
   reale Datei oder ein reales Verzeichnis belegt sein. Verzeichnisbäume vor
   dem Zeichnen mit `ls`/`tree` gegen das Repo prüfen.
-- **Wording:** jotti ist **source-available** (nie „Open Source“), „ausgelegt
-  auf die <abbr>KassenSichV</abbr>“ (nie „konform“).
-- **Kein Bezug erzwingen.** Wenn das Thema keinen echten jotti-Bezug hat,
-  diesen Schritt mit einem Begründungssatz im Protokoll überspringen.
+- **Wording (nur falls jotti erwähnt wird):** jotti ist **source-available**
+  (nie „Open Source“), „ausgelegt auf die <abbr>KassenSichV</abbr>“ (nie
+  „konform“). Diese Regeln sind konditional — sie sind kein Anlass, jotti zu
+  erwähnen.
+- **Kein Bezug erzwingen.** Wenn das Thema keinen echten jotti-Bezug hat oder
+  ein generisches Beispiel klarer ist, diesen Schritt mit einem Begründungssatz
+  im Protokoll überspringen.
 
-Fill in Recherche-Protokoll item 5 with 1–2 candidates, each with:
-(a) was das Beispiel zeigt, (b) Belege (Datei-/Verzeichnispfade),
-(c) vorgeschlagene Darstellungsform (Prosa, Verzeichnisbaum, simulierte
-CLI-Session, Tabelle — see Style Guide, Visuals).
+Fill in Recherche-Protokoll item 5 with 1–2 candidates (jotti oder generisch),
+each with: (a) was das Beispiel zeigt, (b) Belege (bei jotti: Datei-/
+Verzeichnispfade), (c) vorgeschlagene Darstellungsform (Prosa, Verzeichnisbaum,
+simulierte CLI-Session, Tabelle — see Style Guide, Visuals).
 
 Then present the complete Recherche-Protokoll and ask:
 *"Sollen wir mit diesen Erkenntnissen, [empfohlenem Titel] und
@@ -154,10 +171,14 @@ and check each of the following points. Fix any issues found inline.
    werden.
 8. **Gedankenstrich-Check** — Kein „—“ und kein „–“ im Fließtext. Jeden
    Fund auflösen: Komma, Doppelpunkt, Klammern oder eigener Satz.
-9. **Stimmen-Check** — Mindestens ein echter Ich-Anker (eigene Erfahrung,
-   jotti). Keine LLM-Brücken („Soweit die Theorie…“), keine Fazits, die nur
+9. **Stimmen-Check** — Mindestens ein echter Ich-Anker (eigene Erfahrung).
+   Keine LLM-Brücken („Soweit die Theorie…“), keine Fazits, die nur
    wiederholen, keine Staccato-Punchlines.
-10. **Visual-Check** — Jeder Codeblock hat einen Sprach-Tag; ASCII-Art und
+10. **Werbefreiheits-Check** — Kein Absatz liest sich wie Produktmarketing.
+    Kein Schlussabsatz mit Produktverweis, kein Link-CTA am Artikelende
+    („Sieh dir den Code an“, „findest du auf…“). Jede jotti-Passage besteht
+    den Löschtest aus Schritt 3.
+11. **Visual-Check** — Jeder Codeblock hat einen Sprach-Tag; ASCII-Art und
     Terminal-Sessions sind als ` ```text ` getaggt. Jedes Visual besteht den
     Mehrwert-Test und ist in Prosa eingebettet (Satz davor, Bezug danach).
 
@@ -278,14 +299,16 @@ Workflow-Artikel (`workflow-ki-coding-agents.md`).
 
 ### Hands-on & Praxisbezug
 
-- Die Artikel zeigen, dass Nico die Konzepte selbst anwendet. jotti ist der
-  primäre Praxisanker (siehe Workflow Schritt 3); alle jotti-Aussagen sind
-  durch reale Dateien im Repo belegt.
-- **jotti-Querverweis am Artikelende** ist erwünscht: kurzer Absatz mit Link
-  auf [jotti.rocks](https://jotti.rocks) und/oder
-  [github.com/nicograef/jotti](https://github.com/nicograef/jotti), inklusive
-  „source-available“ und „ausgelegt auf die KassenSichV“. Wording von Artikel
-  zu Artikel variieren — nicht dreimal derselbe Satz.
+- Ein konkretes Beispiel macht Konzepte greifbar (siehe Workflow Schritt 3).
+  jotti ist eine mögliche Quelle dafür, generische Beispiele (CRM, Warenkorb,
+  Bank) sind gleichwertig; alle jotti-Aussagen sind durch reale Dateien im
+  Repo belegt.
+- **Anti-Pitch:** Kein Artikel endet mit einem Produkt-Absatz. Keine CTAs
+  („Sieh dir den Code an“, „findest du auf…“), kein source-available/
+  KassenSichV-Boilerplate am Artikelende, außer das Thema selbst verlangt es
+  (Erfahrungs-Artikel mit jotti als Gegenstand). Falls jotti erwähnt wird,
+  bleibt es inline als Konzept-Illustration; die Wording-Regeln aus Schritt 3
+  gelten dann konditional.
 - Self-links use **nicograef.com** (never nicograef.de).
 
 ### Visuals: ASCII-Art, Terminal-Sessions & Fake-Screenshots
@@ -379,8 +402,9 @@ Werkzeug-Ausgaben eingerückt, Gekürztes mit `…`.
   Pflicht-Struktur:
   1. **Einleitung: Das Problem** — Welches konkrete Problem löst das Pattern?
   2. **Das Pattern** — Wie funktioniert die Lösung?
-  3. **Praxisbeispiel** — bevorzugt aus jotti (Workflow Schritt 3): Code,
-     Verzeichnisbaum, Tabelle oder Schritt-für-Schritt-Walkthrough.
+  3. **Praxisbeispiel** — das Beispiel mit dem klarsten Erklärwert (Workflow
+     Schritt 3), jotti oder generisch: Code, Verzeichnisbaum, Tabelle oder
+     Schritt-für-Schritt-Walkthrough.
   4. **Wann lohnt sich das?** — Enthält: Kriterien (wann passt das Pattern),
      Gegenindikatoren (wann lieber nicht).
   5. **Fazit** — Kurze Zusammenfassung.
@@ -394,7 +418,9 @@ Werkzeug-Ausgaben eingerückt, Gekürztes mit `…`.
 - No glossary.
 - No raster images or image placeholders — ASCII-Diagramme in getaggten
   Codeblöcken sind erlaubt (see Visuals section).
-- No cross-links to other articles.
+- Sparsame interne Links zwischen Artikeln sind erlaubt, wo sie Lesern
+  konkret weiterhelfen (z. B. auf einen vertiefenden Artikel zum selben
+  Konzept). Kein Link um des Links willen.
 
 ## Constraints
 
@@ -402,6 +428,11 @@ Werkzeug-Ausgaben eingerückt, Gekürztes mit `…`.
   the user approved the SEO description. Do not modify templates or PHP code.
 - **Verify jotti facts against `~/r/jotti`** before they go into the article —
   never invent structure, behavior, or anecdotes.
+- **Substanzschutz.** Der Artikel erklärt sein Konzept vollständig auch ohne
+  jotti — die Theorie steht auf eigenen Füßen, jotti illustriert nur. Beim
+  Überarbeiten eines bestehenden Artikels dürfen ganze Sektionen nur mit
+  expliziter Freigabe des Users entfernt werden; Straffen und Umschreiben ist
+  frei, aber Substanz nicht kommentarlos streichen.
 - **Follow existing patterns exactly.** When in doubt, match what the existing
   articles do.
 
