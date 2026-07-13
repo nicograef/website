@@ -1,5 +1,11 @@
 [
     {
+        "slug": "orchestrierung-ki-coding-agents",
+        "title": "Der Orchestrator übernimmt: KI-Agents setzen nachts meinen Plan um",
+        "description": "Ein KI-Orchestrator hat über Nacht sieben Phasen meines Plans umgesetzt und auf main committet. Was das sicher macht und wo es trotzdem hakte.",
+        "date": "2026-07-13"
+    },
+    {
         "slug": "workflow-ki-coding-agents",
         "title": "Erst klären, dann coden: Mein Workflow mit KI-Coding-Agents",
         "description": "Klären, planen, umsetzen, prüfen: Wie ich mit Claude Code an jotti arbeite und warum der KI-Agent dabei nie raten muss.",
