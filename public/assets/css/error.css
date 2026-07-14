@@ -1,16 +1,64 @@
-.error-container {
+/* ── 404 page ── */
+
+.error-main {
+  position: relative;
+  overflow: hidden;
+  flex: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 80vh;
-  text-align: center;
-  padding: 20px;
 
-  .error-image {
-    max-width: 400px;
-    width: 100%;
-    height: auto;
-    margin-bottom: 20px;
+  .error-glow-blue {
+    top: 10%;
+    left: 15%;
+    width: 520px;
+    height: 420px;
+  }
+
+  .error-glow-amber {
+    bottom: 5%;
+    right: 10%;
+    width: 460px;
+    height: 400px;
+  }
+
+  .error-content {
+    position: relative;
+    text-align: center;
+    padding: 80px 32px;
+  }
+
+  .error-code {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(120px, 20vw, 220px);
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    animation: sheen 6s linear infinite, rise 0.6s ease both;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 18px 0 12px;
+    animation: rise 0.6s 0.08s ease both;
+  }
+
+  .error-lead {
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--muted);
+    margin: 0 0 32px;
+    transition: color 0.35s;
+    animation: rise 0.6s 0.16s ease both;
+  }
+
+  .error-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    animation: rise 0.6s 0.24s ease both;
   }
 }

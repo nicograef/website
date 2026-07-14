@@ -64,11 +64,11 @@ function cvLabels(string $lang): array
     $de = $lang === 'de';
     return [
         'present'        => $de ? 'heute' : 'present',
-        'from'           => $de ? 'aus' : 'from',
-        'experience'     => $de ? 'Berufserfahrung' : 'Experience',
+        'experience'     => $de ? 'Erfahrung' : 'Experience',
         'education'      => $de ? 'Ausbildung' : 'Education',
-        'certifications' => $de ? 'Zertifizierungen' : 'Certifications',
+        'certifications' => $de ? 'Zertifikate' : 'Certificates',
         'languages'      => $de ? 'Sprachen' : 'Languages',
         'volunteering'   => $de ? 'Ehrenamt' : 'Volunteering',
+        'grade'          => $de ? 'Note' : 'Grade',
     ];
 }

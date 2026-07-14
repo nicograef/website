@@ -5,19 +5,28 @@ require_once __DIR__ . '/lib/projects.php';
 require_once __DIR__ . '/lib/render.php';
 
 $lang = detectLang();
-$projects = loadProjects($lang);
 $isGerman = $lang === 'de';
 
+$earlyProjects = [];
+foreach (loadProjects($lang) as $project) {
+    if (!empty($project['early'])) {
+        $earlyProjects[] = $project;
+    }
+}
+
 render(__DIR__ . '/templates/home.php', [
-    'pageTitle' => 'Nico Gräf – Software Engineer',
+    'pageTitle' => $isGerman
+        ? 'Nico Gräf – Senior Softwareentwickler'
+        : 'Nico Gräf – Senior Software Engineer',
     'pageDescription' => $isGerman
-        ? 'Portfolio von Nico Gräf, Software Engineer mit Fokus auf Webentwicklung und moderne Technologien.'
-        : 'Portfolio of Nico Gräf, a Software Engineer specializing in web development and modern technologies.',
+        ? 'Portfolio von Nico Gräf, Senior Softwareentwickler aus Freiburg im Breisgau. Aktuell: jotti, ein Kassensystem für Vereine — dazu Artikel über Softwarearchitektur und Lebenslauf.'
+        : 'Portfolio of Nico Gräf, senior software engineer from Freiburg im Breisgau. Currently building jotti, a point-of-sale system for clubs — plus articles on software architecture and a CV.',
     'pageUrl' => '/',
     'pageLang' => $lang,
     'pageImage' => '/assets/img/nico-social.jpg',
     'pageStyles' => ['/assets/css/home.css'],
     'lang' => $lang,
     'currentPage' => 'home',
-    'projects' => $projects,
+    'latestArticles' => getLatestArticles(3),
+    'earlyProjects' => $earlyProjects,
 ]);

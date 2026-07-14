@@ -9,10 +9,10 @@ $l = cvLabels($lang);
 $isGerman = $lang === 'de';
 
 render(__DIR__ . '/templates/cv-page.php', [
-    'pageTitle' => $cv['basics']['name'] . ' – CV',
+    'pageTitle' => $cv['basics']['name'] . ($isGerman ? ' – Lebenslauf' : ' – CV'),
     'pageDescription' => $isGerman
-        ? 'Lebenslauf von ' . $cv['basics']['name'] . ', ' . $cv['basics']['headline']
-        : 'CV of ' . $cv['basics']['name'] . ', ' . $cv['basics']['headline'],
+        ? 'Lebenslauf von ' . $cv['basics']['name'] . ', ' . $cv['basics']['headline'] . ' aus ' . $cv['basics']['location'] . ' — Erfahrung, Ausbildung, Sprachen und Zertifikate.'
+        : 'CV of ' . $cv['basics']['name'] . ', ' . $cv['basics']['headline'] . ' from ' . $cv['basics']['location'] . ' — experience, education, languages, and certificates.',
     'pageUrl' => '/cv',
     'pageLang' => $lang,
     'pageImage' => '/assets/img/nico-social.jpg',

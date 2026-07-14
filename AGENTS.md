@@ -1,6 +1,6 @@
 # Agent Instructions — nicograef.com
 
-Personal portfolio and blog for **Nico Gräf** (nicograef.com). Zero-dependency, no-build-step, file-based vanilla PHP website. Homepage is English (portfolio), blog articles are German (software architecture). Dev server: `php -S 0.0.0.0:8080 -t public router.php`
+Personal portfolio and blog for **Nico Gräf** (nicograef.com). Zero-dependency, no-build-step, file-based vanilla PHP website. Default language is German everywhere; homepage, CV, and 404 have English variants served via `Accept-Language`. Blog articles are German only (software architecture). Dev server: `php -S 0.0.0.0:8080 -t public router.php`
 
 ## Tech Stack
 
@@ -11,6 +11,8 @@ Personal portfolio and blog for **Nico Gräf** (nicograef.com). Zero-dependency,
 | Markdown | `public/vendor/Parsedown.php` (vendored) |
 | Syntax highlighting | `public/vendor/highlight.js` (vendored) |
 | CSS | Native CSS nesting, custom properties, no preprocessor |
+| Fonts | Self-hosted woff2: Space Grotesk (headings), Inter (body), JetBrains Mono (code) — `@font-face` in `base.css`, files in `public/assets/fonts/` |
+| Theming | Light/dark via `data-theme` on `<html>`; persisted under the `ng-theme` localStorage key (inline head script in `layout.php` prevents FOUC, `public/assets/js/theme.js` handles the toggle) |
 | Deployment | rsync over SSH via GitHub Actions |
 
 ## Commands
@@ -24,7 +26,9 @@ Personal portfolio and blog for **Nico Gräf** (nicograef.com). Zero-dependency,
 
 Everything the web sees lives under `public/`. The repo root holds config, docs, and the dev-only `router.php`.
 
-PHP inside `public/` is split by purpose: **entry points** (`index.php`, `articles.php`, `cv.php`, `404.php`, `sitemap.php`) at the webroot; **helpers** in `public/lib/` (`lang.php`, `render.php`, `articles.php`, `projects.php`, `cv.php`) — pure functions that load and return data; **templates** in `public/templates/` (`layout.php`, `header.php`, `home.php`, `cv-page.php`, `article.php`, `overview.php`, `404-page.php`) — HTML output only. Entry points require helpers, then call `render()` with a template. Helpers never call `render()`.
+PHP inside `public/` is split by purpose: **entry points** (`index.php`, `articles.php`, `cv.php`, `404.php`, `sitemap.php`) at the webroot; **helpers** in `public/lib/` (`lang.php`, `render.php`, `articles.php`, `projects.php`, `cv.php`) — pure functions that load, format, and return data (e.g. `detectLang()`, `loadArticleMarkdown()`, `formatArticleDate()`, `groupArticlesByYear()`, `estimateReadingMinutes()`); **templates** in `public/templates/` (`layout.php`, `header.php`, `home.php`, `cv-page.php`, `article.php`, `overview.php`, `404-page.php`) — HTML output only. Entry points require helpers, then call `render()` with a template. Helpers never call `render()`.
+
+The page shell is centralized in `layout.php`: it includes `header.php` (nav + theme toggle), emits the footer, the inline theme script, and the `theme.js` tag. Page templates render only their page content — they never include `header.php` themselves.
 
 ## Template Pattern
 
@@ -40,11 +44,11 @@ Article metadata lives in `public/content/articles.json` (slug, title, descripti
 
 ## CSS Architecture
 
-`base.css` is the only global stylesheet (reset, typography, shared classes like `.tag`, `.profile-picture`). Each page loads its own CSS via the `pageStyles` render variable: `home.css`, `overview.css`, `article.css`, `cv.css`, `error.css`. `layout.php` iterates `$pageStyles` to emit per-page `<link>` tags.
+`base.css` is the only global stylesheet: `@font-face` declarations, design tokens as custom properties (colors, fonts; light values on `:root`, dark overrides on `[data-theme="dark"]`), reset, typography, and shared building-block classes (`.eyebrow`, `.btn-primary`, `.btn-outline`, `.card`, `.chip`, `.gradient-text`, `.glow`). Each page loads its own CSS via the `pageStyles` render variable: `home.css`, `overview.css`, `article.css`, `cv.css`, `error.css`. `layout.php` iterates `$pageStyles` to emit per-page `<link>` tags.
 
 ## Markdown & Highlighting
 
-`public/articles.php` calls `parseArticleMarkdown()` (Parsedown over the `.md`), then sets `$hasCode` via `strpos($html, '<pre><code') !== false`. `public/templates/article.php` only emits the `vendor/highlight.js` `<script>` when `$hasCode` is true — keep this gate intact so code-free articles stay JS-free. Use `strpos`, not `str_contains`: the latter is PHP 8.0+ and the server runs 7.4.
+`public/articles.php` loads the raw markdown via `loadArticleMarkdown()` (returns `null` for a missing `.md` → 404), reuses it for `estimateReadingMinutes()`, then converts it with `parseArticleMarkdown()` (Parsedown) and sets `$hasCode` via `strpos($html, '<pre><code') !== false`. When `$hasCode` is true it adds `vendor/highlight.css` to `$pageStyles`, and `public/templates/article.php` emits the `vendor/highlight.js` `<script>` — keep this gate intact so code-free articles stay JS- and highlight-CSS-free. Use `strpos`, not `str_contains`: the latter is PHP 8.0+ and the server runs 7.4.
 
 ## Security Model
 
@@ -54,7 +58,7 @@ Article metadata lives in `public/content/articles.json` (slug, title, descripti
 
 1. **No package managers or build tools.** No Composer, no npm. Vendor new libraries manually if absolutely necessary.
 2. **No framework refactoring.** The vanilla PHP approach is deliberate.
-3. **Bilingual:** Homepage English, blog section German (UI strings and articles).
+3. **Bilingual:** German is the default everywhere; `detectLang()` in `public/lib/lang.php` switches homepage, CV, and 404 to English for English `Accept-Language` headers. Blog articles and the article overview are German only.
 4. **CSS:** Use native CSS nesting (no preprocessor). Respect existing custom properties in `base.css` and breakpoint system. Each page has its own CSS file — add styles to the relevant per-page file, not `base.css` (unless truly shared).
 5. **Security:** Always `htmlspecialchars()` on user-facing dynamic output.
 6. **New articles** → `public/content/articles/*.md`, **new projects** → `public/content/projects.json`. Read existing files for the expected format.
