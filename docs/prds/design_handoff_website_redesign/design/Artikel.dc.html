@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#2b45d8;--accent-hover:#1f36b8;--accent-ink:#2b45d8;--g2:color-mix(in oklab,var(--accent) 55%,#a855f7);--g3:color-mix(in oklab,var(--accent) 50%,#22d3ee);--bg:#f8f4ec;--card:#fffdf7;--text:#17150e;--prose:#3d3b2f;--muted:#5f5c4e;--faint:#8f8a76;--line:#e7e2d3;--line2:#ddd7c5;--btn-bg:#17150e;--btn-fg:#f8f4ec;--code-bg:#17150e;--glow-o:1;--glow1:rgba(43,69,216,.10);--glow2:rgba(200,140,40,.12);}
+[data-theme="dark"]{--accent-ink:#98a7ff;--bg:#14130c;--card:#1c1a11;--text:#f2eee0;--prose:#d6d1bf;--muted:#b8b3a0;--faint:#8c8874;--line:#2b281c;--line2:#3a3627;--btn-bg:#f2eee0;--btn-fg:#14130c;--code-bg:#0e0d08;--glow1:rgba(105,130,255,.10);--glow2:rgba(220,160,60,.07);}
+body{margin:0;background-color:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;transition:background-color .35s,color .35s;}
+a{color:inherit;text-decoration:none;}
+a:hover{color:inherit;}
+@keyframes orb{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(14px,-18px) scale(1.06);}}
+@keyframes rise{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+</style>
+</helmet>
+
+<div data-screen-label="Artikel-Detail">
+<div style="border-bottom:1px solid var(--line); transition:border-color .35s;">
+  <header style="max-width:1160px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:22px 32px;">
+    <a href="Startseite.dc.html" style="font-family:'Space Grotesk'; font-weight:700; font-size:19px;">nico gräf<span style="color:var(--accent-ink);">.</span></a>
+    <nav style="display:flex; align-items:center; gap:28px; font-size:15px; font-weight:500; color:var(--muted);">
+      <a href="Startseite.dc.html#portfolio" style-hover="color:var(--accent-ink);">Portfolio</a>
+      <a href="Blog.dc.html" style="color:var(--accent-ink); font-weight:700;">Artikel</a>
+      <a href="Lebenslauf.dc.html" style-hover="color:var(--accent-ink);">Lebenslauf</a>
+      <button onClick="{{ toggleTheme }}" title="Theme wechseln" style="width:38px; height:38px; border:1px solid var(--line2); border-radius:11px; background:transparent; color:var(--text); font-size:15px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; padding:0;">{{ themeIcon }}</button>
+      <a href="mailto:graef.nico@gmail.com" style="background:var(--btn-bg); color:var(--btn-fg); padding:10px 20px; border-radius:13px; font-weight:600; transition:background-color .35s,color .35s;" style-hover="opacity:.85;">Kontakt</a>
+    </nav>
+  </header>
+</div>
+
+<div style="position:relative; overflow:hidden;">
+  <div style="position:absolute; top:-140px; left:15%; width:520px; height:380px; background:radial-gradient(circle, var(--glow1), transparent 70%); filter:blur(26px); pointer-events:none; opacity:var(--glow-o); animation:orb 9s ease-in-out infinite;"></div>
+  <article style="position:relative; max-width:760px; margin:0 auto; padding:64px 32px 80px;">
+    <a href="Blog.dc.html" style="display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:600; color:var(--faint); margin-bottom:32px;" style-hover="color:var(--accent-ink);">← Alle Artikel</a>
+    <div style="display:flex; gap:14px; align-items:center; font-size:13.5px; color:var(--faint); margin-bottom:18px; animation:rise .6s ease both;">
+      <span style="font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-ink);">Domain Driven Design</span>
+      <span>·</span><span>4. Juli 2026</span><span>·</span><span>6 Min. Lesezeit</span>
+    </div>
+    <h1 style="font-family:'Space Grotesk'; font-size:clamp(32px,4.5vw,46px); line-height:1.12; font-weight:700; margin:0 0 22px; letter-spacing:-0.02em; animation:rise .6s .08s ease both;">Strategisches Domain Driven Design: Große Domänen aufteilen</h1>
+    <p style="font-size:19px; line-height:1.65; color:var(--muted); margin:0 0 40px; text-wrap:pretty; animation:rise .6s .16s ease both;">Wie Subdomains, Bounded Contexts und Context Maps große Domänen in unabhängig entwickelbare Bereiche aufteilen.</p>
+
+    <div style="font-size:17px; line-height:1.75; color:var(--prose); display:flex; flex-direction:column; gap:22px;">
+      <p style="margin:0;">Dein E-Commerce-System hat 200 Tabellen in einer Datenbank. Das Vertriebsteam sagt „Kunde“ und meint Umsatzpotenzial. Das Support-Team sagt „Kunde“ und meint ein offenes Ticket. Beide greifen auf dasselbe <code style="font-family:'JetBrains Mono',monospace; font-size:14.5px; background:var(--line); border-radius:6px; padding:2px 7px;">Customer</code>-Objekt zu. Jede Änderung an diesem Objekt kann den jeweils anderen Bereich kaputtmachen.</p>
+      <p style="margin:0;">Strategisches DDD liefert Werkzeuge, um große Domänen in Bereiche aufzuteilen, die sich unabhängig voneinander entwickeln lassen. Während taktisches Design beschreibt, wie du einen einzelnen Bereich in Code gießt, geht es hier eine Ebene höher: um den Zuschnitt, um Grenzen und um die Frage, wo sich Investition überhaupt lohnt.</p>
+
+      <h2 style="font-family:'Space Grotesk'; font-size:27px; font-weight:700; margin:20px 0 0; color:var(--text); letter-spacing:-0.01em;">Subdomains: Teilbereiche des Fachgebiets</h2>
+      <p style="margin:0;">Eine Subdomain ist ein Teilbereich der Domain mit eigenen Zielen und Verantwortlichkeiten. Im E-Commerce: Bestellverwaltung, Zahlungsabwicklung, Lagerhaltung, Kundenkommunikation. Der entscheidende Punkt ist, dass nicht alle Subdomains gleich wichtig sind. DDD unterscheidet drei Typen, und die Unterscheidung ist keine akademische Übung, sondern eine Anweisung, wohin deine knappe Entwicklungszeit fließt.</p>
+      <p style="margin:0;">Die <strong style="color:var(--text);">Core Domain</strong> ist das Kerngeschäft, das, womit du dich vom Wettbewerb abhebst. Bei einem Streaming-Dienst ist das die Empfehlungslogik, nicht der Login. Hier lohnt sich die höchste Sorgfalt: eigene Entwicklung, sorgfältige Modellierung, deine besten Leute. Wer die Core Domain wie einen Nebenschauplatz behandelt, verschenkt genau die Stelle, an der Softwarequalität sich in Geschäftserfolg übersetzt.</p>
+      <p style="margin:0;">Eine <strong style="color:var(--text);">Supporting Domain</strong> unterstützt das Kerngeschäft, ist aber selbst kein Alleinstellungsmerkmal. Beim Streaming-Dienst etwa die Verwaltung von Abo-Tarifen: notwendig, spezifisch genug, dass man sie nicht von der Stange kauft, aber kein Ort für Overengineering. Solide Umsetzung reicht, und wenn hier ein Modell etwas gröber bleibt als in der Core Domain, ist das eine bewusste Entscheidung, kein Versäumnis.</p>
+      <p style="margin:0;">Eine <strong style="color:var(--text);">Generic Domain</strong> löst ein allgemeines Problem, das viele haben: Authentifizierung, E-Mail-Versand, Zahlungsabwicklung. Hier eigene Software zu bauen ist fast immer Verschwendung. Man kauft ein oder nimmt eine erprobte Bibliothek, denn ein selbstgebauter Login bringt keinen Kunden dazu, das Abo abzuschließen. Die eingesparte Zeit gehört der Core Domain.</p>
+      <p style="margin:0;">Die praktische Konsequenz: Bevor du Architektur baust, ordne deine Subdomains ein. Sie sagt dir, wo Modellierungsaufwand sich auszahlt und wo er nur Kosten verursacht.</p>
+
+      <h2 style="font-family:'Space Grotesk'; font-size:27px; font-weight:700; margin:20px 0 0; color:var(--text); letter-spacing:-0.01em;">Bounded Context: Wo welches Modell gilt</h2>
+      <p style="margin:0;">Ein Bounded Context ist eine explizite Grenze, innerhalb derer ein bestimmtes Modell und eine einheitliche Sprache gelten. „Kunde“ im Rechnungswesen hat andere Attribute als „Kunde“ im Marketing. Zwei saubere Modelle in zwei Kontexten sind wartbarer als ein aufgeblähtes Universalmodell, das jeden Sonderfall aller Bereiche kennen muss.</p>
+      <p style="margin:0;">Der <a href="Artikel.dc.html" style="color:var(--accent-ink); border-bottom:1px solid color-mix(in oklab,var(--accent-ink) 40%,transparent);">Artikel zu Bounded Contexts</a> behandelt dieses Thema ausführlich. Hier genügt: Subdomain ist der fachliche Teilbereich im Problemraum, Bounded Context die Grenze, die du im Lösungsraum tatsächlich um ein Modell ziehst. Im Idealfall fällt beides zusammen, in der Praxis nicht immer.</p>
+      <p style="margin:0;">Im Backend von jotti, meinem Kassensystem für Vereine, schneide ich die Domäne genau so: ein Go-Paket pro Bounded Context.</p>
+      <pre style="background:var(--code-bg); color:#e8e4d4; font-family:'JetBrains Mono',monospace; font-size:13.5px; line-height:1.7; border-radius:14px; padding:24px 28px; overflow-x:auto; margin:0;">backend/domain/
+├── kasse/      Bestellung, Zahlung, Stornierung
+├── produkt/    Produktverwaltung mit Varianten
+├── tisch/
+├── betreiber/
+├── tse/        TSE-Anbindung und Signaturen
+└── …           dazu u. a. steuer/ und reporting/</pre>
+      <p style="margin:0;">Jedes Paket hat sein eigenes Modell. Die Fachpakete heißen bewusst deutsch, nur Infrastruktur wie <code style="font-family:'JetBrains Mono',monospace; font-size:14.5px; background:var(--line); border-radius:6px; padding:2px 7px;">event</code> oder <code style="font-family:'JetBrains Mono',monospace; font-size:14.5px; background:var(--line); border-radius:6px; padding:2px 7px;">jwt</code> bleibt englisch. Ein Kontext wie <code style="font-family:'JetBrains Mono',monospace; font-size:14.5px; background:var(--line); border-radius:6px; padding:2px 7px;">tse</code> ist dabei ein interessanter Sonderfall: Diesen Bounded Context gäbe es ohne die Kassensicherungsverordnung gar nicht, er ist ein Kontext, der allein aus einem regulatorischen Zwang entstanden ist.</p>
+
+      <h2 style="font-family:'Space Grotesk'; font-size:27px; font-weight:700; margin:20px 0 0; color:var(--text); letter-spacing:-0.01em;">Context Mapping: Beziehungen zwischen Kontexten</h2>
+      <p style="margin:0;">Bounded Contexts existieren nicht isoliert. Wenn der Rechnungswesen-Kontext Kundendaten aus dem Vertriebs-Kontext braucht, entsteht eine Beziehung. Die Context Map dokumentiert diese Beziehungen: Wer liefert Daten (Upstream), wer konsumiert sie (Downstream)? Und vor allem: Welches Integrations-Pattern beschreibt das Verhältnis?</p>
+      <p style="margin:0;">Drei Patterns tauchen am häufigsten auf, und die Wahl zwischen ihnen ist eine strategische, keine technische:</p>
+      <ul style="margin:0; padding-left:24px; display:flex; flex-direction:column; gap:14px;">
+        <li><strong style="color:var(--text);">Conformist:</strong> Der Downstream übernimmt das Upstream-Modell unverändert. Das ist die günstigste Option und die richtige, wenn das fremde Modell ohnehin gut zu deinem Bedarf passt und du keine Verhandlungsmacht über den Upstream hast. Der Preis ist Kopplung: Ändert sich das Upstream-Modell, ändert sich deins mit.</li>
+        <li><strong style="color:var(--text);">Anti-Corruption Layer:</strong> Der Downstream baut eine Übersetzungsschicht, die das fremde Modell an der Grenze in sein eigenes umwandelt. Das lohnt sich, sobald das Upstream-Modell schlecht zu deiner Domäne passt oder instabil ist, oder wenn du einen austauschbaren Drittanbieter kapseln willst. Der <a href="Artikel.dc.html" style="color:var(--accent-ink); border-bottom:1px solid color-mix(in oklab,var(--accent-ink) 40%,transparent);">Anti-Corruption Layer</a> kostet Aufwand, hält deine Core Domain aber sauber.</li>
+        <li><strong style="color:var(--text);">Open Host Service:</strong> Der Upstream stellt eine bewusst stabile, dokumentierte API bereit, die viele Konsumenten bedient. Das lohnt sich, wenn ein Kontext zum geteilten Lieferanten wird und du nicht für jeden Konsumenten eine Sonderlösung pflegen willst. Der Aufwand liegt beim Upstream, dafür bleiben die Downstreams entkoppelt.</li>
+      </ul>
+      <p style="margin:0;">Die Faustregel: Je unpassender oder wackliger das fremde Modell, desto eher ein Anti-Corruption Layer. Je mehr Konsumenten ein Kontext bedient, desto eher ein Open Host Service. Und die strategische Entscheidung (welche Beziehung?) kommt immer vor der technischen (welche API, welches Protokoll?).</p>
+
+      <h2 style="font-family:'Space Grotesk'; font-size:27px; font-weight:700; margin:20px 0 0; color:var(--text); letter-spacing:-0.01em;">Wann lohnt sich strategisches Design?</h2>
+      <p style="margin:0;">Strategisches Design ist kein Selbstzweck. Es lohnt sich konkret, wenn:</p>
+      <ul style="margin:0; padding-left:24px; display:flex; flex-direction:column; gap:10px;">
+        <li>Mehrere Teams an einer Codebasis arbeiten und sich sonst ständig in die Quere kommen.</li>
+        <li>Verschiedene Fachbereiche dasselbe System nutzen und denselben Begriff unterschiedlich meinen.</li>
+        <li>Die Domain groß genug ist, dass ein einzelnes Modell sie nicht mehr ohne Widersprüche abbildet.</li>
+        <li>Das System über Jahre wächst und Teile davon unabhängig voneinander weiterentwickelt werden sollen.</li>
+      </ul>
+      <p style="margin:0;">Für ein einzelnes Team mit einer überschaubaren Domain ist der volle Apparat aus Subdomains und Context Maps dagegen Overhead. Wer eine Formular-Datenbank-Liste-Anwendung baut, gewinnt durch eine Context Map nichts außer Diagrammen.</p>
+      <p style="margin:0;">Ehrlicherweise falle ich mit jotti selbst in die zweite Kategorie: alleiniger Entwickler, überschaubare Domain. Den Schnitt in Bounded Contexts habe ich trotzdem gemacht, schon damit jedes Paket für sich verständlich bleibt. Der Nutzen war weniger Team-Koordination als kognitive Entlastung: Wer im <code style="font-family:'JetBrains Mono',monospace; font-size:14.5px; background:var(--line); border-radius:6px; padding:2px 7px;">kasse</code>-Paket arbeitet, muss nicht das <code style="font-family:'JetBrains Mono',monospace; font-size:14.5px; background:var(--line); border-radius:6px; padding:2px 7px;">steuer</code>-Paket im Kopf haben.</p>
+    </div>
+
+    <div style="margin-top:56px; background:var(--card); border:1px solid var(--line); border-radius:20px; padding:28px; display:flex; gap:20px; align-items:center;">
+      <img src="public/assets/img/nico-social.jpg" alt="Nico Gräf" style="width:64px; height:64px; border-radius:50%; object-fit:cover; object-position:50% 20%; flex-shrink:0;">
+      <div style="flex:1;">
+        <div style="font-family:'Space Grotesk'; font-weight:700; font-size:17px;">Nico Gräf</div>
+        <div style="font-size:14.5px; color:var(--muted); line-height:1.55; margin-top:4px;">Senior Software Engineer aus Freiburg. Baut aktuell <a href="https://jotti.rocks" target="_blank" style="color:var(--accent-ink); font-weight:600;">jotti</a>, ein Kassensystem für Vereine.</div>
+      </div>
+      <a href="Blog.dc.html" style="color:var(--accent-ink); font-weight:700; font-size:15px; white-space:nowrap;">Alle Artikel →</a>
+    </div>
+  </article>
+</div>
+
+<div style="border-top:1px solid var(--line); transition:border-color .35s;">
+  <footer style="max-width:1160px; margin:0 auto; padding:26px 32px; display:flex; justify-content:space-between; font-size:14px; color:var(--faint);">
+    <span>© 2026 Nico Gräf</span>
+    <span style="display:flex; gap:20px;">
+      <a href="https://github.com/nicograef" target="_blank" style-hover="color:var(--accent-ink);">GitHub</a>
+      <a href="https://www.linkedin.com/in/nicograef" target="_blank" style-hover="color:var(--accent-ink);">LinkedIn</a>
+      <a href="mailto:graef.nico@gmail.com" style-hover="color:var(--accent-ink);">E-Mail</a>
+    </span>
+  </footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { dark: false };
+  componentDidMount() {
+    const dark = localStorage.getItem('ng-theme') === 'dark';
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    this.setState({ dark });
+  }
+  renderVals() {
+    const toggleTheme = () => {
+      const dark = !this.state.dark;
+      localStorage.setItem('ng-theme', dark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      this.setState({ dark });
+    };
+    return { themeIcon: this.state.dark ? '☀' : '☾', toggleTheme };
+  }
+}
+</script>
+</body>
+</html>

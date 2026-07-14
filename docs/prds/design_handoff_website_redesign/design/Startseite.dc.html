@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#2b45d8;--accent-hover:#1f36b8;--accent-ink:#2b45d8;--g2:color-mix(in oklab,var(--accent) 55%,#a855f7);--g3:color-mix(in oklab,var(--accent) 50%,#22d3ee);--bg:#f8f4ec;--card:#fffdf7;--text:#17150e;--prose:#3d3b2f;--muted:#5f5c4e;--faint:#8f8a76;--line:#e7e2d3;--line2:#ddd7c5;--btn-bg:#17150e;--btn-fg:#f8f4ec;--feature-line:transparent;--glow-o:1;--glow1:rgba(43,69,216,.10);--glow2:rgba(200,140,40,.12);}
+[data-theme="dark"]{--accent-ink:#98a7ff;--bg:#14130c;--card:#1c1a11;--text:#f2eee0;--prose:#d6d1bf;--muted:#b8b3a0;--faint:#8c8874;--line:#2b281c;--line2:#3a3627;--btn-bg:#f2eee0;--btn-fg:#14130c;--feature-line:#2b281c;--glow1:rgba(105,130,255,.10);--glow2:rgba(220,160,60,.07);}
+body{margin:0;background-color:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;transition:background-color .35s,color .35s;}
+a{color:inherit;text-decoration:none;}
+a:hover{color:inherit;}
+@keyframes sheen{0%{background-position:-140% 0;}100%{background-position:240% 0;}}
+@keyframes orb{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(14px,-18px) scale(1.06);}}
+@keyframes rise{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+</style>
+</helmet>
+
+<div data-screen-label="Startseite">
+<div style="border-bottom:1px solid var(--line); transition:border-color .35s;">
+  <header style="max-width:1160px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:22px 32px;">
+    <a href="Startseite.dc.html" style="font-family:'Space Grotesk'; font-weight:700; font-size:19px;">nico gräf<span style="color:var(--accent-ink);">.</span></a>
+    <nav style="display:flex; align-items:center; gap:28px; font-size:15px; font-weight:500; color:var(--muted);">
+      <a href="#portfolio" style-hover="color:var(--accent-ink);">Portfolio</a>
+      <a href="Blog.dc.html" style-hover="color:var(--accent-ink);">Artikel</a>
+      <a href="Lebenslauf.dc.html" style-hover="color:var(--accent-ink);">Lebenslauf</a>
+      <button onClick="{{ toggleTheme }}" title="Theme wechseln" style="width:38px; height:38px; border:1px solid var(--line2); border-radius:11px; background:transparent; color:var(--text); font-size:15px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; padding:0;">{{ themeIcon }}</button>
+      <a href="mailto:graef.nico@gmail.com" style="background:var(--btn-bg); color:var(--btn-fg); padding:10px 20px; border-radius:13px; font-weight:600; transition:background-color .35s,color .35s;" style-hover="opacity:.85;">Kontakt</a>
+    </nav>
+  </header>
+</div>
+
+<div style="position:relative; overflow:hidden;">
+  <div style="position:absolute; top:-140px; left:-60px; width:520px; height:420px; background:radial-gradient(circle, var(--glow1), transparent 70%); filter:blur(26px); pointer-events:none; opacity:var(--glow-o); animation:orb 9s ease-in-out infinite;"></div>
+  <div style="position:absolute; top:-100px; right:-40px; width:460px; height:400px; background:radial-gradient(circle, var(--glow2), transparent 70%); filter:blur(26px); pointer-events:none; opacity:var(--glow-o); animation:orb 11s ease-in-out infinite reverse;"></div>
+  <div style="position:relative; max-width:1160px; margin:0 auto; padding:80px 32px 84px; display:grid; grid-template-columns:1.45fr 1fr; gap:60px; align-items:center;">
+    <div>
+      <div style="font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-ink); margin-bottom:22px; animation:rise .6s ease both;">Senior Software Engineer · Freiburg im Breisgau</div>
+      <h1 style="font-family:'Space Grotesk'; font-size:clamp(44px,6vw,72px); line-height:1.05; font-weight:700; margin:0 0 26px; letter-spacing:-0.02em; animation:rise .6s .08s ease both;">Hi, ich bin <span style="background:linear-gradient(100deg,var(--accent),var(--g2),var(--g3),var(--accent)); background-size:200% auto; -webkit-background-clip:text; background-clip:text; color:transparent; animation:sheen 6s linear infinite;">Nico</span>.</h1>
+      <p style="font-size:19px; line-height:1.65; color:var(--muted); margin:0 0 36px; max-width:560px; text-wrap:pretty; animation:rise .6s .16s ease both;">Seit über zehn Jahren baue ich Software, die Probleme wirklich löst — als Freelancer, Fullstack-Entwickler im Konzern und Teamleiter im Startup. Aktuell: <strong style="color:var(--text);">jotti</strong>, ein Kassensystem für Vereine.</p>
+      <div style="display:flex; gap:14px; animation:rise .6s .24s ease both;">
+        <a href="#portfolio" style="background:var(--accent); color:#fff; padding:14px 30px; border-radius:13px; font-weight:700; font-size:15px;" style-hover="background:var(--accent-hover);">Portfolio ansehen</a>
+        <a href="Lebenslauf.dc.html" style="border:2px solid var(--line2); color:var(--text); padding:12px 28px; border-radius:13px; font-weight:700; font-size:15px;" style-hover="border-color:var(--accent-ink); color:var(--accent-ink);">Lebenslauf</a>
+      </div>
+    </div>
+    <div style="position:relative; animation:rise .7s .2s ease both;">
+      <img src="public/assets/img/nico-social.jpg" alt="Nico Gräf" style="width:100%; aspect-ratio:4/4.5; object-fit:cover; object-position:50% 15%; border-radius:26px; box-shadow:0 30px 70px -18px rgba(60,50,20,.35);">
+      <div style="position:absolute; bottom:-14px; left:-18px; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:12px 18px; box-shadow:0 12px 30px -10px rgba(60,50,20,.25); font-size:14px;"><strong style="font-family:'Space Grotesk';">10+ Jahre</strong> <span style="color:var(--muted);">Software-Entwicklung</span></div>
+      <div style="position:absolute; inset:auto 0 -22px 0; width:70%; height:3px; margin:0 auto; border-radius:2px; background:linear-gradient(100deg,var(--accent),var(--g2),var(--g3)); opacity:.4; filter:blur(1px);"></div>
+    </div>
+  </div>
+</div>
+
+<div id="artikel" style="max-width:1160px; margin:0 auto; padding:24px 32px 72px;">
+  <div style="font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-ink); margin-bottom:10px;">Blog</div>
+  <div style="display:flex; align-items:baseline; justify-content:space-between; gap:24px; margin-bottom:28px;">
+    <h2 style="font-family:'Space Grotesk'; font-size:34px; font-weight:700; margin:0;">Neueste Artikel</h2>
+    <a href="Blog.dc.html" style="color:var(--accent-ink); font-weight:700; font-size:15px; white-space:nowrap;">Alle Artikel →</a>
+  </div>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;">
+    <a href="Artikel.dc.html" style="background:var(--card); border:1px solid var(--line); border-radius:20px; padding:26px; display:flex; flex-direction:column; gap:10px; transition:border-color .2s;" style-hover="border-color:var(--accent-ink);">
+      <span style="font-size:13px; color:var(--faint);">13. Juli 2026</span>
+      <span style="font-family:'Space Grotesk'; font-size:19px; font-weight:600; line-height:1.3;">Der Orchestrator übernimmt: KI-Agents setzen nachts meinen Plan um</span>
+      <span style="font-size:14.5px; line-height:1.55; color:var(--muted);">Ein KI-Orchestrator hat über Nacht sieben Phasen meines Plans umgesetzt und auf main committet.</span>
+    </a>
+    <a href="Artikel.dc.html" style="background:var(--card); border:1px solid var(--line); border-radius:20px; padding:26px; display:flex; flex-direction:column; gap:10px; transition:border-color .2s;" style-hover="border-color:var(--accent-ink);">
+      <span style="font-size:13px; color:var(--faint);">7. Juli 2026</span>
+      <span style="font-family:'Space Grotesk'; font-size:19px; font-weight:600; line-height:1.3;">Erst klären, dann coden: Mein Workflow mit KI-Coding-Agents</span>
+      <span style="font-size:14.5px; line-height:1.55; color:var(--muted);">Klären, planen, umsetzen, prüfen: Wie ich mit Claude Code an jotti arbeite.</span>
+    </a>
+    <a href="Artikel.dc.html" style="background:var(--card); border:1px solid var(--line); border-radius:20px; padding:26px; display:flex; flex-direction:column; gap:10px; transition:border-color .2s;" style-hover="border-color:var(--accent-ink);">
+      <span style="font-size:13px; color:var(--faint);">4. Juli 2026</span>
+      <span style="font-family:'Space Grotesk'; font-size:19px; font-weight:600; line-height:1.3;">Strategisches Domain Driven Design: Große Domänen aufteilen</span>
+      <span style="font-size:14.5px; line-height:1.55; color:var(--muted);">Wie Subdomains, Bounded Contexts und Context Maps große Domänen aufteilen.</span>
+    </a>
+  </div>
+</div>
+
+<div id="portfolio" style="max-width:1160px; margin:0 auto; padding:0 32px 80px;">
+  <div style="font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-ink); margin-bottom:10px;">Portfolio</div>
+  <h2 style="font-family:'Space Grotesk'; font-size:34px; font-weight:700; margin:0 0 28px;">Woran ich arbeite</h2>
+  <div style="position:relative; background:#17150e; color:#f8f4ec; border:1px solid var(--feature-line); border-radius:26px; padding:44px; display:grid; grid-template-columns:1fr 1.1fr; gap:44px; align-items:center; margin-bottom:20px; overflow:hidden;">
+    <div style="position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(100deg,var(--accent),var(--g2),var(--g3)); opacity:.85;"></div>
+    <div>
+      <div style="display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;">
+        <span style="border:1px solid rgba(255,255,255,.2); border-radius:999px; padding:4px 12px; font-size:12.5px; color:#c9c5b4;">Go</span>
+        <span style="border:1px solid rgba(255,255,255,.2); border-radius:999px; padding:4px 12px; font-size:12.5px; color:#c9c5b4;">React</span>
+        <span style="border:1px solid rgba(255,255,255,.2); border-radius:999px; padding:4px 12px; font-size:12.5px; color:#c9c5b4;">Event Sourcing</span>
+        <span style="border:1px solid rgba(255,255,255,.2); border-radius:999px; padding:4px 12px; font-size:12.5px; color:#c9c5b4;">KassenSichV</span>
+      </div>
+      <h3 style="font-family:'Space Grotesk'; font-size:30px; font-weight:700; margin:0 0 14px;">jotti <span style="color:#8f9dee; font-size:18px; font-weight:500;">/ seit 2025</span></h3>
+      <p style="font-size:15.5px; line-height:1.6; color:#b5b1a0; margin:0 0 24px;">Kostenloses mobiles Kassensystem für Vereine und gemeinnützige Organisationen — Bestellungen, Bons und Tagesabschluss direkt auf dem Smartphone, ausgelegt auf die KassenSichV.</p>
+      <a href="https://jotti.rocks" target="_blank" style="color:#8f9dee; font-weight:700; font-size:15px;">Website besuchen →</a>
+    </div>
+    <img src="public/assets/img/jotti.png" alt="jotti Screenshot" style="width:100%; border-radius:16px; box-shadow:0 20px 50px -12px rgba(0,0,0,.6);">
+  </div>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:20px; margin-bottom:44px;">
+    <div style="background:var(--card); border:1px solid var(--line); border-radius:20px; padding:30px;">
+      <h3 style="font-family:'Space Grotesk'; font-size:21px; font-weight:600; margin:0 0 10px;">Haufe Akademie <span style="color:var(--faint); font-size:14px; font-weight:500;">/ seit 2024</span></h3>
+      <p style="font-size:14.5px; line-height:1.55; color:var(--muted); margin:0;">Event-getriebene Serverless-Systeme auf AWS und React-Frontends im Scrum-Team des Weiterbildungsbereichs der Haufe Group.</p>
+    </div>
+    <div style="background:var(--card); border:1px solid var(--line); border-radius:20px; padding:30px;">
+      <h3 style="font-family:'Space Grotesk'; font-size:21px; font-weight:600; margin:0 0 10px;">Idana <span style="color:var(--faint); font-size:14px; font-weight:500;">/ 2020–2024</span></h3>
+      <p style="font-size:14.5px; line-height:1.55; color:var(--muted); margin:0;">Vom Fullstack-Entwickler zum Team Lead: Führung von fünf Entwicklern und Migration des Backends auf eine Go-Architektur.</p>
+    </div>
+  </div>
+  <h3 style="font-family:'Space Grotesk'; font-size:21px; font-weight:600; margin:0 0 18px; color:var(--muted);">Frühe Projekte &amp; Experimente</h3>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px;">
+    <a href="https://github.com/nicograef" target="_blank" style="background:var(--card); border:1px solid var(--line); border-radius:16px; overflow:hidden; transition:border-color .2s;" style-hover="border-color:var(--accent-ink);">
+      <img src="public/assets/img/what-the-flag.jpg" alt="What The Flag" style="width:100%; height:110px; object-fit:cover; display:block;">
+      <div style="padding:14px 16px;"><div style="font-weight:600; font-size:14.5px;">What The Flag</div><div style="font-size:12.5px; color:var(--faint); margin-top:3px;">PWA · MERN · 2019</div></div>
+    </a>
+    <a href="https://github.com/nicograef" target="_blank" style="background:var(--card); border:1px solid var(--line); border-radius:16px; overflow:hidden; transition:border-color .2s;" style-hover="border-color:var(--accent-ink);">
+      <img src="public/assets/img/sudoku-app.jpg" alt="Sudoku App" style="width:100%; height:110px; object-fit:cover; display:block;">
+      <div style="padding:14px 16px;"><div style="font-weight:600; font-size:14.5px;">Sudoku Android App</div><div style="font-size:12.5px; color:var(--faint); margin-top:3px;">Java · Android · 2016</div></div>
+    </a>
+    <a href="https://github.com/nicograef" target="_blank" style="background:var(--card); border:1px solid var(--line); border-radius:16px; overflow:hidden; transition:border-color .2s;" style-hover="border-color:var(--accent-ink);">
+      <img src="public/assets/img/freiburg-challenge.jpg" alt="Freiburg Challenge" style="width:100%; height:110px; object-fit:cover; display:block;">
+      <div style="padding:14px 16px;"><div style="font-weight:600; font-size:14.5px;">Freiburg Challenge</div><div style="font-size:12.5px; color:var(--faint); margin-top:3px;">PWA · Firebase · 2020</div></div>
+    </a>
+    <a href="https://github.com/nicograef" target="_blank" style="background:var(--card); border:1px solid var(--line); border-radius:16px; overflow:hidden; transition:border-color .2s;" style-hover="border-color:var(--accent-ink);">
+      <img src="public/assets/img/smart-coffee.jpg" alt="Smart Coffee" style="width:100%; height:110px; object-fit:cover; display:block;">
+      <div style="padding:14px 16px;"><div style="font-weight:600; font-size:14.5px;">Smart Coffee</div><div style="font-size:12.5px; color:var(--faint); margin-top:3px;">Arduino · C++ · 2015</div></div>
+    </a>
+  </div>
+</div>
+
+<div style="border-top:1px solid var(--line); transition:border-color .35s;">
+  <footer style="max-width:1160px; margin:0 auto; padding:26px 32px; display:flex; justify-content:space-between; font-size:14px; color:var(--faint);">
+    <span>© 2026 Nico Gräf</span>
+    <span style="display:flex; gap:20px;">
+      <a href="https://github.com/nicograef" target="_blank" style-hover="color:var(--accent-ink);">GitHub</a>
+      <a href="https://www.linkedin.com/in/nicograef" target="_blank" style-hover="color:var(--accent-ink);">LinkedIn</a>
+      <a href="mailto:graef.nico@gmail.com" style-hover="color:var(--accent-ink);">E-Mail</a>
+    </span>
+  </footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#2b45d8&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#2b45d8&quot;, &quot;#c25a3a&quot;, &quot;#1f7a4d&quot;, &quot;#7a2bd8&quot;], &quot;section&quot;: &quot;Farbwelt&quot;}, &quot;glows&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Animation&quot;}}">
+class Component extends DCLogic {
+  state = { dark: false };
+  componentDidMount() {
+    const dark = localStorage.getItem('ng-theme') === 'dark';
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    this.setState({ dark });
+    this.applyProps();
+  }
+  componentDidUpdate() { this.applyProps(); }
+  applyProps() {
+    const root = document.documentElement;
+    root.style.setProperty('--accent', this.props.accent ?? '#2b45d8');
+    root.style.setProperty('--glow-o', (this.props.glows ?? true) ? '1' : '0');
+  }
+  renderVals() {
+    const toggleTheme = () => {
+      const dark = !this.state.dark;
+      localStorage.setItem('ng-theme', dark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      this.setState({ dark });
+    };
+    return { themeIcon: this.state.dark ? '☀' : '☾', toggleTheme };
+  }
+}
+</script>
+</body>
+</html>

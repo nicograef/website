@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#2b45d8;--accent-hover:#1f36b8;--accent-ink:#2b45d8;--g2:color-mix(in oklab,var(--accent) 55%,#a855f7);--g3:color-mix(in oklab,var(--accent) 50%,#22d3ee);--bg:#f8f4ec;--card:#fffdf7;--text:#17150e;--prose:#3d3b2f;--muted:#5f5c4e;--faint:#8f8a76;--line:#e7e2d3;--line2:#ddd7c5;--btn-bg:#17150e;--btn-fg:#f8f4ec;--chip:#f0ebdd;--glow-o:1;--glow1:rgba(43,69,216,.10);--glow2:rgba(200,140,40,.12);}
+[data-theme="dark"]{--accent-ink:#98a7ff;--bg:#14130c;--card:#1c1a11;--text:#f2eee0;--prose:#d6d1bf;--muted:#b8b3a0;--faint:#8c8874;--line:#2b281c;--line2:#3a3627;--btn-bg:#f2eee0;--btn-fg:#14130c;--chip:#26231a;--glow1:rgba(105,130,255,.10);--glow2:rgba(220,160,60,.07);}
+body{margin:0;background-color:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;transition:background-color .35s,color .35s;}
+a{color:inherit;text-decoration:none;}
+a:hover{color:inherit;}
+@keyframes orb{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(14px,-18px) scale(1.06);}}
+@keyframes rise{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+</style>
+</helmet>
+
+<div data-screen-label="Lebenslauf">
+<div style="border-bottom:1px solid var(--line); transition:border-color .35s;">
+  <header style="max-width:1160px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:22px 32px;">
+    <a href="Startseite.dc.html" style="font-family:'Space Grotesk'; font-weight:700; font-size:19px;">nico gräf<span style="color:var(--accent-ink);">.</span></a>
+    <nav style="display:flex; align-items:center; gap:28px; font-size:15px; font-weight:500; color:var(--muted);">
+      <a href="Startseite.dc.html#portfolio" style-hover="color:var(--accent-ink);">Portfolio</a>
+      <a href="Blog.dc.html" style-hover="color:var(--accent-ink);">Artikel</a>
+      <a href="Lebenslauf.dc.html" style="color:var(--accent-ink); font-weight:700;">Lebenslauf</a>
+      <button onClick="{{ toggleTheme }}" title="Theme wechseln" style="width:38px; height:38px; border:1px solid var(--line2); border-radius:11px; background:transparent; color:var(--text); font-size:15px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; padding:0;">{{ themeIcon }}</button>
+      <a href="mailto:graef.nico@gmail.com" style="background:var(--btn-bg); color:var(--btn-fg); padding:10px 20px; border-radius:13px; font-weight:600; transition:background-color .35s,color .35s;" style-hover="opacity:.85;">Kontakt</a>
+    </nav>
+  </header>
+</div>
+
+<div style="position:relative; overflow:hidden;">
+  <div style="position:absolute; top:-140px; left:-40px; width:520px; height:400px; background:radial-gradient(circle, var(--glow1), transparent 70%); filter:blur(26px); pointer-events:none; opacity:var(--glow-o); animation:orb 9s ease-in-out infinite;"></div>
+  <div style="position:absolute; top:-100px; right:0; width:420px; height:360px; background:radial-gradient(circle, var(--glow2), transparent 70%); filter:blur(26px); pointer-events:none; opacity:var(--glow-o); animation:orb 11s ease-in-out infinite reverse;"></div>
+  <div style="position:relative; max-width:1000px; margin:0 auto; padding:64px 32px 48px; display:flex; gap:32px; align-items:center;">
+    <img src="public/assets/img/nico-social.jpg" alt="Nico Gräf" style="width:120px; height:120px; border-radius:28px; object-fit:cover; object-position:50% 18%; box-shadow:0 16px 40px -12px rgba(60,50,20,.35); animation:rise .6s ease both;">
+    <div style="animation:rise .6s .08s ease both;">
+      <h1 style="font-family:'Space Grotesk'; font-size:clamp(34px,5vw,48px); line-height:1.08; font-weight:700; margin:0 0 10px; letter-spacing:-0.02em;">Nico Gräf</h1>
+      <div style="font-size:17px; color:var(--muted); margin-bottom:14px;">Senior Softwareentwickler · Freiburg im Breisgau</div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; font-size:13.5px; font-weight:600;">
+        <a href="mailto:graef.nico@gmail.com" style="border:1px solid var(--line2); border-radius:999px; padding:6px 14px; color:var(--muted);" style-hover="border-color:var(--accent-ink); color:var(--accent-ink);">graef.nico@gmail.com</a>
+        <a href="https://github.com/nicograef" target="_blank" style="border:1px solid var(--line2); border-radius:999px; padding:6px 14px; color:var(--muted);" style-hover="border-color:var(--accent-ink); color:var(--accent-ink);">github.com/nicograef</a>
+        <a href="https://www.linkedin.com/in/nicograef" target="_blank" style="border:1px solid var(--line2); border-radius:999px; padding:6px 14px; color:var(--muted);" style-hover="border-color:var(--accent-ink); color:var(--accent-ink);">linkedin.com/in/nicograef</a>
+      </div>
+    </div>
+  </div>
+  <div style="position:relative; max-width:1000px; margin:0 auto; padding:0 32px 40px;">
+    <p style="font-size:17px; line-height:1.7; color:var(--prose); margin:0; max-width:760px; text-wrap:pretty; animation:rise .6s .16s ease both;">Hi, ich bin Nico, Senior Softwareentwickler aus Freiburg im Breisgau. Seit über zehn Jahren entwickle ich Software in verschiedensten Rollen: selbstständig als Web-Freelancer, als Fullstack-Entwickler in einem Konzern oder als Teamleiter eines Software-Startups. Ich habe großen Spaß daran, moderne Webanwendungen zu bauen, komplexe Probleme zu lösen und neue Technologien auszuprobieren. Nebenbei schreibe ich gerne Artikel über Themen aus der Softwareentwicklung. Aktuell baue ich <strong style="color:var(--text);">jotti</strong>, ein Kassensystem für gemeinnützige Organisationen, ausgelegt auf die KassenSichV.</p>
+  </div>
+</div>
+
+<div style="max-width:1000px; margin:0 auto; padding:16px 32px 80px; display:grid; grid-template-columns:1.7fr 1fr; gap:56px; align-items:start;">
+  <div>
+    <h2 style="font-family:'Space Grotesk'; font-size:26px; font-weight:700; margin:0 0 26px;">Erfahrung</h2>
+    <div style="display:flex; flex-direction:column; gap:0;">
+
+      <div style="display:grid; grid-template-columns:24px 1fr; gap:18px;">
+        <div style="display:flex; flex-direction:column; align-items:center;"><span style="width:12px; height:12px; border-radius:50%; background:var(--accent); margin-top:6px; box-shadow:0 0 0 4px color-mix(in oklab,var(--accent) 18%,transparent);"></span><span style="flex:1; width:2px; background:var(--line);"></span></div>
+        <div style="padding-bottom:36px;">
+          <div style="font-size:13px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--accent-ink); margin-bottom:6px;">Okt 2025 – heute</div>
+          <h3 style="font-family:'Space Grotesk'; font-size:20px; font-weight:600; margin:0 0 4px;">Creator &amp; Maintainer · jotti</h3>
+          <div style="font-size:14px; color:var(--faint); margin-bottom:10px;">Freiburg im Breisgau</div>
+          <p style="font-size:15px; line-height:1.65; color:var(--prose); margin:0 0 14px;">Initiator, Architekt und alleiniger Entwickler von jotti, einem kostenlosen mobilen Kassensystem (Source-Available) für Vereine und gemeinnützige Organisationen, ausgelegt auf die KassenSichV. Das gesamte Produkt eigenständig konzipiert und umgesetzt: Go-Backend mit event-basiertem, append-only Kassenjournal (GoBD), React-Frontend, Cloud-TSE-Anbindung (fiskaly), DSFinV-K-Export, ESC/POS-Bondruck und self-hosted Docker-Deployment.</p>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Go</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">TypeScript</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">React</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">PostgreSQL</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Event Sourcing</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">DDD</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Docker</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Caddy</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Linux</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Vite</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">shadcn/ui</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Tailwind CSS</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">JWT</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Argon2id</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">zod</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">KassenSichV/TSE</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:24px 1fr; gap:18px;">
+        <div style="display:flex; flex-direction:column; align-items:center;"><span style="width:12px; height:12px; border-radius:50%; background:var(--accent); margin-top:6px; box-shadow:0 0 0 4px color-mix(in oklab,var(--accent) 18%,transparent);"></span><span style="flex:1; width:2px; background:var(--line);"></span></div>
+        <div style="padding-bottom:36px;">
+          <div style="font-size:13px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--accent-ink); margin-bottom:6px;">Mai 2024 – heute</div>
+          <h3 style="font-family:'Space Grotesk'; font-size:20px; font-weight:600; margin:0 0 4px;">Senior Software Engineer · Haufe Akademie</h3>
+          <div style="font-size:14px; color:var(--faint); margin-bottom:10px;">Freiburg im Breisgau</div>
+          <p style="font-size:15px; line-height:1.65; color:var(--prose); margin:0 0 14px;">Entwicklung für den Weiterbildungsbereich der Haufe Group in einem crossfunktionalen Scrum-Team: event-getriebene Serverless-Systeme auf AWS und React-Frontends. Maßgeblich am Aufbau einer internen React-Komponentenbibliothek als shadcn-Registry beteiligt (Registry-Setup und CLI, Radix-UI-Komponenten, Tailwind CSS, Design-Tokens zum internen Design-System). Einen Microservice für die asynchrone Kommunikation zwischen SAP und der übrigen Systemlandschaft gebaut und das Team in event-getriebener Architektur geschult, um Kopplung zu reduzieren. Selbstständig in ABAP eingearbeitet, als SAP-Anpassungen anstanden: Unit-Tests geschrieben und Reports in testbare, isolierte Klassen aufgeteilt. Interner Vortrag zu Event Sourcing.</p>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">AWS</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Serverless</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">DynamoDB</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">CDK</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">IaC</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">TypeScript</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">React</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Material UI</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Event-Driven</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">SAP</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">ABAP</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">DDD</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Docker</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Linux</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">GitLab</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">PostgreSQL</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Vite</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">shadcn</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Radix UI</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Microservices</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Tailwind CSS</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">zod</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:24px 1fr; gap:18px;">
+        <div style="display:flex; flex-direction:column; align-items:center;"><span style="width:12px; height:12px; border-radius:50%; background:var(--line2); margin-top:6px;"></span><span style="flex:1; width:2px; background:var(--line);"></span></div>
+        <div style="padding-bottom:36px;">
+          <div style="font-size:13px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); margin-bottom:6px;">Sep 2022 – Mai 2024</div>
+          <h3 style="font-family:'Space Grotesk'; font-size:20px; font-weight:600; margin:0 0 4px;">Lead Software Engineer · Idana AG</h3>
+          <div style="font-size:14px; color:var(--faint); margin-bottom:10px;">Freiburg im Breisgau</div>
+          <p style="font-size:15px; line-height:1.65; color:var(--prose); margin:0 0 14px;">Fachliche und disziplinarische Führung eines fünfköpfigen Entwicklungsteams bei Idana, einem deutschen Healthcare-Startup mit digitalem Anamnese-Assistenten; zusätzlich Scrum Master sowie verantwortlich für Systemarchitektur und Tech-Debt-Management. Migration des JavaScript-Backends auf eine Go-Architektur geleitet, kritische Performance-Limits über Datenbank-Indizes auf Basis normalisierter Hashes gelöst und Build-Zeiten durch die Einführung von Vite und esbuild deutlich reduziert. Das Idana Customer Portal von der Customer-Journey-Analyse bis zum interaktiven Clickdummy konzipiert sowie Hiring und Onboarding neuer Entwickler verantwortet.</p>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Leadership</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Scrum</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Google Cloud</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Go</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">TypeScript</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Vue.js</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Angular</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Electron</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">SQL</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">MongoDB</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Firebase</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">Material UI</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">E2EE</span><span style="background:var(--chip); border-radius:999px; padding:3px 11px; font-size:12px; color:var(--muted);">GitHub</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:24px 1fr; gap:18px;">
+        <div style="display:flex; flex-direction:column; align-items:center;"><span style="width:12px; height:12px; border-radius:50%; background:var(--line2); margin-top:6px;"></span><span style="flex:1; width:2px; background:var(--line);"></span></div>
+        <div style="padding-bottom:36px;">
+          <div style="font-size:13px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); margin-bottom:6px;">Jun 2020 – Sep 2022</div>
+          <h3 style="font-family:'Space Grotesk'; font-size:20px; font-weight:600; margin:0 0 4px;">Software-Entwickler · Idana AG</h3>
+          <div style="font-size:14px; color:var(--faint); margin-bottom:10px;">Freiburg im Breisgau</div>
+          <p style="font-size:15px; line-height:1.65; color:var(--prose); margin:0;">Full-Stack-Entwicklung der Webanwendung und Backend-Services hinter Idanas digitalem Anamnese-Assistenten, vom Design-Prototyping bis zu CI/CD und Ende-zu-Ende-Verschlüsselung.</p>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:24px 1fr; gap:18px;">
+        <div style="display:flex; flex-direction:column; align-items:center;"><span style="width:12px; height:12px; border-radius:50%; background:var(--line2); margin-top:6px;"></span><span style="flex:1; width:2px; background:var(--line);"></span></div>
+        <div style="padding-bottom:36px;">
+          <div style="font-size:13px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); margin-bottom:6px;">Sep 2017 – Apr 2020</div>
+          <h3 style="font-family:'Space Grotesk'; font-size:20px; font-weight:600; margin:0 0 4px;">Front-End-Entwickler · Urknall Startups</h3>
+          <div style="font-size:14px; color:var(--faint); margin-bottom:10px;">Freiburg im Breisgau</div>
+          <p style="font-size:15px; line-height:1.65; color:var(--prose); margin:0;">Konzeption, Design und Entwicklung einer Android-App, einer Hybrid-App und einiger Features im Web-Backend der Community-Plattform des Unternehmens.</p>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:24px 1fr; gap:18px;">
+        <div style="display:flex; flex-direction:column; align-items:center;"><span style="width:12px; height:12px; border-radius:50%; background:var(--line2); margin-top:6px;"></span><span style="flex:1; width:2px; background:var(--line);"></span></div>
+        <div style="padding-bottom:36px;">
+          <div style="font-size:13px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); margin-bottom:6px;">Jun 2016 – Mär 2020</div>
+          <h3 style="font-family:'Space Grotesk'; font-size:20px; font-weight:600; margin:0 0 4px;">Webdesign &amp; Softwareentwicklung · Freelance</h3>
+          <div style="font-size:14px; color:var(--faint); margin-bottom:10px;">Freiburg und Umgebung</div>
+          <p style="font-size:15px; line-height:1.65; color:var(--prose); margin:0;">Selbstständig: Webdesign und Online-Marketing, Softwareentwicklung sowie App- und Web-App-Entwicklung für Kunden aus der Region Freiburg.</p>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:24px 1fr; gap:18px;">
+        <div style="display:flex; flex-direction:column; align-items:center;"><span style="width:12px; height:12px; border-radius:50%; background:var(--line2); margin-top:6px;"></span></div>
+        <div>
+          <div style="font-size:13px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); margin-bottom:6px;">Jul 2016 – Apr 2017</div>
+          <h3 style="font-family:'Space Grotesk'; font-size:20px; font-weight:600; margin:0 0 4px;">Wissenschaftliche Hilfskraft · IMTEK, Uni Freiburg</h3>
+          <div style="font-size:14px; color:var(--faint); margin-bottom:10px;">Freiburg im Breisgau</div>
+          <p style="font-size:15px; line-height:1.65; color:var(--prose); margin:0;">Design und Implementierung eines PCBs als Erweiterung für die Entwicklung eines neuen Sensors. Betreuung des Elektronik-Praktikums.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <aside style="display:flex; flex-direction:column; gap:36px;">
+    <div>
+      <h2 style="font-family:'Space Grotesk'; font-size:20px; font-weight:700; margin:0 0 16px;">Ausbildung</h2>
+      <div style="background:var(--card); border:1px solid var(--line); border-radius:18px; padding:24px;">
+        <div style="font-size:13px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--accent-ink); margin-bottom:6px;">2013 – 2020</div>
+        <div style="font-family:'Space Grotesk'; font-size:17px; font-weight:600; margin-bottom:2px;">B.Sc. Embedded Systems Engineering</div>
+        <div style="font-size:14px; color:var(--muted); margin-bottom:10px;">Albert-Ludwigs-Universität Freiburg · Note 1,8</div>
+        <p style="font-size:13.5px; line-height:1.6; color:var(--muted); margin:0;">Schwerpunkte: Java, C, C++, SQL, Algorithmen und Datenstrukturen, Eingebettete Systeme, Mikrocontroller, Elektronik, Technische Informatik.</p>
+      </div>
+    </div>
+    <div>
+      <h2 style="font-family:'Space Grotesk'; font-size:20px; font-weight:700; margin:0 0 16px;">Sprachen</h2>
+      <div style="display:flex; flex-direction:column; gap:10px; font-size:14.5px;">
+        <div style="display:flex; justify-content:space-between; gap:16px;"><span style="font-weight:600;">Deutsch</span><span style="color:var(--muted);">Muttersprache</span></div>
+        <div style="display:flex; justify-content:space-between; gap:16px;"><span style="font-weight:600;">Englisch</span><span style="color:var(--muted);">Fließend</span></div>
+        <div style="display:flex; justify-content:space-between; gap:16px;"><span style="font-weight:600;">Französisch</span><span style="color:var(--muted);">Grundkenntnisse</span></div>
+        <div style="display:flex; justify-content:space-between; gap:16px;"><span style="font-weight:600;">Italienisch</span><span style="color:var(--muted);">Grundkenntnisse</span></div>
+      </div>
+    </div>
+    <div>
+      <h2 style="font-family:'Space Grotesk'; font-size:20px; font-weight:700; margin:0 0 16px;">Zertifikate</h2>
+      <div style="display:flex; flex-direction:column; gap:14px; font-size:14.5px;">
+        <div><div style="font-weight:600;">Grundlagen des Onlinemarketings</div><div style="color:var(--muted); font-size:13.5px;">The Open University · 2018</div></div>
+        <div><div style="font-weight:600;">Entrepreneurship</div><div style="color:var(--muted); font-size:13.5px;">Universität Freiburg · 2018</div></div>
+        <div><div style="font-weight:600;">Gründerworkshop Exist Bootcamp</div><div style="color:var(--muted); font-size:13.5px;">Universität Freiburg · 2015</div></div>
+      </div>
+    </div>
+    <div>
+      <h2 style="font-family:'Space Grotesk'; font-size:20px; font-weight:700; margin:0 0 16px;">Ehrenamt</h2>
+      <div style="display:flex; flex-direction:column; gap:14px; font-size:14.5px;">
+        <div><div style="font-weight:600;">Mitglied der Vorstandschaft</div><div style="color:var(--muted); font-size:13.5px;">SV Jechtingen e.V. · 2014–2019</div></div>
+        <div><div style="font-weight:600;">Schülersprecher</div><div style="color:var(--muted); font-size:13.5px;">Martin-Schongauer-Gymnasium Breisach · 2009–2012</div></div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<div style="border-top:1px solid var(--line); transition:border-color .35s;">
+  <footer style="max-width:1160px; margin:0 auto; padding:26px 32px; display:flex; justify-content:space-between; font-size:14px; color:var(--faint);">
+    <span>© 2026 Nico Gräf</span>
+    <span style="display:flex; gap:20px;">
+      <a href="https://github.com/nicograef" target="_blank" style-hover="color:var(--accent-ink);">GitHub</a>
+      <a href="https://www.linkedin.com/in/nicograef" target="_blank" style-hover="color:var(--accent-ink);">LinkedIn</a>
+      <a href="mailto:graef.nico@gmail.com" style-hover="color:var(--accent-ink);">E-Mail</a>
+    </span>
+  </footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { dark: false };
+  componentDidMount() {
+    const dark = localStorage.getItem('ng-theme') === 'dark';
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    this.setState({ dark });
+  }
+  renderVals() {
+    const toggleTheme = () => {
+      const dark = !this.state.dark;
+      localStorage.setItem('ng-theme', dark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      this.setState({ dark });
+    };
+    return { themeIcon: this.state.dark ? '☀' : '☾', toggleTheme };
+  }
+}
+</script>
+</body>
+</html>
