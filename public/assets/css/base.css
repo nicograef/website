@@ -277,7 +277,9 @@ pre {
     background: var(--btn-bg);
     color: var(--btn-fg);
     padding: 10px 20px;
-    border-radius: 999px;
+    /* 13px per the five .dc.html prototypes; the handoff README's token
+       table says 999px — the rendered prototypes win on conflict. */
+    border-radius: 13px;
     font-weight: 600;
     transition: background-color 0.35s, color 0.35s, opacity 0.2s;
 

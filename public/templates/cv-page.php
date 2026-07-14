@@ -117,9 +117,13 @@ $stationCount = count($cv['experience']);
                 <h2><?= htmlspecialchars($l['volunteering']) ?></h2>
                 <div class="cv-list">
                     <?php foreach ($cv['volunteering'] as $vol): ?>
+                        <?php
+                        $volBareYears = strlen($vol['start']) === 4 && !empty($vol['end']) && strlen($vol['end']) === 4;
+                        $volEnd = empty($vol['end']) ? $l['present'] : $vol['end'];
+                        ?>
                         <div>
                             <p class="cv-item-name"><?= htmlspecialchars($vol['role']) ?></p>
-                            <p class="cv-item-meta"><?= htmlspecialchars($vol['organization']) ?> · <?= htmlspecialchars($vol['start']) ?>–<?= htmlspecialchars($vol['end']) ?></p>
+                            <p class="cv-item-meta"><?= htmlspecialchars($vol['organization']) ?> · <?= htmlspecialchars($vol['start'] . ($volBareYears ? '–' : ' – ') . $volEnd) ?></p>
                         </div>
                     <?php endforeach; ?>
                 </div>

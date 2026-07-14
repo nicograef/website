@@ -149,6 +149,7 @@
 
 .cv-station.is-ongoing .cv-dot {
   background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(43, 69, 216, 0.18);
   box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 18%, transparent);
 }
 
