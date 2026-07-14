@@ -20,5 +20,4 @@ Thumbs.db
 phpstan.phar
 
 # ── Private (local only, never committed) ────────────────────────────────────
-private/
-docs/plans/
+private
