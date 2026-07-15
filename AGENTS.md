@@ -1,6 +1,6 @@
 # Agent Instructions — nicograef.com
 
-Personal portfolio and blog for **Nico Gräf** (nicograef.com). Zero-dependency, no-build-step, file-based vanilla PHP website. Default language is German everywhere; homepage, CV, and 404 have English variants served via `Accept-Language`. Blog articles are German only (software architecture). Dev server: `php -S 0.0.0.0:8080 -t public router.php`
+Personal portfolio and blog for **Nico Gräf** (nicograef.com). Zero-dependency, no-build-step, file-based vanilla PHP website. German is the canonical default (German `Accept-Language` signals and header-less requests like crawlers); homepage, CV, and 404 switch to English for any non-German `Accept-Language` (English, French, Spanish, …), so non-German visitors read those pages in English. Blog articles are German only (software architecture). Dev server: `php -S 0.0.0.0:8080 -t public router.php`
 
 ## Tech Stack
 
@@ -58,7 +58,7 @@ Article metadata lives in `public/content/articles.json` (slug, title, descripti
 
 1. **No package managers or build tools.** No Composer, no npm. Vendor new libraries manually if absolutely necessary.
 2. **No framework refactoring.** The vanilla PHP approach is deliberate.
-3. **Bilingual:** German is the default everywhere; `detectLang()` in `public/lib/lang.php` switches homepage, CV, and 404 to English for English `Accept-Language` headers. Blog articles and the article overview are German only.
+3. **Bilingual:** German is the canonical default; `detectLang()` in `public/lib/lang.php` returns German for a German `Accept-Language` signal or a header-less request, and English for any other stated language — so non-German visitors (French, Spanish, …) read homepage, CV, and 404 in English, not German. Blog articles and the article overview are German only.
 4. **CSS:** Use native CSS nesting (no preprocessor). Respect existing custom properties in `base.css` and breakpoint system. Each page has its own CSS file — add styles to the relevant per-page file, not `base.css` (unless truly shared).
 5. **Security:** Always `htmlspecialchars()` on user-facing dynamic output.
 6. **New articles** → `public/content/articles/*.md`, **new projects** → `public/content/projects.json`. Read existing files for the expected format. `early` project titles follow the `Name / Year` convention — `home.php` splits on ` / ` to move the year into the card's meta line.

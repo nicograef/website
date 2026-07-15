@@ -7,9 +7,13 @@ verifiziert) des Branches `claude/website-redesign-moma8b` gegen `main`
 ## Urteil
 
 **Approve mit kleinen Fixes** (alle in diesem Review direkt behoben, siehe unten).
-Kein einziges Critical- oder Major-Finding. Alle Acceptance-Criteria der
-Plan-Phasen 1–7 wurden einzeln geprüft und bestehen; Design-Fidelity, Repo-Regeln
-und Funktionalität sind durchgehend eingehalten. Die im PR deklarierten bewussten
+Alle Acceptance-Criteria der Plan-Phasen 1–7 wurden einzeln geprüft und bestehen;
+Design-Fidelity, Repo-Regeln und Funktionalität sind durchgehend eingehalten.
+
+**Nachtrag (vom Autor gemeldet):** Ein major-Finding kam durch das plan-basierte
+Audit, weil es dem Plan *entspricht* — die Sprach-Fallback-Logik (Finding 0).
+Der Plan hatte das ursprüngliche Produktziel invertiert; nach Rücksprache
+korrigiert. Die im PR deklarierten bewussten
 Abweichungen (`--faint`-Abdunklung auf 4,66:1 — nachgerechnet, gerechtfertigt;
 Gedankenstrich-Konvention — der Prototyp ist selbst inkonsistent, gerechtfertigt)
 sind plausibel begründet.
@@ -42,6 +46,7 @@ sind plausibel begründet.
 
 | # | Schwere | Stelle | Finding | Fix in diesem Review |
 |---|---------|--------|---------|----------------------|
+| 0 | major | `public/lib/lang.php:12` | **Sprach-Fallback invertiert (Regression ggü. Produktziel).** `main` lieferte allen Nicht-Deutsch-Sprechern Englisch (`strpos('de') ? de : en`); der PR liefert jeder nicht-deutschen/nicht-englischen Sprache (fr, es, ja, …) **Deutsch**. Ein französischer/spanischer Besucher bekam also Deutsch statt Englisch — entgegen der Absicht „Deutsche lesen Deutsch, alle anderen Englisch". Das plan-basierte Audit hat es nicht markiert, weil Plan (Phase-1-Kriterium) **und** AGENTS.md diese Umkehr ausdrücklich vorschrieben — ein Spec-Bug, kein Code-Bug. | **Gefixt (Variante B):** Deutsch-Signal **oder** signalfreie Anfrage (Bots/SEO-Crawler) → `de`; jede andere gestellte Sprache → `en`. `AGENTS.md` (Kopfzeile + Regel 3) und Docstring an das korrigierte Verhalten angepasst. Matrix verifiziert: `de-DE`→de, `en-US`→en, `fr-FR`→en, `es-ES`→en, kein Header→de. |
 | 1 | minor | `public/content/cv.json` | Plan friert Inhalte ein („bleibt unverändert"), der PR ändert cv.json trotzdem: typografische Apostrophe, `company_de`-Ergänzungen, gekürzte `location`-Strings. Die `company_de`-Felder SIND im PR-Text deklariert; Apostrophe + Location-Kürzungen nicht. Fakten werden nicht verfälscht. | Keine Code-Änderung nötig (Inhalte korrekt und layoutdienlich). Dokumentiert hier; PR-Beschreibung sollte die kosmetischen cv.json-Änderungen ergänzend erwähnen (nicht ausgeführt — keine GitHub-Writes gewünscht). |
 | 2 | minor | `public/assets/css/base.css:280` | `.contact-pill` hat `border-radius: 999px`; alle fünf Prototypen stylen den Kontakt-Button einheitlich mit `13px`. Spec-interner Konflikt: README-Tokentabelle sagt „999px (Chips, Kontakt-Pill)", die als „pixelgenau" deklarierten Prototypen sagen 13px. | **Gefixt**: auf 13px geändert (die Prototypen sind das gerenderte, freigegebene Zielbild; alle fünf sind konsistent). CSS-Kommentar dokumentiert den Spec-Konflikt. |
 | 3 | minor | `public/templates/cv-page.php:122` | Regression gegenüber main: Volunteering-Zeitraum rendert `start–end` ohne „heute/present"-Fallback. Ein laufender Eintrag (`"end": null`) ergäbe „2014–" mit hängendem Strich. Experience und Education behandeln den Fall weiterhin. | **Gefixt**: Fallback auf `$l['present']` analog Education wiederhergestellt (inkl. Spatiierung bei Wort-Endpunkt). |
