@@ -119,7 +119,9 @@ $isGerman = $lang === 'de';
         <div class="early-grid">
             <?php foreach ($earlyProjects as $project): ?>
                 <?php
-                [$projectName, $projectYear] = array_pad(explode(' / ', $project['title'], 2), 2, '');
+                $titleParts = explode(' / ', $project['title'], 2);
+                $projectName = $titleParts[0];
+                $projectYear = $titleParts[1] ?? '';
                 $projectTags = array_slice($project['tags'], 0, 3);
                 ob_start();
                 ?>
