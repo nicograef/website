@@ -22,9 +22,9 @@ $isGerman = $lang === 'de';
                 <p class="eyebrow hero-eyebrow">Senior Software Engineer · Freiburg im Breisgau</p>
                 <h1><?= $isGerman ? 'Hi, ich bin' : 'Hi, I&rsquo;m' ?> <span class="gradient-text">Nico</span>.</h1>
                 <?php if ($isGerman): ?>
-                    <p class="hero-lead">Seit über zehn Jahren baue ich Software, die Probleme wirklich löst — als Freelancer, Fullstack-Entwickler im Konzern und Teamleiter im Startup. Aktuell: <strong>jotti</strong>, ein Kassensystem für Vereine.</p>
+                    <p class="hero-lead">Seit über zehn Jahren baue ich Software, die Probleme wirklich löst: als Freelancer, Fullstack-Entwickler im Konzern und Teamleiter im Startup. Aktuell: <strong>jotti</strong>, ein Kassensystem für Vereine.</p>
                 <?php else: ?>
-                    <p class="hero-lead">For over ten years I&rsquo;ve been building software that actually solves problems — as a freelancer, as a fullstack developer at a large company, and as a team lead at a startup. Currently: <strong>jotti</strong>, a point-of-sale system for clubs.</p>
+                    <p class="hero-lead">For over ten years I&rsquo;ve been building software that actually solves problems: as a freelancer, as a fullstack developer at a large company, and as a team lead at a startup. Currently: <strong>jotti</strong>, a point-of-sale system for clubs.</p>
                 <?php endif; ?>
                 <div class="hero-ctas">
                     <a class="btn-primary" href="#portfolio"><?= $isGerman ? 'Portfolio ansehen' : 'View portfolio' ?></a>
@@ -64,15 +64,18 @@ $isGerman = $lang === 'de';
             <div>
                 <div class="featured-chips">
                     <span class="featured-chip">Go</span>
+                    <span class="featured-chip">TypeScript</span>
                     <span class="featured-chip">React</span>
+                    <span class="featured-chip">PostgreSQL</span>
                     <span class="featured-chip">Event Sourcing</span>
+                    <span class="featured-chip">DDD</span>
                     <span class="featured-chip">KassenSichV</span>
                 </div>
                 <h3>jotti <span class="featured-since">/ <?= $isGerman ? 'seit' : 'since' ?> 2025</span></h3>
                 <?php if ($isGerman): ?>
-                    <p>Kostenloses mobiles Kassensystem für Vereine und gemeinnützige Organisationen — Bestellungen, Bons und Tagesabschluss direkt auf dem Smartphone, ausgelegt auf die KassenSichV.</p>
+                    <p>Kostenloses mobiles Kassensystem für Vereine und gemeinnützige Organisationen: Bestellungen, Bons und Tagesabschluss direkt auf dem Smartphone, ausgelegt auf die KassenSichV. Servicekräfte kassieren Tisch für Tisch im Browser, self-hosted via Docker und abgesichert durch eine lückenlose, event-basierte Historie.</p>
                 <?php else: ?>
-                    <p>Free mobile point-of-sale system for clubs and non-profit organizations — orders, receipts, and daily close right on the smartphone, designed for KassenSichV.</p>
+                    <p>Free mobile point-of-sale system for clubs and non-profit organizations: orders, receipts, and daily close right on the smartphone, designed for KassenSichV. Service staff take payment table by table in the browser, self-hosted via Docker and backed by an audit-proof, event-sourced history.</p>
                 <?php endif; ?>
                 <a class="featured-link" href="https://jotti.rocks" target="_blank" rel="noopener noreferrer"><?= $isGerman ? 'Website besuchen' : 'Visit website' ?> →</a>
             </div>
@@ -87,14 +90,28 @@ $isGerman = $lang === 'de';
                 <?php else: ?>
                     <p>Event-driven serverless systems on AWS and React frontends in a Scrum team of Haufe Group&rsquo;s training and education division.</p>
                 <?php endif; ?>
+                <div class="job-tags">
+                    <span class="chip">AWS</span>
+                    <span class="chip">Serverless</span>
+                    <span class="chip">TypeScript</span>
+                    <span class="chip">Event-Driven</span>
+                    <span class="chip">React</span>
+                </div>
             </article>
             <article class="card job-card">
-                <h3>Idana <span class="job-since">/ 2020–2024</span></h3>
+                <h3>Idana <span class="job-since">/ 2020&ndash;2024</span></h3>
                 <?php if ($isGerman): ?>
                     <p>Vom Fullstack-Entwickler zum Team Lead: Führung von fünf Entwicklern und Migration des Backends auf eine Go-Architektur.</p>
                 <?php else: ?>
                     <p>From fullstack developer to team lead: leading a team of five developers and migrating the backend to a Go architecture.</p>
                 <?php endif; ?>
+                <div class="job-tags">
+                    <span class="chip">Go</span>
+                    <span class="chip">TypeScript</span>
+                    <span class="chip">Vue.js</span>
+                    <span class="chip">Google Cloud</span>
+                    <span class="chip">E2EE</span>
+                </div>
             </article>
         </div>
 
@@ -102,18 +119,19 @@ $isGerman = $lang === 'de';
         <div class="early-grid">
             <?php foreach ($earlyProjects as $project): ?>
                 <?php
-                $titleParts = explode(' / ', $project['title'], 2);
-                $projectName = $titleParts[0];
-                $metaParts = array_slice($project['tags'], 0, 2);
-                if (isset($titleParts[1])) {
-                    $metaParts[] = $titleParts[1];
-                }
-                $projectBody = '<img src="' . htmlspecialchars($project['image']) . '" alt="' . htmlspecialchars($projectName) . '" loading="lazy">'
-                    . '<span class="early-body">'
-                    . '<span class="early-name">' . htmlspecialchars($projectName) . '</span>'
-                    . '<span class="early-meta">' . htmlspecialchars(implode(' · ', $metaParts)) . '</span>'
-                    . '</span>';
+                [$projectName, $projectYear] = array_pad(explode(' / ', $project['title'], 2), 2, '');
+                $projectTags = array_slice($project['tags'], 0, 3);
+                ob_start();
                 ?>
+                <img src="<?= htmlspecialchars($project['image']) ?>" alt="<?= htmlspecialchars($projectName) ?>" loading="lazy">
+                <span class="early-body">
+                    <span class="early-name"><?= htmlspecialchars($projectName) ?><?php if ($projectYear !== ''): ?> <span class="early-year"><?= htmlspecialchars($projectYear) ?></span><?php endif; ?></span>
+                    <span class="early-desc"><?= htmlspecialchars($project['description']) ?></span>
+                    <span class="early-tags">
+                        <?php foreach ($projectTags as $tag): ?><span class="chip"><?= htmlspecialchars($tag) ?></span><?php endforeach; ?>
+                    </span>
+                </span>
+                <?php $projectBody = ob_get_clean(); ?>
                 <?php if (!empty($project['linkUrl'])): ?>
                     <a class="card early-card" href="<?= htmlspecialchars($project['linkUrl']) ?>" target="_blank" rel="noopener noreferrer"><?= $projectBody ?></a>
                 <?php else: ?>

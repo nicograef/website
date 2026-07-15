@@ -304,6 +304,13 @@
       color: var(--muted);
       margin: 0;
     }
+
+    .job-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
   }
 }
 
@@ -341,11 +348,28 @@
       font-size: 14.5px;
     }
 
-    .early-meta {
-      display: block;
-      font-size: 12.5px;
+    .early-year {
       color: var(--faint);
-      margin-top: 3px;
+      font-weight: 500;
+    }
+
+    .early-desc {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-top: 6px;
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .early-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
     }
   }
 }
