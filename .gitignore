@@ -19,5 +19,8 @@ Thumbs.db
 # ── Tools (downloaded in CI, not vendored) ───────────────────────────────────
 phpstan.phar
 
+# ── Local-only tooling output (e.g. `make lighthouse` reports) ───────────────
+tmp/
+
 # ── Private (local only, never committed) ────────────────────────────────────
 private

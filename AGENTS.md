@@ -21,6 +21,7 @@ Personal portfolio and blog for **Nico Gräf** (nicograef.com). Zero-dependency,
 |---------|-------------|
 | `php -S 0.0.0.0:8080 -t public router.php` | Start dev server (`-t public` = document root; `router.php` handles pretty-URL rewrites in dev, as `.htaccess` does in prod) |
 | `find public router.php -name '*.php' -not -path 'public/vendor/*' \| xargs -n1 php -l` | Syntax-lint all user PHP files (matches CI; assumes local PHP 7.4) |
+| `make lighthouse` | **Local-only, not CI.** Runs a Lighthouse (perf/a11y/SEO) audit against `/`, `/cv`, `/articles`, and `/articles/anti-corruption-layer-erklaert`. Boots the dev server on a dedicated port, drives headless Chrome via `npx --yes lighthouse` (chrome flags `--headless=new --no-sandbox`), writes HTML + JSON reports to `tmp/lighthouse/` (git-ignored), then tears the server down. Needs developer-local Node + Chrome; nothing is installed into the repo or the deploy payload. Override the Chrome binary with `CHROME_PATH=/path/to/chrome make lighthouse` if none is auto-detected. |
 
 ## Layout
 
