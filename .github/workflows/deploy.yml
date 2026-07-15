@@ -39,7 +39,7 @@ jobs:
           echo "All PHP files pass syntax check on PHP ${{ matrix.php-version }}"
 
       - name: Cache PHPStan
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: phpstan.phar
           key: phpstan-2.1.17
