@@ -33,7 +33,7 @@ lighthouse:    ## Run a local Lighthouse audit (perf/a11y/SEO) against key route
 	HOST=127.0.0.1; PORT="$${LIGHTHOUSE_PORT:-8098}"; \
 	php -S "$$HOST:$$PORT" -t public router.php >tmp/lighthouse/server.log 2>&1 & \
 	SERVER_PID=$$!; \
-	trap 'kill $$SERVER_PID 2>/dev/null || true' EXIT; \
+	trap 'kill $$SERVER_PID 2>/dev/null || true' EXIT INT TERM; \
 	READY=0; \
 	for i in $$(seq 1 50); do \
 		if curl -s -o /dev/null "http://$$HOST:$$PORT/"; then READY=1; break; fi; \

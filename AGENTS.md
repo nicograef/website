@@ -6,7 +6,7 @@ Personal portfolio and blog for **Nico Gräf** (nicograef.com). Zero-dependency,
 
 | Component | Technology |
 |-----------|-----------|
-| Language  | PHP 7.4 (vanilla, no framework; production and CI both run 7.4) |
+| Language  | PHP 8.3 (vanilla, no framework; production runs 8.3, CI gates on 8.3 with an 8.4 forward-check) |
 | Templating | PHP output buffering (`ob_start` / `ob_get_clean`) |
 | Markdown | `public/vendor/Parsedown.php` (vendored) |
 | Syntax highlighting | `public/vendor/highlight.js` (vendored) |
@@ -20,7 +20,7 @@ Personal portfolio and blog for **Nico Gräf** (nicograef.com). Zero-dependency,
 | Command | Description |
 |---------|-------------|
 | `php -S 0.0.0.0:8080 -t public router.php` | Start dev server (`-t public` = document root; `router.php` handles pretty-URL rewrites in dev, as `.htaccess` does in prod) |
-| `find public router.php -name '*.php' -not -path 'public/vendor/*' \| xargs -n1 php -l` | Syntax-lint all user PHP files (matches CI; assumes local PHP 7.4) |
+| `find public router.php -name '*.php' -not -path 'public/vendor/*' \| xargs -n1 php -l` | Syntax-lint all user PHP files (matches CI; assumes local PHP 8.3+) |
 | `make lighthouse` | **Local-only, not CI.** Runs a Lighthouse (perf/a11y/SEO) audit against `/`, `/cv`, `/articles`, and `/articles/anti-corruption-layer-erklaert`. Boots the dev server on a dedicated port, drives headless Chrome via `npx --yes lighthouse` (chrome flags `--headless=new --no-sandbox`), writes HTML + JSON reports to `tmp/lighthouse/` (git-ignored), then tears the server down. Needs developer-local Node + Chrome; nothing is installed into the repo or the deploy payload. Override the Chrome binary with `CHROME_PATH=/path/to/chrome make lighthouse` if none is auto-detected. |
 
 ## Layout
@@ -51,7 +51,7 @@ Article metadata lives in `public/content/articles.json` (slug, title, descripti
 
 ## Markdown & Highlighting
 
-`public/articles.php` loads the raw markdown via `loadArticleMarkdown()` (returns `null` for a missing `.md` → 404), reuses it for `estimateReadingMinutes()`, then converts it with `parseArticleMarkdown()` (Parsedown) and sets `$hasCode` via `strpos($html, '<pre><code') !== false`. When `$hasCode` is true it adds `vendor/highlight.css` to `$pageStyles`, and `public/templates/article.php` emits the `vendor/highlight.js` `<script>` — keep this gate intact so code-free articles stay JS- and highlight-CSS-free. Use `strpos`, not `str_contains`: the latter is PHP 8.0+ and the server runs 7.4.
+`public/articles.php` loads the raw markdown via `loadArticleMarkdown()` (returns `null` for a missing `.md` → 404), reuses it for `estimateReadingMinutes()`, then converts it with `parseArticleMarkdown()` (Parsedown) and sets `$hasCode` via `strpos($html, '<pre><code') !== false`. When `$hasCode` is true it adds `vendor/highlight.css` to `$pageStyles`, and `public/templates/article.php` emits the `vendor/highlight.js` `<script>` — keep this gate intact so code-free articles stay JS- and highlight-CSS-free. The check uses `strpos`; `str_contains` is available on PHP 8.3 but there is no need to switch — leave the gate as-is.
 
 ## Security Model
 

@@ -46,8 +46,13 @@ fetch() {
     if [[ -n "$accept_language" ]]; then
         header_args=(-H "Accept-Language: ${accept_language}")
     fi
-    curl -s -o "$BODY_FILE" -D "$HEADERS_FILE" -w '%{http_code}' \
-        "${header_args[@]}" "${BASE_URL}${path}" 2>>"$SERVER_LOG" || echo "000"
+    # curl -w already prints "000" to stdout on a connection error; the `|| code=000`
+    # only guards errexit (it overwrites the same value, so the status stays a single
+    # clean token rather than a doubled "000\n000" in failure diagnostics).
+    local code
+    code=$(curl -s -o "$BODY_FILE" -D "$HEADERS_FILE" -w '%{http_code}' \
+        "${header_args[@]}" "${BASE_URL}${path}" 2>>"$SERVER_LOG") || code="000"
+    printf '%s' "$code"
 }
 
 cd "$ROOT_DIR"
@@ -115,12 +120,17 @@ else
     fail "GET /articles => 200, lang=\"de\" (got status=$status)"
 fi
 
-# /articles/{slug} with a fenced code block => highlight.js assets loaded
+# /articles/{slug} with a fenced code block => BOTH highlight assets loaded
+# (the CSS link from articles.php and the JS <script> from article.php). Assert
+# both independently so a half-broken gate — one present, the other dropped —
+# still fails.
 status=$(fetch "/articles/anti-corruption-layer-erklaert")
-if [[ "$status" == "200" ]] && grep -q 'vendor/highlight' "$BODY_FILE"; then
-    pass 'GET /articles/anti-corruption-layer-erklaert => 200, includes vendor/highlight'
+if [[ "$status" == "200" ]] \
+    && grep -q 'vendor/highlight\.css' "$BODY_FILE" \
+    && grep -q 'vendor/highlight\.js' "$BODY_FILE"; then
+    pass 'GET /articles/anti-corruption-layer-erklaert => 200, includes highlight.css + highlight.js'
 else
-    fail "GET /articles/anti-corruption-layer-erklaert => 200, includes vendor/highlight (got status=$status)"
+    fail "GET /articles/anti-corruption-layer-erklaert => 200, includes highlight.css + highlight.js (got status=$status)"
 fi
 
 # /articles/{slug} without a code block => no highlight.js assets
