@@ -1,15 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Shared layout template
  * Variables: $pageTitle, $pageDescription, $pageUrl, $pageImage, $pageLang, $pageContent
  * Shell variables: $lang (fallback: $pageLang), $currentPage ('home'|'articles'|'cv'|null)
+ *
+ * Optional vars carry a `|null` type because not every caller passes them
+ * (e.g. the 404 render omits $pageUrl/$pageImage/$currentPage); the `??`
+ * fallbacks below and in the body supply the defaults.
+ *
+ * @var string            $pageTitle
+ * @var string|null       $pageDescription
+ * @var string|null       $pageUrl
+ * @var string|null       $pageImage
+ * @var string|null       $pageLang
+ * @var string            $pageContent
+ * @var list<string>|null $pageStyles
+ * @var string|null       $lang
+ * @var string|null       $currentPage
  */
 
 $pageLang = $pageLang ?? 'de';
 $pageImage = $pageImage ?? '/assets/img/icon.png';
 $baseUrl = 'https://nicograef.com';
-$fullUrl = $baseUrl . ($pageUrl ?? $_SERVER['REQUEST_URI']);
+$requestUri = $_SERVER['REQUEST_URI'] ?? '';
+$fullUrl = $baseUrl . ($pageUrl ?? (is_string($requestUri) ? $requestUri : ''));
 $lang = $lang ?? $pageLang;
 $currentPage = $currentPage ?? null;
 ?>

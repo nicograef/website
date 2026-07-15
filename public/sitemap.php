@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Dynamic XML Sitemap
  */
@@ -32,7 +34,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
         <url>
             <loc><?= $baseUrl ?>/articles/<?= htmlspecialchars($article['slug']) ?></loc>
             <?php if ($article['date']): ?>
-                <lastmod><?= date('Y-m-d', strtotime($article['date'])) ?></lastmod>
+                <lastmod><?= date('Y-m-d', strtotime($article['date']) ?: 0) ?></lastmod>
             <?php endif; ?>
             <changefreq>monthly</changefreq>
             <priority>0.7</priority>

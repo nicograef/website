@@ -1,6 +1,6 @@
 parameters:
     phpVersion: 80300
-    level: 5
+    level: max
     paths:
         - public
         - router.php
@@ -8,6 +8,23 @@ parameters:
         - public/vendor
     scanFiles:
         - public/vendor/Parsedown.php
+    # Array shapes for the JSON content files, mirroring public/content/*.json
+    # (articles.json, projects.json, cv.json). Single source of truth for the
+    # decoded structures: the loaders' @return and the templates' @var reference
+    # these aliases so decoded-JSON values carry precise types instead of leaking
+    # mixed into the templates. CvData is the shape after resolveLocale() has
+    # collapsed the *_de locale siblings (no *_de keys remain).
+    typeAliases:
+        Article: 'array{slug: string, title: string, description: string, date: string}'
+        Project: 'array{title: string, title_de?: string, description: string, description_de?: string, image: string, tags: list<string>, linkTitle?: string, linkTitle_de?: string, linkUrl?: string, early?: bool}'
+        CvData: 'array{basics: array{name: string, headline: string, location: string, email: string, website: string, linkedin: string, github: string, summary: string}, experience: list<array{company: string, location: string, title: string, start: string, end: string|null, description: string, tags: list<string>}>, education: list<array{school: string, degree: string, field: string, start: string, end: string, grade: string, description: string, tags: list<string>}>, certifications: list<array{name: string, issuer: string, date: string}>, languages: list<array{name: string, level: string}>, volunteering: list<array{role: string, organization: string, start: string, end: string|null}>}'
+    # Templates receive their variables via extract() in render(), so PHPStan
+    # cannot see where they are defined. They are typed with @var docblocks in
+    # each template; this ignore is retained as a safety net for any template
+    # variable that is read without a @var annotation or ?? guard. Because the
+    # annotated templates may leave it unmatched, unmatched-ignore reporting is
+    # disabled so the net can stay in place without failing the analysis.
+    reportUnmatchedIgnoredErrors: false
     ignoreErrors:
         -
             identifier: variable.undefined

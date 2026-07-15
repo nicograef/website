@@ -1,24 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Load and localize CV data from content/cv.json.
+ *
+ * @return CvData
  */
 function loadCV(string $lang): array
 {
     $json = file_get_contents(__DIR__ . '/../content/cv.json');
-    $data = json_decode($json, true);
-    return resolveLocale($data, $lang);
+    /** @var array<string, mixed> $data */
+    $data = json_decode($json === false ? '{}' : $json, true);
+    /** @var CvData $cv */
+    $cv = resolveLocale($data, $lang);
+    return $cv;
 }
 
 /**
  * Recursively resolve _de fields: if $lang is 'de' and a key_de sibling
  * exists, replace key with key_de, then drop the _de field.
+ *
+ * @param  array<array-key, mixed> $data
+ * @return array<array-key, mixed>
  */
 function resolveLocale(array $data, string $lang): array
 {
     $resolved = [];
     foreach ($data as $key => $value) {
-        if (substr($key, -3) === '_de') {
+        if (is_string($key) && substr($key, -3) === '_de') {
             continue; // handled when processing the base key
         }
         if ($lang === 'de' && array_key_exists($key . '_de', $data)) {
@@ -58,6 +68,8 @@ function formatCVDate(string $date, string $lang): string
 
 /**
  * Return all UI labels for the CV page in the given language.
+ *
+ * @return array<string, string>
  */
 function cvLabels(string $lang): array
 {

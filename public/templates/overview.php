@@ -1,3 +1,15 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Article overview template.
+ *
+ * PHP coerces the numeric-string year keys to int, so they arrive as int.
+ *
+ * @var array<int|string, list<Article>> $articlesByYear
+ */
+?>
 <main>
     <div class="blog-head-wrap">
         <div class="glow"></div>
@@ -11,7 +23,7 @@
     <div class="blog-list">
         <?php foreach ($articlesByYear as $year => $yearArticles): ?>
             <section class="year-group">
-                <h2 class="year-label"><?= htmlspecialchars($year) ?></h2>
+                <h2 class="year-label"><?= htmlspecialchars((string) $year) ?></h2>
                 <div class="year-list">
                     <?php foreach ($yearArticles as $article): ?>
                         <a class="article-row" href="/articles/<?= htmlspecialchars($article['slug']) ?>">

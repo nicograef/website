@@ -1,16 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * CV page template: head (photo, name, contact chips), summary,
  * experience timeline (left) and sidebar (right).
  * Variables: $lang ('de'|'en'), $l (cvLabels), $cv (localized cv.json)
+ *
+ * @var string                  $lang
+ * @var array<string, string>   $l
+ * @var CvData                  $cv
  */
 
 $isGerman = $lang === 'de';
 $basics = $cv['basics'];
 
-$githubDisplay = preg_replace('#^https?://(www\.)?#', '', $basics['github']);
-$linkedinDisplay = preg_replace('#^https?://(www\.)?#', '', $basics['linkedin']);
+$githubDisplay = preg_replace('#^https?://(www\.)?#', '', $basics['github']) ?? '';
+$linkedinDisplay = preg_replace('#^https?://(www\.)?#', '', $basics['linkedin']) ?? '';
 
 /* Presentation only: the design bolds the product name inside the summary. */
 $summaryHtml = str_replace('jotti', '<strong>jotti</strong>', htmlspecialchars($basics['summary']));
@@ -46,6 +52,7 @@ $stationCount = count($cv['experience']);
                     <?php
                     $ongoing = empty($exp['end']);
                     $isLast = $i === $stationCount - 1;
+                    $endLabel = empty($exp['end']) ? $l['present'] : formatCVDate($exp['end'], $lang);
                     ?>
                     <div class="cv-station<?= $ongoing ? ' is-ongoing' : '' ?>">
                         <div class="cv-marker" aria-hidden="true">
@@ -55,7 +62,7 @@ $stationCount = count($cv['experience']);
                             <?php endif; ?>
                         </div>
                         <div class="cv-station-body<?= $isLast ? ' is-last' : '' ?>">
-                            <p class="cv-period"><?= htmlspecialchars(formatCVDate($exp['start'], $lang)) ?> – <?= $ongoing ? htmlspecialchars($l['present']) : htmlspecialchars(formatCVDate($exp['end'], $lang)) ?></p>
+                            <p class="cv-period"><?= htmlspecialchars(formatCVDate($exp['start'], $lang)) ?> – <?= htmlspecialchars($endLabel) ?></p>
                             <h3><?= htmlspecialchars($exp['title']) ?> · <?= htmlspecialchars($exp['company']) ?></h3>
                             <p class="cv-location"><?= htmlspecialchars($exp['location']) ?></p>
                             <p class="cv-description"><?= htmlspecialchars($exp['description']) ?></p>

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 require_once __DIR__ . '/lib/articles.php';
 require_once __DIR__ . '/lib/render.php';
 
@@ -7,8 +10,9 @@ if (!is_string($slug)) {
     $slug = null; // e.g. ?slug[]=… would arrive as an array
 }
 if (!$slug) {
-    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    if (preg_match('#^/articles/([a-z0-9-]+)/?$#', $path, $matches)) {
+    $requestUri = $_SERVER['REQUEST_URI'] ?? '';
+    $path = parse_url(is_string($requestUri) ? $requestUri : '', PHP_URL_PATH);
+    if (is_string($path) && preg_match('#^/articles/([a-z0-9-]+)/?$#', $path, $matches)) {
         $slug = $matches[1];
     }
 }
@@ -26,7 +30,7 @@ if ($slug) {
 
     $htmlContent = parseArticleMarkdown($markdown);
     // The template renders the title itself — drop the markdown's leading H1.
-    $htmlContent = preg_replace('#\A\s*<h1[^>]*>.*?</h1>\s*#s', '', $htmlContent, 1);
+    $htmlContent = preg_replace('#\A\s*<h1[^>]*>.*?</h1>\s*#s', '', $htmlContent, 1) ?? $htmlContent;
     $hasCode = strpos($htmlContent, '<pre><code') !== false;
 
     $pageStyles = ['/assets/css/article.css'];

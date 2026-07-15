@@ -1,17 +1,31 @@
 <?php
+
+declare(strict_types=1);
+
 require_once __DIR__ . '/../vendor/Parsedown.php';
 
+/**
+ * @return list<Article>
+ */
 function getArticles(): array
 {
     $json = file_get_contents(__DIR__ . '/../content/articles.json');
-    return json_decode($json, true);
+    /** @var list<Article> $articles */
+    $articles = json_decode($json === false ? '[]' : $json, true);
+    return $articles;
 }
 
+/**
+ * @return list<Article>
+ */
 function getLatestArticles(int $limit): array
 {
     return array_slice(getArticles(), 0, $limit);
 }
 
+/**
+ * @return Article|null
+ */
 function getArticle(string $slug): ?array
 {
     foreach (getArticles() as $article) {
@@ -39,6 +53,7 @@ function loadArticleMarkdown(string $slug): ?string
 function parseArticleMarkdown(string $markdown): string
 {
     $parsedown = new Parsedown();
+    /** @var string $html */
     $html = $parsedown->text($markdown);
     return str_replace('<img ', '<img loading="lazy" ', $html);
 }
@@ -53,7 +68,7 @@ function formatArticleDate(string $isoDate, string $lang, bool $withYear = true)
         ? ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
         : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-    $timestamp = strtotime($isoDate);
+    $timestamp = strtotime($isoDate) ?: 0;
     $day = (int) date('j', $timestamp);
     $month = $months[(int) date('n', $timestamp) - 1];
     $year = date('Y', $timestamp);
@@ -67,12 +82,22 @@ function formatArticleDate(string $isoDate, string $lang, bool $withYear = true)
 /**
  * Group articles by year, sorted descending by date
  * (newest year first, newest article first within each year).
+ *
+ * @param  list<Article>                  $articles
+ * @return array<int|string, list<Article>>
  */
 function groupArticlesByYear(array $articles): array
 {
-    usort($articles, function (array $a, array $b): int {
-        return strcmp($b['date'], $a['date']);
-    });
+    usort(
+        $articles,
+        /**
+         * @param Article $a
+         * @param Article $b
+         */
+        function (array $a, array $b): int {
+            return strcmp($b['date'], $a['date']);
+        }
+    );
 
     $grouped = [];
     foreach ($articles as $article) {

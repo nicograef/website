@@ -1,9 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * @return list<Project>
+ */
 function loadProjects(string $lang = 'en'): array
 {
     $json = file_get_contents(__DIR__ . '/../content/projects.json');
-    $projects = json_decode($json, true);
+    /** @var list<Project> $projects */
+    $projects = json_decode($json === false ? '[]' : $json, true);
 
     foreach ($projects as &$p) {
         foreach (['title', 'description', 'linkTitle'] as $field) {
@@ -14,6 +20,7 @@ function loadProjects(string $lang = 'en'): array
             unset($p[$deKey]);
         }
     }
+    unset($p);
 
     return $projects;
 }
