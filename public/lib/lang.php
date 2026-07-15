@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Resolve the page language from the Accept-Language header.
  *
@@ -12,7 +14,10 @@
 function detectLang(): string
 {
     $header = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '';
-    $header = preg_replace('/[^,]*;\s*q=0(?:\.0{1,3})?\s*(?=,|$)/i', '', $header);
+    if (!is_string($header)) {
+        $header = '';
+    }
+    $header = preg_replace('/[^,]*;\s*q=0(?:\.0{1,3})?\s*(?=,|$)/i', '', $header) ?? '';
     if (trim($header) === '' || preg_match('/(^|,)\s*de\b/i', $header)) {
         return 'de';
     }

@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Render a template inside the shared layout.
  *
  * Buffers the template output, then includes layout.php with
  * the buffered content as $pageContent alongside the layout variables.
  *
- * @param string $template Absolute path to the template file
- * @param array  $vars     Layout variables ($pageTitle, $pageDescription, etc.)
- *                         and any template-specific variables
+ * @param string               $template Absolute path to the template file
+ * @param array<string, mixed> $vars     Layout variables ($pageTitle, $pageDescription, etc.)
+ *                                        and any template-specific variables
  */
 function render(string $template, array $vars = []): void
 {

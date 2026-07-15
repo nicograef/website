@@ -1,8 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Homepage template
  * Variables: $lang ('de'|'en'), $latestArticles (3 newest articles), $earlyProjects (all projects with 'early' flag)
+ *
+ * @var string         $lang
+ * @var list<Article>  $latestArticles
+ * @var list<Project>  $earlyProjects
  */
 
 $isGerman = $lang === 'de';

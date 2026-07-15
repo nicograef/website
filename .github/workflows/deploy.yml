@@ -18,14 +18,17 @@ concurrency:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ["8.3", "8.4"]
     steps:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Setup PHP 7.4
+      - name: Setup PHP ${{ matrix.php-version }}
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "7.4"
+          php-version: ${{ matrix.php-version }}
           coverage: none
           tools: none
 
@@ -33,7 +36,7 @@ jobs:
         run: |
           find public router.php -name '*.php' -not -path 'public/vendor/*' -print0 \
             | xargs -0 -n1 -P4 php -l
-          echo "All PHP files pass syntax check on PHP 7.4"
+          echo "All PHP files pass syntax check on PHP ${{ matrix.php-version }}"
 
       - name: Cache PHPStan
         uses: actions/cache@v4
@@ -50,6 +53,9 @@ jobs:
 
       - name: Run PHPStan
         run: php phpstan.phar analyse --no-progress
+
+      - name: Run route smoke tests
+        run: bash tests/smoke.sh
 
   deploy:
     needs: lint

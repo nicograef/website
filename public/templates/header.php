@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Slim site navigation, included by layout.php on every page.
  * Variables: $lang ('de'|'en'), $currentPage ('home'|'articles'|'cv'|null)

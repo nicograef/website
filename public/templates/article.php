@@ -1,3 +1,16 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Single article template.
+ *
+ * @var Article $article
+ * @var int     $readingMinutes
+ * @var string  $htmlContent
+ * @var bool    $hasCode
+ */
+?>
 <main class="article-wrap">
     <div class="glow"></div>
     <article class="article">

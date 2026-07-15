@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Dev router for PHP's built-in server.
  * Usage: php -S 0.0.0.0:8080 -t public router.php
@@ -9,7 +11,11 @@
  * handles in production.
  */
 
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$requestUri = $_SERVER['REQUEST_URI'] ?? '';
+$uri = parse_url(is_string($requestUri) ? $requestUri : '', PHP_URL_PATH);
+if (!is_string($uri)) {
+    $uri = '';
+}
 
 // Block direct .php access — only pretty routes are public
 if (substr($uri, -4) === '.php') {
