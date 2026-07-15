@@ -47,6 +47,10 @@ ErrorDocument 404 /404.php
     AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json
 </IfModule>
 
+<IfModule mod_brotli.c>
+    AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css text/javascript application/javascript application/json image/svg+xml application/xml
+</IfModule>
+
 # Cache-Control headers for static assets
 <IfModule mod_headers.c>
     # Images
