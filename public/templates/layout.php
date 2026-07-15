@@ -3,12 +3,15 @@
 /**
  * Shared layout template
  * Variables: $pageTitle, $pageDescription, $pageUrl, $pageImage, $pageLang, $pageContent
+ * Shell variables: $lang (fallback: $pageLang), $currentPage ('home'|'articles'|'cv'|null)
  */
 
 $pageLang = $pageLang ?? 'de';
 $pageImage = $pageImage ?? '/assets/img/icon.png';
 $baseUrl = 'https://nicograef.com';
 $fullUrl = $baseUrl . ($pageUrl ?? $_SERVER['REQUEST_URI']);
+$lang = $lang ?? $pageLang;
+$currentPage = $currentPage ?? null;
 ?>
 
 <!DOCTYPE html>
@@ -45,23 +48,46 @@ $fullUrl = $baseUrl . ($pageUrl ?? $_SERVER['REQUEST_URI']);
     <meta name="twitter:description" content="<?= htmlspecialchars($pageDescription ?? '') ?>">
     <meta name="twitter:image" content="<?= $baseUrl . htmlspecialchars($pageImage) ?>">
 
+    <!-- Theme: set data-theme before the stylesheets load to avoid a wrong-theme flash -->
+    <script>
+        (function () {
+            var theme = 'light';
+            try {
+                if (localStorage.getItem('ng-theme') === 'dark') theme = 'dark';
+            } catch (e) {}
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+
     <!-- Favicon & Styles -->
     <link rel="icon" type="image/png" href="/assets/img/icon.png">
-    <link rel="preload" href="/assets/fonts/Montserrat-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/Montserrat-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/SpaceGrotesk-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/assets/css/base.css">
     <?php foreach (($pageStyles ?? []) as $style): ?>
         <link rel="stylesheet" href="<?= htmlspecialchars($style) ?>">
     <?php endforeach; ?>
+    <script src="/assets/js/theme.js" defer></script>
 
     <title><?= htmlspecialchars($pageTitle) ?></title>
 </head>
 
 <body>
+    <?php include __DIR__ . '/header.php'; ?>
+
     <?= $pageContent ?>
 
-    <footer>
-        <p>&copy; <?= date('Y') ?> <a href="/">Nico Gräf</a></p>
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <span>&copy; <?= date('Y') ?> Nico Gräf</span>
+            <span class="site-footer-links">
+                <a href="https://github.com/nicograef" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/nicograef" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://xing.com/profile/Nico_Graef2/" target="_blank" rel="noopener noreferrer">Xing</a>
+                <a href="https://medium.com/@nicograef" target="_blank" rel="noopener noreferrer">Medium</a>
+                <a href="mailto:graef.nico@gmail.com"><?= $lang === 'de' ? 'E-Mail' : 'Email' ?></a>
+            </span>
+        </div>
     </footer>
 </body>
 

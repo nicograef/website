@@ -7,11 +7,12 @@ $isGerman = $lang === 'de';
 
 render(__DIR__ . '/templates/404-page.php', [
     'pageTitle' => $isGerman
-        ? '404 - Seite nicht gefunden | Nico Gräf'
-        : '404 - Page Not Found | Nico Gräf',
+        ? '404 – Diese Seite gibt es nicht | Nico Gräf'
+        : '404 – This page doesn’t exist | Nico Gräf',
     'pageDescription' => $isGerman
-        ? 'Die gesuchte Seite konnte nicht gefunden werden.'
-        : 'The page you are looking for could not be found.',
+        ? 'Diese Seite gibt es nicht. Vielleicht ein alter Link — oder ein Tippfehler. Zurück zur Startseite oder zu allen Artikeln.'
+        : 'This page doesn’t exist. Maybe an old link — or a typo. Head back to the homepage or browse all articles.',
     'pageLang' => $lang,
     'pageStyles' => ['/assets/css/error.css'],
+    'lang' => $lang,
 ]);
