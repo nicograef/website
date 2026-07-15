@@ -39,7 +39,7 @@ declare(strict_types=1);
 </main>
 
 <?php if ($hasCode): ?>
-    <script src="/vendor/highlight.js"></script>
+    <script src="<?= htmlspecialchars(asset('/vendor/highlight.js')) ?>"></script>
     <script>
         hljs.highlightAll();
     </script>

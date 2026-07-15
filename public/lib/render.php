@@ -20,3 +20,22 @@ function render(string $template, array $vars = []): void
     $pageContent = ob_get_clean();
     include __DIR__ . '/../templates/layout.php';
 }
+
+/**
+ * Append a content-based version query to a static asset URL for cache-busting.
+ *
+ * Browsers cache CSS/JS aggressively (see the immutable headers in .htaccess);
+ * a stable filename would keep serving a stale copy after a deploy. The `?v=`
+ * hash changes only when the file's bytes change, so the URL — and thus the
+ * cache entry — turns over exactly when the asset does. Returns the path
+ * unchanged if the file is not found on disk.
+ *
+ * @param string $path Root-absolute web path, e.g. '/assets/css/home.css'
+ */
+function asset(string $path): string
+{
+    $file = __DIR__ . '/..' . $path;
+    $hash = is_file($file) ? hash_file('crc32b', $file) : false;
+
+    return $hash === false ? $path : $path . '?v=' . $hash;
+}

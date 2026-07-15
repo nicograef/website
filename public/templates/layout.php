@@ -80,11 +80,11 @@ $currentPage = $currentPage ?? null;
     <link rel="icon" type="image/png" href="/assets/img/icon.png">
     <link rel="preload" href="/assets/fonts/SpaceGrotesk-Bold.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="<?= htmlspecialchars(asset('/assets/css/base.css')) ?>">
     <?php foreach (($pageStyles ?? []) as $style): ?>
-        <link rel="stylesheet" href="<?= htmlspecialchars($style) ?>">
+        <link rel="stylesheet" href="<?= htmlspecialchars(asset($style)) ?>">
     <?php endforeach; ?>
-    <script src="/assets/js/theme.js" defer></script>
+    <script src="<?= htmlspecialchars(asset('/assets/js/theme.js')) ?>" defer></script>
 
     <title><?= htmlspecialchars($pageTitle) ?></title>
 </head>
