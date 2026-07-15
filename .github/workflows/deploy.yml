@@ -54,6 +54,9 @@ jobs:
       - name: Run PHPStan
         run: php phpstan.phar analyse --no-progress
 
+      - name: Run route smoke tests
+        run: bash tests/smoke.sh
+
   deploy:
     needs: lint
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'

@@ -30,6 +30,8 @@ PHP inside `public/` is split by purpose: **entry points** (`index.php`, `articl
 
 The page shell is centralized in `layout.php`: it includes `header.php` (nav + theme toggle), emits the footer, the inline theme script, and the `theme.js` tag. Page templates render only their page content — they never include `header.php` themselves.
 
+`tests/` holds the route smoke test (`smoke.sh`) — outside `public/`, so it never ships in the rsync deploy payload.
+
 ## Template Pattern
 
 Pages use PHP output buffering via `render()` in `public/lib/render.php`:

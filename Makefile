@@ -10,7 +10,7 @@ dev:           ## Start the PHP dev server on :8080
 
 # ── Code Quality (mirrors .github/workflows/deploy.yml lint job) ──
 
-.PHONY: lint stan check
+.PHONY: lint stan smoke check
 
 lint:          ## Syntax-lint all user PHP files on the local PHP
 	find public router.php -name '*.php' -not -path 'public/vendor/*' -print0 \
@@ -19,7 +19,10 @@ lint:          ## Syntax-lint all user PHP files on the local PHP
 stan:          ## Run PHPStan static analysis
 	php phpstan.phar analyse --no-progress
 
-check: lint stan  ## Run the full CI quality gate (lint + PHPStan)
+smoke:         ## Boot the dev server and smoke-test every pretty-URL route
+	bash tests/smoke.sh
+
+check: lint stan smoke  ## Run the full CI quality gate (lint + PHPStan + smoke)
 
 # ── Utilities ──
 
