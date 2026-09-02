@@ -24,3 +24,6 @@ tmp/
 
 # ── Private (local only, never committed) ────────────────────────────────────
 private
+
+# ── Claude Code ──────────────────────────────────────────────────────────────
+.claude/settings.local.json
