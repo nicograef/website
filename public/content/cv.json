@@ -9,10 +9,26 @@
     "website": "https://nicograef.com",
     "linkedin": "https://www.linkedin.com/in/nicograef",
     "github": "https://github.com/nicograef",
-    "summary": "Hey, I’m Nico, a senior software engineer from Freiburg, Germany. For over ten years, I’ve been developing software in a variety of roles: as a freelance web developer, as a fullstack engineer in a large company, and as a team lead at a software startup. I truly enjoy building modern web applications, solving complex problems, and exploring new technologies. On the side, I like to write about software development topics. Currently I’m building jotti, a point-of-sale system for non-profits designed for Germany’s cash-register regulation (KassenSichV).",
-    "summary_de": "Hi, ich bin Nico, Senior Softwareentwickler aus Freiburg im Breisgau. Seit über zehn Jahren entwickle ich Software in verschiedensten Rollen: selbstständig als Web-Freelancer, als Fullstack-Entwickler in einem Konzern oder als Teamleiter eines Software-Startups. Ich habe großen Spaß daran, moderne Webanwendungen zu bauen, komplexe Probleme zu lösen und neue Technologien auszuprobieren. Nebenbei schreibe ich gerne Artikel über Themen aus der Softwareentwicklung. Aktuell baue ich jotti, ein Kassensystem für gemeinnützige Organisationen, ausgelegt auf die KassenSichV."
+    "summary": "Hey, I’m Nico, a senior software engineer from Freiburg, Germany. For over ten years, I’ve been developing software in a variety of roles: as a freelance web developer, as a fullstack engineer in a large company, and as a team lead at a software startup. Since September 2026 I’ve been building the platform core for AI-assisted appliance repair at Gyva in Freiburg. I truly enjoy building modern web applications, solving complex problems, and exploring new technologies. On the side, I like to write about software development topics. Currently I’m building jotti, a point-of-sale system for non-profits designed for Germany’s cash-register regulation (KassenSichV).",
+    "summary_de": "Hi, ich bin Nico, Senior Softwareentwickler aus Freiburg im Breisgau. Seit über zehn Jahren entwickle ich Software in verschiedensten Rollen: selbstständig als Web-Freelancer, als Fullstack-Entwickler in einem Konzern oder als Teamleiter eines Software-Startups. Seit September 2026 baue ich bei Gyva in Freiburg den Plattformkern für KI-gestützte Gerätereparatur. Ich habe großen Spaß daran, moderne Webanwendungen zu bauen, komplexe Probleme zu lösen und neue Technologien auszuprobieren. Nebenbei schreibe ich gerne Artikel über Themen aus der Softwareentwicklung. Aktuell baue ich jotti, ein Kassensystem für gemeinnützige Organisationen, ausgelegt auf die KassenSichV."
   },
   "experience": [
+    {
+      "company": "Gyva (AugRep GmbH)",
+      "location": "Freiburg im Breisgau, Germany",
+      "location_de": "Freiburg im Breisgau",
+      "title": "Senior Software Engineer",
+      "start": "2026-09",
+      "end": null,
+      "description": "Gyva is a Freiburg startup for AI-assisted repair of broken household appliances and home equipment, from washing machines to heating systems: users describe their problem in plain language and get a diagnosis, a personalised step-by-step repair guide, a repair expert via video call if needed, or a referral to a vetted local repair service. I own the platform core behind the AI diagnosis: the path from manufacturer documentation through a structured, source-referenced knowledge base and retrieval to grounded diagnoses and repair guides. This covers the data pipeline and data model in Python and PostgreSQL, retrieval (RAG), LLM orchestration, safety guardrails, and running the service.",
+      "description_de": "Gyva ist ein Freiburger Startup für KI-gestützte Reparatur defekter Geräte im Haushalt, von der Waschmaschine bis zur Heizung: Nutzer beschreiben ihr Problem in einfachen Worten und erhalten eine Diagnose, eine individuelle Schritt-für-Schritt-Anleitung, bei Bedarf einen Reparaturexperten per Video oder die Vermittlung an einen geprüften Fachbetrieb. Ich verantworte den Plattformkern hinter der KI-Diagnose: die Strecke von Herstellerdokumentation über eine strukturierte, quellenreferenzierte Wissensbasis und Retrieval bis zur belegten Diagnose und Reparaturanleitung. Dazu gehören Datenpipeline und Datenmodell in Python und PostgreSQL, Retrieval (RAG), LLM-Orchestrierung, Sicherheits-Guardrails und der Betrieb des Dienstes.",
+      "tags": [
+        "Python",
+        "PostgreSQL",
+        "RAG",
+        "LLM"
+      ]
+    },
     {
       "company": "jotti",
       "location": "Freiburg im Breisgau, Germany",
@@ -48,7 +64,7 @@
       "location_de": "Freiburg im Breisgau",
       "title": "Senior Software Engineer",
       "start": "2024-05",
-      "end": null,
+      "end": "2026-08",
       "description": "Development for the training and education division of Haufe Group in a cross-functional Scrum team: event-driven serverless systems on AWS and React frontends. Played a leading role in building an internal React component library as a shadcn registry (registry setup and CLI, Radix UI components, Tailwind CSS, design tokens for the internal design system). Built a microservice for asynchronous communication between SAP and the rest of the system landscape, and trained the team in event-driven architecture to reduce coupling. Independently learned ABAP when SAP changes were needed, writing unit tests and splitting reports into testable, isolated classes. Gave an internal talk on event sourcing.",
       "description_de": "Entwicklung für den Weiterbildungsbereich der Haufe Group in einem crossfunktionalen Scrum-Team: event-getriebene Serverless-Systeme auf AWS und React-Frontends. Maßgeblich am Aufbau einer internen React-Komponentenbibliothek als shadcn-Registry beteiligt (Registry-Setup und CLI, Radix-UI-Komponenten, Tailwind CSS, Design-Tokens zum internen Design-System). Einen Microservice für die asynchrone Kommunikation zwischen SAP und der übrigen Systemlandschaft gebaut und das Team in event-getriebener Architektur geschult, um Kopplung zu reduzieren. Selbstständig in ABAP eingearbeitet, als SAP-Anpassungen anstanden: Unit-Tests geschrieben und Reports in testbare, isolierte Klassen aufgeteilt. Interner Vortrag zu Event Sourcing.",
       "tags": [

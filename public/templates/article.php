@@ -31,7 +31,7 @@ declare(strict_types=1);
             <img src="/assets/img/nico-social.jpg" alt="Nico Gräf" width="64" height="64">
             <div class="author-card-text">
                 <p class="author-card-name">Nico Gräf</p>
-                <p class="author-card-bio">Senior Software Engineer aus Freiburg. Baut aktuell <a href="https://jotti.rocks" target="_blank" rel="noopener noreferrer">jotti</a>, ein Kassensystem für Vereine.</p>
+                <p class="author-card-bio">Senior Software Engineer bei Gyva in Freiburg. Baut nebenbei <a href="https://jotti.rocks" target="_blank" rel="noopener noreferrer">jotti</a>, ein Kassensystem für Vereine.</p>
             </div>
             <a class="author-card-link" href="/articles">Alle Artikel &rarr;</a>
         </div>

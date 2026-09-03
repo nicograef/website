@@ -1,5 +1,21 @@
 [
   {
+    "title": "Gyva / since 2026",
+    "title_de": "Gyva / seit 2026",
+    "description": "Gyva is a Freiburg startup for AI-assisted repair of broken household appliances and home equipment, from washing machines to heating systems: users describe their problem in plain language and get a diagnosis, a personalised step-by-step repair guide, a repair expert via video call if needed, or a referral to a vetted local repair service. Since September 2026 I own the platform core behind the AI diagnosis: the path from manufacturer documentation through a structured, source-referenced knowledge base and retrieval to grounded diagnoses and repair guides. This covers the data pipeline and data model in Python and PostgreSQL, retrieval (RAG), LLM orchestration, safety guardrails, and running the service.",
+    "description_de": "Gyva ist ein Freiburger Startup für KI-gestützte Reparatur defekter Geräte im Haushalt, von der Waschmaschine bis zur Heizung: Nutzer beschreiben ihr Problem in einfachen Worten und erhalten eine Diagnose, eine individuelle Schritt-für-Schritt-Anleitung, bei Bedarf einen Reparaturexperten per Video oder die Vermittlung an einen geprüften Fachbetrieb. Seit September 2026 verantworte ich den Plattformkern hinter der KI-Diagnose: die Strecke von Herstellerdokumentation über eine strukturierte, quellenreferenzierte Wissensbasis und Retrieval bis zur belegten Diagnose und Reparaturanleitung. Dazu gehören Datenpipeline und Datenmodell in Python und PostgreSQL, Retrieval (RAG), LLM-Orchestrierung, Sicherheits-Guardrails und der Betrieb des Dienstes.",
+    "image": "/assets/img/gyva.svg",
+    "tags": [
+      "Python",
+      "PostgreSQL",
+      "RAG",
+      "LLM"
+    ],
+    "linkTitle": "Visit website",
+    "linkTitle_de": "Website besuchen",
+    "linkUrl": "https://gyva.ai"
+  },
+  {
     "title": "jotti / since 2025",
     "title_de": "jotti / seit 2025",
     "description": "jotti is a free, source-available mobile point-of-sale system for clubs and non-profit organizations, built for Vereinsfeste, Christmas markets, and concerts. As a former club board member myself, I know Vereinsfeste from behind the cash box. Service staff take orders, confirm handout, collect payment, and handle cancellations straight from their own smartphones: table by table, all in the browser. No special hardware, no cloud subscription, no payment gateway. And it's built for Germany's cash-register regulation (KassenSichV): jotti ships the fiscal building blocks: a cloud TSE that signs every transaction, receipts per § 146a AO, an append-only cash journal, and a DSFinV-K export for the tax authorities. Self-hosted via Docker, jotti lets admins manage products, tables, and users, prints receipts at the counter, handles cash sessions with a proper daily close, and breaks down revenue per table and per staff member, all backed by an audit-proof, event-sourced history.",
@@ -28,10 +44,10 @@
     "linkUrl": "https://jotti.rocks"
   },
   {
-    "title": "Haufe Akademie / since 2024",
-    "title_de": "Haufe Akademie / seit 2024",
-    "description": "The Haufe Akademie is the training and education division of Haufe Group. Since 2024 I have been part of a Scrum team building technical solutions for the company.",
-    "description_de": "Die Haufe Akademie ist der Weiterbildungsbereich der Haufe Group. Seit 2024 bin ich Teil eines Scrum-Teams und entwickle technische Lösungen für das Unternehmen.",
+    "title": "Haufe Akademie / 2024–2026",
+    "title_de": "Haufe Akademie / 2024–2026",
+    "description": "The Haufe Akademie is the training and education division of Haufe Group. From 2024 to 2026 I was part of a Scrum team building technical solutions for the company.",
+    "description_de": "Die Haufe Akademie ist der Weiterbildungsbereich der Haufe Group. Von 2024 bis 2026 war ich Teil eines Scrum-Teams und habe technische Lösungen für das Unternehmen entwickelt.",
     "image": "/assets/img/haufe-akademie.png",
     "tags": [
       "AWS",

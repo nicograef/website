@@ -22,8 +22,8 @@ render(__DIR__ . '/templates/home.php', [
         ? 'Nico Gräf – Senior Softwareentwickler'
         : 'Nico Gräf – Senior Software Engineer',
     'pageDescription' => $isGerman
-        ? 'Portfolio von Nico Gräf, Senior Softwareentwickler aus Freiburg im Breisgau. Aktuell: jotti, ein Kassensystem für Vereine — dazu Artikel über Softwarearchitektur und Lebenslauf.'
-        : 'Portfolio of Nico Gräf, senior software engineer from Freiburg im Breisgau. Currently building jotti, a point-of-sale system for clubs — plus articles on software architecture and a CV.',
+        ? 'Portfolio von Nico Gräf, Senior Softwareentwickler aus Freiburg im Breisgau. Aktuell: Plattformkern der KI-Diagnose bei Gyva, nebenbei jotti, ein Kassensystem für Vereine — dazu Artikel über Softwarearchitektur und Lebenslauf.'
+        : 'Portfolio of Nico Gräf, senior software engineer from Freiburg im Breisgau. Currently building the platform core for AI diagnosis at Gyva, plus jotti, a point-of-sale system for clubs — and articles on software architecture and a CV.',
     'pageUrl' => '/',
     'pageLang' => $lang,
     'pageImage' => '/assets/img/nico-social.jpg',

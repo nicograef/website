@@ -22,9 +22,9 @@ $isGerman = $lang === 'de';
                 <p class="eyebrow hero-eyebrow">Senior Software Engineer · Freiburg im Breisgau</p>
                 <h1><?= $isGerman ? 'Hi, ich bin' : 'Hi, I&rsquo;m' ?> <span class="gradient-text">Nico</span>.</h1>
                 <?php if ($isGerman): ?>
-                    <p class="hero-lead">Seit über zehn Jahren baue ich Software, die Probleme wirklich löst: als Freelancer, Fullstack-Entwickler im Konzern und Teamleiter im Startup. Aktuell: <strong>jotti</strong>, ein Kassensystem für Vereine.</p>
+                    <p class="hero-lead">Seit über zehn Jahren baue ich Software, die Probleme wirklich löst: als Freelancer, Fullstack-Entwickler im Konzern und Teamleiter im Startup. Aktuell: Plattformkern der KI-Diagnose bei <strong>Gyva</strong>, nebenbei <strong>jotti</strong>, ein Kassensystem für Vereine.</p>
                 <?php else: ?>
-                    <p class="hero-lead">For over ten years I&rsquo;ve been building software that actually solves problems: as a freelancer, as a fullstack developer at a large company, and as a team lead at a startup. Currently: <strong>jotti</strong>, a point-of-sale system for clubs.</p>
+                    <p class="hero-lead">For over ten years I&rsquo;ve been building software that actually solves problems: as a freelancer, as a fullstack developer at a large company, and as a team lead at a startup. Currently: the platform core for AI diagnosis at <strong>Gyva</strong>, plus <strong>jotti</strong>, a point-of-sale system for clubs, on the side.</p>
                 <?php endif; ?>
                 <div class="hero-ctas">
                     <a class="btn-primary" href="#portfolio"><?= $isGerman ? 'Portfolio ansehen' : 'View portfolio' ?></a>
@@ -84,7 +84,21 @@ $isGerman = $lang === 'de';
 
         <div class="job-cards">
             <article class="card job-card">
-                <h3>Haufe Akademie <span class="job-since">/ <?= $isGerman ? 'seit' : 'since' ?> 2024</span></h3>
+                <h3>Gyva <span class="job-since">/ <?= $isGerman ? 'seit' : 'since' ?> 2026</span></h3>
+                <?php if ($isGerman): ?>
+                    <p>Plattformkern der KI-Diagnose für angeleitete Gerätereparatur: Datenpipeline, Wissensbasis, Retrieval (RAG) und LLM-Orchestrierung mit Quellenbelegen in Python und PostgreSQL.</p>
+                <?php else: ?>
+                    <p>Platform core of the AI diagnosis for guided appliance repair: data pipeline, knowledge base, retrieval (RAG) and source-grounded LLM orchestration in Python and PostgreSQL.</p>
+                <?php endif; ?>
+                <div class="job-tags">
+                    <span class="chip">Python</span>
+                    <span class="chip">PostgreSQL</span>
+                    <span class="chip">RAG</span>
+                    <span class="chip">LLM</span>
+                </div>
+            </article>
+            <article class="card job-card">
+                <h3>Haufe Akademie <span class="job-since">/ 2024&ndash;2026</span></h3>
                 <?php if ($isGerman): ?>
                     <p>Event-getriebene Serverless-Systeme auf AWS und React-Frontends im Scrum-Team des Weiterbildungsbereichs der Haufe Group.</p>
                 <?php else: ?>
