@@ -86,13 +86,14 @@ $isGerman = $lang === 'de';
             <article class="card job-card">
                 <h3>Gyva <span class="job-since">/ <?= $isGerman ? 'seit' : 'since' ?> 2026</span></h3>
                 <?php if ($isGerman): ?>
-                    <p>Plattformkern der KI-Diagnose für angeleitete Gerätereparatur: Datenpipeline, Wissensbasis, Retrieval (RAG) und LLM-Orchestrierung mit Quellenbelegen in Python und PostgreSQL.</p>
+                    <p>Plattformkern der KI-Diagnose für angeleitete Gerätereparatur: Datenpipeline, Wissensgraph, Retrieval (GraphRAG) und LLM-Orchestrierung mit Quellenbelegen in Python und PostgreSQL.</p>
                 <?php else: ?>
-                    <p>Platform core of the AI diagnosis for guided appliance repair: data pipeline, knowledge base, retrieval (RAG) and source-grounded LLM orchestration in Python and PostgreSQL.</p>
+                    <p>Platform core of the AI diagnosis for guided appliance repair: data pipeline, knowledge graph, retrieval (GraphRAG) and source-grounded LLM orchestration in Python and PostgreSQL.</p>
                 <?php endif; ?>
                 <div class="job-tags">
                     <span class="chip">Python</span>
                     <span class="chip">PostgreSQL</span>
+                    <span class="chip">Knowledge Graph</span>
                     <span class="chip">RAG</span>
                     <span class="chip">LLM</span>
                 </div>
