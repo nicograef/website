@@ -65,11 +65,32 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Install dependencies
-        run: sudo apt-get install -y sshpass rsync
-
-      - name: Deploy
+      - name: Configure SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
         run: |
-          sshpass -p '${{ secrets.FTP_PASSWORD }}' rsync -avz --delete \
-            -e "ssh -o StrictHostKeyChecking=no" \
-            ./public/ ${{ secrets.FTP_USER }}@${{ secrets.FTP_HOST }}:/home/www/nicograef.de/
+          install -m 700 -d ~/.ssh
+          install -m 600 /dev/null ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          printf 'Host %s\n  User %s\n  IdentityFile ~/.ssh/deploy_key\n  IdentitiesOnly yes\n  StrictHostKeyChecking yes\n' \
+            "$DEPLOY_HOST" "$DEPLOY_USER" > ~/.ssh/config
+
+      # The empty target path below is only safe while rrsync confines the key to the docroot.
+      - name: Assert deploy key is confined
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          if ssh "$DEPLOY_HOST" true 2>/dev/null; then
+            echo "::error::deploy key can run shell commands; refusing to deploy"
+            exit 1
+          fi
+
+      # The server's rrsync confines the deploy key to /home/www/nicograef.de, so the empty path is the docroot.
+      - name: Deploy
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: rsync -avz --delete ./public/ "$DEPLOY_HOST:"

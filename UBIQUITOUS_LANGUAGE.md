@@ -47,6 +47,5 @@
 
 ## Flagged ambiguities
 
-- **"FTP" vs SSH** — The GitHub Actions secrets (`FTP_USER`, `FTP_HOST`) are named as if the transport is FTP, but the actual **Deploy** mechanism is `rsync` over SSH. `FTP_PASSWORD` was replaced with `SSH_PRIVATE_KEY` in this session. `FTP_USER` and `FTP_HOST` remain misleadingly named — consider renaming to `SSH_USER` and `SSH_HOST`.
 - **"template"** — used in two unrelated senses: (1) `public/templates/layout.php`, the PHP page **Layout**; (2) `handbook/templates/`, the **Handbook**'s reference files. These are entirely different concepts. Use **Layout** for (1) and **Handbook template** or **handbook area** for (2).
 - **"vendor"** — in standard PHP/Composer projects, `vendor/` means Composer-managed packages. Here it means manually copied libraries with no package manager involved. The distinction is material: nothing in `public/vendor/` should ever be auto-updated or gitignored.
